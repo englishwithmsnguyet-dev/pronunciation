@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRONUNCIATION WITH MISS NGUYET</title>
+  
+  <!-- Google Fonts: Be Vietnam Pro & Lexend Deca -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lexend+Deca:wght@600;700;800&family=Charis+SIL:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP GLOBAL HEADER
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Nút mở Sidebar trên Mobile -->
+      <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" title="Mở danh mục bài học">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Logo & Brand Name -->
+      <div class="brand-group" onclick="window.navigateTo('overview')">
+        <div class="brand-avatar-box">
+          <span class="avatar-emoji">👩‍🏫</span>
+        </div>
+        <div class="brand-text-col">
+          <div class="brand-main-title">PRONUNCIATION WITH MISS NGUYET</div>
+          <div class="brand-tagline">Học Ngữ Âm Theo Cặp Chuẩn Quốc Tế</div>
+        </div>
+      </div>
+
+      <!-- Quick Audio Controls -->
+      <div class="header-controls">
+        <div class="accent-toggle-group">
+          <button class="accent-pill active" data-accent="UK" title="Giọng Anh - Anh (RP chuẩn)">
+            🇬🇧 Anh (UK)
+          </button>
+          <button class="accent-pill" data-accent="US" title="Giọng Anh - Mỹ">
+            🇺🇸 Mỹ (US)
+          </button>
+        </div>
+
+        <select class="speed-select-box" id="speedSelect" title="Tốc độ phát âm">
+          <option value="0.75">Tốc độ: 0.75x (Chậm)</option>
+          <option value="1.0" selected>Tốc độ: 1.0x (Chuẩn)</option>
+          <option value="1.25">Tốc độ: 1.25x (Nhanh)</option>
+        </select>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       APP SHELL: SIDEBAR TRÁI + NỘI DUNG CHÍNH
+       ========================================================================== -->
+  <div class="app-layout">
+    
+    <!-- THANH SIDEBAR BÊN TRÁI -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-inner">
+        
+        <!-- SECTION 1: KHỞI ĐỘNG -->
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">🌟 KHỞI ĐỘNG</div>
+          <button class="sidebar-nav-item active" data-view="overview">
+            <span class="nav-icon">🌐</span>
+            <span class="nav-label">TỔNG QUAN VỀ IPA</span>
+          </button>
+          <button class="sidebar-nav-item" data-view="chart">
+            <span class="nav-icon">🔤</span>
+            <span class="nav-label">BẢNG 44 ÂM TỔNG THỂ</span>
+          </button>
+        </div>
+
+        <!-- SECTION 2: NGUYÊN ÂM ĐƠN THEO CẶP (6 CẶP) -->
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">🔵 NGUYÊN ÂM ĐƠN (6 CẶP)</div>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_1">
+            <span class="unit-num-badge">1</span>
+            <span class="nav-label">/iː/ &amp; /ɪ/ <small>(Sheep/Ship)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_2">
+            <span class="unit-num-badge">2</span>
+            <span class="nav-label">/uː/ &amp; /ʊ/ <small>(Boot/Book)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_3">
+            <span class="unit-num-badge">3</span>
+            <span class="nav-label">/ɑː/ &amp; /ʌ/ <small>(Heart/Hut)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_4">
+            <span class="unit-num-badge">4</span>
+            <span class="nav-label">/e/ &amp; /æ/ <small>(Pen/Pan)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_5">
+            <span class="unit-num-badge">5</span>
+            <span class="nav-label">/ɒ/ &amp; /ɔː/ <small>(Spot/Sport)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_6">
+            <span class="unit-num-badge">6</span>
+            <span class="nav-label">/ɜː/ &amp; /ə/ <small>(Bird/Teacher)</small></span>
+          </button>
+        </div>
+
+        <!-- SECTION 3: NGUYÊN ÂM ĐÔI (3 NHÓM) -->
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">🟣 NGUYÊN ÂM ĐÔI (3 NHÓM)</div>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_7">
+            <span class="unit-num-badge">7</span>
+            <span class="nav-label">/ɪə/, /eə/ &amp; /ʊə/</span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_8">
+            <span class="unit-num-badge">8</span>
+            <span class="nav-label">/eɪ/, /aɪ/ &amp; /ɔɪ/</span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_9">
+            <span class="unit-num-badge">9</span>
+            <span class="nav-label">/əʊ/ &amp; /aʊ/</span>
+          </button>
+        </div>
+
+        <!-- SECTION 4: PHỤ ÂM THEO CẶP (10 NHÓM) -->
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">🟢 PHỤ ÂM THEO CẶP (10 NHÓM)</div>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_10">
+            <span class="unit-num-badge">10</span>
+            <span class="nav-label">/p/ &amp; /b/ <small>(Cặp Môi)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_11">
+            <span class="unit-num-badge">11</span>
+            <span class="nav-label">/t/ &amp; /d/ <small>(Cặp Nướu)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_12">
+            <span class="unit-num-badge">12</span>
+            <span class="nav-label">/k/ &amp; /ɡ/ <small>(Cuống họng)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_13">
+            <span class="unit-num-badge">13</span>
+            <span class="nav-label">/f/ &amp; /v/ <small>(Cắn môi)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_14">
+            <span class="unit-num-badge">14</span>
+            <span class="nav-label">/s/ &amp; /z/ <small>(Xì răng)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_15">
+            <span class="unit-num-badge">15</span>
+            <span class="nav-label">/ʃ/ &amp; /ʒ/ <small>(Chu môi phễu)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_16">
+            <span class="unit-num-badge">16</span>
+            <span class="nav-label">/tʃ/ &amp; /dʒ/ <small>(Bật chu môi)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_17">
+            <span class="unit-num-badge">17</span>
+            <span class="nav-label">/θ/ &amp; /ð/ <small>(Thè lưỡi)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_18">
+            <span class="unit-num-badge">18</span>
+            <span class="nav-label">/m/, /n/ &amp; /ŋ/ <small>(Âm mũi)</small></span>
+          </button>
+          <button class="sidebar-nav-item" data-view="unit" data-unit-id="unit_19">
+            <span class="unit-num-badge">19</span>
+            <span class="nav-label">/l/, /r/, /w/, /j/, /h/</span>
+          </button>
+        </div>
+
+        <!-- SECTION 5: THỰC HÀNH & CẨM NANG -->
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">🎯 THỰC HÀNH &amp; CẨM NANG</div>
+          <button class="sidebar-nav-item" data-view="quiz">
+            <span class="nav-icon">🏆</span>
+            <span class="nav-label">Trắc Nghiệm Tai Nghe</span>
+          </button>
+          <button class="sidebar-nav-item" data-view="rules">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">Quy Tắc (-s/es, -ed)</span>
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- KHU VỰC HIỂN THỊ NỘI DUNG CHÍNH (MAIN CONTENT) -->
+    <main class="app-main-content">
+      
+      <!-- ====================================================================
+           VIEW 1: TỔNG QUAN VỀ IPA
+           ==================================================================== -->
+      <section class="app-view active" id="view_overview">
+        <div class="view-header-banner">
+          <div class="hero-badge">🌐 International Phonetic Alphabet</div>
+          <h1 class="view-main-title">Tổng Quan Về <span class="highlight">Bảng Ngữ Âm Quốc Tế IPA</span></h1>
+          <p class="view-main-desc">Chìa khóa vàng giúp bạn phát âm chuẩn xác mọi từ vựng tiếng Anh trong từ điển mà không cần đoán mò.</p>
+        </div>
+
+        <!-- Bento Grid: Khái niệm cốt lõi -->
+        <div class="overview-bento-grid">
+          <div class="overview-card feature-blue">
+            <div class="overview-card-header">
+              <span class="overview-icon">🎯</span>
+              <h3 class="overview-card-title">1. IPA Là Gì?</h3>
+            </div>
+            <p class="overview-card-text">
+              <strong>IPA (International Phonetic Alphabet)</strong> là <em>Bảng ký hiệu ngữ âm quốc tế</em> do Hiệp hội Ngữ âm Quốc tế sáng lập, nhằm cung cấp một hệ thống ký hiệu chuẩn xác đại diện cho mọi âm thanh trong mọi ngôn ngữ trên thế giới.
+            </p>
+            <div class="overview-highlight-box">
+              📌 <strong>Quy tắc vàng:</strong> <em>"Chữ cái dùng để VIẾT (Spelling), còn Ký hiệu IPA dùng để PHÁT ÂM (Pronunciation)."</em>
+            </div>
+          </div>
+
+          <div class="overview-card feature-purple">
+            <div class="overview-card-header">
+              <span class="overview-icon">⚡</span>
+              <h3 class="overview-card-title">2. Nghịch Lý: 26 Chữ Cái vs 44 Âm</h3>
+            </div>
+            <p class="overview-card-text">
+              Bảng chữ cái tiếng Anh chỉ có <strong>26 chữ cái</strong> (A, B, C... Z), nhưng lại kết hợp tạo ra tới <strong>44 âm cơ bản</strong> (Phonemes).
+            </p>
+            <div class="overview-contrast-demo">
+              <div class="demo-label">Chữ 'A' nhưng phát ra 5 âm khác nhau:</div>
+              <div class="demo-tag-list">
+                <span class="demo-tag">c<strong>a</strong>t ➡️ /æ/</span>
+                <span class="demo-tag">c<strong>a</strong>r ➡️ /ɑː/</span>
+                <span class="demo-tag"><strong>a</strong>bout ➡️ /ə/</span>
+                <span class="demo-tag">n<strong>a</strong>me ➡️ /eɪ/</span>
+                <span class="demo-tag">w<strong>a</strong>ll ➡️ /ɔː/</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sơ Đồ Cấu Trúc Bảng 44 Âm IPA -->
+        <div class="overview-card" style="margin-top: 24px;">
+          <div class="overview-card-header" style="justify-content: center; text-align: center; margin-bottom: 20px;">
+            <div>
+              <div class="hero-badge" style="margin-bottom: 6px;">📊 Cấu Trúc Phân Tầng</div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: #0B132B;">
+                Phân Loại Chi Tiết 44 Âm IPA
+              </h3>
+            </div>
+          </div>
+
+          <div class="ipa-structure-grid">
+            <div class="structure-branch-box branch-vowels">
+              <div class="branch-header">
+                <span class="branch-icon">🟡</span>
+                <h4 class="branch-title">20 NGUYÊN ÂM (VOWELS)</h4>
+                <span class="branch-badge">Luồng hơi thoát tự do</span>
+              </div>
+              <p class="branch-desc">Âm được phát ra khi luồng khí từ phổi đi lên khoang miệng mà không bị cản trở bởi môi, răng hay lưỡi.</p>
+              
+              <div class="sub-branch-list">
+                <div class="sub-branch-item">
+                  <strong>1. Nguyên âm đơn dài (5 âm):</strong>
+                  <p>/iː/, /uː/, /ɑː/, /ɔː/, /ɜː/ — Căng cơ môi, có dấu hai chấm (ː), ngân dài 1.5 - 2 giây.</p>
+                </div>
+                <div class="sub-branch-item">
+                  <strong>2. Nguyên âm đơn ngắn (7 âm):</strong>
+                  <p>/ɪ/, /ʊ/, /e/, /æ/, /ə/, /ʌ/, /ɒ/ — Thả lỏng cơ miệng, phát âm nhanh, dứt khoát dưới 0.5 giây.</p>
+                </div>
+                <div class="sub-branch-item">
+                  <strong>3. Nguyên âm đôi (8 âm):</strong>
+                  <p>/ɪə/, /eɪ/, /ʊə/, /ɔɪ/, /əʊ/, /eə/, /aɪ/, /aʊ/ — Lướt mượt mà từ nguyên âm trước sang nguyên âm sau.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="structure-branch-box branch-consonants">
+              <div class="branch-header">
+                <span class="branch-icon">🟢</span>
+                <h4 class="branch-title">24 PHỤ ÂM (CONSONANTS)</h4>
+                <span class="branch-badge">Bị cản trở luồng hơi</span>
+              </div>
+              <p class="branch-desc">Âm được tạo ra khi luồng hơi bị cản trở hoàn toàn hoặc một phần bởi môi, răng, nướu hoặc vòm miệng.</p>
+              
+              <div class="sub-branch-list">
+                <div class="sub-branch-item">
+                  <strong>1. Phụ âm vô thanh (8 âm - Unvoiced):</strong>
+                  <p>/p/, /t/, /k/, /f/, /θ/, /s/, /ʃ/, /tʃ/ — Cổ họng <u>KHÔNG rung</u>, chỉ có luồng gió xát hoặc bật hơi.</p>
+                </div>
+                <div class="sub-branch-item">
+                  <strong>2. Phụ âm hữu thanh (16 âm - Voiced):</strong>
+                  <p>/b/, /d/, /ɡ/, /v/, /ð/, /z/, /ʒ/, /dʒ/, /m/, /n/, /ŋ/, /h/, /l/, /r/, /w/, /j/ — Dây thanh quản <u>RUNG MẠNH</u> trong cổ họng.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Trụ Cột Kỹ Thuật Cấu Âm -->
+        <div class="overview-card feature-peach" style="margin-top: 24px;">
+          <div class="overview-card-header">
+            <span class="overview-icon">👄</span>
+            <h3 class="overview-card-title">3 Yếu Tố Quyết Định Phát Âm Chuẩn Như Người Bản Xứ</h3>
+          </div>
+          <div class="anatomy-pillars-grid">
+            <div class="pillar-card">
+              <div class="pillar-num">1</div>
+              <h4 class="pillar-title">Khẩu Hình Môi (Lip Shape)</h4>
+              <p class="pillar-desc">
+                • <strong>Cười bè rộng:</strong> /iː/, /eɪ/, /s/<br>
+                • <strong>Chu tròn nhỏ:</strong> /uː/, /w/, /ʃ/<br>
+                • <strong>Răng trên cắn môi dưới:</strong> /f/, /v/<br>
+                • <strong>Mở to thả lỏng:</strong> /ɑː/, /æ/
+              </p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-num">2</div>
+              <h4 class="pillar-title">Vị Trí Của Lưỡi (Tongue)</h4>
+              <p class="pillar-desc">
+                • <strong>Thè kẹp giữa 2 răng:</strong> /θ/, /ð/<br>
+                • <strong>Tì nướu răng trên:</strong> /t/, /d/, /n/, /l/<br>
+                • <strong>Uốn cong lơ lửng:</strong> /r/<br>
+                • <strong>Khóa ngạc mềm cuống họng:</strong> /k/, /ɡ/, /ŋ/
+              </p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-num">3</div>
+              <h4 class="pillar-title">Dây Thanh Quản (Voicing)</h4>
+              <p class="pillar-desc">
+                • <strong>Vô thanh (Unvoiced):</strong> Đặt tay lên cổ họng thấy im lặng, luồng gió bay mạnh.<br>
+                • <strong>Hữu thanh (Voiced):</strong> Đặt tay lên cổ thấy rung rền mạnh mẽ.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Start Learning Unit 1 -->
+        <div class="overview-cta-box" style="margin-top: 28px; text-align: center;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; color: #0B132B; margin-bottom: 8px;">
+            🚀 Bắt Đầu Học Cặp Âm Đầu Tiên: Unit 1 (/iː/ &amp; /ɪ/)
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">
+            Cùng Miss Nguyệt phân biệt cặp âm nổi tiếng nhất: Sheep or Ship?
+          </p>
+          <button class="control-btn" onclick="window.navigateTo('unit', 'unit_1')" style="background: var(--brand-primary-dark); color: #FFF; font-size: 0.96rem; padding: 12px 28px;">
+            👉 Bắt đầu học Unit 1 ngay
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 2: BẢNG 44 ÂM TỔNG THỂ & LIVE INSPECTOR
+           ==================================================================== -->
+      <section class="app-view" id="view_chart">
+        
+        <!-- Live Inspector -->
+        <section class="live-inspector-section" id="liveInspectorSection">
+          <div class="inspector-main-grid">
+            <div class="inspector-visual-col">
+              <div class="inspector-svg-container" id="inspSvgBox"></div>
+              <div class="inspector-symbol-badge" id="inspSymbol">/iː/</div>
+              <div class="inspector-sound-title" id="inspSoundName">Âm i dài</div>
+              
+              <div class="audio-dual-buttons">
+                <button class="btn-play-action btn-play-phoneme" id="inspBtnPlayPhoneme">
+                  <span>🔊</span> Nghe Âm /iː/
+                </button>
+                <button class="btn-play-action btn-play-word" id="inspBtnPlayWord">
+                  <span>🔊</span> Nghe Từ "sheep"
+                </button>
+              </div>
+
+              <div class="inspector-keyword-display">
+                <span class="kw-label">Từ ví dụ khóa:</span>
+                <span class="kw-word" id="inspKeyWord">sheep</span>
+                <span class="kw-ipa" id="inspKeyWordIPA">/ʃiːp/</span>
+                <span class="kw-mean" id="inspMeaning">(con cừu)</span>
+              </div>
+            </div>
+
+            <div class="inspector-guide-col">
+              <div class="guide-header">
+                <h3 class="guide-title">
+                  <span>👄 Hướng Dẫn Khẩu Hình Chuẩn Xác (100% Tiếng Việt)</span>
+                </h3>
+              </div>
+
+              <div class="four-steps-grid" id="inspFourSteps"></div>
+
+              <div class="anatomy-strip-grid">
+                <div class="anatomy-box">
+                  <span class="anatomy-label">MÔI</span>
+                  <span class="anatomy-val" id="inspLips">Mở rộng 2 bên như cười</span>
+                </div>
+                <div class="anatomy-box">
+                  <span class="anatomy-label">LƯỠI</span>
+                  <span class="anatomy-val" id="inspTongue">Nâng cao sát vòm trên</span>
+                </div>
+                <div class="anatomy-box">
+                  <span class="anatomy-label">HÀM</span>
+                  <span class="anatomy-val" id="inspJaw">Khép hẹp, mở rất nhỏ</span>
+                </div>
+                <div class="anatomy-box">
+                  <span class="anatomy-label">DÂY THANH</span>
+                  <span class="anatomy-val" id="inspVoicing">Có rung thanh quản</span>
+                </div>
+              </div>
+
+              <div class="notes-grid-row">
+                <div class="note-card pitfall-card">
+                  <span class="note-title">⚠️ Lỗi Người Việt Hay Mắc:</span>
+                  <p class="note-desc" id="inspPitfall">Đọc ngắn như chữ 'i' tiếng Việt.</p>
+                </div>
+                <div class="note-card tip-card">
+                  <span class="note-title">💡 Mẹo Ghi Nhớ Từ Miss Nguyệt:</span>
+                  <p class="note-desc" id="inspProTip">Giữ chặt khóe miệng cười tươi.</p>
+                </div>
+              </div>
+
+              <!-- Interactive Examples Chips -->
+              <div class="examples-chip-row">
+                <div class="examples-chip-title">📌 Bấm vào từ để nghe thêm ví dụ thực tế:</div>
+                <div class="examples-chip-list" id="inspExamplesList"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 44 Sounds Bento Grid -->
+        <div style="margin: 20px 0 12px;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #0B132B;">
+            👇 Bấm vào bất kỳ thẻ âm nào để soi khẩu hình &amp; nghe phát âm tức thì:
+          </h3>
+        </div>
+        <div class="ipa-board-container" id="ipaBoardContainer"></div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 3: HỌC THEO CẶP BÀI HỌC (UNIT LESSON ARENA)
+           ==================================================================== -->
+      <section class="app-view" id="view_unit">
+        <div id="unitLessonContent">
+          <!-- Dynamically Rendered via JavaScript -->
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 4: TRẮC NGHIỆM TAI NGHE (QUIZ ARENA)
+           ==================================================================== -->
+      <section class="app-view" id="view_quiz">
+        <div class="quiz-container-card">
+          <div class="quiz-header-status">
+            <div class="quiz-stat-pill">
+              <span>🏆 Điểm số:</span>
+              <strong id="quizScoreText">0 / 0</strong>
+            </div>
+            <div class="quiz-stat-pill streak-pill">
+              <span>🔥 Chuỗi đúng:</span>
+              <strong id="quizStreakText">0</strong>
+            </div>
+            <button class="control-btn" id="quizResetBtn" style="font-size: 0.8rem; padding: 4px 10px;">
+              🔄 Làm lại từ đầu
+            </button>
+          </div>
+
+          <div class="quiz-question-box">
+            <div class="quiz-unit-tag" id="quizUnitTag">Unit 1: /iː/ vs /ɪ/ (Sheep or Ship?)</div>
+            <h3 class="quiz-prompt-title">❓ Bạn nghe thấy từ nào trong 2 từ dưới đây?</h3>
+            
+            <div class="quiz-audio-trigger-area">
+              <button class="btn-quiz-play-audio" id="quizPlayAudioBtn">
+                <span class="quiz-play-icon">🔊</span>
+                <span>Bấm Nghe Từ Bí Ẩn</span>
+              </button>
+              <div class="quiz-audio-hint">Bấm vào loa để nghe lại nhiều lần nếu chưa rõ</div>
+            </div>
+
+            <!-- 2 Lựa chọn A / B -->
+            <div class="quiz-options-grid">
+              <button class="quiz-choice-card" id="quizChoiceA" data-choice="A">
+                <span class="choice-badge">A</span>
+                <span class="choice-word" id="quizWordA">sheep</span>
+                <span class="choice-ipa" id="quizIpaA">/ʃiːp/</span>
+                <span class="choice-mean" id="quizMeanA">con cừu</span>
+              </button>
+
+              <div class="quiz-vs-divider">VS</div>
+
+              <button class="quiz-choice-card" id="quizChoiceB" data-choice="B">
+                <span class="choice-badge">B</span>
+                <span class="choice-word" id="quizWordB">ship</span>
+                <span class="choice-ipa" id="quizIpaB">/ʃɪp/</span>
+                <span class="choice-mean" id="quizMeanB">con tàu</span>
+              </button>
+            </div>
+
+            <!-- Hộp kết quả & Giải thích -->
+            <div class="quiz-feedback-box" id="quizFeedbackBox" style="display: none;">
+              <div class="feedback-status-row" id="feedbackStatusRow"></div>
+              <div class="feedback-explanation" id="feedbackExplanation"></div>
+              <button class="btn-next-question" id="quizNextBtn">
+                <span>Tiếp tục câu tiếp theo</span> <span>➡️</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 5: QUY TẮC PHÁT ÂM (-S/ES, -ED)
+           ==================================================================== -->
+      <section class="app-view" id="view_rules">
+        <div class="view-header-banner">
+          <div class="hero-badge">📖 Cẩm Nang Quy Tắc</div>
+          <h1 class="view-main-title">Bí Quyết Phát Âm <span class="highlight">Đuôi -s/es &amp; -ed</span></h1>
+          <p class="view-main-desc">Các mẹo nhớ siêu tốc từ Miss Nguyệt giúp bạn luôn đọc chuẩn xác trong giao tiếp.</p>
+        </div>
+        <div id="rulesContainer"></div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
