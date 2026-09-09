@@ -56,6 +56,14 @@
           <option value="1.0" selected>Tốc độ: 1.0x (Chuẩn)</option>
           <option value="1.25">Tốc độ: 1.25x (Nhanh)</option>
         </select>
+
+        <!-- User Profile / Login Button -->
+        <div class="user-auth-box" id="userAuthBox">
+          <button class="btn-user-auth" id="btnUserAuth" onclick="window.openLoginModal()" title="Bấm để đăng nhập Họ Tên">
+            <span class="user-auth-avatar">👤</span>
+            <span class="user-auth-name" id="userNameText">Đăng Nhập</span>
+          </button>
+        </div>
       </div>
 
     </div>
@@ -522,6 +530,58 @@
     </main>
 
   </div>
+
+  <!-- ==========================================================================
+       MODAL ĐĂNG NHẬP HỌ TÊN & THEO DÕI QUA GOOGLE FORMS
+       ========================================================================== -->
+  <div class="login-modal-overlay" id="loginModalOverlay">
+    <div class="login-modal-card">
+      <div class="login-modal-banner">
+        <div class="login-avatar-ring">
+          <span class="login-avatar-emoji">👩‍🏫</span>
+        </div>
+        <h2 class="login-modal-title">Chào Mừng Bạn Đến Với</h2>
+        <div class="login-brand-name">PRONUNCIATION WITH MISS NGUYET</div>
+        <p class="login-modal-desc">Vui lòng nhập <strong>Họ và Tên</strong> của bạn để bắt đầu luyện tập ngữ âm và để cô theo dõi tiến độ nhé!</p>
+      </div>
+
+      <form class="login-form-body" id="loginForm" onsubmit="window.handleLoginSubmit(event)">
+        <div class="login-field-group">
+          <label for="inputFullName" class="login-label">
+            <span>Họ và tên của bạn:</span>
+            <span class="badge-required">Bắt buộc</span>
+          </label>
+          <div class="input-with-icon">
+            <span class="input-icon">✍️</span>
+            <input 
+              type="text" 
+              id="inputFullName" 
+              class="login-text-input" 
+              placeholder="Ví dụ: Nguyễn Văn An - Lớp TOEIC 2026" 
+              autocomplete="name" 
+              required 
+            />
+          </div>
+          <div class="login-help-text">💡 Ghi kèm tên lớp hoặc mục tiêu học tập (nếu có) để cô tiện theo dõi.</div>
+        </div>
+
+        <div class="login-actions-row">
+          <button type="submit" class="btn-submit-login" id="btnSubmitLogin">
+            <span>🚀 Bắt Đầu Buổi Học Ngay</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Thông báo chào mừng Toast -->
+  <div class="login-toast" id="loginToast"></div>
+
+  <!-- Hidden Iframe & Form for Silent Google Form Logging -->
+  <iframe name="hidden_google_form_iframe" id="hiddenGoogleFormIframe" style="display:none;"></iframe>
+  <form id="hiddenGoogleForm" target="hidden_google_form_iframe" action="https://docs.google.com/forms/d/e/1FAIpQLScQBlm_zmKc-JoUbvOjsUg2wf9vRarM2_v2nkJmVdbsT_R7_Q/formResponse" method="POST" style="display:none;">
+    <input type="hidden" name="entry.388968236" id="googleFormEntryFullName" value="" />
+  </form>
 
   <!-- Scripts -->
   <script src="data.js"></script>

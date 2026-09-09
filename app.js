@@ -967,6 +967,148 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Khởi tạo app
+  // ==========================================================================
+  // MODULE ĐĂNG NHẬP HỌ TÊN & THEO DÕI QUA GOOGLE FORMS
+  // ==========================================================================
+  const AUTH = {
+    FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLScQBlm_zmKc-JoUbvOjsUg2wf9vRarM2_v2nkJmVdbsT_R7_Q/formResponse",
+    ENTRY_NAME: "entry.388968236",
+    STORAGE_KEY: "miss_nguyet_student_name",
+
+    getUserName() {
+      try {
+        return localStorage.getItem(this.STORAGE_KEY) || "";
+      } catch (e) {
+        return "";
+      }
+    },
+
+    saveUser(fullName) {
+      const trimmed = fullName.trim();
+      if (!trimmed) return false;
+
+      try {
+        localStorage.setItem(this.STORAGE_KEY, trimmed);
+      } catch (e) {}
+
+      this.updateHeaderUI(trimmed);
+      this.sendToGoogleForm(trimmed);
+      this.showToast(`🎉 Chào mừng bạn ${trimmed}! Chúc bạn có buổi học thật hiệu quả.`);
+      this.closeModal();
+      return true;
+    },
+
+    sendToGoogleForm(fullName) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", second: "2-digit" }) + " - " + now.toLocaleDateString("vi-VN");
+      const submissionText = `${fullName} (Đăng nhập: ${timeStr})`;
+
+      // Cách 1: Submit qua hidden iframe (không bị chặn CORS, cực kỳ mượt mà)
+      try {
+        const hiddenForm = document.getElementById("hiddenGoogleForm");
+        const entryInput = document.getElementById("googleFormEntryFullName");
+        if (hiddenForm && entryInput) {
+          entryInput.value = submissionText;
+          hiddenForm.submit();
+        }
+      } catch (err) {
+        console.warn("Hidden form log warning:", err);
+      }
+
+      // Cách 2: Fetch no-cors dự phòng
+      try {
+        const bodyParams = new URLSearchParams();
+        bodyParams.append(this.ENTRY_NAME, submissionText);
+        fetch(this.FORM_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: bodyParams.toString()
+        }).catch(() => {});
+      } catch (e) {}
+    },
+
+    updateHeaderUI(fullName) {
+      const btn = document.getElementById("btnUserAuth");
+      const nameEl = document.getElementById("userNameText");
+      if (!btn || !nameEl) return;
+
+      if (fullName) {
+        nameEl.textContent = fullName;
+        btn.classList.add("logged-in");
+        btn.title = `Học viên: ${fullName} (Bấm để đổi tên)`;
+      } else {
+        nameEl.textContent = "Đăng Nhập";
+        btn.classList.remove("logged-in");
+        btn.title = "Bấm để đăng nhập Họ Tên";
+      }
+    },
+
+    openModal() {
+      const overlay = document.getElementById("loginModalOverlay");
+      const input = document.getElementById("inputFullName");
+      if (!overlay) return;
+
+      const currentName = this.getUserName();
+      if (input) {
+        input.value = currentName;
+        setTimeout(() => input.focus(), 200);
+      }
+
+      overlay.classList.add("active");
+    },
+
+    closeModal() {
+      const overlay = document.getElementById("loginModalOverlay");
+      if (overlay) {
+        overlay.classList.remove("active");
+      }
+    },
+
+    showToast(msg) {
+      const toast = document.getElementById("loginToast");
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 4000);
+    },
+
+    init() {
+      const currentName = this.getUserName();
+      if (currentName) {
+        this.updateHeaderUI(currentName);
+      } else {
+        // Tự động bật modal đăng nhập sau 500ms nếu chưa nhập họ tên
+        setTimeout(() => {
+          this.openModal();
+        }, 500);
+      }
+    }
+  };
+
+  // Global functions cho HTML gọi trực tiếp
+  window.openLoginModal = function() {
+    AUTH.openModal();
+  };
+
+  window.closeLoginModal = function() {
+    AUTH.closeModal();
+  };
+
+  window.handleLoginSubmit = function(e) {
+    e.preventDefault();
+    const input = document.getElementById("inputFullName");
+    if (!input || !input.value.trim()) {
+      alert("Vui lòng nhập họ và tên của bạn để tiếp tục.");
+      return;
+    }
+    AUTH.saveUser(input.value);
+  };
+
+  // Khởi tạo app & đăng nhập
   window.navigateTo("overview");
+  AUTH.init();
+
 });
