@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const match = unitId.match(/unit_(\d+)/);
     if (match) {
       const num = parseInt(match[1], 10);
-      return num > 9; // Đã mở khóa hết Nguyên Âm Đơn (Unit 1-6) và Nguyên Âm Đôi (Unit 7-9). Khóa từ Unit 10 đến 19 (Phụ âm).
+      return num > 14; // Đã mở khóa hết Nguyên Âm (Unit 1-9) và phân nửa Phụ Âm (Unit 10-14). Khóa từ Unit 15 đến 19.
     }
     return false;
   }
@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const unit = btn.getAttribute("data-unit-id");
       if (view === "unit" && isUnitLocked(unit)) {
         if (typeof AUTH !== "undefined" && AUTH.showToast) {
-          AUTH.showToast("🔒 Phần Phụ Âm đang tạm khóa theo tiến độ của cô giáo.");
+          AUTH.showToast("🔒 Các Unit phụ âm từ 15 đến 19 đang tạm khóa theo tiến độ của cô giáo.");
         }
       }
       window.navigateTo(view, unit);
@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const unit = IPA_DATA.pairedUnits.find(u => u.id === unitId) || IPA_DATA.pairedUnits[0];
 
-    // Kiểm tra nếu Unit bị khóa (Phụ âm: Unit 10 đến 19)
+    // Kiểm tra nếu Unit bị khóa (Phụ âm nửa sau: Unit 15 đến 19)
     if (isUnitLocked(unit.id)) {
       container.innerHTML = `
         <div class="locked-unit-wrapper">
@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="locked-brand">NỘI DUNG ĐANG TẠM KHÓA • MISS NGUYET</div>
             <p class="locked-desc">
               Phần bài học <strong>${unit.sectionName}</strong> đang được tạm khóa theo kế hoạch giảng dạy của cô giáo.<br>
-              Bạn hãy hoàn thành xuất sắc <strong>các bài học Nguyên Âm Đơn &amp; Nguyên Âm Đôi (Unit 1 – Unit 9)</strong> để nắm thật vững kiến thức nền tảng trước nhé!
+              Bạn hãy hoàn thành xuất sắc <strong>các bài học từ Unit 1 đến Unit 14</strong> để nắm thật vững kiến thức trước nhé!
             </p>
             <div class="locked-btn-group">
               <button class="btn-back-unlocked" onclick="window.navigateTo('unit', 'unit_1')">
