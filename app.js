@@ -467,13 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. NAVIGATION ROUTER (CHUYỂN TAB & BÀI HỌC)
   // ==========================================================================
   function isUnitLocked(unitId) {
-    if (!unitId) return false;
-    const match = unitId.match(/unit_(\d+)/);
-    if (match) {
-      const num = parseInt(match[1], 10);
-      return num > 14; // Đã mở khóa hết Nguyên Âm (Unit 1-9) và phân nửa Phụ Âm (Unit 10-14). Khóa từ Unit 15 đến 19.
-    }
-    return false;
+    return false; // Mở khóa toàn bộ 19 Units (100% Nguyên Âm và Phụ Âm)
   }
 
   window.navigateTo = function(viewId, unitId = null) {
