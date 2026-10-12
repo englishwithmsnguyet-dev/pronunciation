@@ -498,6 +498,8 @@ document.addEventListener("DOMContentLoaded", () => {
       updateLiveInspector(state.activeSoundId);
     } else if (viewId === "quiz") {
       setupNewQuizQuestion();
+    } else if (viewId === "dictation") {
+      DictationManager.start();
     } else if (viewId === "rules") {
       renderRules();
     }
@@ -1158,6 +1160,378 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================================================
+  // MODULE: BÀI TẬP NGHE & ĐÁNH MÁY 50 TỪ (LISTENING DICTATION / SPELLING ARENA)
+  // ==========================================================================
+  const DictationManager = {
+    words: [],
+    currentIndex: 0,
+    score: 0,
+    streak: 0,
+    maxStreak: 0,
+    isAnswered: false,
+    showHint: false,
+    history: [],
+
+    init() {
+      if (!window.DICTATION_WORDS_50 || !window.DICTATION_WORDS_50.length) return;
+      this.words = [...window.DICTATION_WORDS_50];
+      this.currentIndex = 0;
+      this.score = 0;
+      this.streak = 0;
+      this.maxStreak = 0;
+      this.isAnswered = false;
+      this.showHint = false;
+      this.history = [];
+    },
+
+    start(shuffle = false) {
+      if (!this.words.length || shuffle) {
+        this.init();
+        if (shuffle) {
+          for (let i = this.words.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.words[i], this.words[j]] = [this.words[j], this.words[i]];
+          }
+        }
+      }
+      this.render();
+      setTimeout(() => {
+        this.playCurrentAudio();
+      }, 350);
+    },
+
+    getCurrentWord() {
+      return this.words[this.currentIndex] || null;
+    },
+
+    playCurrentAudio(slow = false) {
+      const cur = this.getCurrentWord();
+      if (!cur) return;
+      
+      const listenBtn = document.getElementById("btnDictationListen");
+      if (listenBtn) {
+        listenBtn.classList.add("playing");
+        setTimeout(() => listenBtn.classList.remove("playing"), 1200);
+      }
+
+      const origSpeed = state.speed;
+      if (slow) {
+        state.speed = 0.75;
+      }
+      AudioEngine.playWord(cur.word);
+      state.speed = origSpeed;
+    },
+
+    toggleHint() {
+      this.showHint = !this.showHint;
+      const hintBox = document.getElementById("dictationHintBox");
+      const hintBtn = document.getElementById("btnDictationHint");
+      if (hintBox) {
+        hintBox.style.display = this.showHint ? "flex" : "none";
+      }
+      if (hintBtn) {
+        hintBtn.textContent = this.showHint ? "🙈 Ẩn Gợi Ý" : "💡 Gợi Ý Nghĩa";
+      }
+    },
+
+    submitAnswer(event) {
+      if (event) event.preventDefault();
+      if (this.isAnswered) {
+        this.nextWord();
+        return;
+      }
+
+      const input = document.getElementById("dictationInput");
+      if (!input) return;
+
+      const userText = input.value.trim().toLowerCase();
+      if (!userText) {
+        input.focus();
+        return;
+      }
+
+      const cur = this.getCurrentWord();
+      if (!cur) return;
+
+      const targetWord = cur.word.trim().toLowerCase();
+      const isCorrect = userText === targetWord;
+
+      this.isAnswered = true;
+      if (isCorrect) {
+        this.score++;
+        this.streak++;
+        if (this.streak > this.maxStreak) this.maxStreak = this.streak;
+      } else {
+        this.streak = 0;
+      }
+
+      this.history.push({
+        id: cur.id,
+        word: cur.word,
+        userWord: userText,
+        isCorrect: isCorrect,
+        ipa: cur.ipa,
+        vn: cur.vn,
+        category: cur.category
+      });
+
+      this.renderFeedback(isCorrect, cur, userText);
+    },
+
+    nextWord() {
+      this.currentIndex++;
+      this.isAnswered = false;
+      this.showHint = false;
+
+      if (this.currentIndex >= this.words.length) {
+        this.renderSummary();
+      } else {
+        this.render();
+        setTimeout(() => {
+          this.playCurrentAudio();
+        }, 350);
+      }
+    },
+
+    render() {
+      const container = document.getElementById("dictationContainer");
+      if (!container) return;
+
+      const cur = this.getCurrentWord();
+      if (!cur) {
+        this.renderSummary();
+        return;
+      }
+
+      const total = this.words.length;
+      const progressPercent = Math.round((this.currentIndex / total) * 100);
+
+      container.innerHTML = `
+        <div class="dictation-card">
+          <!-- Header Thống Kê -->
+          <div class="dictation-header">
+            <span class="dictation-category-badge">🏷️ Nhóm: ${cur.category || "Cốt lõi"}</span>
+            <div class="dictation-stats-row">
+              <span class="dictation-stat-pill">📊 Câu: <strong>${this.currentIndex + 1}/${total}</strong></span>
+              <span class="dictation-stat-pill">🎯 Đúng: <strong>${this.score}</strong></span>
+              ${this.streak > 1 ? `<span class="dictation-stat-pill streak">🔥 Chuỗi: <strong>${this.streak}</strong></span>` : ""}
+            </div>
+          </div>
+
+          <!-- Thanh Tiến Trình -->
+          <div class="dictation-progress-bar-bg">
+            <div class="dictation-progress-bar-fill" style="width: ${progressPercent}%;"></div>
+          </div>
+
+          <!-- Khung Nghe Âm Thanh -->
+          <div class="dictation-audio-box">
+            <button class="btn-dictation-listen" id="btnDictationListen" onclick="DictationManager.playCurrentAudio()">
+              <span>🔊</span> <span>Bấm Để Nghe Lại</span>
+            </button>
+            
+            <div class="dictation-audio-subcontrols">
+              <button class="btn-dictation-subaction" onclick="DictationManager.playCurrentAudio(true)" title="Phát âm chậm 0.75x để nghe rõ từng phụ âm">
+                🐢 Nghe Chậm (0.75x)
+              </button>
+              <button class="btn-dictation-subaction" id="btnDictationHint" onclick="DictationManager.toggleHint()">
+                💡 Gợi Ý Nghĩa
+              </button>
+            </div>
+
+            <div class="dictation-hint-reveal-box" id="dictationHintBox" style="display: none;">
+              <span>💡 Gợi ý: <strong>${cur.vn}</strong> ${cur.hint ? `(${cur.hint})` : ""}</span>
+            </div>
+
+            <div class="dictation-audio-hint">Mẹo: Bấm Space để nghe lại, Enter để xác nhận hoặc chuyển câu</div>
+          </div>
+
+          <!-- Form Gõ Từ -->
+          <form class="dictation-input-form" onsubmit="DictationManager.submitAnswer(event)">
+            <div class="dictation-input-row">
+              <input 
+                type="text" 
+                id="dictationInput" 
+                class="dictation-text-input" 
+                placeholder="Gõ từ tiếng Anh bạn nghe được..." 
+                autocomplete="off" 
+                autocorrect="off" 
+                autocapitalize="off" 
+                spellcheck="false"
+                required
+              />
+              <button type="submit" class="btn-dictation-submit" id="btnDictationSubmit">
+                <span>Kiểm Tra</span> <span>↵</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Vùng Phản Hồi Kết Quả -->
+          <div id="dictationFeedbackArea"></div>
+        </div>
+      `;
+
+      // Focus input
+      setTimeout(() => {
+        const input = document.getElementById("dictationInput");
+        if (input) input.focus();
+      }, 50);
+    },
+
+    renderFeedback(isCorrect, cur, userText) {
+      const feedbackArea = document.getElementById("dictationFeedbackArea");
+      if (!feedbackArea) return;
+
+      const input = document.getElementById("dictationInput");
+      const submitBtn = document.getElementById("btnDictationSubmit");
+      if (input) {
+        input.disabled = true;
+        input.style.borderColor = isCorrect ? "#22C55E" : "#EF4444";
+      }
+      if (submitBtn) {
+        submitBtn.style.display = "none";
+      }
+
+      feedbackArea.innerHTML = `
+        <div class="dictation-feedback-card ${isCorrect ? 'correct' : 'incorrect'}">
+          <div class="dictation-feedback-title">
+            <span>${isCorrect ? '🎉 Rất Chính Xác!' : '❌ Chưa Đúng Rồi!'}</span>
+          </div>
+
+          <div class="dictation-word-detail-box">
+            <div>
+              <small style="color:var(--text-muted); display:block; font-size:0.75rem;">TỪ CHUẨN XÁC:</small>
+              <span class="dictation-correct-word">${cur.word}</span>
+            </div>
+            <div>
+              <small style="color:var(--text-muted); display:block; font-size:0.75rem;">PHIÊN ÂM IPA:</small>
+              <span class="dictation-correct-ipa">${cur.ipa}</span>
+            </div>
+            <div>
+              <small style="color:var(--text-muted); display:block; font-size:0.75rem;">Ý NGHĨA:</small>
+              <span class="dictation-correct-vn">${cur.vn}</span>
+            </div>
+            <button class="control-btn" onclick="AudioEngine.playWord('${cur.word}')" style="margin-left:auto; background:#FFF; border:1px solid #CBD5E1; padding:6px 12px; border-radius:var(--radius-pill); font-weight:700;">
+              🔊 Nghe lại
+            </button>
+          </div>
+
+          ${!isCorrect ? `<div style="font-size:0.85rem; margin-top:10px; color:#991B1B;">Bạn đã gõ: <strong>"${userText}"</strong></div>` : ""}
+
+          <button class="btn-dictation-next" id="btnDictationNext" onclick="DictationManager.nextWord()">
+            <span>${this.currentIndex + 1 >= this.words.length ? '🏆 Xem Kết Quả Tổng Kết (50 Từ)' : 'Câu Tiếp Theo'}</span> <span>↵</span>
+          </button>
+        </div>
+      `;
+
+      setTimeout(() => {
+        const nextBtn = document.getElementById("btnDictationNext");
+        if (nextBtn) nextBtn.focus();
+      }, 50);
+    },
+
+    renderSummary() {
+      const container = document.getElementById("dictationContainer");
+      if (!container) return;
+
+      const total = this.words.length;
+      const correctCount = this.score;
+      const percent = Math.round((correctCount / total) * 100);
+
+      let trophyEmoji = "🌟";
+      let evalText = "Rất nỗ lực!";
+      if (percent >= 90) {
+        trophyEmoji = "👑";
+        evalText = "Xuất sắc tuyệt đối! Đôi tai vàng của Miss Nguyệt!";
+      } else if (percent >= 75) {
+        trophyEmoji = "🎉";
+        evalText = "Rất tốt! Phản xạ nghe và chính tả rất vững vàng!";
+      } else if (percent >= 50) {
+        trophyEmoji = "💪";
+        evalText = "Khá tốt! Hãy ôn lại các từ chưa đúng để hoàn thiện hơn nhé!";
+      }
+
+      const rowsHtml = this.history.map((h, i) => `
+        <tr>
+          <td style="font-weight:700; color:var(--text-muted); width:40px;">#${i + 1}</td>
+          <td>
+            <strong>${h.word}</strong> <span style="color:var(--brand-primary-dark); font-size:0.82rem;">${h.ipa}</span>
+            <div style="font-size:0.78rem; color:var(--text-muted);">${h.vn}</div>
+          </td>
+          <td>
+            <span style="font-family:monospace; font-weight:700; color:${h.isCorrect ? '#16A34A' : '#DC2626'}">
+              ${h.userWord || "—"}
+            </span>
+          </td>
+          <td>
+            <span class="dictation-review-status ${h.isCorrect ? 'correct' : 'incorrect'}">
+              ${h.isCorrect ? '✓ Đúng' : '✗ Sai'}
+            </span>
+          </td>
+          <td style="text-align:right;">
+            <button class="control-btn" onclick="AudioEngine.playWord('${h.word}')" style="background:#FFF; border:1px solid #CBD5E1; padding:4px 8px; border-radius:var(--radius-pill); font-size:0.75rem;">
+              🔊 Nghe
+            </button>
+          </td>
+        </tr>
+      `).join("");
+
+      container.innerHTML = `
+        <div class="dictation-summary-card">
+          <div class="dictation-trophy-badge">${trophyEmoji}</div>
+          <h2 class="dictation-summary-title">Hoàn Thành Thử Thách 50 Từ!</h2>
+          <p class="dictation-summary-desc">${evalText}</p>
+
+          <div class="dictation-score-grid">
+            <div class="dictation-score-item">
+              <div class="dictation-score-val">${correctCount}/${total}</div>
+              <div class="dictation-score-lbl">SỐ TỪ ĐÚNG</div>
+            </div>
+            <div class="dictation-score-item">
+              <div class="dictation-score-val">${percent}%</div>
+              <div class="dictation-score-lbl">ĐỘ CHÍNH XÁC</div>
+            </div>
+            <div class="dictation-score-item">
+              <div class="dictation-score-val">${this.maxStreak}</div>
+              <div class="dictation-score-lbl">CHUỖI ĐÚNG DÀI NHẤT</div>
+            </div>
+          </div>
+
+          <div class="dictation-review-section">
+            <h3 class="dictation-review-title">📋 Bảng Chi Tiết Kết Quả 50 Từ:</h3>
+            <div class="dictation-review-table-wrapper">
+              <table class="dictation-review-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Từ Chuẩn & IPA</th>
+                    <th>Bạn Đã Gõ</th>
+                    <th>Kết Quả</th>
+                    <th style="text-align:right;">Nghe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dictation-summary-actions">
+            <button class="btn-dictation-restart" onclick="DictationManager.start(false)">
+              <span>🔄 Làm Lại Từ Đầu</span>
+            </button>
+            <button class="btn-dictation-restart" onclick="DictationManager.start(true)" style="background:var(--brand-primary-dark);">
+              <span>🔀 Xáo Trộn Thứ Tự 50 Từ</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+  };
+
+  window.DictationManager = DictationManager;
+
+  // ==========================================================================
   // 7. RENDER RULES (-S/ES, -ED)
   // ==========================================================================
   function renderRules() {
@@ -1363,6 +1737,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     AUTH.saveUser(input.value);
   };
+
+  // Bàn phím nhanh cho bài tập Nghe & Đánh máy
+  window.addEventListener("keydown", (e) => {
+    if (state.currentView !== "dictation") return;
+
+    // Phím Space để nghe lại khi không đang gõ text
+    if (e.code === "Space" && document.activeElement !== document.getElementById("dictationInput")) {
+      e.preventDefault();
+      DictationManager.playCurrentAudio();
+    }
+    // Phím Ctrl+Space hoặc Alt+Space để nghe lại bất cứ lúc nào
+    else if (e.code === "Space" && (e.ctrlKey || e.metaKey || e.altKey)) {
+      e.preventDefault();
+      DictationManager.playCurrentAudio();
+    }
+  });
 
   // Khởi tạo app & giọng đọc & đăng nhập
   AudioEngine.init();
