@@ -279,6 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.speechSynthesis.speak(utterance);
     }
   };
+  window.AudioEngine = AudioEngine;
 
   // Global Helpers for HTML inline onclicks
   window.__playPhonemeAudio = function(soundId) {
@@ -1162,6 +1163,59 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   // MODULE: BÀI TẬP NGHE & ĐÁNH MÁY 50 TỪ (LISTENING DICTATION / SPELLING ARENA)
   // ==========================================================================
+  const BUILTIN_DICTATION_WORDS_50 = [
+    { id: 1, word: "sheep", ipa: "/ʃiːp/", vn: "con cừu", hint: "Âm /iː/ dài", category: "Nguyên âm đơn" },
+    { id: 2, word: "ship", ipa: "/ʃɪp/", vn: "con tàu, thuyền lớn", hint: "Âm /ɪ/ ngắn", category: "Nguyên âm đơn" },
+    { id: 3, word: "pool", ipa: "/puːl/", vn: "hồ bơi", hint: "Âm /uː/ dài", category: "Nguyên âm đơn" },
+    { id: 4, word: "pull", ipa: "/pʊl/", vn: "kéo, lôi kéo", hint: "Âm /ʊ/ ngắn", category: "Nguyên âm đơn" },
+    { id: 5, word: "dark", ipa: "/dɑːk/", vn: "bóng tối, màu tối", hint: "Âm /ɑː/ sâu", category: "Nguyên âm đơn" },
+    { id: 6, word: "duck", ipa: "/dʌk/", vn: "con vịt", hint: "Âm /ʌ/ mở", category: "Nguyên âm đơn" },
+    { id: 7, word: "bed", ipa: "/bed/", vn: "cái giường ngủ", hint: "Âm /e/ mở nhẹ", category: "Nguyên âm đơn" },
+    { id: 8, word: "bad", ipa: "/bæd/", vn: "xấu, tồi tệ", hint: "Âm /æ/ hạ hàm", category: "Nguyên âm đơn" },
+    { id: 9, word: "spot", ipa: "/spɒt/", vn: "đốm, điểm, vết", hint: "Âm /ɒ/ tròn môi ngắn", category: "Nguyên âm đơn" },
+    { id: 10, word: "sport", ipa: "/spɔːt/", vn: "thể thao", hint: "Âm /ɔː/ tròn môi dài", category: "Nguyên âm đơn" },
+    { id: 11, word: "bird", ipa: "/bɜːd/", vn: "con chim", hint: "Âm /ɜː/ uốn lưỡi dài", category: "Nguyên âm đơn" },
+    { id: 12, word: "teacher", ipa: "/ˈtiːtʃə(r)/", vn: "giáo viên", hint: "Âm /ə/ lướt nhẹ", category: "Nguyên âm đơn" },
+    { id: 13, word: "day", ipa: "/deɪ/", vn: "ngày, ban ngày", hint: "Âm đôi /eɪ/", category: "Nguyên âm đôi" },
+    { id: 14, word: "sky", ipa: "/skaɪ/", vn: "bầu trời", hint: "Âm đôi /aɪ/", category: "Nguyên âm đôi" },
+    { id: 15, word: "boy", ipa: "/bɔɪ/", vn: "cậu bé, bé trai", hint: "Âm đôi /ɔɪ/", category: "Nguyên âm đôi" },
+    { id: 16, word: "here", ipa: "/hɪə(r)/", vn: "ở đây", hint: "Âm đôi /ɪə/", category: "Nguyên âm đôi" },
+    { id: 17, word: "chair", ipa: "/tʃeə(r)/", vn: "cái ghế tựa", hint: "Âm đôi /eə/", category: "Nguyên âm đôi" },
+    { id: 18, word: "tour", ipa: "/tʊə(r)/", vn: "chuyến du lịch", hint: "Âm đôi /ʊə/", category: "Nguyên âm đôi" },
+    { id: 19, word: "now", ipa: "/naʊ/", vn: "bây giờ, ngay lúc này", hint: "Âm đôi /aʊ/", category: "Nguyên âm đôi" },
+    { id: 20, word: "go", ipa: "/ɡəʊ/", vn: "đi, di chuyển", hint: "Âm đôi /əʊ/", category: "Nguyên âm đôi" },
+    { id: 21, word: "pen", ipa: "/pen/", vn: "cây bút mực", hint: "Phụ âm bật hơi /p/", category: "Phụ âm" },
+    { id: 22, word: "book", ipa: "/bʊk/", vn: "cuốn sách", hint: "Phụ âm rung /b/", category: "Phụ âm" },
+    { id: 23, word: "time", ipa: "/taɪm/", vn: "thời gian, giờ giấc", hint: "Phụ âm bật đầu lưỡi /t/", category: "Phụ âm" },
+    { id: 24, word: "door", ipa: "/dɔː(r)/", vn: "cánh cửa ra vào", hint: "Phụ âm chân răng /d/", category: "Phụ âm" },
+    { id: 25, word: "cat", ipa: "/kæt/", vn: "con mèo", hint: "Phụ âm bật ngạc mềm /k/", category: "Phụ âm" },
+    { id: 26, word: "gift", ipa: "/ɡɪft/", vn: "món quà tặng", hint: "Phụ âm ngạc mềm rung /ɡ/", category: "Phụ âm" },
+    { id: 27, word: "fly", ipa: "/flaɪ/", vn: "bay lượn, con ruồi", hint: "Phụ âm cắn môi thổi gió /f/", category: "Phụ âm" },
+    { id: 28, word: "voice", ipa: "/vɔɪs/", vn: "giọng nói", hint: "Phụ âm cắn môi rung /v/", category: "Phụ âm" },
+    { id: 29, word: "think", ipa: "/θɪŋk/", vn: "suy nghĩ", hint: "Phụ âm thè lưỡi không rung /θ/", category: "Phụ âm" },
+    { id: 30, word: "this", ipa: "/ðɪs/", vn: "cái này, điều này", hint: "Phụ âm thè lưỡi rung /ð/", category: "Phụ âm" },
+    { id: 31, word: "sea", ipa: "/siː/", vn: "biển cả", hint: "Phụ âm xì răng /s/", category: "Phụ âm" },
+    { id: 32, word: "zoo", ipa: "/zuː/", vn: "vườn bách thú", hint: "Phụ âm xì rung /z/", category: "Phụ âm" },
+    { id: 33, word: "shoe", ipa: "/ʃuː/", vn: "chiếc giày", hint: "Phụ âm chu môi phễu /ʃ/", category: "Phụ âm" },
+    { id: 34, word: "vision", ipa: "/ˈvɪʒn/", vn: "tầm nhìn, thị giác", hint: "Phụ âm chu môi rung /ʒ/", category: "Phụ âm" },
+    { id: 35, word: "cheap", ipa: "/tʃiːp/", vn: "rẻ tiền", hint: "Phụ âm bật chu môi /tʃ/", category: "Phụ âm" },
+    { id: 36, word: "job", ipa: "/dʒɒb/", vn: "công việc nghề nghiệp", hint: "Phụ âm bật chu môi rung /dʒ/", category: "Phụ âm" },
+    { id: 37, word: "moon", ipa: "/muːn/", vn: "mặt trăng", hint: "Âm mũi ngậm môi /m/", category: "Phụ âm" },
+    { id: 38, word: "night", ipa: "/naɪt/", vn: "ban đêm", hint: "Âm mũi chân răng /n/", category: "Phụ âm" },
+    { id: 39, word: "sing", ipa: "/sɪŋ/", vn: "hát, ca hát", hint: "Âm mũi cuống lưỡi /ŋ/", category: "Phụ âm" },
+    { id: 40, word: "home", ipa: "/həʊm/", vn: "mái ấm gia đình", hint: "Âm thổi hơi nhẹ /h/", category: "Phụ âm" },
+    { id: 41, word: "love", ipa: "/lʌv/", vn: "tình yêu, yêu mến", hint: "Âm uốn đầu lưỡi /l/", category: "Phụ âm" },
+    { id: 42, word: "rain", ipa: "/reɪn/", vn: "cơn mưa", hint: "Âm cuộn lưỡi /r/", category: "Phụ âm" },
+    { id: 43, word: "water", ipa: "/ˈwɔːtə(r)/", vn: "nước uống", hint: "Âm tròn môi lướt /w/", category: "Phụ âm" },
+    { id: 44, word: "year", ipa: "/jɪə(r)/", vn: "năm (thời gian)", hint: "Âm bán nguyên âm /j/", category: "Phụ âm" },
+    { id: 45, word: "peace", ipa: "/piːs/", vn: "sự hòa bình, yên bình", hint: "Âm /p/ & /iː/", category: "Tổng hợp" },
+    { id: 46, word: "heart", ipa: "/hɑːt/", vn: "trái tim, tấm lòng", hint: "Âm /h/ & /ɑː/", category: "Tổng hợp" },
+    { id: 47, word: "bear", ipa: "/beə(r)/", vn: "con gấu", hint: "Âm /b/ & /eə/", category: "Tổng hợp" },
+    { id: 48, word: "pear", ipa: "/peə(r)/", vn: "quả lê", hint: "Âm /p/ & /eə/", category: "Tổng hợp" },
+    { id: 49, word: "watch", ipa: "/wɒtʃ/", vn: "đồng hồ đeo tay, xem", hint: "Âm /w/ & /tʃ/", category: "Tổng hợp" },
+    { id: 50, word: "dream", ipa: "/driːm/", vn: "giấc mơ, ước mơ", hint: "Âm /dr/ & /iː/", category: "Tổng hợp" }
+  ];
+
   const DictationManager = {
     words: [],
     currentIndex: 0,
@@ -1173,8 +1227,10 @@ document.addEventListener("DOMContentLoaded", () => {
     history: [],
 
     init() {
-      if (!window.DICTATION_WORDS_50 || !window.DICTATION_WORDS_50.length) return;
-      this.words = [...window.DICTATION_WORDS_50];
+      const srcWords = (window.DICTATION_WORDS_50 && window.DICTATION_WORDS_50.length)
+        ? window.DICTATION_WORDS_50
+        : BUILTIN_DICTATION_WORDS_50;
+      this.words = [...srcWords];
       this.currentIndex = 0;
       this.score = 0;
       this.streak = 0;
@@ -1187,13 +1243,22 @@ document.addEventListener("DOMContentLoaded", () => {
     start(shuffle = false) {
       if (!this.words.length || shuffle) {
         this.init();
-        if (shuffle) {
-          for (let i = this.words.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.words[i], this.words[j]] = [this.words[j], this.words[i]];
-          }
+      }
+      if (shuffle && this.words.length) {
+        for (let i = this.words.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [this.words[i], this.words[j]] = [this.words[j], this.words[i]];
         }
       }
+      // Reset tiến trình về câu đầu tiên
+      this.currentIndex = 0;
+      this.score = 0;
+      this.streak = 0;
+      this.maxStreak = 0;
+      this.isAnswered = false;
+      this.showHint = false;
+      this.history = [];
+
       this.render();
       setTimeout(() => {
         this.playCurrentAudio();
@@ -1296,6 +1361,25 @@ document.addEventListener("DOMContentLoaded", () => {
     render() {
       const container = document.getElementById("dictationContainer");
       if (!container) return;
+
+      if (!this.words || !this.words.length) {
+        this.init();
+      }
+
+      if (!this.words || !this.words.length) {
+        container.innerHTML = `
+          <div class="dictation-card" style="text-align:center; padding:40px 20px;">
+            <p style="font-size:1.1rem; color:var(--text-muted); margin-bottom:16px;">Đang chuẩn bị bài tập 50 từ cốt lõi...</p>
+            <button class="btn-dictation-listen" onclick="DictationManager.start(true)">Bắt Đầu Luyện Tập</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (this.currentIndex >= this.words.length) {
+        this.renderSummary();
+        return;
+      }
 
       const cur = this.getCurrentWord();
       if (!cur) {
@@ -1434,8 +1518,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!container) return;
 
       const total = this.words.length;
+      if (total === 0) {
+        this.start(false);
+        return;
+      }
       const correctCount = this.score;
-      const percent = Math.round((correctCount / total) * 100);
+      const percent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
 
       let trophyEmoji = "🌟";
       let evalText = "Rất nỗ lực!";
@@ -1756,6 +1844,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Khởi tạo app & giọng đọc & đăng nhập
   AudioEngine.init();
+  DictationManager.init();
   window.navigateTo("overview");
   AUTH.init();
 
