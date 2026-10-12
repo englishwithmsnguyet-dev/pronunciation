@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const state = {
     accent: localStorage.getItem("miss_nguyet_accent") || "UK",
     speed: parseFloat(localStorage.getItem("miss_nguyet_speed")) || 1.0,
+    selectedVoice: localStorage.getItem("miss_nguyet_voice") || "auto",
     currentView: "overview",
     currentUnitId: "unit_1",
     activeSoundId: "i_long",
@@ -21,10 +22,149 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // ==========================================================================
-  // 1. REAL AUDIO ENGINE (PHÁT ÂM RIÊNG BIỆT TỪNG ÂM ĐƠN LẬP & TỪ PHÒNG THU)
+  // 1. REAL AUDIO ENGINE (PHÁT ÂM RIÊNG BIỆT TỪNG ÂM ĐƠN LẬP & TỪ PHÒNG THU & CÂU TỰ NHIÊN)
   // ==========================================================================
   const AudioEngine = {
     currentAudio: null,
+    currentUtterance: null,
+    voices: [],
+
+    init() {
+      if ("speechSynthesis" in window) {
+        this.updateVoiceList();
+        window.speechSynthesis.onvoiceschanged = () => {
+          this.updateVoiceList();
+        };
+      }
+    },
+
+    updateVoiceList() {
+      if (!("speechSynthesis" in window)) return;
+      this.voices = window.speechSynthesis.getVoices() || [];
+      this.populateVoiceDropdown();
+    },
+
+    // Lọc & Chấm Điểm Thông Minh để tự động chọn Giọng Đọc Bản Xứ Tự Nhiên Nhất (loại bỏ giọng robot rẻ tiền)
+    getBestVoice(accent) {
+      if (!this.voices || this.voices.length === 0) {
+        this.voices = window.speechSynthesis.getVoices() || [];
+      }
+      if (!this.voices.length) return null;
+
+      // Nếu người dùng chủ động chọn 1 giọng cụ thể trong dropdown
+      if (state.selectedVoice && state.selectedVoice !== "auto") {
+        const customVoice = this.voices.find(v => (v.voiceURI && v.voiceURI === state.selectedVoice) || v.name === state.selectedVoice);
+        if (customVoice) return customVoice;
+      }
+
+      // Danh sách đen: Giọng robot cổ xưa, hiệu ứng âm thanh máy móc kỳ quặc trên macOS/Windows
+      const blacklist = [
+        "albert", "bad news", "bahh", "bells", "boing", "bubbles", "cellos",
+        "good news", "jester", "junior", "organ", "superstar", "ralph", "trinoids",
+        "whisper", "zarvox", "wobble", "fred", "deranged", "hysterical", "pipe organ",
+        "sin-ji", "ting-ting", "xander"
+      ];
+
+      const isUS = accent === "US";
+      const targetPrefix = isUS ? "en-us" : "en-gb";
+
+      // 1. Lọc giọng khớp mã ngôn ngữ và không nằm trong blacklist
+      let candidates = this.voices.filter(v => {
+        const name = (v.name || "").toLowerCase();
+        const lang = (v.lang || "").toLowerCase().replace(/_/g, "-");
+        if (blacklist.some(b => name.includes(b))) return false;
+        return lang.startsWith(targetPrefix) || (isUS ? lang === "en-us" : lang === "en-gb");
+      });
+
+      // Nếu không tìm thấy exact lang, mở rộng sang các giọng tiếng Anh khác (loại bỏ blacklist)
+      if (!candidates.length) {
+        candidates = this.voices.filter(v => {
+          const name = (v.name || "").toLowerCase();
+          const lang = (v.lang || "").toLowerCase();
+          return !blacklist.some(b => name.includes(b)) && lang.startsWith("en");
+        });
+      }
+
+      if (!candidates.length) return null;
+
+      // 2. Chấm điểm độ tự nhiên (AI/Neural/Studio/Cloud Human Voices)
+      function scoreVoice(v) {
+        let score = 0;
+        const name = (v.name || "").toLowerCase();
+        const lang = (v.lang || "").toLowerCase().replace(/_/g, "-");
+
+        if (lang.startsWith(targetPrefix)) score += 60;
+
+        // Ưu tiên cao nhất: Giọng Cloud / Neural tự nhiên của Google, Microsoft, Apple
+        if (name.includes("online (natural)")) score += 100;
+        if (name.includes("natural")) score += 90;
+        if (name.includes("enhanced") || name.includes("premium")) score += 80;
+        if (name.includes("google")) score += 75; // Google US English, Google UK English Female/Male
+        if (name.includes("siri")) score += 70;
+
+        // Giọng người bản xứ chuẩn mực, ấm áp, ngắt câu tự nhiên
+        if (isUS) {
+          if (name.includes("samantha")) score += 65;
+          if (name.includes("ava") || name.includes("allison")) score += 60;
+          if (name.includes("jenny") || name.includes("aria") || name.includes("guy")) score += 65;
+          if (name.includes("flo") || name.includes("eddy") || name.includes("sandy")) score += 45;
+        } else {
+          // UK
+          if (name.includes("daniel")) score += 70;
+          if (name.includes("oliver") || name.includes("serena")) score += 65;
+          if (name.includes("libby") || name.includes("ryan") || name.includes("sonia")) score += 65;
+          if (name.includes("flo") || name.includes("eddy") || name.includes("sandy")) score += 45;
+        }
+
+        if (v.default) score += 5;
+        return score;
+      }
+
+      candidates.sort((a, b) => scoreVoice(b) - scoreVoice(a));
+      return candidates[0];
+    },
+
+    populateVoiceDropdown() {
+      const voiceSelect = document.getElementById("voiceSelect");
+      if (!voiceSelect) return;
+
+      const currentAccent = state.accent;
+      const best = this.getBestVoice(currentAccent);
+
+      const blacklist = [
+        "albert", "bad news", "bahh", "bells", "boing", "bubbles", "cellos",
+        "good news", "jester", "junior", "organ", "superstar", "ralph", "trinoids",
+        "whisper", "zarvox", "wobble", "fred", "deranged", "hysterical"
+      ];
+      const targetPrefix = currentAccent === "US" ? "en-us" : "en-gb";
+      const validVoices = (this.voices || []).filter(v => {
+        const name = (v.name || "").toLowerCase();
+        const lang = (v.lang || "").toLowerCase().replace(/_/g, "-");
+        return !blacklist.some(b => name.includes(b)) && (lang.startsWith(targetPrefix) || lang.startsWith("en"));
+      });
+
+      voiceSelect.innerHTML = "";
+
+      const autoOpt = document.createElement("option");
+      autoOpt.value = "auto";
+      const bestLabel = best ? ` (${best.name.replace(/Google |Microsoft /g, "").replace(/\(.*?\)/g, "").trim()})` : "";
+      autoOpt.textContent = `🎙️ Giọng: Tự nhiên nhất${bestLabel}`;
+      voiceSelect.appendChild(autoOpt);
+
+      validVoices.slice(0, 15).forEach(v => {
+        const opt = document.createElement("option");
+        opt.value = v.voiceURI || v.name;
+        opt.textContent = `🎙️ ${v.name}`;
+        if (state.selectedVoice === opt.value) {
+          opt.selected = true;
+        }
+        voiceSelect.appendChild(opt);
+      });
+
+      if (state.selectedVoice === "auto" || !state.selectedVoice) {
+        voiceSelect.value = "auto";
+      }
+    },
 
     // Phát Âm Đơn Lập Gốc từ file MP3 trích xuất của cô giáo
     playPhoneme(sound) {
@@ -59,10 +199,56 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     },
 
-    // Phát Câu Ngữ Cảnh
-    playSentence(sentenceText) {
+    // Phát Câu Ngữ Cảnh Tự Nhiên (Natural Speech with Native Cadence)
+    playSentence(sentenceText, btnEl) {
+      if (!sentenceText) return;
       this.stop();
-      this.fallbackTTS(sentenceText);
+
+      let activeBtn = btnEl;
+      if (!activeBtn && window.event && window.event.currentTarget) {
+        activeBtn = window.event.currentTarget;
+      }
+      if (activeBtn) {
+        activeBtn.classList.add("playing");
+      }
+
+      // Xử lý câu: loại bỏ dấu ngoặc kép thừa, đảm bảo có dấu câu kết thúc để ngắt nhịp tự nhiên
+      let cleanText = sentenceText.trim().replace(/^["']|["']$/g, "").trim();
+      if (!cleanText.match(/[.!?]$/)) {
+        cleanText += ".";
+      }
+
+      if (!("speechSynthesis" in window)) {
+        if (activeBtn) activeBtn.classList.remove("playing");
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const voice = this.getBestVoice(state.accent);
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
+      }
+
+      // Điều chỉnh tốc độ và độ cao âm thanh:
+      // Tốc độ hơi chậm nhẹ (~0.94) để ngữ điệu ngắt nghỉ tròn vành, tự nhiên, không bị giật cục
+      utterance.rate = Math.max(0.6, Math.min(1.4, state.speed * 0.94));
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+
+      const clearPlaying = () => {
+        if (activeBtn) activeBtn.classList.remove("playing");
+        document.querySelectorAll(".btn-play-sentence.playing").forEach(b => b.classList.remove("playing"));
+        this.currentUtterance = null;
+      };
+
+      utterance.onend = clearPlaying;
+      utterance.onerror = clearPlaying;
+
+      this.currentUtterance = utterance;
+      window.speechSynthesis.speak(utterance);
     },
 
     stop() {
@@ -74,13 +260,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }
+      document.querySelectorAll(".btn-play-sentence.playing").forEach(b => b.classList.remove("playing"));
+      this.currentUtterance = null;
     },
 
     fallbackTTS(text) {
       if (!("speechSynthesis" in window)) return;
       const utterance = new SpeechSynthesisUtterance(text);
+      const voice = this.getBestVoice(state.accent);
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
+      }
       utterance.rate = state.speed;
-      utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
+      utterance.pitch = 1.0;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -93,8 +288,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.__playWordAudio = function(word) {
     AudioEngine.playWord(word);
   };
-  window.__playSentenceAudio = function(sentence) {
-    AudioEngine.playSentence(sentence);
+  window.__playSentenceAudio = function(param) {
+    if (param instanceof HTMLElement) {
+      const sentence = decodeURIComponent(param.dataset.sentence || "");
+      AudioEngine.playSentence(sentence, param);
+    } else if (typeof param === "string") {
+      AudioEngine.playSentence(param);
+    }
   };
 
   // ==========================================================================
@@ -461,7 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="sentence-action-row">
             <span style="font-size:0.8rem; color:var(--text-muted);">${p.wordA} (${p.meanA})</span>
-            <button class="btn-play-sentence" onclick="window.__playSentenceAudio('${p.sentenceA}')">
+            <button class="btn-play-sentence" data-sentence="${encodeURIComponent(p.sentenceA)}" onclick="window.__playSentenceAudio(this)">
               <span>🔊</span> Nghe câu
             </button>
           </div>
@@ -473,7 +673,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="sentence-action-row">
             <span style="font-size:0.8rem; color:var(--text-muted);">${p.wordB} (${p.meanB})</span>
-            <button class="btn-play-sentence" onclick="window.__playSentenceAudio('${p.sentenceB}')">
+            <button class="btn-play-sentence" data-sentence="${encodeURIComponent(p.sentenceB)}" onclick="window.__playSentenceAudio(this)">
               <span>🔊</span> Nghe câu
             </button>
           </div>
@@ -993,13 +1193,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Accent & Speed
+  // Accent & Speed & Voice
   document.querySelectorAll("[data-accent]").forEach(btn => {
     btn.addEventListener("click", () => {
       const acc = btn.getAttribute("data-accent");
       state.accent = acc;
       localStorage.setItem("miss_nguyet_accent", acc);
       document.querySelectorAll("[data-accent]").forEach(b => b.classList.toggle("active", b === btn));
+      AudioEngine.updateVoiceList();
     });
   });
 
@@ -1009,6 +1210,14 @@ document.addEventListener("DOMContentLoaded", () => {
     speedSelect.addEventListener("change", () => {
       state.speed = parseFloat(speedSelect.value);
       localStorage.setItem("miss_nguyet_speed", state.speed);
+    });
+  }
+
+  const voiceSelect = document.getElementById("voiceSelect");
+  if (voiceSelect) {
+    voiceSelect.addEventListener("change", () => {
+      state.selectedVoice = voiceSelect.value;
+      localStorage.setItem("miss_nguyet_voice", state.selectedVoice);
     });
   }
 
@@ -1152,7 +1361,8 @@ document.addEventListener("DOMContentLoaded", () => {
     AUTH.saveUser(input.value);
   };
 
-  // Khởi tạo app & đăng nhập
+  // Khởi tạo app & giọng đọc & đăng nhập
+  AudioEngine.init();
   window.navigateTo("overview");
   AUTH.init();
 

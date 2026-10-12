@@ -189,6 +189,7 @@ button, select, input {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
+.voice-select-box,
 .speed-select-box {
   padding: 6px 12px;
   border-radius: var(--radius-pill);
@@ -198,6 +199,12 @@ button, select, input {
   font-weight: 700;
   color: var(--text-main);
   cursor: pointer;
+}
+
+.voice-select-box {
+  max-width: 220px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -1051,6 +1058,20 @@ button, select, input {
   background: var(--brand-primary);
   color: #FFF;
   border-color: var(--brand-primary);
+}
+
+.btn-play-sentence.playing {
+  background: var(--brand-primary);
+  color: #FFF;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.25);
+  animation: pulseAudio 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseAudio {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 /* Unit Nav Footer */
