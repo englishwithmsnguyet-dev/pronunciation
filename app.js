@@ -653,11 +653,20 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
 
     // 4. Tạo các câu ngữ cảnh
+    const highlightWordInSentence = (sentence, word) => {
+      if (!sentence) return "";
+      let s = sentence.trim();
+      if (s.length > 0) {
+        s = s.charAt(0).toUpperCase() + s.slice(1);
+      }
+      return s.replace(new RegExp(`\\b${word}\\b`, "i"), (matched) => `<span class="sentence-highlight">${matched}</span>`);
+    };
+
     const sentencesHtml = unit.minimalPairs.slice(0, 3).map(p => `
       <div class="sentence-grid-row">
         <div class="sentence-box">
           <div class="sentence-en">
-            "${p.sentenceA.replace(new RegExp(`\\b${p.wordA}\\b`, "i"), `<span class="sentence-highlight">${p.wordA}</span>`)}"
+            "${highlightWordInSentence(p.sentenceA, p.wordA)}"
           </div>
           <div class="sentence-action-row">
             <span style="font-size:0.8rem; color:var(--text-muted);">${p.wordA} (${p.meanA})</span>
@@ -669,7 +678,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="sentence-box">
           <div class="sentence-en">
-            "${p.sentenceB.replace(new RegExp(`\\b${p.wordB}\\b`, "i"), `<span class="sentence-highlight">${p.wordB}</span>`)}"
+            "${highlightWordInSentence(p.sentenceB, p.wordB)}"
           </div>
           <div class="sentence-action-row">
             <span style="font-size:0.8rem; color:var(--text-muted);">${p.wordB} (${p.meanB})</span>
