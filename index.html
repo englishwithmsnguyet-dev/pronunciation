@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lexend+Deca:wght@600;700;800&family=Charis+SIL:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css?v=2.4">
+  <link rel="stylesheet" href="styles.css?v=2.5">
 </head>
 <body>
 
@@ -196,6 +196,10 @@
           <button class="sidebar-nav-item" data-view="dictation">
             <span class="nav-icon">⌨️</span>
             <span class="nav-label">Nghe &amp; Đánh Máy (50 Từ TOEIC)</span>
+          </button>
+          <button class="sidebar-nav-item" data-view="ipa_decoding">
+            <span class="nav-icon">🔤</span>
+            <span class="nav-label">Nhìn IPA Viết Từ (50 Từ)</span>
           </button>
           <button class="sidebar-nav-item" data-view="rules">
             <span class="nav-icon">📖</span>
@@ -547,6 +551,18 @@
         <div id="dictationContainer"></div>
       </section>
 
+      <!-- ====================================================================
+           VIEW 7: BÀI TẬP NHÌN PHIÊN ÂM IPA ĐỂ VIẾT TỪ (IPA TO WORD DECODING)
+           ==================================================================== -->
+      <section class="app-view" id="view_ipa_decoding">
+        <div class="view-header-banner">
+          <div class="hero-badge">🔤 Giải Mã Ký Hiệu Ngữ Âm Quốc Tế</div>
+          <h1 class="view-main-title">Nhìn Phiên Âm IPA &amp; <span class="highlight">Đoán Chữ Viết 50 Từ</span></h1>
+          <p class="view-main-desc">Quan sát kỹ các ký hiệu ngữ âm IPA, dấu trọng âm và nguyên âm/phụ âm để gõ lại chính xác từ vựng tiếng Anh tương ứng. Thử thách khả năng liên kết âm thanh và mặt chữ!</p>
+        </div>
+        <div id="ipaDecodingContainer"></div>
+      </section>
+
     </main>
 
   </div>
@@ -603,7 +619,7 @@
   </form>
 
   <!-- Scripts -->
-  <script src="data.js?v=2.4"></script>
-  <script src="app.js?v=2.4"></script>
+  <script src="data.js?v=2.5"></script>
+  <script src="app.js?v=2.5"></script>
 </body>
 </html>

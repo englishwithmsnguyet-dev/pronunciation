@@ -501,6 +501,8 @@ document.addEventListener("DOMContentLoaded", () => {
       setupNewQuizQuestion();
     } else if (viewId === "dictation") {
       DictationManager.start();
+    } else if (viewId === "ipa_decoding") {
+      IpaDecodingManager.start();
     } else if (viewId === "rules") {
       renderRules();
     }
@@ -1620,6 +1622,452 @@ document.addEventListener("DOMContentLoaded", () => {
   window.DictationManager = DictationManager;
 
   // ==========================================================================
+  // MODULE: BÀI TẬP NHÌN PHIÊN ÂM IPA ĐỂ VIẾT TỪ (IPA TO WORD DECODING ARENA)
+  // ==========================================================================
+  const BUILTIN_IPA_DECODING_WORDS_50 = [
+    { id: 1, word: "beautiful", ipa: "/ˈbjuːtɪfl/", vn: "xinh đẹp, tuyệt vời", hint: "Âm /juː/ và âm đuôi /fl/", category: "Tính từ miêu tả" },
+    { id: 2, word: "honest", ipa: "/ˈɒnɪst/", vn: "thật thà, trung thực", hint: "Câm chữ 'h', bắt đầu bằng /ɒ/", category: "Phẩm chất & Tính cách" },
+    { id: 3, word: "comfortable", ipa: "/ˈkʌmftəbl/", vn: "thoải mái, dễ chịu", hint: "Đọc 3 âm tiết, câm chữ 'or'", category: "Đời sống hàng ngày" },
+    { id: 4, word: "success", ipa: "/səkˈses/", vn: "sự thành công", hint: "Trọng âm rơi vào âm tiết 2", category: "Công việc & Thành tựu" },
+    { id: 5, word: "purpose", ipa: "/ˈpɜːpəs/", vn: "mục đích, ý định", hint: "Âm dài /ɜː/ và âm schwa /əs/", category: "Công việc & Thành tựu" },
+    { id: 6, word: "company", ipa: "/ˈkʌmpəni/", vn: "công ty, doanh nghiệp", hint: "Âm /ʌ/ mở và 3 âm tiết", category: "Công việc & Doanh nghiệp" },
+    { id: 7, word: "message", ipa: "/ˈmesɪdʒ/", vn: "tin nhắn, thông điệp", hint: "Âm đuôi bật rung /dʒ/", category: "Giao tiếp & Công nghệ" },
+    { id: 8, word: "natural", ipa: "/ˈnætʃrəl/", vn: "tự nhiên, thiên nhiên", hint: "Âm /æ/ hạ hàm & âm /tʃ/", category: "Thiên nhiên & Đời sống" },
+    { id: 9, word: "special", ipa: "/ˈspeʃl/", vn: "đặc biệt, riêng biệt", hint: "Âm /e/ & âm xì chu môi /ʃl/", category: "Tính từ miêu tả" },
+    { id: 10, word: "wonderful", ipa: "/ˈwʌndəfl/", vn: "tuyệt vời, kỳ diệu", hint: "Âm tròn môi /w/ và đuôi /fl/", category: "Tính từ cảm xúc" },
+    { id: 11, word: "favorite", ipa: "/ˈfeɪvərɪt/", vn: "ưa thích, được chuộng", hint: "Âm đôi /eɪ/ và âm /v/", category: "Đời sống hàng ngày" },
+    { id: 12, word: "mirror", ipa: "/ˈmɪrə(r)/", vn: "cái gương soi", hint: "Âm ngắn /ɪ/ và âm kết thúc /ə/", category: "Đồ vật gia đình" },
+    { id: 13, word: "picture", ipa: "/ˈpɪktʃə(r)/", vn: "bức tranh, bức ảnh", hint: "Âm bật chu môi /tʃə/", category: "Đồ vật gia đình" },
+    { id: 14, word: "money", ipa: "/ˈmʌni/", vn: "tiền bạc", hint: "Âm /ʌ/ không phải âm /o/", category: "Đời sống & Tài chính" },
+    { id: 15, word: "number", ipa: "/ˈnʌmbə(r)/", vn: "con số, số lượng", hint: "Âm /ʌ/ và kết thúc /bə/", category: "Toán học & Đời sống" },
+    { id: 16, word: "little", ipa: "/ˈlɪtl/", vn: "nhỏ bé, một chút", hint: "Âm ngắn /ɪ/ và âm đuôi /tl/", category: "Số lượng & Kích thước" },
+    { id: 17, word: "morning", ipa: "/ˈmɔːnɪŋ/", vn: "buổi sáng", hint: "Âm dài /ɔː/ và âm mũi /ŋ/", category: "Thời gian & Lời chào" },
+    { id: 18, word: "dinner", ipa: "/ˈdɪnə(r)/", vn: "bữa tối", hint: "Âm ngắn /ɪ/ và kết thúc /nə/", category: "Ẩm thực & Đời sống" },
+    { id: 19, word: "window", ipa: "/ˈwɪndəʊ/", vn: "cửa sổ", hint: "Âm đầu /w/ và âm đôi /əʊ/", category: "Nhà cửa & Đồ vật" },
+    { id: 20, word: "market", ipa: "/ˈmɑːkɪt/", vn: "khu chợ, thị trường", hint: "Âm dài /ɑː/ và kết thúc /kɪt/", category: "Mua sắm & Địa điểm" },
+    { id: 21, word: "summer", ipa: "/ˈsʌmə(r)/", vn: "mùa hè, mùa hạ", hint: "Âm ngắn /ʌ/ và âm /mə/", category: "Thời gian & Thời tiết" },
+    { id: 22, word: "winter", ipa: "/ˈwɪntə(r)/", vn: "mùa đông", hint: "Âm /wɪ/ và kết thúc /tə/", category: "Thời gian & Thời tiết" },
+    { id: 23, word: "separate", ipa: "/ˈsepəreɪt/", vn: "phân chia, tách rời", hint: "Động từ phát âm đuôi /eɪt/", category: "Hành động & Trạng thái" },
+    { id: 24, word: "hospital", ipa: "/ˈhɒspɪtl/", vn: "bệnh viện", hint: "Âm /ɒ/ tròn môi và đuôi /tl/", category: "Y tế & Địa điểm" },
+    { id: 25, word: "doctor", ipa: "/ˈdɒktə(r)/", vn: "bác sĩ", hint: "Âm tròn môi /ɒ/ và đuôi /tə/", category: "Nghề nghiệp" },
+    { id: 26, word: "student", ipa: "/ˈstjuːdnt/", vn: "học sinh, sinh viên", hint: "Âm /stjuː/ và đuôi /dnt/", category: "Trường học & Giáo dục" },
+    { id: 27, word: "kitchen", ipa: "/ˈkɪtʃɪn/", vn: "căn bếp, gian bếp", hint: "Âm ngắn /ɪ/ và âm /tʃɪn/", category: "Nhà cửa & Đời sống" },
+    { id: 28, word: "bathroom", ipa: "/ˈbɑːθruːm/", vn: "phòng tắm", hint: "Âm thè lưỡi /θ/ và âm /uː/", category: "Nhà cửa & Đời sống" },
+    { id: 29, word: "bedroom", ipa: "/ˈbedruːm/", vn: "phòng ngủ", hint: "Âm /ed/ và âm /ruːm/", category: "Nhà cửa & Đời sống" },
+    { id: 30, word: "visit", ipa: "/ˈvɪzɪt/", vn: "thăm hỏi, chuyến thăm", hint: "Âm rung /z/ ở giữa từ", category: "Hành động & Du lịch" },
+    { id: 31, word: "person", ipa: "/ˈpɜːsn/", vn: "con người, cá nhân", hint: "Âm dài /ɜː/ và âm đuôi /sn/", category: "Xã hội & Con người" },
+    { id: 32, word: "happiness", ipa: "/ˈhæpɪnəs/", vn: "niềm hạnh phúc", hint: "Âm /æ/ mở rộng miệng", category: "Cảm xúc & Tinh thần" },
+    { id: 33, word: "paper", ipa: "/ˈpeɪpə(r)/", vn: "tờ giấy", hint: "Âm đôi /eɪ/ và âm bật /p/", category: "Đồ dùng học tập" },
+    { id: 34, word: "bottle", ipa: "/ˈbɒtl/", vn: "cái chai, lọ nước", hint: "Âm tròn môi /ɒ/ và đuôi /tl/", category: "Đồ vật hàng ngày" },
+    { id: 35, word: "serious", ipa: "/ˈsɪəriəs/", vn: "nghiêm túc, nghiêm trọng", hint: "Âm đôi /ɪə/ và đuôi /əs/", category: "Tính cách & Thái độ" },
+    { id: 36, word: "district", ipa: "/ˈdɪstrɪkt/", vn: "quận, huyện, khu vực", hint: "Cụm phụ âm /str/ và đuôi /kt/", category: "Địa lý & Hành chính" },
+    { id: 37, word: "simple", ipa: "/ˈsɪmpl/", vn: "đơn giản, dễ hiểu", hint: "Âm ngắn /ɪ/ và đuôi /mpl/", category: "Tính từ miêu tả" },
+    { id: 38, word: "modern", ipa: "/ˈmɒdn/", vn: "hiện đại, tân tiến", hint: "Âm /ɒ/ và kết thúc /dn/", category: "Tính từ miêu tả" },
+    { id: 39, word: "clever", ipa: "/ˈklevə(r)/", vn: "thông minh, nhanh trí", hint: "Cụm phụ âm /kl/ và đuôi /və/", category: "Tính cách & Trí tuệ" },
+    { id: 40, word: "forest", ipa: "/ˈfɒrɪst/", vn: "rừng cây, khu rừng", hint: "Âm /ɒ/ và âm đuôi /st/", category: "Thiên nhiên & Môi trường" },
+    { id: 41, word: "river", ipa: "/ˈrɪvə(r)/", vn: "dòng sông", hint: "Âm cắn môi rung /v/", category: "Thiên nhiên & Môi trường" },
+    { id: 42, word: "magic", ipa: "/ˈmædʒɪk/", vn: "phép thuật, kỳ diệu", hint: "Âm /æ/ hạ hàm & âm rung /dʒ/", category: "Nghệ thuật & Kỳ ảo" },
+    { id: 43, word: "castle", ipa: "/ˈkɑːsl/", vn: "tòa lâu đài", hint: "Câm âm /t/, đọc là /kɑːsl/", category: "Kiến trúc & Lịch sử" },
+    { id: 44, word: "journey", ipa: "/ˈdʒɜːni/", vn: "chuyến đi, hành trình", hint: "Âm rung /dʒ/ và âm dài /ɜː/", category: "Du lịch & Khám phá" },
+    { id: 45, word: "angry", ipa: "/ˈæŋɡri/", vn: "tức giận, phẫn nộ", hint: "Âm mũi cuống lưỡi /ŋɡr/", category: "Cảm xúc & Tâm lý" },
+    { id: 46, word: "island", ipa: "/ˈaɪlənd/", vn: "hòn đảo", hint: "Câm chữ 's', đọc là /ˈaɪlənd/", category: "Địa lý & Du lịch" },
+    { id: 47, word: "muscle", ipa: "/ˈmʌsl/", vn: "cơ bắp, bắp thịt", hint: "Câm chữ 'c', đọc là /ˈmʌsl/", category: "Cơ thể & Sức khỏe" },
+    { id: 48, word: "climb", ipa: "/klaɪm/", vn: "leo trèo, trèo lên", hint: "Câm chữ 'b', đọc là /klaɪm/", category: "Hành động & Thể thao" },
+    { id: 49, word: "subtle", ipa: "/ˈsʌtl/", vn: "tinh tế, khéo léo", hint: "Câm chữ 'b', đọc là /ˈsʌtl/", category: "Tính từ miêu tả" },
+    { id: 50, word: "doubt", ipa: "/daʊt/", vn: "sự nghi ngờ, phân vân", hint: "Câm chữ 'b', đọc là /daʊt/", category: "Tâm lý & Cảm xúc" }
+  ];
+
+  const IpaDecodingManager = {
+    words: [],
+    currentIndex: 0,
+    score: 0,
+    streak: 0,
+    maxStreak: 0,
+    isAnswered: false,
+    showHint: false,
+    history: [],
+
+    init() {
+      const srcWords = (window.IPA_DECODING_WORDS_50 && window.IPA_DECODING_WORDS_50.length)
+        ? window.IPA_DECODING_WORDS_50
+        : BUILTIN_IPA_DECODING_WORDS_50;
+      this.words = [...srcWords];
+      this.currentIndex = 0;
+      this.score = 0;
+      this.streak = 0;
+      this.maxStreak = 0;
+      this.isAnswered = false;
+      this.showHint = false;
+      this.history = [];
+    },
+
+    start(shuffle = false) {
+      if (!this.words.length || shuffle) {
+        this.init();
+      }
+      if (shuffle && this.words.length) {
+        for (let i = this.words.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [this.words[i], this.words[j]] = [this.words[j], this.words[i]];
+        }
+      }
+      this.currentIndex = 0;
+      this.score = 0;
+      this.streak = 0;
+      this.maxStreak = 0;
+      this.isAnswered = false;
+      this.showHint = false;
+      this.history = [];
+
+      this.render();
+    },
+
+    getCurrentWord() {
+      return this.words[this.currentIndex] || null;
+    },
+
+    playAudio() {
+      const cur = this.getCurrentWord();
+      if (!cur) return;
+      AudioEngine.playWord(cur.word);
+    },
+
+    toggleHint() {
+      this.showHint = !this.showHint;
+      const hintBox = document.getElementById("ipaDecodingHintBox");
+      const hintBtn = document.getElementById("btnIpaDecodingHint");
+      if (hintBox) {
+        hintBox.style.display = this.showHint ? "flex" : "none";
+      }
+      if (hintBtn) {
+        hintBtn.textContent = this.showHint ? "🙈 Ẩn Gợi Ý" : "💡 Gợi Ý Nghĩa";
+      }
+    },
+
+    submitAnswer(event) {
+      if (event) event.preventDefault();
+      if (this.isAnswered) {
+        this.nextWord();
+        return;
+      }
+
+      const input = document.getElementById("ipaDecodingInput");
+      if (!input) return;
+
+      const userText = input.value.trim().toLowerCase();
+      if (!userText) {
+        input.focus();
+        return;
+      }
+
+      const cur = this.getCurrentWord();
+      if (!cur) return;
+
+      const targetWord = cur.word.trim().toLowerCase();
+      const isCorrect = userText === targetWord;
+
+      this.isAnswered = true;
+      if (isCorrect) {
+        this.score++;
+        this.streak++;
+        if (this.streak > this.maxStreak) this.maxStreak = this.streak;
+      } else {
+        this.streak = 0;
+      }
+
+      this.history.push({
+        id: cur.id,
+        word: cur.word,
+        userWord: userText,
+        isCorrect: isCorrect,
+        ipa: cur.ipa,
+        vn: cur.vn,
+        category: cur.category
+      });
+
+      this.renderFeedback(isCorrect, cur, userText);
+
+      // Tự động phát âm từ chuẩn sau khi nộp bài
+      setTimeout(() => {
+        AudioEngine.playWord(cur.word);
+      }, 200);
+    },
+
+    nextWord() {
+      this.currentIndex++;
+      this.isAnswered = false;
+      this.showHint = false;
+
+      if (this.currentIndex >= this.words.length) {
+        this.renderSummary();
+      } else {
+        this.render();
+      }
+    },
+
+    render() {
+      const container = document.getElementById("ipaDecodingContainer");
+      if (!container) return;
+
+      if (!this.words || !this.words.length) {
+        this.init();
+      }
+
+      if (!this.words || !this.words.length) {
+        container.innerHTML = `
+          <div class="dictation-card" style="text-align:center; padding:40px 20px;">
+            <p style="font-size:1.1rem; color:var(--text-muted); margin-bottom:16px;">Đang chuẩn bị 50 từ phiên âm IPA...</p>
+            <button class="btn-dictation-listen" onclick="IpaDecodingManager.start(true)">Bắt Đầu Luyện Tập</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (this.currentIndex >= this.words.length) {
+        this.renderSummary();
+        return;
+      }
+
+      const cur = this.getCurrentWord();
+      if (!cur) {
+        this.renderSummary();
+        return;
+      }
+
+      const total = this.words.length;
+      const progressPercent = Math.round((this.currentIndex / total) * 100);
+
+      container.innerHTML = `
+        <div class="dictation-card ipa-decode-card">
+          <!-- Header Thống Kê -->
+          <div class="dictation-header">
+            <span class="dictation-category-badge">🏷️ Nhóm: ${cur.category || "Từ vựng"}</span>
+            <div class="dictation-stats-row">
+              <span class="dictation-stat-pill">📊 Câu: <strong>${this.currentIndex + 1}/${total}</strong></span>
+              <span class="dictation-stat-pill">🎯 Đúng: <strong>${this.score}</strong></span>
+              ${this.streak > 1 ? `<span class="dictation-stat-pill streak">🔥 Chuỗi: <strong>${this.streak}</strong></span>` : ""}
+            </div>
+          </div>
+
+          <!-- Thanh Tiến Trình -->
+          <div class="dictation-progress-bar-bg">
+            <div class="dictation-progress-bar-fill" style="width: ${progressPercent}%;"></div>
+          </div>
+
+          <!-- Khung Hiển Thị Phiên Âm IPA Trung Tâm -->
+          <div class="ipa-showcase-box">
+            <div class="ipa-showcase-badge">🔤 PHIÊN ÂM QUỐC TẾ (IPA):</div>
+            <div class="ipa-showcase-text">${cur.ipa}</div>
+            <div class="ipa-showcase-sub">Đọc kỹ dấu trọng âm <strong>'</strong> và các ký hiệu ngữ âm để đoán từ tiếng Anh tương ứng</div>
+            
+            <div class="dictation-audio-subcontrols" style="margin-top: 14px;">
+              <button class="btn-dictation-subaction" id="btnIpaDecodingHint" onclick="IpaDecodingManager.toggleHint()">
+                💡 Gợi Ý Nghĩa
+              </button>
+              <button class="btn-dictation-subaction" onclick="IpaDecodingManager.playAudio()" title="Nghe người bản xứ phát âm từ này để trợ giúp">
+                🔊 Nghe Phát Âm Trợ Giúp
+              </button>
+            </div>
+
+            <div class="dictation-hint-reveal-box" id="ipaDecodingHintBox" style="display: none; margin-top: 12px;">
+              <span>💡 Gợi ý nghĩa: <strong>${cur.vn}</strong> ${cur.hint ? `(${cur.hint})` : ""}</span>
+            </div>
+
+            <div class="dictation-audio-hint" style="margin-top:12px;">Mẹo: Bấm Space để nghe phát âm trợ giúp, Enter để xác nhận hoặc chuyển câu</div>
+          </div>
+
+          <!-- Form Gõ Từ -->
+          <form class="dictation-input-form" onsubmit="IpaDecodingManager.submitAnswer(event)">
+            <div class="dictation-input-row">
+              <input 
+                type="text" 
+                id="ipaDecodingInput" 
+                class="dictation-text-input" 
+                placeholder="Gõ từ tiếng Anh tương ứng với phiên âm trên..." 
+                autocomplete="off" 
+                autocorrect="off" 
+                autocapitalize="off" 
+                spellcheck="false" 
+                required
+              />
+              <button type="submit" class="btn-dictation-submit" id="btnIpaDecodingSubmit">
+                <span>Kiểm Tra</span> <span>↵</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Vùng Phản Hồi Kết Quả -->
+          <div id="ipaDecodingFeedbackArea"></div>
+        </div>
+      `;
+
+      // Focus input
+      setTimeout(() => {
+        const input = document.getElementById("ipaDecodingInput");
+        if (input) input.focus();
+      }, 50);
+    },
+
+    renderFeedback(isCorrect, cur, userText) {
+      const feedbackArea = document.getElementById("ipaDecodingFeedbackArea");
+      if (!feedbackArea) return;
+
+      const input = document.getElementById("ipaDecodingInput");
+      const submitBtn = document.getElementById("btnIpaDecodingSubmit");
+      if (input) {
+        input.disabled = true;
+        input.style.borderColor = isCorrect ? "#22C55E" : "#EF4444";
+      }
+      if (submitBtn) {
+        submitBtn.style.display = "none";
+      }
+
+      feedbackArea.innerHTML = `
+        <div class="dictation-feedback-card ${isCorrect ? 'correct' : 'incorrect'}">
+          <div class="dictation-feedback-title">
+            <span>${isCorrect ? '🎉 Chính Xác Tuyệt Vời!' : '❌ Chưa Đúng Rồi!'}</span>
+          </div>
+
+          <div class="dictation-word-detail-box">
+            <div>
+              <small style="color:var(--text-muted); display:block; font-size:0.75rem;">TỪ CHUẨN XÁC:</small>
+              <span class="dictation-correct-word">${cur.word}</span>
+            </div>
+            <div>
+              <small style="color:var(--text-muted); display:block; font-size:0.75rem;">PHIÊN ÂM IPA:</small>
+              <span class="dictation-correct-ipa">${cur.ipa}</span>
+            </div>
+            <div>
+              <small style="color:var(--text-muted); display:block; font-size:0.75rem;">Ý NGHĨA:</small>
+              <span class="dictation-correct-vn">${cur.vn}</span>
+            </div>
+            <button class="control-btn" onclick="AudioEngine.playWord('${cur.word}')" style="margin-left:auto; background:#FFF; border:1px solid #CBD5E1; padding:6px 12px; border-radius:var(--radius-pill); font-weight:700;">
+              🔊 Nghe lại
+            </button>
+          </div>
+
+          ${!isCorrect ? `<div style="font-size:0.85rem; margin-top:10px; color:#991B1B;">Bạn đã gõ: <strong>"${userText}"</strong></div>` : ""}
+
+          <button class="btn-dictation-next" id="btnIpaDecodingNext" onclick="IpaDecodingManager.nextWord()">
+            <span>${this.currentIndex + 1 >= this.words.length ? '🏆 Xem Kết Quả Tổng Kết (50 Từ)' : 'Câu Tiếp Theo'}</span> <span>↵</span>
+          </button>
+        </div>
+      `;
+
+      setTimeout(() => {
+        const nextBtn = document.getElementById("btnIpaDecodingNext");
+        if (nextBtn) nextBtn.focus();
+      }, 50);
+    },
+
+    renderSummary() {
+      const container = document.getElementById("ipaDecodingContainer");
+      if (!container) return;
+
+      const total = this.words.length;
+      if (total === 0) {
+        this.start(false);
+        return;
+      }
+      const correctCount = this.score;
+      const percent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+      let trophyEmoji = "🌟";
+      let evalText = "Rất nỗ lực!";
+      if (percent >= 90) {
+        trophyEmoji = "👑";
+        evalText = "Đỉnh cao ngữ âm! Bậc thầy giải mã ký hiệu IPA!";
+      } else if (percent >= 75) {
+        trophyEmoji = "🎉";
+        evalText = "Rất xuất sắc! Khả năng chuyển đổi từ IPA sang chữ viết rất tốt!";
+      } else if (percent >= 50) {
+        trophyEmoji = "💪";
+        evalText = "Khá tốt! Hãy ôn lại các từ chưa đúng để nhớ sâu hơn mặt chữ và phiên âm!";
+      }
+
+      const rowsHtml = this.history.map((h, i) => `
+        <tr>
+          <td style="font-weight:700; color:var(--text-muted); width:40px;">#${i + 1}</td>
+          <td>
+            <div style="font-family:'Charis SIL',serif; font-size:1.15rem; font-weight:700; color:var(--brand-primary-dark);">${h.ipa}</div>
+            <strong style="font-size:1rem; color:var(--text-main);">${h.word}</strong>
+            <div style="font-size:0.78rem; color:var(--text-muted);">${h.vn}</div>
+          </td>
+          <td>
+            <span style="font-family:monospace; font-weight:700; color:${h.isCorrect ? '#16A34A' : '#DC2626'}">
+              ${h.userWord || "—"}
+            </span>
+          </td>
+          <td>
+            <span class="dictation-review-status ${h.isCorrect ? 'correct' : 'incorrect'}">
+              ${h.isCorrect ? '✓ Đúng' : '✗ Sai'}
+            </span>
+          </td>
+          <td style="text-align:right;">
+            <button class="control-btn" onclick="AudioEngine.playWord('${h.word}')" style="background:#FFF; border:1px solid #CBD5E1; padding:4px 8px; border-radius:var(--radius-pill); font-size:0.75rem;">
+              🔊 Nghe
+            </button>
+          </td>
+        </tr>
+      `).join("");
+
+      container.innerHTML = `
+        <div class="dictation-summary-card">
+          <div class="dictation-trophy-badge">${trophyEmoji}</div>
+          <h2 class="dictation-summary-title">Hoàn Thành Thử Thách 50 Từ IPA!</h2>
+          <p class="dictation-summary-desc">${evalText}</p>
+
+          <div class="dictation-score-grid">
+            <div class="dictation-score-item">
+              <div class="dictation-score-val">${correctCount}/${total}</div>
+              <div class="dictation-score-lbl">SỐ TỪ ĐÚNG</div>
+            </div>
+            <div class="dictation-score-item">
+              <div class="dictation-score-val">${percent}%</div>
+              <div class="dictation-score-lbl">ĐỘ CHÍNH XÁC</div>
+            </div>
+            <div class="dictation-score-item">
+              <div class="dictation-score-val">${this.maxStreak}</div>
+              <div class="dictation-score-lbl">CHUỖI ĐÚNG DÀI NHẤT</div>
+            </div>
+          </div>
+
+          <div class="dictation-review-section">
+            <h3 class="dictation-review-title">📋 Bảng Chi Tiết Kết Quả 50 Từ IPA:</h3>
+            <div class="dictation-review-table-wrapper">
+              <table class="dictation-review-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Phiên Âm IPA & Từ Chuẩn</th>
+                    <th>Bạn Đã Gõ</th>
+                    <th>Kết Quả</th>
+                    <th style="text-align:right;">Nghe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dictation-summary-actions">
+            <button class="btn-dictation-restart" onclick="IpaDecodingManager.start(false)">
+              <span>🔄 Làm Lại Từ Đầu</span>
+            </button>
+            <button class="btn-dictation-restart" onclick="IpaDecodingManager.start(true)" style="background:var(--brand-primary-dark);">
+              <span>🔀 Xáo Trộn Thứ Tự 50 Từ</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+  };
+
+  window.IpaDecodingManager = IpaDecodingManager;
+
+  // ==========================================================================
   // 7. RENDER RULES (-S/ES, -ED)
   // ==========================================================================
   function renderRules() {
@@ -1826,25 +2274,35 @@ document.addEventListener("DOMContentLoaded", () => {
     AUTH.saveUser(input.value);
   };
 
-  // Bàn phím nhanh cho bài tập Nghe & Đánh máy
+  // Bàn phím nhanh cho bài tập Nghe & Đánh máy và Nhìn IPA Viết Từ
   window.addEventListener("keydown", (e) => {
-    if (state.currentView !== "dictation") return;
-
-    // Phím Space để nghe lại khi không đang gõ text
-    if (e.code === "Space" && document.activeElement !== document.getElementById("dictationInput")) {
-      e.preventDefault();
-      DictationManager.playCurrentAudio();
-    }
-    // Phím Ctrl+Space hoặc Alt+Space để nghe lại bất cứ lúc nào
-    else if (e.code === "Space" && (e.ctrlKey || e.metaKey || e.altKey)) {
-      e.preventDefault();
-      DictationManager.playCurrentAudio();
+    if (state.currentView === "dictation") {
+      // Phím Space để nghe lại khi không đang gõ text
+      if (e.code === "Space" && document.activeElement !== document.getElementById("dictationInput")) {
+        e.preventDefault();
+        DictationManager.playCurrentAudio();
+      }
+      // Phím Ctrl+Space hoặc Alt+Space để nghe lại bất cứ lúc nào
+      else if (e.code === "Space" && (e.ctrlKey || e.metaKey || e.altKey)) {
+        e.preventDefault();
+        DictationManager.playCurrentAudio();
+      }
+    } else if (state.currentView === "ipa_decoding") {
+      // Phím Space để nghe phát âm trợ giúp khi không đang gõ text
+      if (e.code === "Space" && document.activeElement !== document.getElementById("ipaDecodingInput")) {
+        e.preventDefault();
+        IpaDecodingManager.playAudio();
+      } else if (e.code === "Space" && (e.ctrlKey || e.metaKey || e.altKey)) {
+        e.preventDefault();
+        IpaDecodingManager.playAudio();
+      }
     }
   });
 
   // Khởi tạo app & giọng đọc & đăng nhập
   AudioEngine.init();
   DictationManager.init();
+  IpaDecodingManager.init();
   window.navigateTo("overview");
   AUTH.init();
 
