@@ -4014,34 +4014,34 @@ window.IPA_DATA = {
       ],
       "minimalPairs": [
         {
-          "wordA": "bird",
-          "ipaA": "/bɜːd/",
-          "meanA": "con chim",
-          "wordB": "board",
-          "ipaB": "/bɔːd/",
-          "meanB": "tấm bảng",
-          "sentenceA": "Look at that bird.",
-          "sentenceB": "Look at that board."
+          "wordA": "foreword",
+          "ipaA": "/ˈfɔːwɜːd/",
+          "meanA": "lời nói đầu",
+          "wordB": "forward",
+          "ipaB": "/ˈfɔːwəd/",
+          "meanB": "về phía trước",
+          "sentenceA": "Read the author's foreword.",
+          "sentenceB": "Move two steps forward."
         },
         {
-          "wordA": "shirt",
-          "ipaA": "/ʃɜːt/",
-          "meanA": "áo sơ mi",
-          "wordB": "short",
-          "ipaB": "/ʃɔːt/",
-          "meanB": "ngắn",
-          "sentenceA": "Wash your shirt.",
-          "sentenceB": "It is too short."
+          "wordA": "fur",
+          "ipaA": "/fɜːr/",
+          "meanA": "lông thú",
+          "wordB": "for",
+          "ipaB": "/fər/",
+          "meanB": "dành cho (dạng yếu /ə/)",
+          "sentenceA": "A coat made of real fur.",
+          "sentenceB": "This gift is for you."
         },
         {
-          "wordA": "turn",
-          "ipaA": "/tɜːn/",
-          "meanA": "lượt, rẽ",
-          "wordB": "torn",
-          "ipaB": "/tɔːn/",
-          "meanB": "bị rách",
-          "sentenceA": "Take your turn.",
-          "sentenceB": "My coat is torn."
+          "wordA": "curtain",
+          "ipaA": "/ˈkɜːtn/",
+          "meanA": "tấm rèm cửa",
+          "wordB": "contain",
+          "ipaB": "/kənˈteɪn/",
+          "meanB": "chứa đựng",
+          "sentenceA": "Close the bedroom curtain.",
+          "sentenceB": "Boxes contain old files."
         }
       ],
       "testPairs": [
@@ -5296,52 +5296,44 @@ window.IPA_DATA = {
       ],
       "minimalPairs": [
         {
-          "wordA": "see",
-          "ipaA": "/siː/",
-          "meanA": "nhìn thấy",
-          "wordB": "she",
-          "ipaB": "/ʃiː/",
-          "meanB": "cô ấy",
-          "sentenceA": "Can you see?",
-          "sentenceB": "Who is she?"
+          "wordA": "pressure",
+          "ipaA": "/ˈpreʃə(r)/",
+          "meanA": "áp lực",
+          "wordB": "pleasure",
+          "ipaB": "/ˈpleʒə(r)/",
+          "meanB": "niềm vinh hạnh, niềm vui",
+          "sentenceA": "Work under high pressure.",
+          "sentenceB": "It is a great pleasure."
         },
         {
-          "wordA": "sock",
-          "ipaA": "/sɒk/",
-          "meanA": "chiếc tất",
-          "wordB": "shock",
-          "ipaB": "/ʃɒk/",
-          "meanB": "cú sốc",
-          "sentenceA": "Put on your sock.",
-          "sentenceB": "A big shock."
+          "wordA": "fission",
+          "ipaA": "/ˈfɪʃn/",
+          "meanA": "sự phân hạch hạt nhân",
+          "wordB": "vision",
+          "ipaB": "/ˈvɪʒn/",
+          "meanB": "tầm nhìn, thị lực",
+          "sentenceA": "Nuclear fission creates power.",
+          "sentenceB": "He has a clear vision."
         },
         {
-          "wordA": "save",
-          "ipaA": "/seɪv/",
-          "meanA": "tiết kiệm",
-          "wordB": "shave",
-          "ipaB": "/ʃeɪv/",
-          "meanB": "cạo râu",
-          "sentenceA": "Save money.",
-          "sentenceB": "Need a shave."
+          "wordA": "dilution",
+          "ipaA": "/daɪˈluːʃn/",
+          "meanA": "sự pha loãng dung dịch",
+          "wordB": "delusion",
+          "ipaB": "/dɪˈluːʒn/",
+          "meanB": "ảo tưởng, ảo giác",
+          "sentenceA": "The dilution of the acid.",
+          "sentenceB": "He is under a delusion."
         }
       ],
       "testPairs": [
         {
-          "wordA": "shame",
-          "ipaA": "/ʃeɪm/",
-          "meanA": "xấu hổ",
-          "wordB": "same",
-          "ipaB": "/seɪm/",
-          "meanB": "giống nhau"
-        },
-        {
-          "wordA": "sheet",
-          "ipaA": "/ʃiːt/",
-          "meanA": "ga trải giường",
-          "wordB": "seat",
-          "ipaB": "/siːt/",
-          "meanB": "chỗ ngồi"
+          "wordA": "pressure",
+          "ipaA": "/ˈpreʃə(r)/",
+          "meanA": "áp lực",
+          "wordB": "pleasure",
+          "ipaB": "/ˈpleʒə(r)/",
+          "meanB": "niềm vui"
         },
         {
           "wordA": "fission",
@@ -5362,50 +5354,26 @@ window.IPA_DATA = {
         {
           "wordA": "Confucian",
           "ipaA": "/kənˈfjuːʃn/",
-          "meanA": "Khổng giáo",
+          "meanA": "thuộc Khổng giáo",
           "wordB": "confusion",
           "ipaB": "/kənˈfjuːʒn/",
-          "meanB": "sự bối rối"
+          "meanB": "sự hỗn độn, bối rối"
         },
         {
-          "wordA": "see",
-          "ipaA": "/siː/",
-          "meanA": "nhìn thấy",
-          "wordB": "she",
-          "ipaB": "/ʃiː/",
-          "meanB": "cô ấy"
+          "wordA": "glacier",
+          "ipaA": "/ˈɡlæsiə(r)/",
+          "meanA": "sông băng (/ʃ/ hoặc /s/)",
+          "wordB": "closure",
+          "ipaB": "/ˈkləʊʒə(r)/",
+          "meanB": "sự khép lại, đóng cửa"
         },
         {
-          "wordA": "sock",
-          "ipaA": "/sɒk/",
-          "meanA": "chiếc tất",
-          "wordB": "shock",
-          "ipaB": "/ʃɒk/",
-          "meanB": "cú sốc"
-        },
-        {
-          "wordA": "save",
-          "ipaA": "/seɪv/",
-          "meanA": "tiết kiệm",
-          "wordB": "shave",
-          "ipaB": "/ʃeɪv/",
-          "meanB": "cạo râu"
-        },
-        {
-          "wordA": "lease",
-          "ipaA": "/liːs/",
-          "meanA": "hợp đồng thuê",
-          "wordB": "leash",
-          "ipaB": "/liːʃ/",
-          "meanB": "dây dắt chó"
-        },
-        {
-          "wordA": "crass",
-          "ipaA": "/kræs/",
-          "meanA": "thô lỗ",
-          "wordB": "crash",
-          "ipaB": "/kræʃ/",
-          "meanB": "đâm sầm"
+          "wordA": "ruche",
+          "ipaA": "/ruːʃ/",
+          "meanA": "dải đăng ten viền áo",
+          "wordB": "rouge",
+          "ipaB": "/ruːʒ/",
+          "meanB": "phấn má hồng"
         }
       ]
     },
@@ -5581,45 +5549,37 @@ window.IPA_DATA = {
       ],
       "minimalPairs": [
         {
-          "wordA": "think",
-          "ipaA": "/θɪŋk/",
-          "meanA": "suy nghĩ",
-          "wordB": "sink",
-          "ipaB": "/sɪŋk/",
-          "meanB": "bồn rửa/chìm",
-          "sentenceA": "Think positive.",
-          "sentenceB": "Wash in the sink."
+          "wordA": "teeth",
+          "ipaA": "/tiːθ/",
+          "meanA": "những chiếc răng",
+          "wordB": "teethe",
+          "ipaB": "/tiːð/",
+          "meanB": "mọc răng",
+          "sentenceA": "Brush your teeth every day.",
+          "sentenceB": "The baby has begun to teethe."
         },
         {
-          "wordA": "they",
-          "ipaA": "/ðeɪ/",
-          "meanA": "họ",
-          "wordB": "day",
-          "ipaB": "/deɪ/",
-          "meanB": "ngày",
-          "sentenceA": "They are here.",
-          "sentenceB": "Have a nice day."
+          "wordA": "breath",
+          "ipaA": "/breθ/",
+          "meanA": "hơi thở",
+          "wordB": "breathe",
+          "ipaB": "/briːð/",
+          "meanB": "hít thở",
+          "sentenceA": "Take a deep breath.",
+          "sentenceB": "Breathe in fresh mountain air."
         },
-        {
-          "wordA": "thick",
-          "ipaA": "/θɪk/",
-          "meanA": "dày",
-          "wordB": "sick",
-          "ipaB": "/sɪk/",
-          "meanB": "bị ốm",
-          "sentenceA": "A thick book.",
-          "sentenceB": "Stay in bed when sick."
-        }
-      ],
-      "testPairs": [
         {
           "wordA": "thigh",
           "ipaA": "/θaɪ/",
-          "meanA": "cái đùi",
+          "meanA": "bắp đùi",
           "wordB": "thy",
           "ipaB": "/ðaɪ/",
-          "meanB": "của ngươi"
-        },
+          "meanB": "của ngươi (cổ ngữ)",
+          "sentenceA": "A muscle pain in the thigh.",
+          "sentenceB": "Honor thy father and mother."
+        }
+      ],
+      "testPairs": [
         {
           "wordA": "teeth",
           "ipaA": "/tiːθ/",
@@ -5627,14 +5587,6 @@ window.IPA_DATA = {
           "wordB": "teethe",
           "ipaB": "/tiːð/",
           "meanB": "mọc răng"
-        },
-        {
-          "wordA": "bath",
-          "ipaA": "/bɑːθ/",
-          "meanA": "tắm bồn",
-          "wordB": "bathe",
-          "ipaB": "/beɪð/",
-          "meanB": "tắm rửa"
         },
         {
           "wordA": "breath",
@@ -5645,6 +5597,22 @@ window.IPA_DATA = {
           "meanB": "hít thở"
         },
         {
+          "wordA": "thigh",
+          "ipaA": "/θaɪ/",
+          "meanA": "cái đùi",
+          "wordB": "thy",
+          "ipaB": "/ðaɪ/",
+          "meanB": "của ngươi"
+        },
+        {
+          "wordA": "bath",
+          "ipaA": "/bɑːθ/",
+          "meanA": "tắm bồn",
+          "wordB": "bathe",
+          "ipaB": "/beɪð/",
+          "meanB": "tắm rửa"
+        },
+        {
           "wordA": "sooth",
           "ipaA": "/suːθ/",
           "meanA": "sự thật",
@@ -5653,44 +5621,12 @@ window.IPA_DATA = {
           "meanB": "xoa dịu"
         },
         {
-          "wordA": "think",
-          "ipaA": "/θɪŋk/",
-          "meanA": "suy nghĩ",
-          "wordB": "sink",
-          "ipaB": "/sɪŋk/",
-          "meanB": "bồn rửa"
-        },
-        {
-          "wordA": "they",
-          "ipaA": "/ðeɪ/",
-          "meanA": "họ",
-          "wordB": "day",
-          "ipaB": "/deɪ/",
-          "meanB": "ngày"
-        },
-        {
-          "wordA": "thick",
-          "ipaA": "/θɪk/",
-          "meanA": "dày",
-          "wordB": "sick",
-          "ipaB": "/sɪk/",
-          "meanB": "bị ốm"
-        },
-        {
-          "wordA": "theme",
-          "ipaA": "/θiːm/",
-          "meanA": "chủ đề",
-          "wordB": "seem",
-          "ipaB": "/siːm/",
-          "meanB": "dường như"
-        },
-        {
           "wordA": "mouth",
           "ipaA": "/maʊθ/",
-          "meanA": "cái miệng",
+          "meanA": "cái miệng (danh từ)",
           "wordB": "mouthe",
           "ipaB": "/maʊð/",
-          "meanB": "nói mấp máy"
+          "meanB": "mấp máy miệng (động từ)"
         }
       ]
     },
@@ -6139,10 +6075,10 @@ window.DICTATION_WORDS_100 = [
   { id: 9, word: "sweep", ipa: "/swiːp/", vn: "quét dọn sàn nhà", hint: "Part 1: sweeping the floor", category: "TOEIC Part 1 Tranh Ảnh" },
   { id: 10, word: "railing", ipa: "/ˈreɪlɪŋ/", vn: "lan can, tay vịn", hint: "Part 1: holding the railing", category: "TOEIC Part 1 Tranh Ảnh" },
   { id: 11, word: "client", ipa: "/ˈklaɪənt/", vn: "khách hàng, đối tác", hint: "Xuất hiện liên tục Part 3/4", category: "TOEIC Văn Phòng & Họp" },
-  { id: 12, word: "staff", ipa: "/stɑːf/", vn: "đội ngũ nhân viên", hint: "Chủ đề nhân sự công ty", category: "TOEIC Văn Phòng & Họp" },
-  { id: 13, word: "clerk", ipa: "/klɑːk/", vn: "nhân viên quầy / thu ngân", hint: "Quầy giao dịch, khách sạn", category: "TOEIC Văn Phòng & Họp" },
+  { id: 12, word: "staff", ipa: "/stɑːf/", ipaUK: "/stɑːf/", ipaUS: "/stæf/", vn: "đội ngũ nhân viên", hint: "Chủ đề nhân sự công ty", category: "TOEIC Văn Phòng & Họp" },
+  { id: 13, word: "clerk", ipa: "/klɑːk/", ipaUK: "/klɑːk/", ipaUS: "/klɜːrk/", vn: "nhân viên quầy / thu ngân", hint: "Anh-Anh /klɑːk/, Anh-Mỹ /klɜːrk/", category: "TOEIC Văn Phòng & Họp" },
   { id: 14, word: "brief", ipa: "/briːf/", vn: "bản tóm tắt, ngắn gọn", hint: "brief meeting / briefing", category: "TOEIC Văn Phòng & Họp" },
-  { id: 15, word: "draft", ipa: "/drɑːft/", vn: "bản thảo hợp đồng/báo cáo", hint: "first draft of the proposal", category: "TOEIC Văn Phòng & Họp" },
+  { id: 15, word: "draft", ipa: "/drɑːft/", ipaUK: "/drɑːft/", ipaUS: "/dræft/", vn: "bản thảo hợp đồng/báo cáo", hint: "first draft of the proposal", category: "TOEIC Văn Phòng & Họp" },
   { id: 16, word: "badge", ipa: "/bædʒ/", vn: "thẻ nhân viên, bảng tên", hint: "security badge", category: "TOEIC Thiết Bị & Văn Phòng" },
   { id: 17, word: "printer", ipa: "/ˈprɪntə(r)/", vn: "máy in văn phòng", hint: "printer is out of paper", category: "TOEIC Thiết Bị & Văn Phòng" },
   { id: 18, word: "laptop", ipa: "/ˈlæptɒp/", vn: "máy tính xách tay", hint: "laptop computer", category: "TOEIC Thiết Bị & Văn Phòng" },
@@ -6160,7 +6096,7 @@ window.DICTATION_WORDS_100 = [
   { id: 30, word: "contract", ipa: "/ˈkɒntrækt/", vn: "hợp đồng giao kèo", hint: "sign the contract", category: "TOEIC Hợp Đồng & Kinh Doanh" },
   { id: 31, word: "flight", ipa: "/flaɪt/", vn: "chuyến bay hàng không", hint: "flight was delayed", category: "TOEIC Sân Bay & Đi Lại" },
   { id: 32, word: "seat", ipa: "/siːt/", vn: "chỗ ngồi, ghế ngồi", hint: "window seat / aisle seat", category: "TOEIC Sân Bay & Đi Lại" },
-  { id: 33, word: "route", ipa: "/ruːt/", vn: "tuyến đường, lộ trình", hint: "alternative bus route", category: "TOEIC Sân Bay & Đi Lại" },
+  { id: 33, word: "route", ipa: "/ruːt/", ipaUK: "/ruːt/", ipaUS: "/ruːt/", vn: "tuyến đường, lộ trình", hint: "alternative bus route", category: "TOEIC Sân Bay & Đi Lại" },
   { id: 34, word: "shuttle", ipa: "/ˈʃʌtl/", vn: "xe buýt đưa đón chặng ngắn", hint: "airport shuttle bus", category: "TOEIC Sân Bay & Đi Lại" },
   { id: 35, word: "traffic", ipa: "/ˈtræfɪk/", vn: "giao thông, xe cộ", hint: "heavy traffic delay", category: "TOEIC Sân Bay & Đi Lại" },
   { id: 36, word: "curb", ipa: "/kɜːb/", vn: "lề đường, mép vỉa hè", hint: "parked at the curb", category: "TOEIC Part 1 Tranh Ảnh" },
@@ -6169,7 +6105,7 @@ window.DICTATION_WORDS_100 = [
   { id: 39, word: "pier", ipa: "/pɪə(r)/", vn: "cầu tàu nhô ra biển", hint: "walking on the pier", category: "TOEIC Part 1 Tranh Ảnh" },
   { id: 40, word: "ferry", ipa: "/ˈferi/", vn: "chuyến phà chở khách", hint: "board the ferry", category: "TOEIC Sân Bay & Đi Lại" },
   { id: 41, word: "lobby", ipa: "/ˈlɒbi/", vn: "sảnh lớn tòa nhà/khách sạn", hint: "meet in the hotel lobby", category: "TOEIC Địa Điểm & Cơ Sở" },
-  { id: 42, word: "branch", ipa: "/brɑːntʃ/", vn: "chi nhánh công ty/ngân hàng", hint: "open a new local branch", category: "TOEIC Địa Điểm & Cơ Sở" },
+  { id: 42, word: "branch", ipa: "/brɑːntʃ/", ipaUK: "/brɑːntʃ/", ipaUS: "/bræntʃ/", vn: "chi nhánh công ty/ngân hàng", hint: "open a new local branch", category: "TOEIC Địa Điểm & Cơ Sở" },
   { id: 43, word: "counter", ipa: "/ˈkaʊntə(r)/", vn: "quầy lễ tân/thanh toán", hint: "standing behind the counter", category: "TOEIC Part 1 Tranh Ảnh" },
   { id: 44, word: "hallway", ipa: "/ˈhɔːlweɪ/", vn: "hành lang lối đi", hint: "down the hallway", category: "TOEIC Địa Điểm & Cơ Sở" },
   { id: 45, word: "package", ipa: "/ˈpækɪdʒ/", vn: "kiện hàng, bưu kiện", hint: "deliver a fragile package", category: "TOEIC Vận Chuyển & Đơn Hàng" },
@@ -6202,8 +6138,8 @@ window.DICTATION_WORDS_100 = [
   { id: 72, word: "supervisor", ipa: "/ˈsuːpəvaɪzə(r)/", vn: "người giám sát, cấp trên", hint: "report to the supervisor", category: "TOEIC Văn Phòng & Họp" },
   { id: 73, word: "promotion", ipa: "/prəˈməʊʃn/", vn: "sự thăng chức; chương trình khuyến mãi", hint: "get a career promotion", category: "TOEIC Văn Phòng & Họp" },
   { id: 74, word: "extension", ipa: "/ɪkˈstenʃn/", vn: "số máy nhánh nội bộ văn phòng", hint: "call extension 402", category: "TOEIC Thiết Bị & Văn Phòng" },
-  { id: 75, word: "brochure", ipa: "/ˈbrəʊʃə(r)/", vn: "cuốn sách quảng cáo, tài liệu giới thiệu", hint: "read the product brochure", category: "TOEIC Mua Sắm & Dịch Vụ" },
-  { id: 76, word: "catalog", ipa: "/ˈkætəlɒɡ/", vn: "cuốn danh mục sản phẩm", hint: "browse the autumn catalog", category: "TOEIC Mua Sắm & Dịch Vụ" },
+  { id: 75, word: "brochure", ipa: "/ˈbrəʊʃə(r)/", ipaUK: "/ˈbrəʊʃə(r)/", ipaUS: "/broʊˈʃʊr/", vn: "cuốn sách quảng cáo, tài liệu giới thiệu", hint: "read the product brochure", category: "TOEIC Mua Sắm & Dịch Vụ" },
+  { id: 76, word: "catalog", aliases: ["catalogue"], ipa: "/ˈkætəlɒɡ/", ipaUK: "/ˈkætəlɒɡ/", ipaUS: "/ˈkætəlɔːɡ/", vn: "cuốn danh mục sản phẩm", hint: "browse the autumn catalog", category: "TOEIC Mua Sắm & Dịch Vụ" },
   { id: 77, word: "supplier", ipa: "/səˈplaɪə(r)/", vn: "nhà cung cấp nguyên vật liệu", hint: "contact the parts supplier", category: "TOEIC Hợp Đồng & Kinh Doanh" },
   { id: 78, word: "distributor", ipa: "/dɪˈstrɪbjətə(r)/", vn: "nhà phân phối hàng hóa", hint: "authorized local distributor", category: "TOEIC Hợp Đồng & Kinh Doanh" },
   { id: 79, word: "inventory", ipa: "/ˈɪnvəntri/", vn: "hàng tồn kho, bản kiểm kê", hint: "annual inventory check", category: "TOEIC Vận Chuyển & Đơn Hàng" },
@@ -6216,8 +6152,8 @@ window.DICTATION_WORDS_100 = [
   { id: 86, word: "policy", ipa: "/ˈpɒləsi/", vn: "chính sách công ty, quy định bảo hiểm", hint: "company privacy policy", category: "TOEIC Thông Báo Công Ty" },
   { id: 87, word: "regulation", ipa: "/ˌreɡjuˈleɪʃn/", vn: "quy tắc, quy chuẩn pháp lý", hint: "safety regulations compliance", category: "TOEIC Thông Báo Công Ty" },
   { id: 88, word: "deadline", ipa: "/ˈdedlaɪn/", vn: "hạn chót hoàn thành công việc", hint: "meet the tight deadline", category: "TOEIC Văn Phòng & Họp" },
-  { id: 89, word: "schedule", ipa: "/ˈʃedjuːl/", vn: "lịch trình, thời gian biểu làm việc", hint: "busy work schedule", category: "TOEIC Văn Phòng & Họp" },
-  { id: 90, word: "postpone", ipa: "/pəˈspəʊn/", vn: "trì hoãn, hoãn lại lịch họp", hint: "postpone the staff meeting", category: "TOEIC Văn Phòng & Họp" },
+  { id: 89, word: "schedule", ipa: "/ˈʃedjuːl/", ipaUK: "/ˈʃedjuːl/", ipaUS: "/ˈskedʒuːl/", vn: "lịch trình, thời gian biểu làm việc", hint: "Anh-Anh /ˈʃedjuːl/, Anh-Mỹ /ˈskedʒuːl/", category: "TOEIC Văn Phòng & Họp" },
+  { id: 90, word: "postpone", ipa: "/pəʊstˈpəʊn/", ipaUK: "/pəʊstˈpəʊn/", ipaUS: "/poʊstˈpoʊn/", vn: "trì hoãn, hoãn lại lịch họp", hint: "postpone the staff meeting", category: "TOEIC Văn Phòng & Họp" },
   { id: 91, word: "merger", ipa: "/ˈmɜːdʒə(r)/", vn: "vụ sáp nhập doanh nghiệp", hint: "corporate merger proposal", category: "TOEIC Hợp Đồng & Kinh Doanh" },
   { id: 92, word: "headquarters", ipa: "/ˌhedˈkwɔːtəz/", vn: "trụ sở chính của tập đoàn", hint: "visit company headquarters", category: "TOEIC Địa Điểm & Cơ Sở" },
   { id: 93, word: "tenant", ipa: "/ˈtenənt/", vn: "người thuê nhà, khách thuê văn phòng", hint: "building tenant agreement", category: "TOEIC Địa Điểm & Cơ Sở" },
@@ -6246,7 +6182,7 @@ window.IPA_DECODING_WORDS_100 = [
   { id: 8, word: "natural", ipa: "/ˈnætʃrəl/", vn: "tự nhiên, thiên nhiên", hint: "Âm /æ/ hạ hàm & âm /tʃ/", category: "Thiên nhiên & Đời sống" },
   { id: 9, word: "special", ipa: "/ˈspeʃl/", vn: "đặc biệt, riêng biệt", hint: "Âm /e/ & âm xì chu môi /ʃl/", category: "Tính từ miêu tả" },
   { id: 10, word: "wonderful", ipa: "/ˈwʌndəfl/", vn: "tuyệt vời, kỳ diệu", hint: "Âm tròn môi /w/ và đuôi /fl/", category: "Tính từ cảm xúc" },
-  { id: 11, word: "favorite", ipa: "/ˈfeɪvərɪt/", vn: "ưa thích, được chuộng", hint: "Âm đôi /eɪ/ và âm /v/", category: "Đời sống hàng ngày" },
+  { id: 11, word: "favorite", aliases: ["favourite"], ipa: "/ˈfeɪvərɪt/", vn: "ưa thích, được chuộng", hint: "Âm đôi /eɪ/ và âm /v/", category: "Đời sống hàng ngày" },
   { id: 12, word: "mirror", ipa: "/ˈmɪrə(r)/", vn: "cái gương soi", hint: "Âm ngắn /ɪ/ và âm kết thúc /ə/", category: "Đồ vật gia đình" },
   { id: 13, word: "picture", ipa: "/ˈpɪktʃə(r)/", vn: "bức tranh, bức ảnh", hint: "Âm bật chu môi /tʃə/", category: "Đồ vật gia đình" },
   { id: 14, word: "money", ipa: "/ˈmʌni/", vn: "tiền bạc", hint: "Âm /ʌ/ không phải âm /o/", category: "Đời sống & Tài chính" },
@@ -6261,9 +6197,9 @@ window.IPA_DECODING_WORDS_100 = [
   { id: 23, word: "separate", ipa: "/ˈsepəreɪt/", vn: "phân chia, tách rời", hint: "Động từ phát âm đuôi /eɪt/", category: "Hành động & Trạng thái" },
   { id: 24, word: "hospital", ipa: "/ˈhɒspɪtl/", vn: "bệnh viện", hint: "Âm /ɒ/ tròn môi và đuôi /tl/", category: "Y tế & Địa điểm" },
   { id: 25, word: "doctor", ipa: "/ˈdɒktə(r)/", vn: "bác sĩ", hint: "Âm tròn môi /ɒ/ và đuôi /tə/", category: "Nghề nghiệp" },
-  { id: 26, word: "student", ipa: "/ˈstjuːdnt/", vn: "học sinh, sinh viên", hint: "Âm /stjuː/ và đuôi /dnt/", category: "Trường học & Giáo dục" },
+  { id: 26, word: "student", ipa: "/ˈstjuːdnt/", ipaUK: "/ˈstjuːdnt/", ipaUS: "/ˈstuːdnt/", vn: "học sinh, sinh viên", hint: "Anh-Anh /ˈstjuːdnt/, Anh-Mỹ /ˈstuːdnt/", category: "Trường học & Giáo dục" },
   { id: 27, word: "kitchen", ipa: "/ˈkɪtʃɪn/", vn: "căn bếp, gian bếp", hint: "Âm ngắn /ɪ/ và âm /tʃɪn/", category: "Nhà cửa & Đời sống" },
-  { id: 28, word: "bathroom", ipa: "/ˈbɑːθruːm/", vn: "phòng tắm", hint: "Âm thè lưỡi /θ/ và âm /uː/", category: "Nhà cửa & Đời sống" },
+  { id: 28, word: "bathroom", ipa: "/ˈbɑːθruːm/", ipaUK: "/ˈbɑːθruːm/", ipaUS: "/ˈbæθruːm/", vn: "phòng tắm", hint: "Anh-Anh /ɑː/, Anh-Mỹ /æ/", category: "Nhà cửa & Đời sống" },
   { id: 29, word: "bedroom", ipa: "/ˈbedruːm/", vn: "phòng ngủ", hint: "Âm /ed/ và âm /ruːm/", category: "Nhà cửa & Đời sống" },
   { id: 30, word: "visit", ipa: "/ˈvɪzɪt/", vn: "thăm hỏi, chuyến thăm", hint: "Âm rung /z/ ở giữa từ", category: "Hành động & Du lịch" },
   { id: 31, word: "person", ipa: "/ˈpɜːsn/", vn: "con người, cá nhân", hint: "Âm dài /ɜː/ và âm đuôi /sn/", category: "Xã hội & Con người" },
@@ -6278,7 +6214,7 @@ window.IPA_DECODING_WORDS_100 = [
   { id: 40, word: "forest", ipa: "/ˈfɒrɪst/", vn: "rừng cây, khu rừng", hint: "Âm /ɒ/ và âm đuôi /st/", category: "Thiên nhiên & Môi trường" },
   { id: 41, word: "river", ipa: "/ˈrɪvə(r)/", vn: "dòng sông", hint: "Âm cắn môi rung /v/", category: "Thiên nhiên & Môi trường" },
   { id: 42, word: "magic", ipa: "/ˈmædʒɪk/", vn: "phép thuật, kỳ diệu", hint: "Âm /æ/ hạ hàm & âm rung /dʒ/", category: "Nghệ thuật & Kỳ ảo" },
-  { id: 43, word: "castle", ipa: "/ˈkɑːsl/", vn: "tòa lâu đài", hint: "Câm âm /t/, đọc là /kɑːsl/", category: "Kiến trúc & Lịch sử" },
+  { id: 43, word: "castle", ipa: "/ˈkɑːsl/", ipaUK: "/ˈkɑːsl/", ipaUS: "/ˈkæsl/", vn: "tòa lâu đài", hint: "Câm âm /t/, UK /kɑːsl/, US /kæsl/", category: "Kiến trúc & Lịch sử" },
   { id: 44, word: "journey", ipa: "/ˈdʒɜːni/", vn: "chuyến đi, hành trình", hint: "Âm rung /dʒ/ và âm dài /ɜː/", category: "Du lịch & Khám phá" },
   { id: 45, word: "angry", ipa: "/ˈæŋɡri/", vn: "tức giận, phẫn nộ", hint: "Âm mũi cuống lưỡi /ŋɡr/", category: "Cảm xúc & Tâm lý" },
   { id: 46, word: "island", ipa: "/ˈaɪlənd/", vn: "hòn đảo", hint: "Câm chữ 's', đọc là /ˈaɪlənd/", category: "Địa lý & Du lịch" },
@@ -6302,7 +6238,7 @@ window.IPA_DECODING_WORDS_100 = [
   { id: 64, word: "autumn", ipa: "/ˈɔːtəm/", vn: "mùa thu", hint: "Câm chữ 'n' cuối từ, âm dài /ɔː/", category: "Thời gian & Thời tiết" },
   { id: 65, word: "column", ipa: "/ˈkɒləm/", vn: "cột trụ nhà; chuyên mục báo", hint: "Câm chữ 'n' cuối từ, âm /ɒ/", category: "Kiến trúc & Truyền thông" },
   { id: 66, word: "sword", ipa: "/sɔːd/", vn: "thanh gươm, thanh kiếm", hint: "Câm chữ 'w', đọc là /sɔːd/", category: "Vũ khí & Lịch sử" },
-  { id: 67, word: "answer", ipa: "/ˈɑːnsə(r)/", vn: "câu trả lời, hồi đáp", hint: "Câm chữ 'w', âm dài /ɑː/", category: "Giao tiếp & Đời sống" },
+  { id: 67, word: "answer", ipa: "/ˈɑːnsə(r)/", ipaUK: "/ˈɑːnsə(r)/", ipaUS: "/ˈænsər/", vn: "câu trả lời, hồi đáp", hint: "Câm chữ 'w', UK /ˈɑːnsə(r)/, US /ˈænsər/", category: "Giao tiếp & Đời sống" },
   { id: 68, word: "whole", ipa: "/həʊl/", vn: "toàn bộ, trọn vẹn", hint: "Câm chữ 'w', bắt đầu bằng /h/", category: "Số lượng & Tính từ" },
   { id: 69, word: "wrap", ipa: "/ræp/", vn: "gói quà, bọc lại", hint: "Câm chữ 'w', bắt đầu bằng /r/", category: "Hành động & Đời sống" },
   { id: 70, word: "wreck", ipa: "/rek/", vn: "vụ đắm tàu, xác đổ nát", hint: "Câm chữ 'w', âm ngắn /e/", category: "Tai nạn & Giao thông" },
@@ -6320,20 +6256,20 @@ window.IPA_DECODING_WORDS_100 = [
   { id: 82, word: "lamb", ipa: "/læm/", vn: "con cừu non", hint: "Câm chữ 'b', âm mở /æ/", category: "Động vật & Thiên nhiên" },
   { id: 83, word: "limb", ipa: "/lɪm/", vn: "chi (tay, chân), cành cây", hint: "Câm chữ 'b', âm ngắn /ɪ/", category: "Cơ thể & Tự nhiên" },
   { id: 84, word: "numb", ipa: "/nʌm/", vn: "tê cóng, mất cảm giác", hint: "Câm chữ 'b', âm ngắn /ʌ/", category: "Cảm giác & Sức khỏe" },
-  { id: 85, word: "fasten", ipa: "/ˈfɑːsn/", vn: "thắt chặt, cài dây an toàn", hint: "Câm chữ 't', đọc là /ˈfɑːsn/", category: "Hành động & An toàn" },
-  { id: 86, word: "soften", ipa: "/ˈsɒfn/", vn: "làm mềm, dịu đi", hint: "Câm chữ 't', đọc là /ˈsɒfn/", category: "Hành động & Biến đổi" },
+  { id: 85, word: "fasten", ipa: "/ˈfɑːsn/", ipaUK: "/ˈfɑːsn/", ipaUS: "/ˈfæsn/", vn: "thắt chặt, cài dây an toàn", hint: "Câm chữ 't', UK /ˈfɑːsn/, US /ˈfæsn/", category: "Hành động & An toàn" },
+  { id: 86, word: "soften", ipa: "/ˈsɒfn/", ipaUK: "/ˈsɒfn/", ipaUS: "/ˈsɔːfn/", vn: "làm mềm, dịu đi", hint: "Câm chữ 't', UK /ˈsɒfn/, US /ˈsɔːfn/", category: "Hành động & Biến đổi" },
   { id: 87, word: "whistle", ipa: "/ˈwɪsl/", vn: "cái còi; huýt sáo", hint: "Câm chữ 't' và 'h', đọc là /ˈwɪsl/", category: "Âm thanh & Đồ vật" },
   { id: 88, word: "rustle", ipa: "/ˈrʌsl/", vn: "tiếng lá xào xạc", hint: "Câm chữ 't', đọc là /ˈrʌsl/", category: "Âm thanh & Tự nhiên" },
   { id: 89, word: "bustle", ipa: "/ˈbʌsl/", vn: "sự nhộn nhịp, hối hả", hint: "Câm chữ 't', đọc là /ˈbʌsl/", category: "Đời sống & Xã hội" },
   { id: 90, word: "christmas", ipa: "/ˈkrɪsməs/", vn: "lễ Giáng Sinh", hint: "Câm chữ 't', chữ ch đọc là /k/", category: "Lễ hội & Văn hóa" },
   { id: 91, word: "mortgage", ipa: "/ˈmɔːɡɪdʒ/", vn: "khoản vay thế chấp nhà", hint: "Câm chữ 't', đọc là /ˈmɔːɡɪdʒ/", category: "Tài chính & Ngân hàng" },
-  { id: 92, word: "ballet", ipa: "/ˈbæleɪ/", vn: "múa ba lê, vũ kịch", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Nghệ thuật & Khiêu vũ" },
-  { id: 93, word: "buffet", ipa: "/ˈbʊfeɪ/", vn: "tiệc đứng tự chọn món", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Ẩm thực & Nhà hàng" },
+  { id: 92, word: "ballet", ipa: "/ˈbæleɪ/", ipaUK: "/ˈbæleɪ/", ipaUS: "/bæˈleɪ/", vn: "múa ba lê, vũ kịch", hint: "Câm chữ 't', UK /ˈbæleɪ/, US /bæˈleɪ/", category: "Nghệ thuật & Khiêu vũ" },
+  { id: 93, word: "buffet", ipa: "/ˈbʊfeɪ/", ipaUK: "/ˈbʊfeɪ/", ipaUS: "/bəˈfeɪ/", vn: "tiệc đứng tự chọn món", hint: "Câm chữ 't', UK /ˈbʊfeɪ/, US /bəˈfeɪ/", category: "Ẩm thực & Nhà hàng" },
   { id: 94, word: "gourmet", ipa: "/ˈɡʊəmeɪ/", vn: "sành ăn, món ăn cao cấp", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Ẩm thực cao cấp" },
   { id: 95, word: "depot", ipa: "/ˈdepəʊ/", vn: "nhà ga, kho bãi trung chuyển", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Vận tải & Cơ sở" },
   { id: 96, word: "bouquet", ipa: "/buˈkeɪ/", vn: "bó hoa tươi", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Quà tặng & Đời sống" },
-  { id: 97, word: "debris", ipa: "/ˈdebriː/", vn: "mảnh vụn vỡ, đống đổ nát", hint: "Câm chữ 's' đuôi kiểu tiếng Pháp", category: "Tai nạn & Môi trường" },
-  { id: 98, word: "neighbor", ipa: "/ˈneɪbə(r)/", vn: "người hàng xóm láng giềng", hint: "Cụm 'eigh' phát âm là /eɪ/", category: "Xã hội & Đời sống" },
+  { id: 97, word: "debris", ipa: "/ˈdebriː/", ipaUK: "/ˈdebriː/", ipaUS: "/dəˈbriː/", vn: "mảnh vụn vỡ, đống đổ nát", hint: "Câm chữ 's', UK /ˈdebriː/, US /dəˈbriː/", category: "Tai nạn & Môi trường" },
+  { id: 98, word: "neighbor", aliases: ["neighbour"], ipa: "/ˈneɪbə(r)/", vn: "người hàng xóm láng giềng", hint: "Cụm 'eigh' phát âm là /eɪ/", category: "Xã hội & Đời sống" },
   { id: 99, word: "height", ipa: "/haɪt/", vn: "chiều cao, độ cao", hint: "Cụm 'eigh' phát âm đặc biệt là /aɪ/", category: "Đo lường & Kích thước" },
   { id: 100, word: "significance", ipa: "/sɪɡˈnɪfɪkəns/", vn: "ý nghĩa quan trọng, tầm ảnh hưởng", hint: "Trọng âm âm tiết 2, đuôi /əns/", category: "Tính chất & Tầm vóc" }
 ];

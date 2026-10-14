@@ -182,21 +182,50 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
 
-    // Phát Âm Từ Vựng Mẫu chuẩn phòng thu Oxford / Google CDN
-    playWord(wordText) {
+    // Phát Âm Từ Vựng với giọng bản xứ chuẩn xác & tối ưu hóa độ nét âm vị
+    playWord(wordText, customRate) {
       if (!wordText) return;
       this.stop();
 
-      const clean = wordText.toLowerCase().trim().replace(/[^a-z]/g, "");
-      const langSuffix = state.accent === "US" ? "_us_1" : "_gb_1";
-      const audioUrl = `https://ssl.gstatic.com/dictionary/static/sounds/20200429/${clean}--${langSuffix}.mp3`;
+      if (!("speechSynthesis" in window)) return;
 
-      this.currentAudio = new Audio(audioUrl);
-      this.currentAudio.playbackRate = state.speed;
+      // Đảm bảo SpeechSynthesis không bị trạng thái paused ngầm (lỗi kinh điển trên Chrome/Safari)
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
 
-      this.currentAudio.play().catch(() => {
-        this.fallbackTTS(wordText);
-      });
+      const utterance = new SpeechSynthesisUtterance(wordText.trim());
+      const voice = this.getBestVoice(state.accent);
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
+      }
+
+      // Tốc độ phát âm:
+      // - Nếu truyền customRate (ví dụ slow 0.72x khi nghe chậm), áp dụng trực tiếp.
+      // - Mặc định từ vựng đơn lập: đặt 0.88x để phát âm chuẩn từng phụ âm cuối (ending sounds /t/, /d/, /s/, /z/, /p/, /k/)
+      //   và nguyên âm đôi rõ ràng, không bị nuốt âm.
+      const rate = (customRate !== undefined && customRate !== null)
+        ? customRate
+        : Math.max(0.65, Math.min(1.3, state.speed * 0.88));
+
+      utterance.rate = rate;
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+
+      // Chrome speech queue bug fix: delay 25ms sau khi cancel() để trình duyệt khởi động kênh âm thanh sạch
+      setTimeout(() => {
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          console.warn("Lỗi phát âm SpeechSynthesis:", e);
+        }
+      }, 25);
     },
 
     // Phát Câu Ngữ Cảnh Tự Nhiên (Natural Speech with Native Cadence)
@@ -248,7 +277,16 @@ document.addEventListener("DOMContentLoaded", () => {
       utterance.onerror = clearPlaying;
 
       this.currentUtterance = utterance;
-      window.speechSynthesis.speak(utterance);
+      setTimeout(() => {
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          clearPlaying();
+        }
+      }, 25);
     },
 
     stop() {
@@ -257,26 +295,15 @@ document.addEventListener("DOMContentLoaded", () => {
         this.currentAudio.currentTime = 0;
         this.currentAudio = null;
       }
-      if (window.speechSynthesis) {
+      if (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
         window.speechSynthesis.cancel();
       }
       document.querySelectorAll(".btn-play-sentence.playing").forEach(b => b.classList.remove("playing"));
       this.currentUtterance = null;
     },
 
-    fallbackTTS(text) {
-      if (!("speechSynthesis" in window)) return;
-      const utterance = new SpeechSynthesisUtterance(text);
-      const voice = this.getBestVoice(state.accent);
-      if (voice) {
-        utterance.voice = voice;
-        utterance.lang = voice.lang;
-      } else {
-        utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
-      }
-      utterance.rate = state.speed;
-      utterance.pitch = 1.0;
-      window.speechSynthesis.speak(utterance);
+    fallbackTTS(text, customRate) {
+      this.playWord(text, customRate);
     }
   };
   window.AudioEngine = AudioEngine;
@@ -1269,6 +1296,63 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   const BUILTIN_DICTATION_WORDS_50 = BUILTIN_DICTATION_WORDS_100;
 
+  // Chuẩn hóa và so sánh từ vựng linh hoạt (bảo đảm tính chính xác ngữ âm, chấp nhận biến thể Anh-Mỹ / Anh-Anh hợp lệ)
+  function checkWordMatch(userInput, targetWord, item) {
+    if (!userInput || !targetWord) return false;
+    const cleanUser = userInput.toLowerCase().trim().replace(/['".,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+    const cleanTarget = targetWord.toLowerCase().trim().replace(/['".,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+
+    if (cleanUser === cleanTarget) return true;
+
+    // Kiểm tra danh sách bí danh/biến thể nếu có trong dữ liệu
+    if (item && Array.isArray(item.aliases)) {
+      if (item.aliases.some(a => a.toLowerCase().trim().replace(/['".,\/#!$%\^&\*;:{}=\-_`~()]/g, "") === cleanUser)) {
+        return true;
+      }
+    }
+
+    // Các cặp biến thể Anh-Anh / Anh-Mỹ phổ biến
+    const UK_US_VARIANTS = [
+      ["catalog", "catalogue"],
+      ["favorite", "favourite"],
+      ["color", "colour"],
+      ["flavor", "flavour"],
+      ["neighbor", "neighbour"],
+      ["center", "centre"],
+      ["theater", "theatre"],
+      ["meter", "metre"],
+      ["organize", "organise"],
+      ["recognize", "recognise"],
+      ["realize", "realise"],
+      ["apologize", "apologise"],
+      ["analyze", "analyse"],
+      ["traveler", "traveller"],
+      ["canceled", "cancelled"],
+      ["canceling", "cancelling"],
+      ["program", "programme"],
+      ["dialog", "dialogue"],
+      ["defense", "defence"],
+      ["license", "licence"],
+      ["practice", "practise"]
+    ];
+
+    for (const [v1, v2] of UK_US_VARIANTS) {
+      if ((cleanTarget === v1 && cleanUser === v2) || (cleanTarget === v2 && cleanUser === v1)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Lấy phiên âm IPA phù hợp với giọng đọc đã chọn (US hoặc UK)
+  function getWordDisplayIpa(item) {
+    if (!item) return "";
+    if (state.accent === "UK" && item.ipaUK) return item.ipaUK;
+    if (state.accent === "US" && item.ipaUS) return item.ipaUS;
+    return item.ipa || "";
+  }
+
   const DictationManager = {
     words: [],
     currentIndex: 0,
@@ -1467,12 +1551,9 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => listenBtn.classList.remove("playing"), 1200);
       }
 
-      const origSpeed = state.speed;
-      if (slow) {
-        state.speed = 0.75;
-      }
-      AudioEngine.playWord(cur.word);
-      state.speed = origSpeed;
+      // Phát âm với tốc độ tối ưu: slow = 0.72x rõ nét từng âm cuối; thường = 0.88x tự nhiên
+      const targetRate = slow ? 0.72 : Math.max(0.65, Math.min(1.3, state.speed * 0.88));
+      AudioEngine.playWord(cur.word, targetRate);
     },
 
     toggleHint() {
@@ -1507,7 +1588,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!cur) return;
 
       const targetWord = cur.word.trim().toLowerCase();
-      const isCorrect = userText === targetWord;
+      const isCorrect = checkWordMatch(userText, targetWord, cur);
 
       this.isAnswered = true;
       if (isCorrect) {
@@ -1524,12 +1605,19 @@ document.addEventListener("DOMContentLoaded", () => {
         userWord: userText,
         isCorrect: isCorrect,
         ipa: cur.ipa,
+        ipaUK: cur.ipaUK,
+        ipaUS: cur.ipaUS,
         vn: cur.vn,
         category: cur.category
       });
 
       this.saveProgress();
       this.renderFeedback(isCorrect, cur, userText);
+
+      // Tự động phát âm chuẩn lại từ vừa nộp bài sau 200ms để học viên nghe củng cố phản xạ
+      setTimeout(() => {
+        AudioEngine.playWord(cur.word);
+      }, 200);
     },
 
     nextWord() {
@@ -1693,7 +1781,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div>
               <small style="color:var(--text-muted); display:block; font-size:0.75rem;">PHIÊN ÂM IPA:</small>
-              <span class="dictation-correct-ipa">${cur.ipa}</span>
+              <span class="dictation-correct-ipa">${cur.ipaUK && cur.ipaUS && cur.ipaUK !== cur.ipaUS ? `🇺🇸 ${cur.ipaUS} | 🇬🇧 ${cur.ipaUK}` : cur.ipa}</span>
             </div>
             <div>
               <small style="color:var(--text-muted); display:block; font-size:0.75rem;">Ý NGHĨA:</small>
@@ -1750,7 +1838,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <tr>
           <td style="font-weight:700; color:var(--text-muted); width:40px;">#${i + 1}</td>
           <td>
-            <strong>${h.word}</strong> <span style="color:var(--brand-primary-dark); font-size:0.82rem;">${h.ipa}</span>
+            <strong>${h.word}</strong> <span style="color:var(--brand-primary-dark); font-size:0.82rem;">${h.ipaUK && h.ipaUS && h.ipaUK !== h.ipaUS ? `(US: ${h.ipaUS} / UK: ${h.ipaUK})` : h.ipa}</span>
             <div style="font-size:0.78rem; color:var(--text-muted);">${h.vn}</div>
           </td>
           <td>
@@ -2116,10 +2204,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return this.words[this.currentIndex] || null;
     },
 
-    playAudio() {
+    playAudio(slow = false) {
       const cur = this.getCurrentWord();
       if (!cur) return;
-      AudioEngine.playWord(cur.word);
+      const targetRate = slow ? 0.72 : Math.max(0.65, Math.min(1.3, state.speed * 0.88));
+      AudioEngine.playWord(cur.word, targetRate);
     },
 
     toggleHint() {
@@ -2154,7 +2243,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!cur) return;
 
       const targetWord = cur.word.trim().toLowerCase();
-      const isCorrect = userText === targetWord;
+      const isCorrect = checkWordMatch(userText, targetWord, cur);
 
       this.isAnswered = true;
       if (isCorrect) {
@@ -2171,6 +2260,8 @@ document.addEventListener("DOMContentLoaded", () => {
         userWord: userText,
         isCorrect: isCorrect,
         ipa: cur.ipa,
+        ipaUK: cur.ipaUK,
+        ipaUS: cur.ipaUS,
         vn: cur.vn,
         category: cur.category
       });
@@ -2264,15 +2355,23 @@ document.addEventListener("DOMContentLoaded", () => {
           <!-- Khung Hiển Thị Phiên Âm IPA Trung Tâm -->
           <div class="ipa-showcase-box">
             <div class="ipa-showcase-badge">🔤 PHIÊN ÂM QUỐC TẾ (IPA):</div>
-            <div class="ipa-showcase-text">${cur.ipa}</div>
+            <div class="ipa-showcase-text">${getWordDisplayIpa(cur)}</div>
+            ${cur.ipaUK && cur.ipaUS && cur.ipaUK !== cur.ipaUS ? `
+            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">
+              <span>🇺🇸 US: <strong style="color:var(--brand-primary-dark);">${cur.ipaUS}</strong></span> &nbsp;•&nbsp; 
+              <span>🇬🇧 UK: <strong style="color:var(--brand-primary-dark);">${cur.ipaUK}</strong></span>
+            </div>` : ""}
             <div class="ipa-showcase-sub">Đọc kỹ dấu trọng âm <strong>'</strong> và các ký hiệu ngữ âm để đoán từ tiếng Anh tương ứng</div>
             
             <div class="dictation-audio-subcontrols" style="margin-top: 14px;">
+              <button class="btn-dictation-subaction" onclick="IpaDecodingManager.playAudio(false)" title="Nghe người bản xứ phát âm từ này để trợ giúp">
+                🔊 Nghe Phát Âm Trợ Giúp
+              </button>
+              <button class="btn-dictation-subaction" onclick="IpaDecodingManager.playAudio(true)" title="Phát âm chậm 0.72x để nghe rõ từng phụ âm">
+                🐢 Nghe Chậm (0.72x)
+              </button>
               <button class="btn-dictation-subaction" id="btnIpaDecodingHint" onclick="IpaDecodingManager.toggleHint()">
                 💡 Gợi Ý Nghĩa
-              </button>
-              <button class="btn-dictation-subaction" onclick="IpaDecodingManager.playAudio()" title="Nghe người bản xứ phát âm từ này để trợ giúp">
-                🔊 Nghe Phát Âm Trợ Giúp
               </button>
             </div>
 
@@ -2342,7 +2441,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div>
               <small style="color:var(--text-muted); display:block; font-size:0.75rem;">PHIÊN ÂM IPA:</small>
-              <span class="dictation-correct-ipa">${cur.ipa}</span>
+              <span class="dictation-correct-ipa">${cur.ipaUK && cur.ipaUS && cur.ipaUK !== cur.ipaUS ? `🇺🇸 ${cur.ipaUS} | 🇬🇧 ${cur.ipaUK}` : cur.ipa}</span>
             </div>
             <div>
               <small style="color:var(--text-muted); display:block; font-size:0.75rem;">Ý NGHĨA:</small>
@@ -2399,7 +2498,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <tr>
           <td style="font-weight:700; color:var(--text-muted); width:40px;">#${i + 1}</td>
           <td>
-            <div style="font-family:'Charis SIL',serif; font-size:1.15rem; font-weight:700; color:var(--brand-primary-dark);">${h.ipa}</div>
+            <div style="font-family:'Charis SIL',serif; font-size:1.15rem; font-weight:700; color:var(--brand-primary-dark);">${h.ipaUK && h.ipaUS && h.ipaUK !== h.ipaUS ? `🇺🇸 ${h.ipaUS} | 🇬🇧 ${h.ipaUK}` : h.ipa}</div>
             <strong style="font-size:1rem; color:var(--text-main);">${h.word}</strong>
             <div style="font-size:0.78rem; color:var(--text-muted);">${h.vn}</div>
           </td>
@@ -2524,6 +2623,15 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("miss_nguyet_accent", acc);
       document.querySelectorAll("[data-accent]").forEach(b => b.classList.toggle("active", b === btn));
       AudioEngine.updateVoiceList();
+
+      // Cập nhật ngay phiên âm hiển thị trên màn hình nếu đang mở bài tập Nhận Diện IPA
+      if (typeof IpaDecodingManager !== "undefined" && !IpaDecodingManager.isAnswered && IpaDecodingManager.words && IpaDecodingManager.words.length) {
+        const cur = IpaDecodingManager.getCurrentWord();
+        const scText = document.querySelector(".ipa-showcase-text");
+        if (scText && cur) {
+          scText.textContent = getWordDisplayIpa(cur);
+        }
+      }
     });
   });
 
