@@ -6125,9 +6125,9 @@ window.IPA_DATA = {
 };
 
 // ==========================================================================
-// 50 TỪ VỰNG CỐT LÕI HAY GẶP TRONG BÀI THI TOEIC LISTENING
+// 100 TỪ VỰNG CỐT LÕI HAY GẶP TRONG BÀI THI TOEIC LISTENING (PART 1 - 4)
 // ==========================================================================
-window.DICTATION_WORDS_50 = [
+window.DICTATION_WORDS_100 = [
   { id: 1, word: "receipt", ipa: "/rɪˈsiːt/", vn: "hóa đơn, biên nhận", hint: "TOEIC hay bẫy câm âm /p/", category: "TOEIC Mua Sắm & Dịch Vụ" },
   { id: 2, word: "aisle", ipa: "/aɪl/", vn: "lối đi giữa các hàng ghế/kệ", hint: "TOEIC hay bẫy câm âm /s/", category: "TOEIC Sân Bay & Đi Lại" },
   { id: 3, word: "shelf", ipa: "/ʃelf/", vn: "kệ để đồ, giá sách", hint: "Part 1 tranh ảnh kinh điển", category: "TOEIC Part 1 Tranh Ảnh" },
@@ -6177,13 +6177,65 @@ window.DICTATION_WORDS_50 = [
   { id: 47, word: "factory", ipa: "/ˈfæktri/", vn: "nhà máy, xưởng chế tạo", hint: "manufacturing factory", category: "TOEIC Sản Xuất & Nhà Xưởng" },
   { id: 48, word: "board", ipa: "/bɔːd/", vn: "lên máy bay/tàu; ban giám đốc", hint: "board of directors / board the train", category: "TOEIC Văn Phòng & Họp" },
   { id: 49, word: "device", ipa: "/dɪˈvaɪs/", vn: "thiết bị điện tử cầm tay", hint: "mobile electronic device", category: "TOEIC Thiết Bị & Văn Phòng" },
-  { id: 50, word: "vehicle", ipa: "/ˈviːəkl/", vn: "phương tiện giao thông, xe cộ", hint: "motor vehicle inspection", category: "TOEIC Sân Bay & Đi Lại" }
+  { id: 50, word: "vehicle", ipa: "/ˈviːəkl/", vn: "phương tiện giao thông, xe cộ", hint: "motor vehicle inspection", category: "TOEIC Sân Bay & Đi Lại" },
+  { id: 51, word: "apparel", ipa: "/əˈpærəl/", vn: "trang phục, quần áo", hint: "clothing and apparel store", category: "TOEIC Mua Sắm & Dịch Vụ" },
+  { id: 52, word: "pedestrian", ipa: "/pəˈdestriən/", vn: "người đi bộ", hint: "pedestrian crosswalk", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 53, word: "fountain", ipa: "/ˈfaʊntn/", vn: "đài phun nước", hint: "sitting by the water fountain", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 54, word: "lawn", ipa: "/lɔːn/", vn: "bãi cỏ, thảm cỏ", hint: "mowing the lawn", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 55, word: "intersection", ipa: "/ˌɪntəˈsekʃn/", vn: "ngã tư, giao lộ", hint: "at the busy intersection", category: "TOEIC Sân Bay & Đi Lại" },
+  { id: 56, word: "lamppost", ipa: "/ˈlæmppəʊst/", vn: "cột đèn đường", hint: "next to the street lamppost", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 57, word: "pavement", ipa: "/ˈpeɪvmənt/", vn: "vỉa hè, lề đường đi bộ", hint: "walking along the pavement", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 58, word: "awning", ipa: "/ˈɔːnɪŋ/", vn: "mái hiên che nắng/mưa", hint: "standing under the shop awning", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 59, word: "scaffold", ipa: "/ˈskæfəʊld/", vn: "giàn giáo thi công", hint: "working on the scaffold", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 60, word: "wheelbarrow", ipa: "/ˈwiːlbærəʊ/", vn: "xe rùa chở đất cát", hint: "pushing a wheelbarrow", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 61, word: "bench", ipa: "/bentʃ/", vn: "ghế đá công viên, băng ghế dài", hint: "resting on a park bench", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 62, word: "crate", ipa: "/kreɪt/", vn: "thùng gỗ đựng hàng", hint: "loading wooden crates", category: "TOEIC Vận Chuyển & Đơn Hàng" },
+  { id: 63, word: "clipboard", ipa: "/ˈklɪpbɔːd/", vn: "bìa kẹp hồ sơ có kẹp kim loại", hint: "holding a clipboard", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 64, word: "podium", ipa: "/ˈpəʊdiəm/", vn: "bục phát biểu, bục giảng", hint: "speaking from the podium", category: "TOEIC Hội Thảo & Sự Kiện" },
+  { id: 65, word: "escalator", ipa: "/ˈeskəleɪtə(r)/", vn: "thang cuốn siêu thị/nhà ga", hint: "riding on the escalator", category: "TOEIC Địa Điểm & Cơ Sở" },
+  { id: 66, word: "apron", ipa: "/ˈeɪprən/", vn: "tạp dề nấu bếp/phục vụ", hint: "wearing a white apron", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 67, word: "shovel", ipa: "/ˈʃʌvl/", vn: "cái xẻng xúc đất", hint: "digging with a shovel", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 68, word: "ladder", ipa: "/ˈlædə(r)/", vn: "cái thang leo trèo", hint: "climbing up a stepladder", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 69, word: "conveyor", ipa: "/kənˈveɪə(r)/", vn: "băng chuyền hành lý/nhà máy", hint: "luggage conveyor belt", category: "TOEIC Sân Bay & Đi Lại" },
+  { id: 70, word: "canopy", ipa: "/ˈkænəpi/", vn: "mái vòm che, tán che râm", hint: "sitting under a large canopy", category: "TOEIC Part 1 Tranh Ảnh" },
+  { id: 71, word: "colleague", ipa: "/ˈkɒliːɡ/", vn: "đồng nghiệp cùng cơ quan", hint: "discuss with a colleague", category: "TOEIC Văn Phòng & Họp" },
+  { id: 72, word: "supervisor", ipa: "/ˈsuːpəvaɪzə(r)/", vn: "người giám sát, cấp trên", hint: "report to the supervisor", category: "TOEIC Văn Phòng & Họp" },
+  { id: 73, word: "promotion", ipa: "/prəˈməʊʃn/", vn: "sự thăng chức; chương trình khuyến mãi", hint: "get a career promotion", category: "TOEIC Văn Phòng & Họp" },
+  { id: 74, word: "extension", ipa: "/ɪkˈstenʃn/", vn: "số máy nhánh nội bộ văn phòng", hint: "call extension 402", category: "TOEIC Thiết Bị & Văn Phòng" },
+  { id: 75, word: "brochure", ipa: "/ˈbrəʊʃə(r)/", vn: "cuốn sách quảng cáo, tài liệu giới thiệu", hint: "read the product brochure", category: "TOEIC Mua Sắm & Dịch Vụ" },
+  { id: 76, word: "catalog", ipa: "/ˈkætəlɒɡ/", vn: "cuốn danh mục sản phẩm", hint: "browse the autumn catalog", category: "TOEIC Mua Sắm & Dịch Vụ" },
+  { id: 77, word: "supplier", ipa: "/səˈplaɪə(r)/", vn: "nhà cung cấp nguyên vật liệu", hint: "contact the parts supplier", category: "TOEIC Hợp Đồng & Kinh Doanh" },
+  { id: 78, word: "distributor", ipa: "/dɪˈstrɪbjətə(r)/", vn: "nhà phân phối hàng hóa", hint: "authorized local distributor", category: "TOEIC Hợp Đồng & Kinh Doanh" },
+  { id: 79, word: "inventory", ipa: "/ˈɪnvəntri/", vn: "hàng tồn kho, bản kiểm kê", hint: "annual inventory check", category: "TOEIC Vận Chuyển & Đơn Hàng" },
+  { id: 80, word: "reimburse", ipa: "/ˌriːɪmˈbɜːs/", vn: "hoàn tiền, thanh toán lại chi phí", hint: "reimburse travel expenses", category: "TOEIC Tài Chính & Kế Toán" },
+  { id: 81, word: "itinerary", ipa: "/aɪˈtɪnərəri/", vn: "lịch trình chuyến đi chi tiết", hint: "flight and travel itinerary", category: "TOEIC Sân Bay & Đi Lại" },
+  { id: 82, word: "reservation", ipa: "/ˌrezəˈveɪʃn/", vn: "sự đặt chỗ trước (vé, phòng, bàn)", hint: "confirm hotel reservation", category: "TOEIC Sân Bay & Đi Lại" },
+  { id: 83, word: "maintenance", ipa: "/ˈmeɪntənəns/", vn: "công tác bảo trì, bảo dưỡng thiết bị", hint: "routine maintenance check", category: "TOEIC Sản Xuất & Nhà Xưởng" },
+  { id: 84, word: "estimate", ipa: "/ˈestɪmət/", vn: "bản dự toán, ước tính kinh phí", hint: "request a written estimate", category: "TOEIC Tài Chính & Kế Toán" },
+  { id: 85, word: "warranty", ipa: "/ˈwɒrənti/", vn: "phiếu bảo hành sản phẩm", hint: "two-year product warranty", category: "TOEIC Mua Sắm & Dịch Vụ" },
+  { id: 86, word: "policy", ipa: "/ˈpɒləsi/", vn: "chính sách công ty, quy định bảo hiểm", hint: "company privacy policy", category: "TOEIC Thông Báo Công Ty" },
+  { id: 87, word: "regulation", ipa: "/ˌreɡjuˈleɪʃn/", vn: "quy tắc, quy chuẩn pháp lý", hint: "safety regulations compliance", category: "TOEIC Thông Báo Công Ty" },
+  { id: 88, word: "deadline", ipa: "/ˈdedlaɪn/", vn: "hạn chót hoàn thành công việc", hint: "meet the tight deadline", category: "TOEIC Văn Phòng & Họp" },
+  { id: 89, word: "schedule", ipa: "/ˈʃedjuːl/", vn: "lịch trình, thời gian biểu làm việc", hint: "busy work schedule", category: "TOEIC Văn Phòng & Họp" },
+  { id: 90, word: "postpone", ipa: "/pəˈspəʊn/", vn: "trì hoãn, hoãn lại lịch họp", hint: "postpone the staff meeting", category: "TOEIC Văn Phòng & Họp" },
+  { id: 91, word: "merger", ipa: "/ˈmɜːdʒə(r)/", vn: "vụ sáp nhập doanh nghiệp", hint: "corporate merger proposal", category: "TOEIC Hợp Đồng & Kinh Doanh" },
+  { id: 92, word: "headquarters", ipa: "/ˌhedˈkwɔːtəz/", vn: "trụ sở chính của tập đoàn", hint: "visit company headquarters", category: "TOEIC Địa Điểm & Cơ Sở" },
+  { id: 93, word: "tenant", ipa: "/ˈtenənt/", vn: "người thuê nhà, khách thuê văn phòng", hint: "building tenant agreement", category: "TOEIC Địa Điểm & Cơ Sở" },
+  { id: 94, word: "lease", ipa: "/liːs/", vn: "hợp đồng cho thuê bất động sản", hint: "sign a one-year office lease", category: "TOEIC Hợp Đồng & Kinh Doanh" },
+  { id: 95, word: "amenity", ipa: "/əˈmiːnəti/", vn: "tiện nghi (hồ bơi, phòng gym, wifi)", hint: "complimentary hotel amenities", category: "TOEIC Hội Thảo & Sự Kiện" },
+  { id: 96, word: "banquet", ipa: "/ˈbæŋkwɪt/", vn: "bữa tiệc lớn, yến tiệc trang trọng", hint: "annual awards banquet", category: "TOEIC Hội Thảo & Sự Kiện" },
+  { id: 97, word: "reception", ipa: "/rɪˈsepʃn/", vn: "tiệc chiêu đãi; quầy tiếp tân", hint: "welcome reception dinner", category: "TOEIC Hội Thảo & Sự Kiện" },
+  { id: 98, word: "complaint", ipa: "/kəmˈpleɪnt/", vn: "lời khiếu nại, phản ánh của khách", hint: "file a customer complaint", category: "TOEIC Dịch Vụ Khách Hàng" },
+  { id: 99, word: "overtime", ipa: "/ˈəʊvətaɪm/", vn: "giờ làm thêm, tăng ca", hint: "work overtime hours", category: "TOEIC Văn Phòng & Họp" },
+  { id: 100, word: "applicant", ipa: "/ˈæplɪkənt/", vn: "ứng viên nộp đơn xin việc", hint: "interview job applicants", category: "TOEIC Văn Phòng & Họp" }
 ];
+// Giữ alias tương thích ngược
+window.DICTATION_WORDS_50 = window.DICTATION_WORDS_100;
 
 // ==========================================================================
-// 50 TỪ VỰNG BÀI TẬP: NHÌN PHIÊN ÂM IPA ĐỂ VIẾT TỪ (IPA TO WORD DECODING)
+// 100 TỪ VỰNG BÀI TẬP: NHÌN PHIÊN ÂM IPA ĐỂ VIẾT TỪ (IPA TO WORD DECODING)
 // ==========================================================================
-window.IPA_DECODING_WORDS_50 = [
+window.IPA_DECODING_WORDS_100 = [
   { id: 1, word: "beautiful", ipa: "/ˈbjuːtɪfl/", vn: "xinh đẹp, tuyệt vời", hint: "Âm /juː/ và âm đuôi /fl/", category: "Tính từ miêu tả" },
   { id: 2, word: "honest", ipa: "/ˈɒnɪst/", vn: "thật thà, trung thực", hint: "Câm chữ 'h', bắt đầu bằng /ɒ/", category: "Phẩm chất & Tính cách" },
   { id: 3, word: "comfortable", ipa: "/ˈkʌmftəbl/", vn: "thoải mái, dễ chịu", hint: "Đọc 3 âm tiết, câm chữ 'or'", category: "Đời sống hàng ngày" },
@@ -6233,5 +6285,57 @@ window.IPA_DECODING_WORDS_50 = [
   { id: 47, word: "muscle", ipa: "/ˈmʌsl/", vn: "cơ bắp, bắp thịt", hint: "Câm chữ 'c', đọc là /ˈmʌsl/", category: "Cơ thể & Sức khỏe" },
   { id: 48, word: "climb", ipa: "/klaɪm/", vn: "leo trèo, trèo lên", hint: "Câm chữ 'b', đọc là /klaɪm/", category: "Hành động & Thể thao" },
   { id: 49, word: "subtle", ipa: "/ˈsʌtl/", vn: "tinh tế, khéo léo", hint: "Câm chữ 'b', đọc là /ˈsʌtl/", category: "Tính từ miêu tả" },
-  { id: 50, word: "doubt", ipa: "/daʊt/", vn: "sự nghi ngờ, phân vân", hint: "Câm chữ 'b', đọc là /daʊt/", category: "Tâm lý & Cảm xúc" }
+  { id: 50, word: "doubt", ipa: "/daʊt/", vn: "sự nghi ngờ, phân vân", hint: "Câm chữ 'b', đọc là /daʊt/", category: "Tâm lý & Cảm xúc" },
+  { id: 51, word: "language", ipa: "/ˈlæŋɡwɪdʒ/", vn: "ngôn ngữ, tiếng nói", hint: "Âm /æ/, âm mũi /ŋɡw/ và đuôi /dʒ/", category: "Giao tiếp & Ngôn ngữ" },
+  { id: 52, word: "palace", ipa: "/ˈpæləs/", vn: "cung điện hoàng gia", hint: "Âm /æ/ và đuôi /əs/", category: "Kiến trúc & Địa điểm" },
+  { id: 53, word: "stomach", ipa: "/ˈstʌmək/", vn: "dạ dày, bụng", hint: "Âm /ʌ/ và đuôi /k/ (chữ ch đọc là /k/)", category: "Cơ thể & Sức khỏe" },
+  { id: 54, word: "anchor", ipa: "/ˈæŋkə(r)/", vn: "mỏ neo tàu thuyền", hint: "Chữ ch phát âm là /k/, âm mũi /ŋk/", category: "Hàng hải & Đồ vật" },
+  { id: 55, word: "character", ipa: "/ˈkærəktə(r)/", vn: "tính cách; nhân vật", hint: "Chữ ch đọc là /k/, trọng âm 1", category: "Con người & Văn học" },
+  { id: 56, word: "echo", ipa: "/ˈekəʊ/", vn: "tiếng vang, âm dội lại", hint: "Chữ ch đọc là /k/, âm đôi /əʊ/", category: "Âm thanh & Tự nhiên" },
+  { id: 57, word: "choir", ipa: "/ˈkwaɪə(r)/", vn: "dàn hợp xướng", hint: "Chữ ch đọc là /kw/ và vần /aɪə/", category: "Âm nhạc & Nghệ thuật" },
+  { id: 58, word: "rhythm", ipa: "/ˈrɪðəm/", vn: "nhịp điệu, tiết tấu", hint: "Câm chữ 'h', âm thè lưỡi rung /ð/", category: "Âm nhạc & Nghệ thuật" },
+  { id: 59, word: "rhyme", ipa: "/raɪm/", vn: "vần thơ, gieo vần", hint: "Câm chữ 'h', âm đôi /aɪ/", category: "Văn học & Nghệ thuật" },
+  { id: 60, word: "chaos", ipa: "/ˈkeɪɒs/", vn: "sự hỗn loạn, náo loạn", hint: "Chữ ch phát âm là /k/, âm đôi /eɪ/", category: "Trạng thái & Đời sống" },
+  { id: 61, word: "foreign", ipa: "/ˈfɒrən/", vn: "thuộc về nước ngoài", hint: "Câm chữ 'g', âm tròn môi /ɒ/", category: "Quốc tế & Xã hội" },
+  { id: 62, word: "sign", ipa: "/saɪn/", vn: "ký hiệu, biển báo, ký tên", hint: "Câm chữ 'g', âm đôi /aɪ/", category: "Đời sống & Công việc" },
+  { id: 63, word: "design", ipa: "/dɪˈzaɪn/", vn: "thiết kế, mẫu vẽ", hint: "Câm chữ 'g', âm rung /z/", category: "Sáng tạo & Nghệ thuật" },
+  { id: 64, word: "autumn", ipa: "/ˈɔːtəm/", vn: "mùa thu", hint: "Câm chữ 'n' cuối từ, âm dài /ɔː/", category: "Thời gian & Thời tiết" },
+  { id: 65, word: "column", ipa: "/ˈkɒləm/", vn: "cột trụ nhà; chuyên mục báo", hint: "Câm chữ 'n' cuối từ, âm /ɒ/", category: "Kiến trúc & Truyền thông" },
+  { id: 66, word: "sword", ipa: "/sɔːd/", vn: "thanh gươm, thanh kiếm", hint: "Câm chữ 'w', đọc là /sɔːd/", category: "Vũ khí & Lịch sử" },
+  { id: 67, word: "answer", ipa: "/ˈɑːnsə(r)/", vn: "câu trả lời, hồi đáp", hint: "Câm chữ 'w', âm dài /ɑː/", category: "Giao tiếp & Đời sống" },
+  { id: 68, word: "whole", ipa: "/həʊl/", vn: "toàn bộ, trọn vẹn", hint: "Câm chữ 'w', bắt đầu bằng /h/", category: "Số lượng & Tính từ" },
+  { id: 69, word: "wrap", ipa: "/ræp/", vn: "gói quà, bọc lại", hint: "Câm chữ 'w', bắt đầu bằng /r/", category: "Hành động & Đời sống" },
+  { id: 70, word: "wreck", ipa: "/rek/", vn: "vụ đắm tàu, xác đổ nát", hint: "Câm chữ 'w', âm ngắn /e/", category: "Tai nạn & Giao thông" },
+  { id: 71, word: "wrist", ipa: "/rɪst/", vn: "cổ tay", hint: "Câm chữ 'w', đuôi /st/", category: "Cơ thể & Con người" },
+  { id: 72, word: "knife", ipa: "/naɪf/", vn: "con dao thái", hint: "Câm chữ 'k', bắt đầu bằng /n/", category: "Đồ dùng nhà bếp" },
+  { id: 73, word: "knight", ipa: "/naɪt/", vn: "hiệp sĩ thời trung cổ", hint: "Câm chữ 'k' và 'gh', đọc như night", category: "Lịch sử & Nhân vật" },
+  { id: 74, word: "knot", ipa: "/nɒt/", vn: "nút thắt dây", hint: "Câm chữ 'k', âm tròn môi /ɒ/", category: "Đồ vật & Đời sống" },
+  { id: 75, word: "knee", ipa: "/niː/", vn: "đầu gối chân", hint: "Câm chữ 'k', âm dài /iː/", category: "Cơ thể & Con người" },
+  { id: 76, word: "psychology", ipa: "/saɪˈkɒlədʒi/", vn: "tâm lý học", hint: "Câm chữ 'p' đầu từ, đọc từ /s/", category: "Khoa học & Tâm lý" },
+  { id: 77, word: "plumber", ipa: "/ˈplʌmə(r)/", vn: "thợ sửa ống nước", hint: "Câm chữ 'b', âm /ʌ/", category: "Nghề nghiệp & Đời sống" },
+  { id: 78, word: "comb", ipa: "/kəʊm/", vn: "cái lược chải đầu", hint: "Câm chữ 'b', âm đôi /əʊ/", category: "Đồ dùng cá nhân" },
+  { id: 79, word: "tomb", ipa: "/tuːm/", vn: "ngôi mộ, lăng tẩm", hint: "Câm chữ 'b', âm dài /uː/", category: "Lịch sử & Địa điểm" },
+  { id: 80, word: "debt", ipa: "/det/", vn: "món nợ tiền", hint: "Câm chữ 'b', âm ngắn /e/", category: "Tài chính & Kinh tế" },
+  { id: 81, word: "crumb", ipa: "/krʌm/", vn: "mẩu vụn bánh", hint: "Câm chữ 'b', âm ngắn /ʌ/", category: "Ẩm thực & Đời sống" },
+  { id: 82, word: "lamb", ipa: "/læm/", vn: "con cừu non", hint: "Câm chữ 'b', âm mở /æ/", category: "Động vật & Thiên nhiên" },
+  { id: 83, word: "limb", ipa: "/lɪm/", vn: "chi (tay, chân), cành cây", hint: "Câm chữ 'b', âm ngắn /ɪ/", category: "Cơ thể & Tự nhiên" },
+  { id: 84, word: "numb", ipa: "/nʌm/", vn: "tê cóng, mất cảm giác", hint: "Câm chữ 'b', âm ngắn /ʌ/", category: "Cảm giác & Sức khỏe" },
+  { id: 85, word: "fasten", ipa: "/ˈfɑːsn/", vn: "thắt chặt, cài dây an toàn", hint: "Câm chữ 't', đọc là /ˈfɑːsn/", category: "Hành động & An toàn" },
+  { id: 86, word: "soften", ipa: "/ˈsɒfn/", vn: "làm mềm, dịu đi", hint: "Câm chữ 't', đọc là /ˈsɒfn/", category: "Hành động & Biến đổi" },
+  { id: 87, word: "whistle", ipa: "/ˈwɪsl/", vn: "cái còi; huýt sáo", hint: "Câm chữ 't' và 'h', đọc là /ˈwɪsl/", category: "Âm thanh & Đồ vật" },
+  { id: 88, word: "rustle", ipa: "/ˈrʌsl/", vn: "tiếng lá xào xạc", hint: "Câm chữ 't', đọc là /ˈrʌsl/", category: "Âm thanh & Tự nhiên" },
+  { id: 89, word: "bustle", ipa: "/ˈbʌsl/", vn: "sự nhộn nhịp, hối hả", hint: "Câm chữ 't', đọc là /ˈbʌsl/", category: "Đời sống & Xã hội" },
+  { id: 90, word: "christmas", ipa: "/ˈkrɪsməs/", vn: "lễ Giáng Sinh", hint: "Câm chữ 't', chữ ch đọc là /k/", category: "Lễ hội & Văn hóa" },
+  { id: 91, word: "mortgage", ipa: "/ˈmɔːɡɪdʒ/", vn: "khoản vay thế chấp nhà", hint: "Câm chữ 't', đọc là /ˈmɔːɡɪdʒ/", category: "Tài chính & Ngân hàng" },
+  { id: 92, word: "ballet", ipa: "/ˈbæleɪ/", vn: "múa ba lê, vũ kịch", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Nghệ thuật & Khiêu vũ" },
+  { id: 93, word: "buffet", ipa: "/ˈbʊfeɪ/", vn: "tiệc đứng tự chọn món", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Ẩm thực & Nhà hàng" },
+  { id: 94, word: "gourmet", ipa: "/ˈɡʊəmeɪ/", vn: "sành ăn, món ăn cao cấp", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Ẩm thực cao cấp" },
+  { id: 95, word: "depot", ipa: "/ˈdepəʊ/", vn: "nhà ga, kho bãi trung chuyển", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Vận tải & Cơ sở" },
+  { id: 96, word: "bouquet", ipa: "/buˈkeɪ/", vn: "bó hoa tươi", hint: "Câm chữ 't' đuôi kiểu tiếng Pháp", category: "Quà tặng & Đời sống" },
+  { id: 97, word: "debris", ipa: "/ˈdebriː/", vn: "mảnh vụn vỡ, đống đổ nát", hint: "Câm chữ 's' đuôi kiểu tiếng Pháp", category: "Tai nạn & Môi trường" },
+  { id: 98, word: "neighbor", ipa: "/ˈneɪbə(r)/", vn: "người hàng xóm láng giềng", hint: "Cụm 'eigh' phát âm là /eɪ/", category: "Xã hội & Đời sống" },
+  { id: 99, word: "height", ipa: "/haɪt/", vn: "chiều cao, độ cao", hint: "Cụm 'eigh' phát âm đặc biệt là /aɪ/", category: "Đo lường & Kích thước" },
+  { id: 100, word: "significance", ipa: "/sɪɡˈnɪfɪkəns/", vn: "ý nghĩa quan trọng, tầm ảnh hưởng", hint: "Trọng âm âm tiết 2, đuôi /əns/", category: "Tính chất & Tầm vóc" }
 ];
+// Giữ alias tương thích ngược
+window.IPA_DECODING_WORDS_50 = window.IPA_DECODING_WORDS_100;
