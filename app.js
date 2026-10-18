@@ -171,7 +171,11 @@ document.addEventListener("DOMContentLoaded", () => {
       this.stop();
 
       if (sound && sound.phonemeAudioUrl) {
-        this.currentAudio = new Audio(sound.phonemeAudioUrl);
+        if (!this.phonemeAudio) {
+          this.phonemeAudio = new Audio();
+        }
+        this.currentAudio = this.phonemeAudio;
+        this.currentAudio.src = sound.phonemeAudioUrl;
         this.currentAudio.playbackRate = state.speed;
 
         this.currentAudio.play().catch(() => {
@@ -292,8 +296,13 @@ document.addEventListener("DOMContentLoaded", () => {
     stop() {
       if (this.currentAudio) {
         this.currentAudio.pause();
-        this.currentAudio.currentTime = 0;
+        try {
+          this.currentAudio.currentTime = 0;
+        } catch (e) {}
         this.currentAudio = null;
+      }
+      if (this.phonemeAudio) {
+        this.phonemeAudio.pause();
       }
       if (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
         window.speechSynthesis.cancel();
@@ -608,7 +617,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="unit-sound-name">${sound.name}</div>
         
         <div class="unit-mouth-img-box">
-          <img src="${sound.mouthImage || `images/mouth/${sound.id}.png`}" alt="Khẩu hình /${sound.symbol}/" class="unit-mouth-img" onerror="this.src='images/mouth/${sound.id}.png'">
+          <img src="${sound.mouthImage || `images/mouth/${sound.id}.png`}" alt="Khẩu hình /${sound.symbol}/" class="unit-mouth-img" onerror="this.onerror=null;this.src='images/mouth/${sound.id}.png'">
         </div>
 
         <div class="unit-audio-buttons-row">
@@ -901,7 +910,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const svgBox = document.getElementById("inspSvgBox");
     if (svgBox) {
-      svgBox.innerHTML = `<img src="${sound.mouthImage || `images/mouth/${sound.id}.png`}" alt="Khẩu hình /${sound.symbol}/" class="inspector-mouth-img" onerror="this.src='images/mouth/${sound.id}.png'">`;
+      svgBox.innerHTML = `<img src="${sound.mouthImage || `images/mouth/${sound.id}.png`}" alt="Khẩu hình /${sound.symbol}/" class="inspector-mouth-img" onerror="this.onerror=null;this.src='images/mouth/${sound.id}.png'">`;
     }
 
     const symbEl = document.getElementById("inspSymbol");

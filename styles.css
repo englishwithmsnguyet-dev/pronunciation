@@ -94,9 +94,8 @@ button, select, input {
   left: 0;
   right: 0;
   height: var(--header-height);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   border-bottom: 1.5px solid var(--border-card);
   z-index: 1000;
 }
@@ -1729,9 +1728,7 @@ button, select, input {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(11, 19, 43, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(11, 19, 43, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2603,9 +2600,7 @@ button, select, input {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(11, 19, 43, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(11, 19, 43, 0.85);
   z-index: 10000;
   display: flex;
   align-items: center;
