@@ -206,6 +206,32 @@ button, select, input {
   white-space: nowrap;
 }
 
+.sfx-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-card);
+  background: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sfx-toggle-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--brand-primary);
+}
+
+.sfx-toggle-btn.muted {
+  opacity: 0.7;
+  background: #F1F5F9;
+  color: var(--text-muted);
+}
+
 /* ==========================================================================
    APP SHELL LAYOUT (SIDEBAR + MAIN)
    ========================================================================== */
@@ -914,6 +940,7 @@ button, select, input {
   background: #F0FDF4 !important;
   border-color: #22C55E !important;
   color: #15803D !important;
+  animation: sfxPulseCorrect 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tick-choice-btn.selected-correct .tick-box-indicator {
@@ -926,6 +953,7 @@ button, select, input {
   background: #FEF2F2 !important;
   border-color: #EF4444 !important;
   color: #B91C1C !important;
+  animation: sfxShakeIncorrect 0.35s ease-in-out;
 }
 
 .tick-choice-btn.selected-incorrect .tick-box-indicator {
@@ -1568,8 +1596,8 @@ button, select, input {
 .choice-ipa { font-family: var(--font-ipa); font-size: 1.05rem; font-weight: 700; color: var(--brand-primary-dark); margin-bottom: 4px; }
 .choice-mean { font-size: 0.84rem; color: var(--text-muted); }
 
-.quiz-choice-card.correct { background: #F0FDF4 !important; border-color: #22C55E !important; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25) !important; }
-.quiz-choice-card.incorrect { background: #FEF2F2 !important; border-color: #EF4444 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important; }
+.quiz-choice-card.correct { background: #F0FDF4 !important; border-color: #22C55E !important; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25) !important; animation: sfxPulseCorrect 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.quiz-choice-card.incorrect { background: #FEF2F2 !important; border-color: #EF4444 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important; animation: sfxShakeIncorrect 0.35s ease-in-out; }
 
 .quiz-feedback-box {
   background: var(--bg-body);
@@ -2261,11 +2289,25 @@ button, select, input {
 .dictation-feedback-card.correct {
   background: #F0FDF4;
   border: 1.5px solid #22C55E;
+  animation: sfxPulseCorrect 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .dictation-feedback-card.incorrect {
   background: #FEF2F2;
   border: 1.5px solid #EF4444;
+  animation: sfxShakeIncorrect 0.35s ease-in-out;
+}
+
+@keyframes sfxPulseCorrect {
+  0% { transform: scale(0.96); opacity: 0.5; }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes sfxShakeIncorrect {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
 }
 
 .dictation-feedback-title {

@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     accent: localStorage.getItem("miss_nguyet_accent") || "UK",
     speed: parseFloat(localStorage.getItem("miss_nguyet_speed")) || 1.0,
     selectedVoice: localStorage.getItem("miss_nguyet_voice") || "auto",
+    sfxEnabled: localStorage.getItem("miss_nguyet_sfx") !== "false",
     currentView: "overview",
     currentUnitId: "unit_1",
     activeSoundId: "i_long",
@@ -28,6 +29,113 @@ document.addEventListener("DOMContentLoaded", () => {
     currentAudio: null,
     currentUtterance: null,
     voices: [],
+    audioCtx: null,
+
+    getAudioCtx() {
+      if (!this.audioCtx) {
+        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtxClass) {
+          this.audioCtx = new AudioCtxClass();
+        }
+      }
+      if (this.audioCtx && this.audioCtx.state === "suspended") {
+        this.audioCtx.resume().catch(() => {});
+      }
+      return this.audioCtx;
+    },
+
+    // Phát âm thanh hiệu ứng sống động (Correct, Incorrect, Complete) bằng Web Audio API
+    playSfx(type) {
+      if (state.sfxEnabled === false) return;
+      try {
+        const ctx = this.getAudioCtx();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+
+        if (type === "correct") {
+          // Chuỗi hòa âm arpeggio 3 nốt chuông ngân vang tươi vui (C5 -> E5 -> C6)
+          const notes = [
+            { freq: 523.25, time: 0.00, dur: 0.12, gain: 0.20, type: "triangle" }, // C5
+            { freq: 659.25, time: 0.08, dur: 0.15, gain: 0.22, type: "sine" },     // E5
+            { freq: 1046.50, time: 0.16, dur: 0.38, gain: 0.26, type: "sine" }     // C6
+          ];
+
+          notes.forEach(n => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = n.type;
+            osc.frequency.setValueAtTime(n.freq, now + n.time);
+
+            gain.gain.setValueAtTime(0.001, now + n.time);
+            gain.gain.linearRampToValueAtTime(n.gain, now + n.time + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + n.time + n.dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(now + n.time);
+            osc.stop(now + n.time + n.dur);
+          });
+
+        } else if (type === "incorrect") {
+          // Hai tiếng "bloop-bloop" trầm, mềm mại, thanh lịch, không gây giật mình
+          const tones = [
+            { startFreq: 310, endFreq: 260, time: 0.00, dur: 0.15, gain: 0.18 },
+            { startFreq: 220, endFreq: 175, time: 0.13, dur: 0.22, gain: 0.20 }
+          ];
+
+          tones.forEach(t => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(t.startFreq, now + t.time);
+            osc.frequency.exponentialRampToValueAtTime(t.endFreq, now + t.time + t.dur);
+
+            gain.gain.setValueAtTime(0.001, now + t.time);
+            gain.gain.linearRampToValueAtTime(t.gain, now + t.time + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + t.time + t.dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(now + t.time);
+            osc.stop(now + t.time + t.dur);
+          });
+
+        } else if (type === "complete") {
+          // Fanfare mừng chiến thắng hoàn thành chuỗi 100 từ: C5 -> E5 -> G5 -> C6
+          const fanfare = [
+            { freq: 523.25, time: 0.00, dur: 0.12, gain: 0.18 }, // C5
+            { freq: 659.25, time: 0.10, dur: 0.12, gain: 0.20 }, // E5
+            { freq: 783.99, time: 0.20, dur: 0.15, gain: 0.22 }, // G5
+            { freq: 1046.50, time: 0.32, dur: 0.55, gain: 0.26 } // C6
+          ];
+
+          fanfare.forEach(n => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(n.freq, now + n.time);
+
+            gain.gain.setValueAtTime(0.001, now + n.time);
+            gain.gain.linearRampToValueAtTime(n.gain, now + n.time + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + n.time + n.dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(now + n.time);
+            osc.stop(now + n.time + n.dur);
+          });
+        }
+      } catch (err) {
+        console.warn("SFX error:", err);
+      }
+    },
 
     init() {
       if ("speechSynthesis" in window) {
@@ -373,8 +481,12 @@ document.addEventListener("DOMContentLoaded", () => {
     q.userChoice = choice;
     q.isCorrect = (choice === q.targetChoice);
 
+    AudioEngine.playSfx(q.isCorrect ? "correct" : "incorrect");
     renderPairedUnit(unitId);
-    AudioEngine.playWord(q.targetWord);
+
+    setTimeout(() => {
+      AudioEngine.playWord(q.targetWord);
+    }, 450);
   };
 
   window.__resetUnitTest = function(unitId) {
@@ -1130,6 +1242,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const q = state.quiz.currentQuestion;
     const isCorrect = userChoice === q.correctChoice;
 
+    AudioEngine.playSfx(isCorrect ? "correct" : "incorrect");
+
     state.quiz.total++;
     if (isCorrect) {
       state.quiz.score++;
@@ -1601,10 +1715,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       this.isAnswered = true;
       if (isCorrect) {
+        AudioEngine.playSfx("correct");
         this.score++;
         this.streak++;
         if (this.streak > this.maxStreak) this.maxStreak = this.streak;
       } else {
+        AudioEngine.playSfx("incorrect");
         this.streak = 0;
       }
 
@@ -1623,10 +1739,10 @@ document.addEventListener("DOMContentLoaded", () => {
       this.saveProgress();
       this.renderFeedback(isCorrect, cur, userText);
 
-      // Tự động phát âm chuẩn lại từ vừa nộp bài sau 200ms để học viên nghe củng cố phản xạ
+      // Tự động phát âm chuẩn lại từ vừa nộp bài sau 450ms (sau khi hiệu ứng âm thanh vang lên) để củng cố phản xạ
       setTimeout(() => {
         AudioEngine.playWord(cur.word);
-      }, 200);
+      }, 450);
     },
 
     nextWord() {
@@ -1821,6 +1937,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const container = document.getElementById("dictationContainer");
       if (!container) return;
+
+      AudioEngine.playSfx("complete");
 
       const total = this.words.length;
       if (total === 0) {
@@ -2256,10 +2374,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       this.isAnswered = true;
       if (isCorrect) {
+        AudioEngine.playSfx("correct");
         this.score++;
         this.streak++;
         if (this.streak > this.maxStreak) this.maxStreak = this.streak;
       } else {
+        AudioEngine.playSfx("incorrect");
         this.streak = 0;
       }
 
@@ -2278,10 +2398,10 @@ document.addEventListener("DOMContentLoaded", () => {
       this.saveProgress();
       this.renderFeedback(isCorrect, cur, userText);
 
-      // Tự động phát âm từ chuẩn sau khi nộp bài
+      // Tự động phát âm từ chuẩn sau 450ms (sau khi hiệu ứng âm thanh vang lên)
       setTimeout(() => {
         AudioEngine.playWord(cur.word);
-      }, 200);
+      }, 450);
     },
 
     nextWord() {
@@ -2482,6 +2602,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("ipaDecodingContainer");
       if (!container) return;
 
+      AudioEngine.playSfx("complete");
+
       const total = this.words.length;
       if (total === 0) {
         this.start(false);
@@ -2660,6 +2782,36 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("miss_nguyet_voice", state.selectedVoice);
     });
   }
+
+  // Điều khiển âm hiệu Đúng/Sai sống động
+  window.__toggleSfx = function() {
+    state.sfxEnabled = !state.sfxEnabled;
+    localStorage.setItem("miss_nguyet_sfx", state.sfxEnabled ? "true" : "false");
+    updateSfxUi();
+    if (state.sfxEnabled) {
+      AudioEngine.playSfx("correct");
+    }
+  };
+
+  function updateSfxUi() {
+    const btn = document.getElementById("sfxToggleBtn");
+    const icon = document.getElementById("sfxIcon");
+    const text = document.getElementById("sfxText");
+    if (!btn) return;
+    if (state.sfxEnabled) {
+      btn.classList.remove("muted");
+      if (icon) icon.textContent = "🔔";
+      if (text) text.textContent = "Hiệu ứng: Bật";
+      btn.title = "Âm hiệu Đúng/Sai đang BẬT. Bấm để tắt.";
+    } else {
+      btn.classList.add("muted");
+      if (icon) icon.textContent = "🔕";
+      if (text) text.textContent = "Hiệu ứng: Tắt";
+      btn.title = "Âm hiệu Đúng/Sai đang TẮT. Bấm để bật.";
+    }
+  }
+
+  updateSfxUi();
 
   // ==========================================================================
   // MODULE ĐĂNG NHẬP HỌ TÊN & THEO DÕI QUA GOOGLE FORMS
