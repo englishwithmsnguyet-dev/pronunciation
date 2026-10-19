@@ -2990,8 +2990,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderIpaKeyboard() {
       const controlKeys = [
-        { symbol: "ˈ", label: "ˈ Trọng âm 1", class: "stress", title: "Dấu trọng âm chính (Primary Stress)" },
-        { symbol: "ˌ", label: "ˌ Trọng âm 2", class: "stress", title: "Dấu trọng âm phụ (Secondary Stress)" },
+        { symbol: "ˈ", label: "ˈ Nhấn chính", class: "stress", title: "Dấu trọng âm chính (Primary Stress)" },
+        { symbol: "ˌ", label: "ˌ Nhấn phụ", class: "stress", title: "Dấu trọng âm phụ (Secondary Stress)" },
         { symbol: "/", label: "/", class: "", title: "Dấu gạch chéo phân cách phiên âm" },
         { symbol: "ː", label: "ː Âm dài", class: "", title: "Dấu kéo dài âm" },
         { symbol: ".", label: ".", class: "", title: "Dấu tách âm tiết" },
