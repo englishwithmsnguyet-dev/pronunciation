@@ -459,15 +459,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 25);
     },
 
-    // Phát âm Ngữ Điệu với cao độ (pitch) và tốc độ (rate) tùy chỉnh cho Chuyên đề Intonation
-    // Hỗ trợ truyền mảng prosodyChunks để lên/xuống giọng chính xác tại từng từ khóa
-    playIntonationSpeech(text, customPitch, customRate, btnEl, chunks) {
-      if (chunks && Array.isArray(chunks) && chunks.length > 0) {
-        this.playProsodySequence(chunks, btnEl);
-        return;
-      }
-
-      if (!text) return;
+    // Phát âm Ngữ Điệu Tự Nhiên & Mượt Mà (Natural Fluid Cadence)
+    // Nói liền mạch 1 câu duy nhất (Single Utterance), không giật cục, không đứt đoạn
+    playIntonationSpeech(speechText, customPitch, customRate, btnEl) {
+      if (!speechText) return;
       this.stop();
 
       let activeBtn = btnEl;
@@ -485,7 +480,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.speechSynthesis.resume();
       }
 
-      let cleanText = text.trim();
+      const cleanText = speechText.trim();
       const utterance = new SpeechSynthesisUtterance(cleanText);
       const voice = this.getBestVoice(state.accent);
       if (voice) {
@@ -495,14 +490,18 @@ document.addEventListener("DOMContentLoaded", () => {
         utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
       }
 
-      utterance.pitch = (customPitch !== undefined && customPitch !== null) ? customPitch : 1.0;
-      utterance.rate = (customRate !== undefined && customRate !== null)
-        ? customRate
-        : Math.max(0.65, Math.min(1.3, state.speed * 0.92));
+      // Giữ pitch trong giới hạn giọng người tự nhiên (0.88 - 1.20) để giọng ấm áp, tự nhiên, không bị méo tiếng
+      const pitchVal = (customPitch !== undefined && customPitch !== null) ? customPitch : 1.0;
+      utterance.pitch = Math.max(0.85, Math.min(1.20, pitchVal));
+
+      // Tốc độ phát âm thư thả, tròn vành rõ chữ (~0.88x - 0.92x)
+      const rateVal = (customRate !== undefined && customRate !== null) ? customRate : 0.90;
+      utterance.rate = Math.max(0.70, Math.min(1.25, rateVal * state.speed));
       utterance.volume = 1.0;
 
       const clearPlaying = () => {
         if (activeBtn) activeBtn.classList.remove("playing");
+        document.querySelectorAll(".btn-tone-audio.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing").forEach(b => b.classList.remove("playing"));
         this.currentUtterance = null;
       };
 
@@ -522,104 +521,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 25);
     },
 
-    // Phát âm chuỗi đa âm điệu (Prosodic Multi-Chunk Sequence)
-    // Đảm bảo lên giọng (↗) và xuống giọng (↘) đúng chuẩn xác tại từng từ/âm tiết
-    playProsodySequence(chunks, btnEl) {
-      if (!chunks || !chunks.length) return;
-      this.stop();
-
-      let activeBtn = btnEl;
-      if (!activeBtn && window.event && window.event.currentTarget) {
-        activeBtn = window.event.currentTarget;
-      }
-      if (activeBtn) activeBtn.classList.add("playing");
-
-      if (!("speechSynthesis" in window)) {
-        if (activeBtn) activeBtn.classList.remove("playing");
-        return;
-      }
-
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
-      }
-
-      const voice = this.getBestVoice(state.accent);
-      const lang = voice ? voice.lang : (state.accent === "US" ? "en-US" : "en-GB");
-
-      this.isPlayingSequence = true;
-      let currentIndex = 0;
-
-      const playNextChunk = () => {
-        if (!this.isPlayingSequence || currentIndex >= chunks.length) {
-          this.isPlayingSequence = false;
-          if (activeBtn) activeBtn.classList.remove("playing");
-          this.currentUtterance = null;
-          return;
-        }
-
-        const chunk = chunks[currentIndex];
-        const text = (typeof chunk === "string") ? chunk : (chunk.text || "");
-        if (!text.trim()) {
-          currentIndex++;
-          playNextChunk();
-          return;
-        }
-
-        const utterance = new SpeechSynthesisUtterance(text.trim());
-        if (voice) {
-          utterance.voice = voice;
-          utterance.lang = voice.lang;
-        } else {
-          utterance.lang = lang;
-        }
-
-        // Áp dụng pitch, rate, volume cho từng chunk độc lập
-        const chunkPitch = (typeof chunk === "object" && chunk.pitch !== undefined) ? chunk.pitch : 1.0;
-        const chunkRate = (typeof chunk === "object" && chunk.rate !== undefined) ? chunk.rate : 0.92;
-        const chunkVol = (typeof chunk === "object" && chunk.volume !== undefined) ? chunk.volume : 1.0;
-
-        utterance.pitch = Math.max(0.5, Math.min(2.0, chunkPitch));
-        utterance.rate = Math.max(0.5, Math.min(1.5, chunkRate * state.speed));
-        utterance.volume = Math.max(0.1, Math.min(1.0, chunkVol));
-
-        utterance.onend = () => {
-          if (!this.isPlayingSequence) return;
-          currentIndex++;
-          const pauseMs = (typeof chunk === "object" && chunk.pauseAfter !== undefined) ? chunk.pauseAfter : 15;
-          setTimeout(playNextChunk, pauseMs);
-        };
-
-        utterance.onerror = () => {
-          if (!this.isPlayingSequence) return;
-          currentIndex++;
-          setTimeout(playNextChunk, 15);
-        };
-
-        this.currentUtterance = utterance;
-        try {
-          if (window.speechSynthesis.paused) {
-            window.speechSynthesis.resume();
-          }
-          window.speechSynthesis.speak(utterance);
-        } catch (e) {
-          console.warn("Lỗi phát chunk utterance:", e);
-          if (activeBtn) activeBtn.classList.remove("playing");
-          this.isPlayingSequence = false;
-        }
-      };
-
-      setTimeout(() => {
-        try {
-          playNextChunk();
-        } catch (err) {
-          if (activeBtn) activeBtn.classList.remove("playing");
-          this.isPlayingSequence = false;
-        }
-      }, 25);
-    },
-
     stop() {
-      this.isPlayingSequence = false;
       if (this.currentAudio) {
         this.currentAudio.pause();
         try {
@@ -633,7 +535,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
         window.speechSynthesis.cancel();
       }
-      document.querySelectorAll(".btn-play-sentence.playing").forEach(b => b.classList.remove("playing"));
+      document.querySelectorAll(".btn-play-sentence.playing, .btn-tone-audio.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing").forEach(b => b.classList.remove("playing"));
       this.currentUtterance = null;
     },
 
@@ -4500,28 +4402,26 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // =======================================================================
-    // CÁC HÀM PHÁT ÂM NGỮ ĐIỆU CHUYÊN SÂU (PROSODIC MULTI-CHUNK PLAYERS)
+    // CÁC HÀM PHÁT ÂM NGỮ ĐIỆU CHUYÊN SÂU (NATURAL FLUID PROSODY PLAYERS)
     // =======================================================================
     playToneExample(toneId, exIdx, btnEl) {
       const tone = window.INTONATION_DATA.tones.find(t => t.id === toneId);
       if (!tone || !tone.examples[exIdx]) return;
       const ex = tone.examples[exIdx];
-      if (ex.prosodyChunks && ex.prosodyChunks.length) {
-        AudioEngine.playProsodySequence(ex.prosodyChunks, btnEl);
-      } else {
-        AudioEngine.playIntonationSpeech(ex.en, tone.speechPitch, 0.92, btnEl);
-      }
+      const textToSpeak = ex.speechText || ex.en;
+      const pitch = (ex.speechPitch !== undefined) ? ex.speechPitch : tone.speechPitch;
+      const rate = ex.speechRate || 0.90;
+      AudioEngine.playIntonationSpeech(textToSpeak, pitch, rate, btnEl);
     },
 
     playRuleExample(ruleId, exIdx, btnEl) {
       const rule = window.INTONATION_DATA.rules.find(r => r.id === ruleId);
       if (!rule || !rule.examples[exIdx]) return;
       const ex = rule.examples[exIdx];
-      if (ex.prosodyChunks && ex.prosodyChunks.length) {
-        AudioEngine.playProsodySequence(ex.prosodyChunks, btnEl);
-      } else {
-        AudioEngine.playIntonationSpeech(ex.en, 1.0, 0.92, btnEl);
-      }
+      const textToSpeak = ex.speechText || ex.en;
+      const pitch = (ex.speechPitch !== undefined) ? ex.speechPitch : 1.0;
+      const rate = ex.speechRate || 0.90;
+      AudioEngine.playIntonationSpeech(textToSpeak, pitch, rate, btnEl);
     },
 
     playAttitudeExample(word, toneType, btnEl) {
@@ -4529,32 +4429,23 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!wordObj) return;
       const variation = wordObj.variations.find(v => v.tone === toneType);
       if (!variation) return;
-      if (variation.prosodyChunks && variation.prosodyChunks.length) {
-        AudioEngine.playProsodySequence(variation.prosodyChunks, btnEl);
-      } else {
-        AudioEngine.playIntonationSpeech(word, variation.speechPitch, variation.speechRate, btnEl);
-      }
+      const textToSpeak = variation.speechText || word;
+      AudioEngine.playIntonationSpeech(textToSpeak, variation.speechPitch, variation.speechRate || 0.90, btnEl);
     },
 
     playNucleusExample(wordIdx, btnEl) {
       const demo = window.INTONATION_DATA.nucleusShiftDemo;
       const w = demo.words[wordIdx];
       if (!w) return;
-      if (w.prosodyChunks && w.prosodyChunks.length) {
-        AudioEngine.playProsodySequence(w.prosodyChunks, btnEl);
-      } else {
-        AudioEngine.playIntonationSpeech("I didn't take your book.", w.speechPitch, 0.9, btnEl);
-      }
+      const textToSpeak = w.speechText || "I didn't take your book.";
+      AudioEngine.playIntonationSpeech(textToSpeak, w.speechPitch, 0.90, btnEl);
     },
 
     playQuizAudio(btnEl) {
       const q = window.INTONATION_DATA.quiz[this.quizIndex];
       if (!q) return;
-      if (q.prosodyChunks && q.prosodyChunks.length) {
-        AudioEngine.playProsodySequence(q.prosodyChunks, btnEl);
-      } else {
-        AudioEngine.playIntonationSpeech(q.audioText, q.speechPitch || 1.0, 0.9, btnEl);
-      }
+      const textToSpeak = q.speechText || q.audioText;
+      AudioEngine.playIntonationSpeech(textToSpeak, q.speechPitch || 1.0, 0.90, btnEl);
     }
   };
   window.IntonationManager = IntonationManager;
