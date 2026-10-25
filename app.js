@@ -137,6 +137,64 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
 
+    // Phát mô phỏng sóng cao độ ngữ điệu bằng Oscillator (Pitch Glide Sweep)
+    playPitchContour(toneType) {
+      try {
+        const ctx = this.getAudioCtx();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.24, now + 0.03);
+
+        if (toneType === "fall") {
+          // Falling ↘: Cao độ đổ từ 280Hz -> 125Hz
+          osc.frequency.setValueAtTime(280, now);
+          osc.frequency.exponentialRampToValueAtTime(125, now + 0.5);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.52);
+          osc.start(now);
+          osc.stop(now + 0.53);
+        } else if (toneType === "rise") {
+          // Rising ↗: Cao độ vút từ 130Hz -> 290Hz
+          osc.frequency.setValueAtTime(130, now);
+          osc.frequency.exponentialRampToValueAtTime(290, now + 0.5);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.52);
+          osc.start(now);
+          osc.stop(now + 0.53);
+        } else if (toneType === "fall_rise") {
+          // Fall-Rise ↘↗: 240Hz -> 140Hz -> 250Hz
+          osc.frequency.setValueAtTime(240, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.28);
+          osc.frequency.exponentialRampToValueAtTime(250, now + 0.6);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.62);
+          osc.start(now);
+          osc.stop(now + 0.63);
+        } else if (toneType === "rise_fall") {
+          // Rise-Fall ↗↘: 160Hz -> 330Hz đỉnh nhọn -> 125Hz đáy
+          osc.frequency.setValueAtTime(160, now);
+          osc.frequency.exponentialRampToValueAtTime(330, now + 0.25);
+          osc.frequency.exponentialRampToValueAtTime(125, now + 0.6);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.62);
+          osc.start(now);
+          osc.stop(now + 0.63);
+        } else {
+          // Level →: Giữ phẳng 195Hz
+          osc.frequency.setValueAtTime(195, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+          osc.start(now);
+          osc.stop(now + 0.52);
+        }
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+      } catch (e) {
+        console.warn("Lỗi phát Pitch Contour:", e);
+      }
+    },
+
     init() {
       if ("speechSynthesis" in window) {
         this.updateVoiceList();
@@ -382,6 +440,63 @@ document.addEventListener("DOMContentLoaded", () => {
       const clearPlaying = () => {
         if (activeBtn) activeBtn.classList.remove("playing");
         document.querySelectorAll(".btn-play-sentence.playing").forEach(b => b.classList.remove("playing"));
+        this.currentUtterance = null;
+      };
+
+      utterance.onend = clearPlaying;
+      utterance.onerror = clearPlaying;
+
+      this.currentUtterance = utterance;
+      setTimeout(() => {
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          clearPlaying();
+        }
+      }, 25);
+    },
+
+    // Phát âm Ngữ Điệu với cao độ (pitch) và tốc độ (rate) tùy chỉnh cho Chuyên đề Intonation
+    playIntonationSpeech(text, customPitch, customRate, btnEl) {
+      if (!text) return;
+      this.stop();
+
+      let activeBtn = btnEl;
+      if (!activeBtn && window.event && window.event.currentTarget) {
+        activeBtn = window.event.currentTarget;
+      }
+      if (activeBtn) activeBtn.classList.add("playing");
+
+      if (!("speechSynthesis" in window)) {
+        if (activeBtn) activeBtn.classList.remove("playing");
+        return;
+      }
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+
+      let cleanText = text.trim();
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const voice = this.getBestVoice(state.accent);
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
+      }
+
+      utterance.pitch = (customPitch !== undefined && customPitch !== null) ? customPitch : 1.0;
+      utterance.rate = (customRate !== undefined && customRate !== null)
+        ? customRate
+        : Math.max(0.65, Math.min(1.3, state.speed * 0.92));
+      utterance.volume = 1.0;
+
+      const clearPlaying = () => {
+        if (activeBtn) activeBtn.classList.remove("playing");
         this.currentUtterance = null;
       };
 
@@ -655,6 +770,8 @@ document.addEventListener("DOMContentLoaded", () => {
       IpaEncodingManager.start();
     } else if (viewId === "rules") {
       renderRules();
+    } else if (viewId === "intonation") {
+      IntonationManager.start();
     }
 
     // 4. Cuộn lên đầu trang & đóng sidebar trên Mobile
@@ -3691,7 +3808,600 @@ document.addEventListener("DOMContentLoaded", () => {
     AUTH.saveUser(input.value);
   };
 
-  // Bàn phím nhanh cho bài tập Nghe & Đánh máy và Nhìn IPA Viết Từ
+  // ==========================================================================
+  // INTONATION MANAGER: CHUYÊN ĐỀ NGỮ ĐIỆU TOÀN DIỆN (WELLS, ROACH, CRYSTAL)
+  // ==========================================================================
+  const IntonationManager = {
+    currentTab: "tones",
+    selectedAttitudeWord: "Really",
+    selectedNucleusIndex: 0,
+    quizIndex: 0,
+    quizScore: 0,
+    quizStreak: 0,
+    quizAnswered: false,
+
+    init() {
+      const tabsNav = document.getElementById("intonationTabsNav");
+      if (tabsNav) {
+        tabsNav.querySelectorAll(".intonation-tab-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const tab = btn.dataset.tab;
+            this.switchTab(tab);
+          });
+        });
+      }
+    },
+
+    start() {
+      this.switchTab(this.currentTab || "tones");
+    },
+
+    switchTab(tabName) {
+      this.currentTab = tabName;
+      const tabsNav = document.getElementById("intonationTabsNav");
+      if (tabsNav) {
+        tabsNav.querySelectorAll(".intonation-tab-btn").forEach(btn => {
+          btn.classList.toggle("active", btn.dataset.tab === tabName);
+        });
+      }
+      this.render();
+    },
+
+    render() {
+      const container = document.getElementById("intonationContentContainer");
+      if (!container) return;
+
+      if (!window.INTONATION_DATA) {
+        container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748B;">Đang tải dữ liệu ngữ điệu...</div>`;
+        return;
+      }
+
+      if (this.currentTab === "tones") {
+        this.renderTonesTab(container);
+      } else if (this.currentTab === "rules") {
+        this.renderRulesTab(container);
+      } else if (this.currentTab === "attitudes") {
+        this.renderAttitudesTab(container);
+      } else if (this.currentTab === "functions") {
+        this.renderFunctionsTab(container);
+      } else if (this.currentTab === "quiz") {
+        this.renderQuizTab(container);
+      }
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 1: 5 LOẠI ĐIỆU CỐT LÕI (5 CORE TONES) & TONE UNIT
+    // ------------------------------------------------------------------------
+    renderTonesTab(container) {
+      const tones = window.INTONATION_DATA.tones;
+
+      let html = `
+        <!-- Khối Giải Thích Cấu Trúc Tone Unit -->
+        <div class="tones-intro-box">
+          <div class="tones-intro-title">
+            <span>📐</span> Cấu Trúc Của Một Đơn Vị Ngữ Điệu (The Tone Unit / Intonation Phrase)
+          </div>
+          <p style="font-size:0.88rem; color:#475569; line-height:1.5; margin-bottom:10px;">
+            Theo giáo trình Ngữ âm học của GS. Peter Roach và GS. J.C. Wells, trong tiếng Anh lời nói được phân tách thành các <strong>Đơn vị ngữ điệu (Tone Units)</strong>. Mỗi đơn vị ngữ điệu hoàn chỉnh có 4 thành phần, trong đó quan trọng nhất là <strong>Nucleus (Hạt nhân ngữ điệu)</strong> — nơi cao độ bắt đầu trượt lên hoặc đổ xuống rõ rệt nhất.
+          </p>
+
+          <div class="tone-unit-diagram">
+            <div class="tone-unit-part">
+              <div class="tone-unit-badge">1. Pre-Head</div>
+              <div class="tone-unit-title">Âm Trước Đầu</div>
+              <div class="tone-unit-desc">Các âm tiết không mang trọng âm đứng trước Head.<br/><em>(in a)</em></div>
+            </div>
+            <div class="tone-unit-part">
+              <div class="tone-unit-badge">2. Head</div>
+              <div class="tone-unit-title">Âm Đầu</div>
+              <div class="tone-unit-desc">Từ âm tiết có trọng âm đầu tiên đến trước Nucleus.<br/><em>(LIT-tle)</em></div>
+            </div>
+            <div class="tone-unit-part nucleus-part">
+              <div class="tone-unit-badge">★ BẮT BUỘC CÓ</div>
+              <div class="tone-unit-title" style="color:#7C3AED;">3. NUCLEUS (Tonic)</div>
+              <div class="tone-unit-desc"><strong>Hạt nhân ngữ điệu:</strong> Nơi cao độ trượt lên hoặc đổ xuống mạnh mẽ nhất!<br/><em>(BOIL-)</em></div>
+            </div>
+            <div class="tone-unit-part">
+              <div class="tone-unit-badge">4. Tail</div>
+              <div class="tone-unit-title">Phần Đuôi</div>
+              <div class="tone-unit-desc">Các âm tiết đi sau Nucleus, tiếp tục xu hướng cao độ.<br/><em>(ing pot)</em></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Grid 5 Loại Điệu -->
+        <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:16px;">
+          5 Chuyển Động Cao Độ Cốt Lõi (The 5 Primary Tones)
+        </h3>
+        <div class="tones-bento-grid">
+      `;
+
+      tones.forEach(tone => {
+        // Tạo SVG path biểu diễn đường cong cao độ
+        let pathD = "";
+        if (tone.acousticCurve && tone.acousticCurve.length) {
+          pathD = tone.acousticCurve.map((pt, idx) => (idx === 0 ? `M ${pt.x} ${pt.y}` : `L ${pt.x} ${pt.y}`)).join(" ");
+        }
+
+        html += `
+          <div class="tone-card-interactive tag-${tone.tagColor}">
+            <div class="tone-card-head">
+              <div class="tone-card-symbol-badge" title="Ký hiệu: ${tone.symbol}">
+                ${tone.symbol}
+              </div>
+              <div class="tone-card-title-col">
+                <div class="tone-card-name">${tone.name}</div>
+                <div class="tone-card-meaning-pill">${tone.meaning}</div>
+              </div>
+            </div>
+
+            <!-- Visual Pitch Box: Đường Cong Cao Độ + Nút Nghe Thử Sóng -->
+            <div class="tone-pitch-box">
+              <div class="tone-svg-wrapper">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="grad_${tone.id}" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#0284C7" />
+                      <stop offset="100%" stop-color="#7C3AED" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Lưới toạ độ mờ -->
+                  <line x1="0" y1="20" x2="100" y2="20" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
+                  <line x1="0" y1="50" x2="100" y2="50" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
+                  <line x1="0" y1="80" x2="100" y2="80" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
+                  <!-- Đường cong cao độ -->
+                  <path d="${pathD}" fill="none" stroke="url(#grad_${tone.id})" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <button class="btn-play-tone-pitch" onclick="AudioEngine.playPitchContour('${tone.id}')" title="Nghe mô phỏng sóng cao độ âm học">
+                <span>🔊</span> Nghe Sóng Điệu
+              </button>
+            </div>
+
+            <p class="tone-card-desc">${tone.detailedExplanation}</p>
+
+            <!-- 3 Câu Ví Dụ Tương Tác -->
+            <div class="tone-card-examples-list">
+        `;
+
+        tone.examples.forEach(ex => {
+          html += `
+            <div class="tone-example-item">
+              <div class="tone-ex-text-col">
+                <div class="tone-ex-en">${ex.en}</div>
+                <div class="tone-ex-vn">${ex.vn}</div>
+                <div class="tone-ex-ipa">${ex.ipa}</div>
+              </div>
+              <button class="btn-tone-audio" onclick="AudioEngine.playIntonationSpeech('${ex.en.replace(/'/g, "\\'")}', ${tone.speechPitch}, 0.92, this)" title="Nghe người bản xứ phát âm câu này">
+                🔊
+              </button>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      container.innerHTML = html;
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 2: 8 QUY TẮC NGỮ PHÁP (GRAMMATICAL RULES)
+    // ------------------------------------------------------------------------
+    renderRulesTab(container) {
+      const rules = window.INTONATION_DATA.rules;
+
+      let html = `
+        <div style="margin-bottom:20px;">
+          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
+            8 Quy Tắc Ngữ Pháp Của Ngữ Điệu Chuẩn Bản Xứ
+          </h3>
+          <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
+            Hệ thống quy tắc ngữ pháp khách quan theo chuẩn Cambridge & Oxford. Nắm vững 8 quy tắc này giúp bạn luôn biết khi nào cần lên giọng (↗), khi nào cần hạ giọng (↘) mà không phải đoán mò.
+          </p>
+        </div>
+
+        <div class="rules-accordion-list">
+      `;
+
+      rules.forEach(r => {
+        html += `
+          <div class="rule-accordion-card">
+            <div class="rule-card-header">
+              <div class="rule-num-circle">${r.num}</div>
+              <div class="rule-title-group">
+                <div class="rule-title-text">
+                  ${r.title}
+                  <span class="rule-pattern-pill">${r.tonePattern}</span>
+                </div>
+                <div class="rule-summary-text">${r.ruleSummary}</div>
+              </div>
+            </div>
+
+            <!-- Sơ Đồ Cao Độ Trực Quan -->
+            <div class="rule-diagram-box">
+              ${r.diagram}
+            </div>
+
+            <!-- Ghi Chú Sư Phạm & Bẫy Cần Tránh -->
+            <div class="rule-note-box">
+              💡 <strong>Lưu ý quan trọng:</strong> ${r.note.replace(/\n/g, "<br/>")}
+            </div>
+
+            <!-- Các Ví Dụ Có Audio Phát Chuẩn -->
+            <div class="rule-examples-box">
+        `;
+
+        r.examples.forEach(ex => {
+          html += `
+            <div class="rule-example-row">
+              <div>
+                <div style="font-family:var(--font-heading); font-size:0.92rem; font-weight:700; color:#1E293B;">
+                  ${ex.marked}
+                </div>
+                <div style="font-size:0.78rem; color:#64748B; margin-top:2px;">
+                  ${ex.vn} • <span style="font-family:var(--font-ipa); color:#7C3AED;">${ex.ipa}</span>
+                </div>
+              </div>
+              <button class="btn-tone-audio" onclick="AudioEngine.playIntonationSpeech('${ex.en.replace(/'/g, "\\'")}', 1.0, 0.92, this)" title="Nghe phát âm chuẩn câu này">
+                🔊
+              </button>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      container.innerHTML = html;
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 3: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+    // ------------------------------------------------------------------------
+    renderAttitudesTab(container) {
+      const attitudes = window.INTONATION_DATA.attitudes;
+      const currentWordObj = attitudes.find(a => a.word === this.selectedAttitudeWord) || attitudes[0];
+
+      let html = `
+        <div class="attitude-lab-wrapper">
+          <div style="margin-bottom:20px;">
+            <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
+              Phòng Thí Nghiệm Sắc Thái & Cảm Xúc (Attitudinal Lab)
+            </h3>
+            <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
+              Trong tiếng Anh, cùng một từ ngữ nhưng khi thay đổi cao độ giọng, ý nghĩa thực sự truyền tải sẽ quay ngoắt 180 độ! Bấm chọn từ vựng bên dưới và nghe thử từng sắc thái cảm xúc:
+            </p>
+          </div>
+
+          <!-- Selector Pills -->
+          <div class="attitude-word-selector">
+      `;
+
+      attitudes.forEach(a => {
+        const isActive = a.word === currentWordObj.word;
+        html += `
+          <button class="attitude-word-pill ${isActive ? "active" : ""}" onclick="IntonationManager.selectAttitudeWord('${a.word}')">
+            "${a.word}" <small style="font-family:var(--font-ipa); font-weight:400; opacity:0.85;">${a.ipa}</small>
+          </button>
+        `;
+      });
+
+      html += `
+          </div>
+
+          <!-- Variations Grid -->
+          <div class="attitude-variations-grid">
+      `;
+
+      currentWordObj.variations.forEach(v => {
+        html += `
+          <div class="attitude-tone-card">
+            <div>
+              <div class="attitude-tone-header">
+                <span class="attitude-tone-symbol">${v.symbol}</span>
+                <span class="attitude-tone-tag">${v.meaning}</span>
+              </div>
+              <div class="attitude-tone-vn">"${v.vnMeaning}"</div>
+              <div class="attitude-tone-context">
+                📌 <strong>Ngữ cảnh:</strong> ${v.context}
+              </div>
+            </div>
+            <button class="btn-attitude-listen" onclick="AudioEngine.playIntonationSpeech('${currentWordObj.word}', ${v.speechPitch}, ${v.speechRate}, this)">
+              <span>🔊</span> Nghe Sắc Thái Này (${v.symbol})
+            </button>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    selectAttitudeWord(word) {
+      this.selectedAttitudeWord = word;
+      this.render();
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 4: 4 CHỨC NĂNG CỦA NGỮ ĐIỆU & NUCLEUS SHIFT LAB
+    // ------------------------------------------------------------------------
+    renderFunctionsTab(container) {
+      const funcs = window.INTONATION_DATA.functions;
+      const demo = window.INTONATION_DATA.nucleusShiftDemo;
+      const activeWord = demo.words[this.selectedNucleusIndex] || demo.words[0];
+
+      let html = `
+        <div style="margin-bottom:20px;">
+          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
+            4 Chức Năng Cốt Lõi Của Ngữ Điệu (Theo GS. Peter Roach)
+          </h3>
+          <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
+            Ngữ điệu không chỉ để cho 'hay' hay 'mượt', mà nó thực hiện 4 vai trò ngôn ngữ học tối quan trọng giúp người nghe giải mã trọn vẹn thông điệp của bạn:
+          </p>
+        </div>
+
+        <div class="functions-showcase-grid">
+      `;
+
+      funcs.forEach(f => {
+        html += `
+          <div class="function-card-item">
+            <div class="function-card-icon">${f.icon}</div>
+            <div class="function-card-title">${f.title}</div>
+            <div class="function-card-desc">${f.desc}</div>
+            <div class="function-card-takeaway">💡 ${f.keyTakeaway}</div>
+          </div>
+        `;
+      });
+
+      html += `
+        </div>
+
+        <!-- Thí Nghiệm Kinh Điển: Nucleus Shift -->
+        <div class="nucleus-lab-container">
+          <div style="text-align:center; max-width:680px; margin:0 auto;">
+            <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:800; color:#1E293B; margin-bottom:6px;">
+              🔬 Thí Nghiệm Trọng Tâm: "I didn't take your book."
+            </div>
+            <p style="font-size:0.85rem; color:#64748B; margin-bottom:14px;">
+              Bấm vào từng từ bên dưới để di chuyển <strong>Hạt Nhân Ngữ Điệu (Nucleus)</strong> và khám phá xem ý nghĩa đối lập của cả câu thay đổi ra sao:
+            </p>
+
+            <div class="nucleus-sentence-chips">
+      `;
+
+      demo.words.forEach((w, idx) => {
+        const isAct = idx === this.selectedNucleusIndex;
+        html += `
+          <button class="nucleus-chip-btn ${isAct ? "active" : ""}" onclick="IntonationManager.selectNucleus(${idx})">
+            ${w.word}
+          </button>
+        `;
+      });
+
+      html += `
+            </div>
+
+            <div class="nucleus-feedback-panel">
+              <div class="nucleus-meaning-headline">
+                👉 ${activeWord.meaning}
+              </div>
+              <div class="nucleus-explanation-body">
+                ${activeWord.explanation}
+              </div>
+              <button class="btn-play-tone-pitch" style="margin:0 auto; padding:8px 20px; font-size:0.88rem;" onclick="AudioEngine.playIntonationSpeech('I didn\\'t take your book.', ${activeWord.speechPitch}, 0.9, this)">
+                <span>🔊</span> Nghe Câu Nhấn Trọng Tâm Vào "${activeWord.word}"
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    selectNucleus(idx) {
+      this.selectedNucleusIndex = idx;
+      this.render();
+      const demo = window.INTONATION_DATA.nucleusShiftDemo;
+      const w = demo.words[idx];
+      if (w) {
+        AudioEngine.playIntonationSpeech("I didn't take your book.", w.speechPitch, 0.9);
+      }
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 5: 15 CÂU TRẮC NGHIỆM LUYỆN TAI NHẬN DIỆN CAO ĐỘ (EAR TRAINING QUIZ)
+    // ------------------------------------------------------------------------
+    renderQuizTab(container) {
+      const quizList = window.INTONATION_DATA.quiz;
+      const total = quizList.length;
+
+      // Nếu đã hoàn thành bài quiz
+      if (this.quizIndex >= total) {
+        const pct = Math.round((this.quizScore / total) * 100);
+        let msg = "";
+        let trophy = "🏆";
+        if (pct >= 85) {
+          msg = "Xuất sắc! Đôi tai của bạn đã bắt trọn từng dao động cao độ như người bản xứ!";
+          trophy = "🌟";
+        } else if (pct >= 60) {
+          msg = "Rất tốt! Bạn đã nắm được phần lớn các quy tắc ngữ điệu cốt lõi.";
+          trophy = "👍";
+        } else {
+          msg = "Hãy nghe lại các đường cong cao độ ở Tab 1 và làm lại để tai nghe nhạy bén hơn nhé!";
+          trophy = "💪";
+        }
+
+        container.innerHTML = `
+          <div class="quiz-intonation-wrapper">
+            <div class="quiz-int-card quiz-result-modal-card">
+              <div class="quiz-trophy-emoji">${trophy}</div>
+              <h2 style="font-family:var(--font-heading); font-size:1.6rem; font-weight:800; color:var(--text-main); margin-bottom:8px;">
+                Hoàn Thành Bài Luyện Tai Nghe Ngữ Điệu!
+              </h2>
+              <div class="quiz-final-score">${this.quizScore} / ${total} Đúng (${pct}%)</div>
+              <p style="font-size:0.92rem; color:#475569; max-width:480px; margin:0 auto 24px; line-height:1.5;">
+                ${msg}
+              </p>
+              <button class="btn-quiz-next" style="margin:0 auto;" onclick="IntonationManager.resetQuiz()">
+                <span>🔄</span> Làm Lại Bài Trắc Nghiệm
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const q = quizList[this.quizIndex];
+
+      let html = `
+        <div class="quiz-intonation-wrapper">
+          <!-- Score Bar -->
+          <div class="quiz-score-bar">
+            <div class="quiz-progress-pill">
+              Câu hỏi ${this.quizIndex + 1} / ${total}
+            </div>
+            <div style="font-weight:700; font-size:0.88rem; color:#0284C7;">
+              Điểm: ${this.quizScore} / ${this.quizIndex}
+            </div>
+            <div class="quiz-streak-pill">
+              🔥 Chuỗi: ${this.quizStreak}
+            </div>
+          </div>
+
+          <!-- Question Card -->
+          <div class="quiz-int-card">
+            <span class="quiz-category-tag">${q.category}</span>
+            <div class="quiz-question-title">${q.question}</div>
+
+            <!-- Audio Buttons Box -->
+            <div class="quiz-audio-trigger-box">
+              <button class="btn-quiz-large-play" onclick="AudioEngine.playIntonationSpeech('${q.audioText.replace(/'/g, "\\'")}', ${q.speechPitch || 1.0}, 0.9, this)">
+                <span>🔊</span> Nghe Giọng Bản Xứ
+              </button>
+      `;
+
+      if (q.targetTone && ["fall", "rise", "fall_rise", "rise_fall", "level"].includes(q.targetTone)) {
+        html += `
+          <button class="btn-quiz-contour-play" onclick="AudioEngine.playPitchContour('${q.targetTone}')" title="Nghe mô phỏng sóng cao độ âm học">
+            <span>🎵</span> Nghe Đường Cao Độ (Contour)
+          </button>
+        `;
+      }
+
+      html += `
+            </div>
+
+            <!-- 4 Options -->
+            <div class="quiz-options-grid">
+      `;
+
+      q.options.forEach((opt, optIdx) => {
+        let optClass = "";
+        let disabledAttr = this.quizAnswered ? "disabled" : "";
+        if (this.quizAnswered) {
+          if (opt.isCorrect) optClass = "correct";
+          else if (this.selectedOptIdx === optIdx) optClass = "incorrect";
+        }
+
+        html += `
+          <button class="quiz-opt-btn ${optClass}" ${disabledAttr} onclick="IntonationManager.handleQuizAnswer(${optIdx})">
+            <div class="quiz-opt-marker">${String.fromCharCode(65 + optIdx)}</div>
+            <div>${opt.text}</div>
+          </button>
+        `;
+      });
+
+      html += `</div>`;
+
+      // Feedback Box if answered
+      if (this.quizAnswered) {
+        const isCorrect = q.options[this.selectedOptIdx] && q.options[this.selectedOptIdx].isCorrect;
+        html += `
+          <div class="quiz-feedback-box ${isCorrect ? "" : "is-wrong"}">
+            <div class="quiz-fb-title">
+              ${isCorrect ? "🎉 Chính Xác!" : "❌ Chưa Đúng Rối!"}
+            </div>
+            <div class="quiz-fb-desc">
+              ${q.explanation}
+            </div>
+          </div>
+
+          <div class="quiz-action-bar">
+            <button class="btn-quiz-next" onclick="IntonationManager.nextQuizQuestion()">
+              ${this.quizIndex + 1 === total ? "Xem Kết Quả 🏆" : "Câu Tiếp Theo ➔"}
+            </button>
+          </div>
+        `;
+      }
+
+      html += `
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    handleQuizAnswer(optIdx) {
+      if (this.quizAnswered) return;
+      this.quizAnswered = true;
+      this.selectedOptIdx = optIdx;
+
+      const q = window.INTONATION_DATA.quiz[this.quizIndex];
+      const isCorrect = q.options[optIdx] && q.options[optIdx].isCorrect;
+
+      if (isCorrect) {
+        this.quizScore++;
+        this.quizStreak++;
+        AudioEngine.playSfx("correct");
+      } else {
+        this.quizStreak = 0;
+        AudioEngine.playSfx("incorrect");
+      }
+
+      this.render();
+    },
+
+    nextQuizQuestion() {
+      this.quizIndex++;
+      this.quizAnswered = false;
+      this.selectedOptIdx = null;
+
+      const total = window.INTONATION_DATA.quiz.length;
+      if (this.quizIndex >= total) {
+        AudioEngine.playSfx("complete");
+      }
+
+      this.render();
+      window.scrollTo({ top: 300, behavior: "smooth" });
+    },
+
+    resetQuiz() {
+      this.quizIndex = 0;
+      this.quizScore = 0;
+      this.quizStreak = 0;
+      this.quizAnswered = false;
+      this.selectedOptIdx = null;
+      this.render();
+    }
+  };
+  window.IntonationManager = IntonationManager;
+
   window.addEventListener("keydown", (e) => {
     if (state.currentView === "dictation") {
       // Phím Space để nghe lại khi không đang gõ text
@@ -3730,6 +4440,7 @@ document.addEventListener("DOMContentLoaded", () => {
   DictationManager.init();
   IpaDecodingManager.init();
   IpaEncodingManager.init();
+  IntonationManager.init();
   window.navigateTo("overview");
   AUTH.init();
 

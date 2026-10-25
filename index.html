@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lexend+Deca:wght@600;700;800&family=Charis+SIL:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css?v=3.0">
+  <link rel="stylesheet" href="styles.css?v=3.2">
 </head>
 <body>
 
@@ -191,7 +191,16 @@
           </button>
         </div>
 
-        <!-- SECTION 5: THỰC HÀNH & CẨM NANG -->
+        <!-- SECTION 5: CHUYÊN ĐỀ NGỮ ĐIỆU (INTONATION) -->
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">🎵 NGỮ ĐIỆU (INTONATION)</div>
+          <button class="sidebar-nav-item" data-view="intonation">
+            <span class="nav-icon">🎼</span>
+            <span class="nav-label">Chuyên Đề Ngữ Điệu</span>
+          </button>
+        </div>
+
+        <!-- SECTION 6: THỰC HÀNH & CẨM NANG -->
         <div class="sidebar-group">
           <div class="sidebar-group-title">🎯 THỰC HÀNH &amp; CẨM NANG</div>
           <button class="sidebar-nav-item" data-view="quiz">
@@ -584,6 +593,40 @@
         <div id="ipaEncodingContainer"></div>
       </section>
 
+      <!-- ====================================================================
+           VIEW 9: CHUYÊN ĐỀ NGỮ ĐIỆU (INTONATION MASTERCLASS)
+           ==================================================================== -->
+      <section class="app-view" id="view_intonation">
+        <div class="view-header-banner">
+          <div class="hero-badge">🎵 English Intonation Masterclass</div>
+          <h1 class="view-main-title">Chuyên Đề <span class="highlight">Ngữ Điệu Tiếng Anh (Intonation)</span></h1>
+          <p class="view-main-desc">Làm chủ giai điệu câu, 5 loại cao độ cốt lõi, quy tắc lên/xuống giọng chuẩn bản xứ và phòng thí nghiệm sắc thái cảm xúc.</p>
+        </div>
+
+        <!-- Thanh Tabs Điều Hướng Chuyên Đề -->
+        <nav class="intonation-tabs-nav" id="intonationTabsNav">
+          <button class="intonation-tab-btn active" data-tab="tones">
+            <span>📉</span> 1. 5 Loại Điệu Cốt Lõi
+          </button>
+          <button class="intonation-tab-btn" data-tab="rules">
+            <span>📖</span> 2. 8 Quy Tắc Ngữ Pháp
+          </button>
+          <button class="intonation-tab-btn" data-tab="attitudes">
+            <span>🎭</span> 3. Phòng Thí Nghiệm Sắc Thái
+          </button>
+          <button class="intonation-tab-btn" data-tab="functions">
+            <span>🎯</span> 4. 4 Chức Năng &amp; Tiêu Điểm
+          </button>
+          <button class="intonation-tab-btn" data-tab="quiz">
+            <span>🏆</span> 5. Trắc Nghiệm Luyện Tai (15 Câu)
+          </button>
+        </nav>
+
+        <div id="intonationContentContainer">
+          <!-- Sẽ được render động bởi IntonationManager -->
+        </div>
+      </section>
+
     </main>
 
   </div>
@@ -640,7 +683,8 @@
   </form>
 
   <!-- Scripts -->
-  <script src="data.js?v=3.1"></script>
-  <script src="app.js?v=3.1"></script>
+  <script src="data.js?v=3.2"></script>
+  <script src="intonation_data.js?v=3.2"></script>
+  <script src="app.js?v=3.2"></script>
 </body>
 </html>
