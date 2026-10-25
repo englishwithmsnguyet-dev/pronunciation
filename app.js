@@ -460,7 +460,13 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // Phát âm Ngữ Điệu với cao độ (pitch) và tốc độ (rate) tùy chỉnh cho Chuyên đề Intonation
-    playIntonationSpeech(text, customPitch, customRate, btnEl) {
+    // Hỗ trợ truyền mảng prosodyChunks để lên/xuống giọng chính xác tại từng từ khóa
+    playIntonationSpeech(text, customPitch, customRate, btnEl, chunks) {
+      if (chunks && Array.isArray(chunks) && chunks.length > 0) {
+        this.playProsodySequence(chunks, btnEl);
+        return;
+      }
+
       if (!text) return;
       this.stop();
 
@@ -516,7 +522,104 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 25);
     },
 
+    // Phát âm chuỗi đa âm điệu (Prosodic Multi-Chunk Sequence)
+    // Đảm bảo lên giọng (↗) và xuống giọng (↘) đúng chuẩn xác tại từng từ/âm tiết
+    playProsodySequence(chunks, btnEl) {
+      if (!chunks || !chunks.length) return;
+      this.stop();
+
+      let activeBtn = btnEl;
+      if (!activeBtn && window.event && window.event.currentTarget) {
+        activeBtn = window.event.currentTarget;
+      }
+      if (activeBtn) activeBtn.classList.add("playing");
+
+      if (!("speechSynthesis" in window)) {
+        if (activeBtn) activeBtn.classList.remove("playing");
+        return;
+      }
+
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+
+      const voice = this.getBestVoice(state.accent);
+      const lang = voice ? voice.lang : (state.accent === "US" ? "en-US" : "en-GB");
+
+      this.isPlayingSequence = true;
+      let currentIndex = 0;
+
+      const playNextChunk = () => {
+        if (!this.isPlayingSequence || currentIndex >= chunks.length) {
+          this.isPlayingSequence = false;
+          if (activeBtn) activeBtn.classList.remove("playing");
+          this.currentUtterance = null;
+          return;
+        }
+
+        const chunk = chunks[currentIndex];
+        const text = (typeof chunk === "string") ? chunk : (chunk.text || "");
+        if (!text.trim()) {
+          currentIndex++;
+          playNextChunk();
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text.trim());
+        if (voice) {
+          utterance.voice = voice;
+          utterance.lang = voice.lang;
+        } else {
+          utterance.lang = lang;
+        }
+
+        // Áp dụng pitch, rate, volume cho từng chunk độc lập
+        const chunkPitch = (typeof chunk === "object" && chunk.pitch !== undefined) ? chunk.pitch : 1.0;
+        const chunkRate = (typeof chunk === "object" && chunk.rate !== undefined) ? chunk.rate : 0.92;
+        const chunkVol = (typeof chunk === "object" && chunk.volume !== undefined) ? chunk.volume : 1.0;
+
+        utterance.pitch = Math.max(0.5, Math.min(2.0, chunkPitch));
+        utterance.rate = Math.max(0.5, Math.min(1.5, chunkRate * state.speed));
+        utterance.volume = Math.max(0.1, Math.min(1.0, chunkVol));
+
+        utterance.onend = () => {
+          if (!this.isPlayingSequence) return;
+          currentIndex++;
+          const pauseMs = (typeof chunk === "object" && chunk.pauseAfter !== undefined) ? chunk.pauseAfter : 15;
+          setTimeout(playNextChunk, pauseMs);
+        };
+
+        utterance.onerror = () => {
+          if (!this.isPlayingSequence) return;
+          currentIndex++;
+          setTimeout(playNextChunk, 15);
+        };
+
+        this.currentUtterance = utterance;
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          console.warn("Lỗi phát chunk utterance:", e);
+          if (activeBtn) activeBtn.classList.remove("playing");
+          this.isPlayingSequence = false;
+        }
+      };
+
+      setTimeout(() => {
+        try {
+          playNextChunk();
+        } catch (err) {
+          if (activeBtn) activeBtn.classList.remove("playing");
+          this.isPlayingSequence = false;
+        }
+      }, 25);
+    },
+
     stop() {
+      this.isPlayingSequence = false;
       if (this.currentAudio) {
         this.currentAudio.pause();
         try {
@@ -3964,7 +4067,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="tone-card-examples-list">
         `;
 
-        tone.examples.forEach(ex => {
+        tone.examples.forEach((ex, exIdx) => {
           html += `
             <div class="tone-example-item">
               <div class="tone-ex-text-col">
@@ -3972,7 +4075,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="tone-ex-vn">${ex.vn}</div>
                 <div class="tone-ex-ipa">${ex.ipa}</div>
               </div>
-              <button class="btn-tone-audio" onclick="AudioEngine.playIntonationSpeech('${ex.en.replace(/'/g, "\\'")}', ${tone.speechPitch}, 0.92, this)" title="Nghe người bản xứ phát âm câu này">
+              <button class="btn-tone-audio" onclick="IntonationManager.playToneExample('${tone.id}', ${exIdx}, this)" title="Nghe phát âm chuẩn với điệu ${tone.symbol}">
                 🔊
               </button>
             </div>
@@ -4036,7 +4139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="rule-examples-box">
         `;
 
-        r.examples.forEach(ex => {
+        r.examples.forEach((ex, exIdx) => {
           html += `
             <div class="rule-example-row">
               <div>
@@ -4047,7 +4150,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   ${ex.vn} • <span style="font-family:var(--font-ipa); color:#7C3AED;">${ex.ipa}</span>
                 </div>
               </div>
-              <button class="btn-tone-audio" onclick="AudioEngine.playIntonationSpeech('${ex.en.replace(/'/g, "\\'")}', 1.0, 0.92, this)" title="Nghe phát âm chuẩn câu này">
+              <button class="btn-tone-audio" onclick="IntonationManager.playRuleExample('${r.id}', ${exIdx}, this)" title="Nghe phát âm chuẩn câu này">
                 🔊
               </button>
             </div>
@@ -4115,7 +4218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 📌 <strong>Ngữ cảnh:</strong> ${v.context}
               </div>
             </div>
-            <button class="btn-attitude-listen" onclick="AudioEngine.playIntonationSpeech('${currentWordObj.word}', ${v.speechPitch}, ${v.speechRate}, this)">
+            <button class="btn-attitude-listen" onclick="IntonationManager.playAttitudeExample('${currentWordObj.word}', '${v.tone}', this)">
               <span>🔊</span> Nghe Sắc Thái Này (${v.symbol})
             </button>
           </div>
@@ -4202,7 +4305,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="nucleus-explanation-body">
                 ${activeWord.explanation}
               </div>
-              <button class="btn-play-tone-pitch" style="margin:0 auto; padding:8px 20px; font-size:0.88rem;" onclick="AudioEngine.playIntonationSpeech('I didn\\'t take your book.', ${activeWord.speechPitch}, 0.9, this)">
+              <button class="btn-play-tone-pitch" style="margin:0 auto; padding:8px 20px; font-size:0.88rem;" onclick="IntonationManager.playNucleusExample(${this.selectedNucleusIndex}, this)">
                 <span>🔊</span> Nghe Câu Nhấn Trọng Tâm Vào "${activeWord.word}"
               </button>
             </div>
@@ -4216,11 +4319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selectNucleus(idx) {
       this.selectedNucleusIndex = idx;
       this.render();
-      const demo = window.INTONATION_DATA.nucleusShiftDemo;
-      const w = demo.words[idx];
-      if (w) {
-        AudioEngine.playIntonationSpeech("I didn't take your book.", w.speechPitch, 0.9);
-      }
+      this.playNucleusExample(idx);
     },
 
     // ------------------------------------------------------------------------
@@ -4290,7 +4389,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <!-- Audio Buttons Box -->
             <div class="quiz-audio-trigger-box">
-              <button class="btn-quiz-large-play" onclick="AudioEngine.playIntonationSpeech('${q.audioText.replace(/'/g, "\\'")}', ${q.speechPitch || 1.0}, 0.9, this)">
+              <button class="btn-quiz-large-play" onclick="IntonationManager.playQuizAudio(this)">
                 <span>🔊</span> Nghe Giọng Bản Xứ
               </button>
       `;
@@ -4398,6 +4497,64 @@ document.addEventListener("DOMContentLoaded", () => {
       this.quizAnswered = false;
       this.selectedOptIdx = null;
       this.render();
+    },
+
+    // =======================================================================
+    // CÁC HÀM PHÁT ÂM NGỮ ĐIỆU CHUYÊN SÂU (PROSODIC MULTI-CHUNK PLAYERS)
+    // =======================================================================
+    playToneExample(toneId, exIdx, btnEl) {
+      const tone = window.INTONATION_DATA.tones.find(t => t.id === toneId);
+      if (!tone || !tone.examples[exIdx]) return;
+      const ex = tone.examples[exIdx];
+      if (ex.prosodyChunks && ex.prosodyChunks.length) {
+        AudioEngine.playProsodySequence(ex.prosodyChunks, btnEl);
+      } else {
+        AudioEngine.playIntonationSpeech(ex.en, tone.speechPitch, 0.92, btnEl);
+      }
+    },
+
+    playRuleExample(ruleId, exIdx, btnEl) {
+      const rule = window.INTONATION_DATA.rules.find(r => r.id === ruleId);
+      if (!rule || !rule.examples[exIdx]) return;
+      const ex = rule.examples[exIdx];
+      if (ex.prosodyChunks && ex.prosodyChunks.length) {
+        AudioEngine.playProsodySequence(ex.prosodyChunks, btnEl);
+      } else {
+        AudioEngine.playIntonationSpeech(ex.en, 1.0, 0.92, btnEl);
+      }
+    },
+
+    playAttitudeExample(word, toneType, btnEl) {
+      const wordObj = window.INTONATION_DATA.attitudes.find(a => a.word === word);
+      if (!wordObj) return;
+      const variation = wordObj.variations.find(v => v.tone === toneType);
+      if (!variation) return;
+      if (variation.prosodyChunks && variation.prosodyChunks.length) {
+        AudioEngine.playProsodySequence(variation.prosodyChunks, btnEl);
+      } else {
+        AudioEngine.playIntonationSpeech(word, variation.speechPitch, variation.speechRate, btnEl);
+      }
+    },
+
+    playNucleusExample(wordIdx, btnEl) {
+      const demo = window.INTONATION_DATA.nucleusShiftDemo;
+      const w = demo.words[wordIdx];
+      if (!w) return;
+      if (w.prosodyChunks && w.prosodyChunks.length) {
+        AudioEngine.playProsodySequence(w.prosodyChunks, btnEl);
+      } else {
+        AudioEngine.playIntonationSpeech("I didn't take your book.", w.speechPitch, 0.9, btnEl);
+      }
+    },
+
+    playQuizAudio(btnEl) {
+      const q = window.INTONATION_DATA.quiz[this.quizIndex];
+      if (!q) return;
+      if (q.prosodyChunks && q.prosodyChunks.length) {
+        AudioEngine.playProsodySequence(q.prosodyChunks, btnEl);
+      } else {
+        AudioEngine.playIntonationSpeech(q.audioText, q.speechPitch || 1.0, 0.9, btnEl);
+      }
     }
   };
   window.IntonationManager = IntonationManager;
