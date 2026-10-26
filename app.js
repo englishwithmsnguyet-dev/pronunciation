@@ -4085,17 +4085,6 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
             ` : ""}
 
-            <!-- Lời Cô Nguyệt Dặn -->
-            ${tone.teacherTips ? `
-              <div class="teacher-tip-box">
-                <div class="teacher-tip-icon">👩‍🏫</div>
-                <div>
-                  <div class="teacher-tip-title">Lời Cô Nguyệt Dặn</div>
-                  <div class="teacher-tip-body">${tone.teacherTips}</div>
-                </div>
-              </div>
-            ` : ""}
-
             <!-- Bẫy Ngữ Âm Học Viên Việt Thường Mắc -->
             ${tone.vietnamesePitfalls ? `
               <div class="pitfall-box">
@@ -4215,17 +4204,6 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
             ` : ""}
 
-            <!-- Lời Cô Nguyệt Dặn -->
-            ${r.teacherTips ? `
-              <div class="teacher-tip-box">
-                <div class="teacher-tip-icon">👩‍🏫</div>
-                <div>
-                  <div class="teacher-tip-title">Lời Cô Nguyệt Dặn</div>
-                  <div class="teacher-tip-body">${r.teacherTips}</div>
-                </div>
-              </div>
-            ` : ""}
-
             <!-- Bẫy Ngữ Âm Học Viên Việt Thường Mắc -->
             ${r.vietnamesePitfalls ? `
               <div class="pitfall-box">
@@ -4338,17 +4316,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       html += `
           </div>
-
-          <!-- Lời khuyên sư phạm của cô dành riêng cho từ này -->
-          ${currentWordObj.teacherAdvice ? `
-            <div class="teacher-tip-box" style="margin:16px 0 20px;">
-              <div class="teacher-tip-icon">👩‍🏫</div>
-              <div>
-                <div class="teacher-tip-title">Lời Khuyên Giảng Dạy Của Cô Nguyệt Cho Từ "${currentWordObj.word}"</div>
-                <div class="teacher-tip-body">${currentWordObj.teacherAdvice}</div>
-              </div>
-            </div>
-          ` : ""}
 
           <!-- Variations Grid -->
           <div class="attitude-variations-grid">
@@ -4500,7 +4467,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div style="font-size:2.4rem;">👩‍🏫</div>
               <div>
                 <h2 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:#FFFFFF; margin-bottom:4px;">
-                  Cẩm Nang Giảng Dạy Ngữ Điệu Của Cô Nguyệt
+                  Cẩm Nang Giảng Dạy Ngữ Điệu (Teacher's Guide)
                 </h2>
                 <div style="font-size:0.88rem; color:#C7D2FE; margin:0;">
                   Sổ tay phương pháp sư phạm thực chiến chuẩn quốc tế (Wells, Roach) dành riêng cho lớp học trực tiếp & trực tuyến.
@@ -4569,7 +4536,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <tr>
                   <th style="width:28%;">Lỗi Sai Kinh Điển</th>
                   <th style="width:34%;">Nguyên Nhân Căn Bản (Root Cause)</th>
-                  <th style="width:38%;">Tuyệt Chiêu Sửa Ngay Của Cô Nguyệt</th>
+                  <th style="width:38%;">Kỹ Thuật Sửa Nhanh (Teacher's Fix)</th>
                 </tr>
               </thead>
               <tbody>
