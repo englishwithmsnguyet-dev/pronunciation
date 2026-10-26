@@ -3871,6 +3871,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.renderFunctionsTab(container);
       } else if (this.currentTab === "quiz") {
         this.renderQuizTab(container);
+      } else if (this.currentTab === "guide") {
+        this.renderGuideTab(container);
       }
     },
 
@@ -3879,50 +3881,133 @@ document.addEventListener("DOMContentLoaded", () => {
     // ------------------------------------------------------------------------
     renderTonesTab(container) {
       const tones = window.INTONATION_DATA.tones;
+      const intro = window.INTONATION_DATA.natureIntro;
 
-      let html = `
-        <!-- Khối Giải Thích Cấu Trúc Tone Unit -->
-        <div class="tones-intro-box">
-          <div class="tones-intro-title">
-            <span>📐</span> Cấu Trúc Của Một Đơn Vị Ngữ Điệu (The Tone Unit / Intonation Phrase)
+      let html = "";
+
+      // 1. BÀI GIẢNG DẪN NHẬP & BẢN CHẤT NGỮ ĐIỆU (Dành cho Giáo viên mở đầu bài học)
+      if (intro) {
+        html += `
+          <div class="tones-intro-box" style="margin-bottom:28px;">
+            <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:12px;">
+              <span style="font-size:2rem; line-height:1;">🎓</span>
+              <div>
+                <h2 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:800; color:var(--text-main); margin-bottom:4px;">
+                  ${intro.title}
+                </h2>
+                <div style="font-size:0.86rem; color:#6D28D9; font-weight:600;">
+                  ${intro.subtitle}
+                </div>
+              </div>
+            </div>
+
+            <!-- Nghịch lý cốt lõi -->
+            <div class="teacher-tip-box" style="margin:14px 0 18px;">
+              <div class="teacher-tip-icon">💡</div>
+              <div>
+                <div class="teacher-tip-title">Nghịch Lý Cốt Lõi Khi Người Việt Học Tiếng Anh</div>
+                <div class="teacher-tip-body">${intro.coreParadox}</div>
+              </div>
+            </div>
+
+            <!-- Bảng So Sánh Bản Chất: Tiếng Việt vs Tiếng Anh -->
+            <h4 style="font-family:var(--font-heading); font-size:0.98rem; font-weight:800; color:#1E293B; margin:16px 0 10px; display:flex; align-items:center; gap:6px;">
+              <span>⚖️</span> So Sánh Ngôn Ngữ Học: Tone Language vs Intonation Language
+            </h4>
+            <div class="pedagogy-table-wrap">
+              <table class="pedagogy-table">
+                <thead>
+                  <tr>
+                    <th style="width:20%;">Đặc Điểm</th>
+                    <th style="width:32%;">Tiếng Việt (Tone Language)</th>
+                    <th style="width:32%;">Tiếng Anh (Intonation Language)</th>
+                    <th style="width:16%;">Bản Chất</th>
+                  </tr>
+                </thead>
+                <tbody>
+        `;
+
+        intro.linguisticComparison.forEach(row => {
+          html += `
+            <tr>
+              <td style="font-weight:700; color:#0F172A;">${row.aspect}</td>
+              <td style="color:#B45309; background:#FFFBEB;">${row.vn}</td>
+              <td style="color:#0369A1; background:#F0F9FF; font-weight:600;">${row.en}</td>
+              <td style="font-size:0.8rem; color:#64748B;">${row.note}</td>
+            </tr>
+          `;
+        });
+
+        html += `
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Cấu Trúc Tone Unit -->
+            <div style="margin-top:20px; padding-top:16px; border-top:1px dashed #CBD5E1;">
+              <div class="tones-intro-title">
+                <span>📐</span> ${intro.toneUnitLecture ? intro.toneUnitLecture.headline : "Cấu Trúc Đơn Vị Ngữ Điệu (Tone Unit)"}
+              </div>
+              <p style="font-size:0.88rem; color:#475569; line-height:1.55; margin-bottom:12px;">
+                ${intro.toneUnitLecture ? intro.toneUnitLecture.explanation : "Trong tiếng Anh, lời nói được phân tách thành các Đơn vị ngữ điệu (Tone Units). Mỗi đơn vị ngữ điệu hoàn chỉnh có 4 thành phần:"}
+              </p>
+
+              <div class="tone-unit-diagram">
+        `;
+
+        const components = (intro.toneUnitLecture && intro.toneUnitLecture.components) || [
+          { name: "1. Pre-Head", role: "Âm Trước Đầu", example: "in a...", tip: "Đọc lướt nhanh, không nhấn." },
+          { name: "2. Head", role: "Âm Đầu", example: "...LIT-tle...", tip: "Giữ cao độ ổn định." },
+          { name: "3. NUCLEUS ★", role: "Hạt Nhân Ngữ Điệu", example: "...BOIL-...", tip: "Cao độ trượt mạnh nhất!" },
+          { name: "4. Tail", role: "Phần Đuôi", example: "...ing pot.", tip: "Tiếp tục xu hướng cao độ." }
+        ];
+
+        components.forEach((comp, cIdx) => {
+          const isNucleus = cIdx === 2 || comp.name.includes("NUCLEUS");
+          html += `
+            <div class="tone-unit-part ${isNucleus ? "nucleus-part" : ""}">
+              <div class="tone-unit-badge">${isNucleus ? "★ BẮT BUỘC CÓ" : comp.name.split(" ")[0]}</div>
+              <div class="tone-unit-title" ${isNucleus ? 'style="color:#7C3AED;"' : ""}>${comp.name}</div>
+              <div class="tone-unit-desc">
+                ${comp.role}<br/>
+                <strong style="color:${isNucleus ? '#7C3AED' : '#0F172A'};">Ví dụ: <em>${comp.example}</em></strong>
+                <div style="font-size:0.75rem; color:#64748B; margin-top:4px;">💡 ${comp.tip}</div>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+              </div>
+            </div>
+
+            <!-- Cơ chế cơ thể học (Vocal Mechanism) -->
+            ${intro.vocalMechanism ? `
+              <div class="context-box" style="margin-top:18px;">
+                <div class="context-icon">🫁</div>
+                <div>
+                  <div class="context-title">${intro.vocalMechanism.headline}</div>
+                  <div class="context-body">
+                    <ul style="margin:4px 0 0 16px; padding:0; display:flex; flex-direction:column; gap:4px;">
+                      ${intro.vocalMechanism.steps.map(s => `<li>${s}</li>`).join("")}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ` : ""}
           </div>
-          <p style="font-size:0.88rem; color:#475569; line-height:1.5; margin-bottom:10px;">
-            Theo giáo trình Ngữ âm học của GS. Peter Roach và GS. J.C. Wells, trong tiếng Anh lời nói được phân tách thành các <strong>Đơn vị ngữ điệu (Tone Units)</strong>. Mỗi đơn vị ngữ điệu hoàn chỉnh có 4 thành phần, trong đó quan trọng nhất là <strong>Nucleus (Hạt nhân ngữ điệu)</strong> — nơi cao độ bắt đầu trượt lên hoặc đổ xuống rõ rệt nhất.
-          </p>
+        `;
+      }
 
-          <div class="tone-unit-diagram">
-            <div class="tone-unit-part">
-              <div class="tone-unit-badge">1. Pre-Head</div>
-              <div class="tone-unit-title">Âm Trước Đầu</div>
-              <div class="tone-unit-desc">Các âm tiết không mang trọng âm đứng trước Head.<br/><em>(in a)</em></div>
-            </div>
-            <div class="tone-unit-part">
-              <div class="tone-unit-badge">2. Head</div>
-              <div class="tone-unit-title">Âm Đầu</div>
-              <div class="tone-unit-desc">Từ âm tiết có trọng âm đầu tiên đến trước Nucleus.<br/><em>(LIT-tle)</em></div>
-            </div>
-            <div class="tone-unit-part nucleus-part">
-              <div class="tone-unit-badge">★ BẮT BUỘC CÓ</div>
-              <div class="tone-unit-title" style="color:#7C3AED;">3. NUCLEUS (Tonic)</div>
-              <div class="tone-unit-desc"><strong>Hạt nhân ngữ điệu:</strong> Nơi cao độ trượt lên hoặc đổ xuống mạnh mẽ nhất!<br/><em>(BOIL-)</em></div>
-            </div>
-            <div class="tone-unit-part">
-              <div class="tone-unit-badge">4. Tail</div>
-              <div class="tone-unit-title">Phần Đuôi</div>
-              <div class="tone-unit-desc">Các âm tiết đi sau Nucleus, tiếp tục xu hướng cao độ.<br/><em>(ing pot)</em></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bento Grid 5 Loại Điệu -->
-        <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:16px;">
-          5 Chuyển Động Cao Độ Cốt Lõi (The 5 Primary Tones)
+      // 2. 5 CHUYỂN ĐỘNG CAO ĐỘ CỐT LÕI (BENTO GRID)
+      html += `
+        <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+          <span>📉</span> 5 Chuyển Động Cao Độ Cốt Lõi (The 5 Primary Tones)
         </h3>
         <div class="tones-bento-grid">
       `;
 
       tones.forEach(tone => {
-        // Tạo SVG path biểu diễn đường cong cao độ
         let pathD = "";
         if (tone.acousticCurve && tone.acousticCurve.length) {
           pathD = tone.acousticCurve.map((pt, idx) => (idx === 0 ? `M ${pt.x} ${pt.y}` : `L ${pt.x} ${pt.y}`)).join(" ");
@@ -3950,11 +4035,9 @@ document.addEventListener("DOMContentLoaded", () => {
                       <stop offset="100%" stop-color="#7C3AED" />
                     </linearGradient>
                   </defs>
-                  <!-- Lưới toạ độ mờ -->
                   <line x1="0" y1="20" x2="100" y2="20" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
                   <line x1="0" y1="50" x2="100" y2="50" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
                   <line x1="0" y1="80" x2="100" y2="80" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
-                  <!-- Đường cong cao độ -->
                   <path d="${pathD}" fill="none" stroke="url(#grad_${tone.id})" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
@@ -3965,7 +4048,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <p class="tone-card-desc">${tone.detailedExplanation}</p>
 
-            <!-- 3 Câu Ví Dụ Tương Tác -->
+            ${tone.acousticDetails ? `
+              <div style="font-size:0.78rem; color:#475569; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:6px 10px; margin:8px 0;">
+                📊 <strong>Thông số âm học ($F_0$):</strong> ${tone.acousticDetails}
+              </div>
+            ` : ""}
+
+            <!-- Khi nào áp dụng? -->
+            ${tone.usageGuide && tone.usageGuide.length ? `
+              <div style="margin:10px 0;">
+                <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin-bottom:4px;">
+                  📌 Trường hợp sử dụng chính:
+                </div>
+                <ul style="margin:0 0 0 16px; padding:0; font-size:0.82rem; color:#475569; line-height:1.45;">
+                  ${tone.usageGuide.map(u => `<li>${u}</li>`).join("")}
+                </ul>
+              </div>
+            ` : ""}
+
+            <!-- Lời Cô Nguyệt Dặn -->
+            ${tone.teacherTips ? `
+              <div class="teacher-tip-box">
+                <div class="teacher-tip-icon">👩‍🏫</div>
+                <div>
+                  <div class="teacher-tip-title">Lời Cô Nguyệt Dặn</div>
+                  <div class="teacher-tip-body">${tone.teacherTips}</div>
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Bẫy Ngữ Âm Học Viên Việt Thường Mắc -->
+            ${tone.vietnamesePitfalls ? `
+              <div class="pitfall-box">
+                <div class="pitfall-icon">⚠️</div>
+                <div>
+                  <div class="pitfall-title">Bẫy Ngữ Âm Thường Gặp</div>
+                  <div class="pitfall-body">${tone.vietnamesePitfalls}</div>
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Đoạn Hội Thoại Thực Tế Minh Họa -->
+            ${tone.realLifeDialogue ? `
+              <div class="dialogue-card">
+                <div class="dialogue-card-head">
+                  <div class="dialogue-card-label">
+                    <span>💬</span> ${tone.realLifeDialogue.title}
+                  </div>
+                  <div style="font-size:0.75rem; color:#64748B;">${tone.realLifeDialogue.context}</div>
+                </div>
+                <div class="dialogue-lines">
+                  ${tone.realLifeDialogue.lines.map((l, lIdx) => `
+                    <div class="dialogue-line">
+                      <span class="speaker-badge ${lIdx % 2 === 0 ? "speaker-a" : "speaker-b"}">${l.speaker}</span>
+                      <div class="dialogue-text-wrap">
+                        <div class="dialogue-en">${l.en}</div>
+                        <div class="dialogue-vn">${l.vn}</div>
+                      </div>
+                      <button class="btn-dialogue-play" onclick="IntonationManager.playToneDialogue('${tone.id}', ${lIdx}, this)" title="Nghe câu này">
+                        <span>🔊</span> Nghe
+                      </button>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- 3 Câu Ví Dụ Tương Tác Cơ Bản -->
+            <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin:12px 0 6px;">
+              🎧 3 Câu Ví Dụ Mẫu:
+            </div>
             <div class="tone-card-examples-list">
         `;
 
@@ -4002,11 +4154,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let html = `
         <div style="margin-bottom:20px;">
-          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
-            8 Quy Tắc Ngữ Pháp Của Ngữ Điệu Chuẩn Bản Xứ
+          <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:gap:8px;">
+            <span>📖</span> 8 Quy Tắc Ngữ Pháp Cốt Lõi Của Ngữ Điệu (Grammatical Rules)
           </h3>
           <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
-            Hệ thống quy tắc ngữ pháp khách quan theo chuẩn Cambridge & Oxford. Nắm vững 8 quy tắc này giúp bạn luôn biết khi nào cần lên giọng (↗), khi nào cần hạ giọng (↘) mà không phải đoán mò.
+            Hệ thống quy tắc ngữ pháp khách quan theo chuẩn Cambridge, Oxford & ETS TOEIC. Nắm vững 8 quy tắc này giúp học viên tự tin biết chính xác khi nào lên giọng (↗), khi nào hạ giọng (↘) trong mọi câu nói.
           </p>
         </div>
 
@@ -4027,17 +4179,82 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
             </div>
 
-            <!-- Sơ Đồ Cao Độ Trực Quan -->
+            <!-- Sơ Đồ Cao Độ Trực Quan & Công Thức -->
             <div class="rule-diagram-box">
-              ${r.diagram}
+              <div style="font-family:monospace; font-weight:700; font-size:0.95rem;">${r.diagram}</div>
+              ${r.formula ? `<div style="font-size:0.82rem; color:#6D28D9; margin-top:4px; font-weight:600;">📐 Công thức: ${r.formula}</div>` : ""}
             </div>
 
-            <!-- Ghi Chú Sư Phạm & Bẫy Cần Tránh -->
-            <div class="rule-note-box">
-              💡 <strong>Lưu ý quan trọng:</strong> ${r.note.replace(/\n/g, "<br/>")}
-            </div>
+            <!-- Cơ Sở Ngôn Ngữ Học (Deep Rationale) -->
+            ${r.deepRationale ? `
+              <div class="context-box">
+                <div class="context-icon">🔬</div>
+                <div>
+                  <div class="context-title">Cơ Sở Ngôn Ngữ Học (Deep Rationale)</div>
+                  <div class="context-body">${r.deepRationale}</div>
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Lời Cô Nguyệt Dặn -->
+            ${r.teacherTips ? `
+              <div class="teacher-tip-box">
+                <div class="teacher-tip-icon">👩‍🏫</div>
+                <div>
+                  <div class="teacher-tip-title">Lời Cô Nguyệt Dặn</div>
+                  <div class="teacher-tip-body">${r.teacherTips}</div>
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Bẫy Ngữ Âm Học Viên Việt Thường Mắc -->
+            ${r.vietnamesePitfalls ? `
+              <div class="pitfall-box">
+                <div class="pitfall-icon">⚠️</div>
+                <div>
+                  <div class="pitfall-title">Bẫy Ngữ Âm Thường Gặp</div>
+                  <div class="pitfall-body">${r.vietnamesePitfalls}</div>
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Ghi Chú Sư Phạm Thêm Nếu Có -->
+            ${r.note && !r.deepRationale ? `
+              <div class="rule-note-box">
+                💡 <strong>Lưu ý:</strong> ${r.note.replace(/\n/g, "<br/>")}
+              </div>
+            ` : ""}
+
+            <!-- Đoạn Hội Thoại Thực Tế Minh Họa -->
+            ${r.contextualDialogue ? `
+              <div class="dialogue-card">
+                <div class="dialogue-card-head">
+                  <div class="dialogue-card-label">
+                    <span>💬</span> ${r.contextualDialogue.title}
+                  </div>
+                  <div style="font-size:0.75rem; color:#64748B;">${r.contextualDialogue.context}</div>
+                </div>
+                <div class="dialogue-lines">
+                  ${r.contextualDialogue.lines.map((l, lIdx) => `
+                    <div class="dialogue-line">
+                      <span class="speaker-badge ${lIdx % 2 === 0 ? "speaker-a" : "speaker-b"}">${l.speaker}</span>
+                      <div class="dialogue-text-wrap">
+                        <div class="dialogue-en">${l.en}</div>
+                        <div class="dialogue-vn">${l.vn}</div>
+                      </div>
+                      <button class="btn-dialogue-play" onclick="IntonationManager.playRuleDialogue('${r.id}', ${lIdx}, this)" title="Nghe câu này">
+                        <span>🔊</span> Nghe
+                      </button>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            ` : ""}
 
             <!-- Các Ví Dụ Có Audio Phát Chuẩn -->
+            <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin:12px 0 6px;">
+              🎧 Ví Dụ Mẫu Câu Chuẩn Bản Xứ:
+            </div>
             <div class="rule-examples-box">
         `;
 
@@ -4079,11 +4296,11 @@ document.addEventListener("DOMContentLoaded", () => {
       let html = `
         <div class="attitude-lab-wrapper">
           <div style="margin-bottom:20px;">
-            <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
-              Phòng Thí Nghiệm Sắc Thái & Cảm Xúc (Attitudinal Lab)
+            <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+              <span>🎭</span> Phòng Thí Nghiệm Sắc Thái & Cảm Xúc (Attitudinal Lab)
             </h3>
             <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
-              Trong tiếng Anh, cùng một từ ngữ nhưng khi thay đổi cao độ giọng, ý nghĩa thực sự truyền tải sẽ quay ngoắt 180 độ! Bấm chọn từ vựng bên dưới và nghe thử từng sắc thái cảm xúc:
+              Cùng một từ ngữ, nhưng khi thay đổi chuyển động cao độ, ý nghĩa thực sự của bạn sẽ quay ngoắt 180 độ! Chọn một từ bên dưới để khám phá từng sắc thái cảm xúc:
             </p>
           </div>
 
@@ -4102,6 +4319,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       html += `
           </div>
+
+          <!-- Lời khuyên sư phạm của cô dành riêng cho từ này -->
+          ${currentWordObj.teacherAdvice ? `
+            <div class="teacher-tip-box" style="margin:16px 0 20px;">
+              <div class="teacher-tip-icon">👩‍🏫</div>
+              <div>
+                <div class="teacher-tip-title">Lời Khuyên Giảng Dạy Của Cô Nguyệt Cho Từ "${currentWordObj.word}"</div>
+                <div class="teacher-tip-body">${currentWordObj.teacherAdvice}</div>
+              </div>
+            </div>
+          ` : ""}
 
           <!-- Variations Grid -->
           <div class="attitude-variations-grid">
@@ -4150,11 +4378,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let html = `
         <div style="margin-bottom:20px;">
-          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
-            4 Chức Năng Cốt Lõi Của Ngữ Điệu (Theo GS. Peter Roach)
+          <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+            <span>🎯</span> 4 Chức Năng Cốt Lõi Của Ngữ Điệu (Theo GS. Peter Roach)
           </h3>
           <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
-            Ngữ điệu không chỉ để cho 'hay' hay 'mượt', mà nó thực hiện 4 vai trò ngôn ngữ học tối quan trọng giúp người nghe giải mã trọn vẹn thông điệp của bạn:
+            Ngữ điệu không chỉ để cho 'hay', mà nó đảm nhận 4 vai trò ngôn ngữ học tối quan trọng giúp người nghe giải mã trọn vẹn thông điệp của bạn:
           </p>
         </div>
 
@@ -4179,10 +4407,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="nucleus-lab-container">
           <div style="text-align:center; max-width:680px; margin:0 auto;">
             <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:800; color:#1E293B; margin-bottom:6px;">
-              🔬 Thí Nghiệm Trọng Tâm: "I didn't take your book."
+              🔬 Thí Nghiệm Di Chuyển Hạt Nhân: "I didn't take your book."
             </div>
             <p style="font-size:0.85rem; color:#64748B; margin-bottom:14px;">
-              Bấm vào từng từ bên dưới để di chuyển <strong>Hạt Nhân Ngữ Điệu (Nucleus)</strong> và khám phá xem ý nghĩa đối lập của cả câu thay đổi ra sao:
+              Bấm vào từng từ bên dưới để di chuyển <strong>Hạt Nhân Ngữ Điệu (Nucleus)</strong> và khám phá xem ý nghĩa hàm ẩn của cả câu thay đổi ra sao:
             </p>
 
             <div class="nucleus-sentence-chips">
@@ -4207,8 +4435,159 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="nucleus-explanation-body">
                 ${activeWord.explanation}
               </div>
-              <button class="btn-play-tone-pitch" style="margin:0 auto; padding:8px 20px; font-size:0.88rem;" onclick="IntonationManager.playNucleusExample(${this.selectedNucleusIndex}, this)">
+
+              ${activeWord.dialogueContext ? `
+                <div class="context-box" style="text-align:left; margin:14px 0;">
+                  <div class="context-icon">🎭</div>
+                  <div>
+                    <div class="context-title">Tình Huống Đối Thoại & Phản Biện Thực Tế</div>
+                    <div class="context-body">${activeWord.dialogueContext}</div>
+                  </div>
+                </div>
+              ` : ""}
+
+              <button class="btn-play-tone-pitch" style="margin:12px auto 0; padding:10px 24px; font-size:0.88rem;" onclick="IntonationManager.playNucleusExample(${this.selectedNucleusIndex}, this)">
                 <span>🔊</span> Nghe Câu Nhấn Trọng Tâm Vào "${activeWord.word}"
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    selectNucleus(idx) {
+      this.selectedNucleusIndex = idx;
+      this.render();
+      this.playNucleusExample(idx);
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 6: CẨM NANG GIẢNG DẠY CỦA CÔ GIÁO (TEACHER'S PEDAGOGICAL GUIDE)
+    // ------------------------------------------------------------------------
+    renderGuideTab(container) {
+      const guide = window.INTONATION_DATA.teacherGuide;
+      if (!guide) {
+        container.innerHTML = `<div style="padding:30px; text-align:center;">Dữ liệu cẩm nang chưa sẵn sàng.</div>`;
+        return;
+      }
+
+      let html = `
+        <div class="teacher-guide-wrapper">
+          <!-- Banner Chào Mừng & Tôn Chỉ Sư Phạm -->
+          <div class="pedagogy-step-card" style="background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); color:#FFFFFF; border:none; margin-bottom:24px;">
+            <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
+              <div style="font-size:2.4rem;">👩‍🏫</div>
+              <div>
+                <h2 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:#FFFFFF; margin-bottom:4px;">
+                  Cẩm Nang Giảng Dạy Ngữ Điệu Của Cô Nguyệt
+                </h2>
+                <div style="font-size:0.88rem; color:#C7D2FE; margin:0;">
+                  Sổ tay phương pháp sư phạm thực chiến chuẩn quốc tế (Wells, Roach) dành riêng cho lớp học trực tiếp & trực tuyến.
+                </div>
+              </div>
+            </div>
+            <p style="font-size:0.86rem; color:#E0E7FF; line-height:1.6; margin-top:10px; border-top:1px solid rgba(255,255,255,0.15); padding-top:12px;">
+              📌 <strong>Triết lý giảng dạy:</strong> <em>"Học ngữ điệu không phải là bắt chước máy móc, mà là rèn luyện cho đôi tai nhạy bén để giải mã cảm xúc và điều khiển dây thanh đới để truyền tải đúng ý đồ giao tiếp."</em>
+            </p>
+          </div>
+
+          <!-- Phần 1: Quy Trình 4 Bước Giảng Dạy Trên Lớp -->
+          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <span>🎯</span> Quy Trình 4 Bước Triển Khai Tiết Học (Classroom Workflow)
+          </h3>
+          <div class="pedagogy-steps-grid">
+      `;
+
+      guide.workflowSteps.forEach(step => {
+        html += `
+          <div class="pedagogy-step-card">
+            <div class="pedagogy-step-head">
+              <div class="step-num-badge">${step.num}</div>
+              <div class="step-title-text">${step.title}</div>
+            </div>
+            <div style="font-size:0.88rem; color:#475569; line-height:1.6;">
+              ${step.desc}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+
+          <!-- Phần 2: 3 Phương Pháp Giảng Dạy Độc Quyền -->
+          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin:28px 0 14px; display:flex; align-items:center; gap:8px;">
+            <span>✨</span> 3 Kỹ Thuật Độc Quyền Giúp Học Viên Việt 'Bẻ Giọng' Nhanh Nhất
+          </h3>
+          <div class="pedagogy-method-list">
+      `;
+
+      guide.signatureTechniques.forEach(tech => {
+        html += `
+          <div class="method-card">
+            <div class="method-card-title">
+              <span>💡</span> ${tech.title}
+            </div>
+            <div class="method-card-body" style="color:#4B5563; line-height:1.55;">
+              ${tech.desc}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+
+          <!-- Phần 3: Bảng Ma Trận Chẩn Đoán Lỗi & Cách Sửa Nhanh -->
+          <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main); margin:32px 0 14px; display:flex; align-items:center; gap:8px;">
+            <span>🚨</span> Ma Trận Bắt Lỗi & Kỹ Thuật 'Sửa Gấp' Cho Học Viên Việt Nam
+          </h3>
+          <div class="pedagogy-table-wrap">
+            <table class="pedagogy-table">
+              <thead>
+                <tr>
+                  <th style="width:28%;">Lỗi Sai Kinh Điển</th>
+                  <th style="width:34%;">Nguyên Nhân Căn Bản (Root Cause)</th>
+                  <th style="width:38%;">Tuyệt Chiêu Sửa Ngay Của Cô Nguyệt</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+
+      guide.errorMatrix.forEach(row => {
+        html += `
+          <tr>
+            <td style="font-weight:700; color:#BE123C;">${row.mistake}</td>
+            <td style="color:#475569;">${row.reason}</td>
+            <td style="color:#15803D; font-weight:600;">👉 ${row.teacherFix}</td>
+          </tr>
+        `;
+      });
+
+      html += `
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Nút Điều Hướng Thực Hành Nhanh -->
+          <div style="text-align:center; margin-top:32px; padding:24px; background:#F8FAFC; border-radius:var(--radius-md); border:1px dashed #CBD5E1;">
+            <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#1E293B; margin-bottom:8px;">
+              Sẵn sàng hướng dẫn học viên thực hành ngay bây giờ?
+            </h4>
+            <p style="font-size:0.85rem; color:#64748B; margin-bottom:16px;">
+              Bắt đầu với 5 loại cao độ cốt lõi hoặc khám phá các đoạn hội thoại thực tế:
+            </p>
+            <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+              <button class="btn-primary" style="padding:10px 24px; font-weight:800;" onclick="IntonationManager.switchTab('tones')">
+                <span>📉</span> Bắt Đầu Từ Tab 1 (5 Loại Điệu)
+              </button>
+              <button class="btn-primary" style="padding:10px 24px; font-weight:800; background:#7C3AED;" onclick="IntonationManager.switchTab('rules')">
+                <span>📖</span> Đến Tab 2 (8 Quy Tắc)
+              </button>
+              <button class="btn-primary" style="padding:10px 24px; font-weight:800; background:#0D9488;" onclick="IntonationManager.switchTab('quiz')">
+                <span>🏆</span> Kiểm Tra Với Tab 5 (15 Câu Quiz)
               </button>
             </div>
           </div>
@@ -4446,6 +4825,29 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!q) return;
       const textToSpeak = q.speechText || q.audioText;
       AudioEngine.playIntonationSpeech(textToSpeak, q.speechPitch || 1.0, 0.90, btnEl);
+    },
+
+    playToneDialogue(toneId, lineIdx, btnEl) {
+      const tone = window.INTONATION_DATA.tones.find(t => t.id === toneId);
+      if (!tone || !tone.realLifeDialogue || !tone.realLifeDialogue.lines[lineIdx]) return;
+      const line = tone.realLifeDialogue.lines[lineIdx];
+      const textToSpeak = line.speechText || line.en;
+      const pitch = line.speechPitch !== undefined ? line.speechPitch : (tone.speechPitch || 1.0);
+      AudioEngine.playIntonationSpeech(textToSpeak, pitch, 0.90, btnEl);
+    },
+
+    playRuleDialogue(ruleId, lineIdx, btnEl) {
+      const rule = window.INTONATION_DATA.rules.find(r => r.id === ruleId);
+      if (!rule || !rule.contextualDialogue || !rule.contextualDialogue.lines[lineIdx]) return;
+      const line = rule.contextualDialogue.lines[lineIdx];
+      const textToSpeak = line.speechText || line.en;
+      const pitch = line.speechPitch !== undefined ? line.speechPitch : 1.0;
+      AudioEngine.playIntonationSpeech(textToSpeak, pitch, 0.90, btnEl);
+    },
+
+    playDialogueLine(speechText, pitch, rate, btnEl) {
+      if (!speechText) return;
+      AudioEngine.playIntonationSpeech(speechText, pitch || 1.0, rate || 0.90, btnEl);
     }
   };
   window.IntonationManager = IntonationManager;

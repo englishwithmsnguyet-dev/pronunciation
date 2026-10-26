@@ -3966,4 +3966,321 @@ button, select, input {
   }
 }
 
+/* ==========================================================================
+   BỔ SUNG SƯ PHẠM CHI TIẾT: TEACHER'S PEDAGOGICAL TOOLS & DIALOGUES
+   ========================================================================== */
+
+/* Hộp Lời Cô Nguyệt Dặn (Teacher Tip Box) */
+.teacher-tip-box {
+  background: linear-gradient(135deg, #FAF5FF 0%, #F5F3FF 100%);
+  border: 1px solid #DDD6FE;
+  border-left: 5px solid #7C3AED;
+  border-radius: var(--radius-xs);
+  padding: 12px 16px;
+  margin: 12px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.teacher-tip-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.teacher-tip-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #6D28D9;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.teacher-tip-body {
+  font-size: 0.85rem;
+  color: #4C1D95;
+  line-height: 1.55;
+}
+
+/* Hộp Cảnh Báo Lỗi Sai Học Viên Hay Mắc (Pitfall Warning Box) */
+.pitfall-box {
+  background: #FFF1F2;
+  border: 1px solid #FECDD3;
+  border-left: 5px solid #E11D48;
+  border-radius: var(--radius-xs);
+  padding: 12px 16px;
+  margin: 12px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.pitfall-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pitfall-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #BE123C;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pitfall-body {
+  font-size: 0.84rem;
+  color: #9F1239;
+  line-height: 1.5;
+}
+
+/* Hộp Bối Cảnh Thực Tế (Real-World Context Box) */
+.context-box {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-left: 5px solid #16A34A;
+  border-radius: var(--radius-xs);
+  padding: 12px 16px;
+  margin: 12px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.context-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.context-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #15803D;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.context-body {
+  font-size: 0.84rem;
+  color: #166534;
+  line-height: 1.5;
+}
+
+/* Hộp Hội Thoại Ngữ Cảnh Minh Họa (Real-Life Dialogue Card) */
+.dialogue-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin: 14px 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.dialogue-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #E2E8F0;
+}
+
+.dialogue-card-label {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+.dialogue-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dialogue-line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.speaker-badge {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.speaker-a {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.speaker-b {
+  background: #F3E8FF;
+  color: #7E22CE;
+}
+
+.dialogue-text-wrap {
+  flex: 1;
+}
+
+.dialogue-en {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.dialogue-vn {
+  font-size: 0.78rem;
+  color: #64748B;
+  margin-top: 2px;
+}
+
+.btn-dialogue-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-dialogue-play:hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+/* Bảng Ma Trận Sư Phạm (Pedagogical Contrast Table) */
+.pedagogy-table-wrap {
+  overflow-x: auto;
+  margin: 16px 0 24px;
+}
+
+.pedagogy-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFFFF;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  font-size: 0.85rem;
+}
+
+.pedagogy-table th {
+  background: #0F172A;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.pedagogy-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #F1F5F9;
+  line-height: 1.5;
+  color: var(--text-main);
+}
+
+.pedagogy-table tr:hover {
+  background: #F8FAFC;
+}
+
+/* Thẻ Bước Giảng Dạy Trong Teacher's Guide (Step Card) */
+.pedagogy-step-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.pedagogy-step-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.step-num-badge {
+  background: #7C3AED;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-title-text {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.pedagogy-method-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.method-card {
+  background: #FAF5FF;
+  border: 1px solid #E9D5FF;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.method-card-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #6D28D9;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.method-card-body {
+  font-size: 0.84rem;
+  color: #4C1D95;
+  line-height: 1.5;
+}
+
+
 
