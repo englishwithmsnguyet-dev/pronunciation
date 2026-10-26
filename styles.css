@@ -3132,19 +3132,19 @@ button, select, input {
   line-height: 1.4;
 }
 
-/* Bento Grid 5 Tones */
+/* 5 Tones Layout: Danh Sách Trải Rộng Toàn Chiều Ngang (Full-Width Masterclass Cards) */
 .tones-bento-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 36px;
 }
 
 .tone-card-interactive {
   background: var(--bg-surface);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 24px 28px;
   box-shadow: var(--shadow-soft);
   transition: all 0.25s ease;
   display: flex;
@@ -3152,36 +3152,54 @@ button, select, input {
 }
 
 .tone-card-interactive:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
   border-color: #CBD5E1;
 }
 
-.tone-card-interactive.tag-blue { border-top: 4px solid #0284C7; }
-.tone-card-interactive.tag-green { border-top: 4px solid #16A34A; }
-.tone-card-interactive.tag-purple { border-top: 4px solid #9333EA; }
-.tone-card-interactive.tag-peach { border-top: 4px solid #EA580C; }
-.tone-card-interactive.tag-gray { border-top: 4px solid #64748B; }
+.tone-card-interactive.tag-blue {
+  border-left: 6px solid #0284C7;
+  border-top: 1px solid var(--border-card);
+}
+.tone-card-interactive.tag-green {
+  border-left: 6px solid #16A34A;
+  border-top: 1px solid var(--border-card);
+}
+.tone-card-interactive.tag-purple {
+  border-left: 6px solid #9333EA;
+  border-top: 1px solid var(--border-card);
+}
+.tone-card-interactive.tag-peach {
+  border-left: 6px solid #EA580C;
+  border-top: 1px solid var(--border-card);
+}
+.tone-card-interactive.tag-gray {
+  border-left: 6px solid #64748B;
+  border-top: 1px solid var(--border-card);
+}
 
 .tone-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .tone-card-symbol-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   background: var(--pastel-blue-bg);
   color: var(--brand-primary-dark);
-  font-size: 1.6rem;
+  font-size: 1.85rem;
   font-weight: 800;
   font-family: var(--font-heading);
+  flex-shrink: 0;
 }
 
 .tone-card-interactive.tag-green .tone-card-symbol-badge {
@@ -3208,16 +3226,17 @@ button, select, input {
 
 .tone-card-name {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-main);
+  line-height: 1.3;
 }
 
 .tone-card-meaning-pill {
-  font-size: 0.74rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: #64748B;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* Visual Pitch Canvas / SVG */
@@ -3225,17 +3244,19 @@ button, select, input {
   background: #F8FAFC;
   border: 1px dashed #CBD5E1;
   border-radius: var(--radius-sm);
-  padding: 12px;
-  margin: 12px 0;
+  padding: 14px 20px;
+  margin: 14px 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .tone-svg-wrapper {
-  width: 140px;
-  height: 60px;
+  width: 200px;
+  height: 65px;
+  flex-shrink: 0;
 }
 
 .tone-svg-wrapper svg {
@@ -3246,12 +3267,12 @@ button, select, input {
 .btn-play-tone-pitch {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   background: #FFFFFF;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-pill);
-  padding: 6px 14px;
-  font-size: 0.78rem;
+  padding: 8px 18px;
+  font-size: 0.84rem;
   font-weight: 700;
   color: var(--brand-primary-dark);
   cursor: pointer;
@@ -3266,17 +3287,37 @@ button, select, input {
 }
 
 .tone-card-desc {
-  font-size: 0.84rem;
-  color: var(--text-muted);
-  line-height: 1.5;
+  font-size: 0.94rem;
+  color: #334155;
+  line-height: 1.6;
   margin-bottom: 14px;
+}
+
+.tone-usage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px 14px;
+  margin-top: 8px;
+}
+
+.tone-usage-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: #334155;
+  line-height: 1.5;
+  background: #F8FAFC;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #CBD5E1;
 }
 
 .tone-card-examples-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: auto;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .tone-example-item {
@@ -3285,9 +3326,41 @@ button, select, input {
   justify-content: space-between;
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
-  border-radius: var(--radius-xs);
-  padding: 8px 12px;
-  transition: background 0.2s;
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  transition: all 0.2s;
+  gap: 16px;
+}
+
+.tone-example-item:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+}
+
+.tone-ex-text-col {
+  flex: 1;
+}
+
+.tone-ex-en {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.tone-ex-vn {
+  font-size: 0.84rem;
+  color: #64748B;
+  margin-top: 2px;
+}
+
+.tone-ex-ipa {
+  font-family: var(--font-ipa);
+  font-size: 0.85rem;
+  color: #7C3AED;
+  margin-top: 2px;
+}
 }
 
 .tone-example-item:hover {

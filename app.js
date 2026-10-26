@@ -4007,7 +4007,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="tones-bento-grid">
       `;
 
-      tones.forEach(tone => {
+      tones.forEach((tone, tIdx) => {
         let pathD = "";
         if (tone.acousticCurve && tone.acousticCurve.length) {
           pathD = tone.acousticCurve.map((pt, idx) => (idx === 0 ? `M ${pt.x} ${pt.y}` : `L ${pt.x} ${pt.y}`)).join(" ");
@@ -4016,53 +4016,72 @@ document.addEventListener("DOMContentLoaded", () => {
         html += `
           <div class="tone-card-interactive tag-${tone.tagColor}">
             <div class="tone-card-head">
-              <div class="tone-card-symbol-badge" title="Ký hiệu: ${tone.symbol}">
-                ${tone.symbol}
+              <div style="display:flex; align-items:center; gap:16px;">
+                <div class="tone-card-symbol-badge" title="Ký hiệu: ${tone.symbol}">
+                  ${tone.symbol}
+                </div>
+                <div class="tone-card-title-col" style="margin-left:0;">
+                  <div class="tone-card-name">${tIdx + 1}. ${tone.name} <span class="rule-pattern-pill" style="font-size:0.85rem; margin-left:6px;">${tone.symbol}</span></div>
+                  <div class="tone-card-meaning-pill">${tone.meaning}</div>
+                </div>
               </div>
-              <div class="tone-card-title-col">
-                <div class="tone-card-name">${tone.name}</div>
-                <div class="tone-card-meaning-pill">${tone.meaning}</div>
+              <div style="background:#F1F5F9; border:1px solid #E2E8F0; padding:6px 14px; border-radius:20px; font-size:0.8rem; font-weight:700; color:#475569;">
+                ${tone.id === 'fall' ? 'Chiếm ~60% Giao Tiếp' : tone.id === 'rise' ? 'Chiếm ~25% Giao Tiếp' : 'Sắc Thái Nâng Cao'}
               </div>
             </div>
 
-            <!-- Visual Pitch Box: Đường Cong Cao Độ + Nút Nghe Thử Sóng -->
+            <!-- Visual Pitch Box: Đường Cong Cao Độ To Rõ + Nút Nghe Thử Sóng -->
             <div class="tone-pitch-box">
-              <div class="tone-svg-wrapper">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="grad_${tone.id}" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#0284C7" />
-                      <stop offset="100%" stop-color="#7C3AED" />
-                    </linearGradient>
-                  </defs>
-                  <line x1="0" y1="20" x2="100" y2="20" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
-                  <line x1="0" y1="50" x2="100" y2="50" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
-                  <line x1="0" y1="80" x2="100" y2="80" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
-                  <path d="${pathD}" fill="none" stroke="url(#grad_${tone.id})" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <div style="display:flex; align-items:center; gap:18px; flex:1; min-width:280px;">
+                <div class="tone-svg-wrapper">
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="grad_${tone.id}" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0284C7" />
+                        <stop offset="100%" stop-color="#7C3AED" />
+                      </linearGradient>
+                    </defs>
+                    <line x1="0" y1="20" x2="100" y2="20" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
+                    <line x1="0" y1="50" x2="100" y2="50" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
+                    <line x1="0" y1="80" x2="100" y2="80" stroke="#E2E8F0" stroke-dasharray="2,2" stroke-width="1"/>
+                    <path d="${pathD}" fill="none" stroke="url(#grad_${tone.id})" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-family:var(--font-heading); font-size:0.95rem; font-weight:800; color:#1E293B;">
+                    Đường Cong Cao Độ Âm Học (${tone.symbol})
+                  </div>
+                  <div style="font-size:0.84rem; color:#64748B; margin-top:3px; line-height:1.4;">
+                    ${tone.shortDesc || tone.meaning}
+                  </div>
+                  ${tone.acousticDetails ? `
+                    <div style="font-size:0.78rem; color:#0369A1; font-weight:600; margin-top:4px;">
+                      📊 Thông số vật lý ($F_0$): ${tone.acousticDetails}
+                    </div>
+                  ` : ""}
+                </div>
               </div>
               <button class="btn-play-tone-pitch" onclick="AudioEngine.playPitchContour('${tone.id}')" title="Nghe mô phỏng sóng cao độ âm học">
-                <span>🔊</span> Nghe Sóng Điệu
+                <span>🔊</span> Nghe Sóng Điệu (${tone.symbol})
               </button>
             </div>
 
             <p class="tone-card-desc">${tone.detailedExplanation}</p>
 
-            ${tone.acousticDetails ? `
-              <div style="font-size:0.78rem; color:#475569; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:6px 10px; margin:8px 0;">
-                📊 <strong>Thông số âm học ($F_0$):</strong> ${tone.acousticDetails}
-              </div>
-            ` : ""}
-
-            <!-- Khi nào áp dụng? -->
+            <!-- Khi nào áp dụng? Grid trực quan -->
             ${tone.usageGuide && tone.usageGuide.length ? `
-              <div style="margin:10px 0;">
-                <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin-bottom:4px;">
-                  📌 Trường hợp sử dụng chính:
+              <div style="margin:14px 0 16px;">
+                <div style="font-family:var(--font-heading); font-size:0.88rem; font-weight:800; color:#1E293B; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                  <span>📌</span> Trường Hợp Sử Dụng Chính:
                 </div>
-                <ul style="margin:0 0 0 16px; padding:0; font-size:0.82rem; color:#475569; line-height:1.45;">
-                  ${tone.usageGuide.map(u => `<li>${u}</li>`).join("")}
-                </ul>
+                <div class="tone-usage-grid">
+                  ${tone.usageGuide.map(u => `
+                    <div class="tone-usage-item">
+                      <span style="color:#10B981; font-weight:800; flex-shrink:0;">✓</span>
+                      <span>${u}</span>
+                    </div>
+                  `).join("")}
+                </div>
               </div>
             ` : ""}
 
@@ -4115,8 +4134,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ` : ""}
 
             <!-- 3 Câu Ví Dụ Tương Tác Cơ Bản -->
-            <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin:12px 0 6px;">
-              🎧 3 Câu Ví Dụ Mẫu:
+            <div style="font-family:var(--font-heading); font-size:0.88rem; font-weight:800; color:#334155; text-transform:uppercase; margin:16px 0 8px; display:flex; align-items:center; gap:6px;">
+              <span>🎧</span> 3 Câu Ví Dụ Mẫu Phát Âm Chuẩn:
             </div>
             <div class="tone-card-examples-list">
         `;
