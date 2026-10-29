@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   const AudioEngine = {
     currentAudio: null,
+    intonationAudio: null,
     currentUtterance: null,
     voices: [],
     audioCtx: null,
@@ -137,62 +138,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
 
-    // Phát mô phỏng sóng cao độ ngữ điệu bằng Oscillator (Pitch Glide Sweep)
-    playPitchContour(toneType) {
-      try {
-        const ctx = this.getAudioCtx();
-        if (!ctx) return;
-        const now = ctx.currentTime;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = "sine";
-
-        gain.gain.setValueAtTime(0.001, now);
-        gain.gain.linearRampToValueAtTime(0.24, now + 0.03);
-
-        if (toneType === "fall") {
-          // Falling ↘: Cao độ đổ từ 280Hz -> 125Hz
-          osc.frequency.setValueAtTime(280, now);
-          osc.frequency.exponentialRampToValueAtTime(125, now + 0.5);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.52);
-          osc.start(now);
-          osc.stop(now + 0.53);
-        } else if (toneType === "rise") {
-          // Rising ↗: Cao độ vút từ 130Hz -> 290Hz
-          osc.frequency.setValueAtTime(130, now);
-          osc.frequency.exponentialRampToValueAtTime(290, now + 0.5);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.52);
-          osc.start(now);
-          osc.stop(now + 0.53);
-        } else if (toneType === "fall_rise") {
-          // Fall-Rise ↘↗: 240Hz -> 140Hz -> 250Hz
-          osc.frequency.setValueAtTime(240, now);
-          osc.frequency.exponentialRampToValueAtTime(140, now + 0.28);
-          osc.frequency.exponentialRampToValueAtTime(250, now + 0.6);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.62);
-          osc.start(now);
-          osc.stop(now + 0.63);
-        } else if (toneType === "rise_fall") {
-          // Rise-Fall ↗↘: 160Hz -> 330Hz đỉnh nhọn -> 125Hz đáy
-          osc.frequency.setValueAtTime(160, now);
-          osc.frequency.exponentialRampToValueAtTime(330, now + 0.25);
-          osc.frequency.exponentialRampToValueAtTime(125, now + 0.6);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.62);
-          osc.start(now);
-          osc.stop(now + 0.63);
-        } else {
-          // Level →: Giữ phẳng 195Hz
-          osc.frequency.setValueAtTime(195, now);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
-          osc.start(now);
-          osc.stop(now + 0.52);
-        }
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-      } catch (e) {
-        console.warn("Lỗi phát Pitch Contour:", e);
-      }
+    // Phát mô phỏng sóng cao độ ngữ điệu bằng MP3 bản xứ (Hỗ trợ 100% Google Meet Tab Sharing)
+    playPitchContour(toneType, btnEl) {
+      const contourUrl = `audio/intonation/contour_${toneType}.mp3`;
+      this.playIntonationAudio(contourUrl, null, 1.0, 1.0, btnEl);
     },
 
     init() {
@@ -459,11 +408,70 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 25);
     },
 
-    // Phát âm Ngữ Điệu Tự Nhiên & Mượt Mà (Natural Fluid Cadence)
-    // Nói liền mạch 1 câu duy nhất (Single Utterance), không giật cục, không đứt đoạn
+    // Phát âm Ngữ Điệu Bằng MP3 Gốc Chuẩn Phòng Thu (100% Truyền Tải Được Qua Google Meet Khi Share Thẻ)
+    playIntonationAudio(audioUrl, fallbackText, customPitch, customRate, btnEl) {
+      this.stop();
+
+      let activeBtn = btnEl;
+      if (!activeBtn && window.event && window.event.currentTarget) {
+        activeBtn = window.event.currentTarget;
+      }
+      if (activeBtn) activeBtn.classList.add("playing");
+
+      const clearPlaying = () => {
+        if (activeBtn) activeBtn.classList.remove("playing");
+        document.querySelectorAll(".btn-tone-audio.playing, .btn-dialogue-play.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing, .btn-play-tone-pitch.playing, .btn-quiz-contour-play.playing").forEach(b => b.classList.remove("playing"));
+      };
+
+      if (audioUrl) {
+        try {
+          if (!this.intonationAudio) {
+            this.intonationAudio = new Audio();
+          }
+          this.currentAudio = this.intonationAudio;
+          this.currentAudio.src = audioUrl;
+          this.currentAudio.playbackRate = state.speed || 1.0;
+
+          // Resume Web Audio Context nếu đang suspended
+          if (this.audioCtx && this.audioCtx.state === "suspended") {
+            this.audioCtx.resume().catch(() => {});
+          }
+
+          this.currentAudio.onended = clearPlaying;
+          this.currentAudio.onerror = (e) => {
+            console.warn("Lỗi tải MP3 intonation, chuyển sang TTS dự phòng:", e);
+            clearPlaying();
+            if (fallbackText) {
+              this.playIntonationSpeech(fallbackText, customPitch, customRate, btnEl);
+            }
+          };
+
+          const p = this.currentAudio.play();
+          if (p && typeof p.then === "function") {
+            p.catch(err => {
+              console.warn("Audio play() bị chặn hoặc lỗi:", err);
+              clearPlaying();
+              if (fallbackText) {
+                this.playIntonationSpeech(fallbackText, customPitch, customRate, btnEl);
+              }
+            });
+          }
+          return;
+        } catch (err) {
+          console.warn("Exception khi phát audio:", err);
+        }
+      }
+
+      if (fallbackText) {
+        this.playIntonationSpeech(fallbackText, customPitch, customRate, btnEl);
+      } else {
+        clearPlaying();
+      }
+    },
+
+    // Phát âm Ngữ Điệu Dự Phòng (Non-Freezing Single Utterance)
     playIntonationSpeech(speechText, customPitch, customRate, btnEl) {
       if (!speechText) return;
-      this.stop();
 
       let activeBtn = btnEl;
       if (!activeBtn && window.event && window.event.currentTarget) {
@@ -476,11 +484,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
-      }
+      // Phá băng SpeechSynthesis nếu đang bị kẹt
+      try {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
+        if (window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+        }
+      } catch (e) {}
 
-      const cleanText = speechText.trim();
+      const cleanText = speechText.replace(/[↘↗→─]/g, "").trim();
       const utterance = new SpeechSynthesisUtterance(cleanText);
       const voice = this.getBestVoice(state.accent);
       if (voice) {
@@ -490,35 +504,30 @@ document.addEventListener("DOMContentLoaded", () => {
         utterance.lang = state.accent === "US" ? "en-US" : "en-GB";
       }
 
-      // Giữ pitch trong giới hạn giọng người tự nhiên (0.88 - 1.20) để giọng ấm áp, tự nhiên, không bị méo tiếng
       const pitchVal = (customPitch !== undefined && customPitch !== null) ? customPitch : 1.0;
       utterance.pitch = Math.max(0.85, Math.min(1.20, pitchVal));
 
-      // Tốc độ phát âm thư thả, tròn vành rõ chữ (~0.88x - 0.92x)
       const rateVal = (customRate !== undefined && customRate !== null) ? customRate : 0.90;
       utterance.rate = Math.max(0.70, Math.min(1.25, rateVal * state.speed));
       utterance.volume = 1.0;
 
       const clearPlaying = () => {
         if (activeBtn) activeBtn.classList.remove("playing");
-        document.querySelectorAll(".btn-tone-audio.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing").forEach(b => b.classList.remove("playing"));
+        document.querySelectorAll(".btn-tone-audio.playing, .btn-dialogue-play.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing, .btn-play-tone-pitch.playing, .btn-quiz-contour-play.playing").forEach(b => b.classList.remove("playing"));
         this.currentUtterance = null;
       };
 
       utterance.onend = clearPlaying;
       utterance.onerror = clearPlaying;
 
+      window.__activeUtterance = utterance;
       this.currentUtterance = utterance;
-      setTimeout(() => {
-        try {
-          if (window.speechSynthesis.paused) {
-            window.speechSynthesis.resume();
-          }
-          window.speechSynthesis.speak(utterance);
-        } catch (e) {
-          clearPlaying();
-        }
-      }, 25);
+
+      try {
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        clearPlaying();
+      }
     },
 
     stop() {
@@ -529,13 +538,21 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (e) {}
         this.currentAudio = null;
       }
+      if (this.intonationAudio) {
+        this.intonationAudio.pause();
+        try {
+          this.intonationAudio.currentTime = 0;
+        } catch (e) {}
+      }
       if (this.phonemeAudio) {
         this.phonemeAudio.pause();
       }
-      if (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
-        window.speechSynthesis.cancel();
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (e) {}
       }
-      document.querySelectorAll(".btn-play-sentence.playing, .btn-tone-audio.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing").forEach(b => b.classList.remove("playing"));
+      document.querySelectorAll(".btn-play-sentence.playing, .btn-tone-audio.playing, .btn-dialogue-play.playing, .btn-attitude-listen.playing, .btn-quiz-large-play.playing, .btn-play-tone-pitch.playing, .btn-quiz-contour-play.playing").forEach(b => b.classList.remove("playing"));
       this.currentUtterance = null;
     },
 
@@ -4061,7 +4078,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   ` : ""}
                 </div>
               </div>
-              <button class="btn-play-tone-pitch" onclick="AudioEngine.playPitchContour('${tone.id}')" title="Nghe mô phỏng sóng cao độ âm học">
+              <button class="btn-play-tone-pitch" onclick="AudioEngine.playPitchContour('${tone.id}', this)" title="Nghe mô phỏng sóng cao độ âm học">
                 <span>🔊</span> Nghe Sóng Điệu (${tone.symbol})
               </button>
             </div>
@@ -4663,7 +4680,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (q.targetTone && ["fall", "rise", "fall_rise", "rise_fall", "level"].includes(q.targetTone)) {
         html += `
-          <button class="btn-quiz-contour-play" onclick="AudioEngine.playPitchContour('${q.targetTone}')" title="Nghe mô phỏng sóng cao độ âm học">
+          <button class="btn-quiz-contour-play" onclick="AudioEngine.playPitchContour('${q.targetTone}', this)" title="Nghe mô phỏng sóng cao độ âm học">
             <span>🎵</span> Nghe Đường Cao Độ (Contour)
           </button>
         `;
@@ -4767,26 +4784,48 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // =======================================================================
-    // CÁC HÀM PHÁT ÂM NGỮ ĐIỆU CHUYÊN SÂU (NATURAL FLUID PROSODY PLAYERS)
+    // CÁC HÀM PHÁT ÂM NGỮ ĐIỆU CHUYÊN SÂU (HỖ TRỢ 100% GOOGLE MEET TAB SHARING)
     // =======================================================================
     playToneExample(toneId, exIdx, btnEl) {
       const tone = window.INTONATION_DATA.tones.find(t => t.id === toneId);
       if (!tone || !tone.examples[exIdx]) return;
       const ex = tone.examples[exIdx];
+      const audioUrl = ex.audioUrl || `audio/intonation/tone_${tone.id}_ex_${exIdx}.mp3`;
       const textToSpeak = ex.speechText || ex.en;
       const pitch = (ex.speechPitch !== undefined) ? ex.speechPitch : tone.speechPitch;
       const rate = ex.speechRate || 0.90;
-      AudioEngine.playIntonationSpeech(textToSpeak, pitch, rate, btnEl);
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, pitch, rate, btnEl);
+    },
+
+    playToneDialogue(toneId, lineIdx, btnEl) {
+      const tone = window.INTONATION_DATA.tones.find(t => t.id === toneId);
+      if (!tone || !tone.realLifeDialogue || !tone.realLifeDialogue.lines[lineIdx]) return;
+      const line = tone.realLifeDialogue.lines[lineIdx];
+      const audioUrl = line.audioUrl || `audio/intonation/tone_${tone.id}_dial_${lineIdx}.mp3`;
+      const textToSpeak = line.speechText || line.en;
+      const pitch = line.speechPitch !== undefined ? line.speechPitch : (tone.speechPitch || 1.0);
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, pitch, 0.90, btnEl);
     },
 
     playRuleExample(ruleId, exIdx, btnEl) {
       const rule = window.INTONATION_DATA.rules.find(r => r.id === ruleId);
       if (!rule || !rule.examples[exIdx]) return;
       const ex = rule.examples[exIdx];
+      const audioUrl = ex.audioUrl || `audio/intonation/rule_${rule.id}_ex_${exIdx}.mp3`;
       const textToSpeak = ex.speechText || ex.en;
       const pitch = (ex.speechPitch !== undefined) ? ex.speechPitch : 1.0;
       const rate = ex.speechRate || 0.90;
-      AudioEngine.playIntonationSpeech(textToSpeak, pitch, rate, btnEl);
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, pitch, rate, btnEl);
+    },
+
+    playRuleDialogue(ruleId, lineIdx, btnEl) {
+      const rule = window.INTONATION_DATA.rules.find(r => r.id === ruleId);
+      if (!rule || !rule.contextualDialogue || !rule.contextualDialogue.lines[lineIdx]) return;
+      const line = rule.contextualDialogue.lines[lineIdx];
+      const audioUrl = line.audioUrl || `audio/intonation/rule_${rule.id}_dial_${lineIdx}.mp3`;
+      const textToSpeak = line.speechText || line.en;
+      const pitch = line.speechPitch !== undefined ? line.speechPitch : 1.0;
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, pitch, 0.90, btnEl);
     },
 
     playAttitudeExample(word, toneType, btnEl) {
@@ -4794,46 +4833,32 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!wordObj) return;
       const variation = wordObj.variations.find(v => v.tone === toneType);
       if (!variation) return;
+      const wSafe = word.toLowerCase().replace(/[^a-z0-9]/g, "_");
+      const audioUrl = variation.audioUrl || `audio/intonation/att_${wSafe}_${variation.tone}.mp3`;
       const textToSpeak = variation.speechText || word;
-      AudioEngine.playIntonationSpeech(textToSpeak, variation.speechPitch, variation.speechRate || 0.90, btnEl);
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, variation.speechPitch, variation.speechRate || 0.90, btnEl);
     },
 
     playNucleusExample(wordIdx, btnEl) {
       const demo = window.INTONATION_DATA.nucleusShiftDemo;
       const w = demo.words[wordIdx];
       if (!w) return;
+      const audioUrl = w.audioUrl || `audio/intonation/nucleus_${wordIdx}.mp3`;
       const textToSpeak = w.speechText || "I didn't take your book.";
-      AudioEngine.playIntonationSpeech(textToSpeak, w.speechPitch, 0.90, btnEl);
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, w.speechPitch, 0.90, btnEl);
     },
 
     playQuizAudio(btnEl) {
       const q = window.INTONATION_DATA.quiz[this.quizIndex];
       if (!q) return;
+      const audioUrl = q.audioUrl || `audio/intonation/quiz_${q.id}.mp3`;
       const textToSpeak = q.speechText || q.audioText;
-      AudioEngine.playIntonationSpeech(textToSpeak, q.speechPitch || 1.0, 0.90, btnEl);
-    },
-
-    playToneDialogue(toneId, lineIdx, btnEl) {
-      const tone = window.INTONATION_DATA.tones.find(t => t.id === toneId);
-      if (!tone || !tone.realLifeDialogue || !tone.realLifeDialogue.lines[lineIdx]) return;
-      const line = tone.realLifeDialogue.lines[lineIdx];
-      const textToSpeak = line.speechText || line.en;
-      const pitch = line.speechPitch !== undefined ? line.speechPitch : (tone.speechPitch || 1.0);
-      AudioEngine.playIntonationSpeech(textToSpeak, pitch, 0.90, btnEl);
-    },
-
-    playRuleDialogue(ruleId, lineIdx, btnEl) {
-      const rule = window.INTONATION_DATA.rules.find(r => r.id === ruleId);
-      if (!rule || !rule.contextualDialogue || !rule.contextualDialogue.lines[lineIdx]) return;
-      const line = rule.contextualDialogue.lines[lineIdx];
-      const textToSpeak = line.speechText || line.en;
-      const pitch = line.speechPitch !== undefined ? line.speechPitch : 1.0;
-      AudioEngine.playIntonationSpeech(textToSpeak, pitch, 0.90, btnEl);
+      AudioEngine.playIntonationAudio(audioUrl, textToSpeak, q.speechPitch || 1.0, 0.90, btnEl);
     },
 
     playDialogueLine(speechText, pitch, rate, btnEl) {
       if (!speechText) return;
-      AudioEngine.playIntonationSpeech(speechText, pitch || 1.0, rate || 0.90, btnEl);
+      AudioEngine.playIntonationAudio(null, speechText, pitch || 1.0, rate || 0.90, btnEl);
     }
   };
   window.IntonationManager = IntonationManager;

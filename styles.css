@@ -4249,6 +4249,21 @@ button, select, input {
   color: #FFFFFF;
 }
 
+/* Trạng thái phát âm thanh sinh động (Active Playing States) */
+.btn-tone-audio.playing,
+.btn-dialogue-play.playing,
+.btn-play-tone-pitch.playing,
+.btn-attitude-listen.playing,
+.btn-quiz-large-play.playing,
+.btn-quiz-contour-play.playing {
+  background: var(--brand-primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.35) !important;
+  transform: scale(1.05);
+  animation: pulseAudio 1.2s infinite ease-in-out;
+}
+
 /* Bảng Ma Trận Sư Phạm (Pedagogical Contrast Table) */
 .pedagogy-table-wrap {
   overflow-x: auto;
