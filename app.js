@@ -3908,6 +3908,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.renderStressTab(container);
       } else if (this.currentTab === "pausing") {
         this.renderPausingTab(container);
+      } else if (this.currentTab === "linking") {
+        this.renderLinkingTab(container);
       } else if (this.currentTab === "attitudes") {
         this.renderAttitudesTab(container);
       } else if (this.currentTab === "functions") {
@@ -4924,7 +4926,135 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 5: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+    // TAB 5: KỸ THUẬT NỐI ÂM (LINKING) & DẠNG NÓI TẮT (CONTRACTIONS)
+    // ------------------------------------------------------------------------
+    renderLinkingTab(container) {
+      const data = window.INTONATION_DATA.linkingContractions;
+      if (!data) {
+        container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748B;">Đang tải dữ liệu nối âm...</div>`;
+        return;
+      }
+
+      const types = data.linkingTypes;
+      const contractions = data.contractions;
+
+      let html = `
+        <div style="margin-bottom:24px;">
+          <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:800; background:#E0F2FE; color:#0369A1; padding:4px 12px; border-radius:999px; text-transform:uppercase; margin-bottom:8px; border:1px solid #BAE6FD;">
+            <span>🔗</span> Dòng Chảy Lời Nói Tự Nhiên (Connected Speech)
+          </div>
+          <h2 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
+            ${data.title}
+          </h2>
+          <div style="font-size:0.88rem; color:#6D28D9; font-weight:600; margin-bottom:12px;">
+            ${data.subtitle}
+          </div>
+          <p style="font-size:0.88rem; color:#475569; line-height:1.6; background:#F8FAFC; border:1px solid #E2E8F0; padding:14px 16px; border-radius:10px;">
+            ${data.overview}
+          </p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:28px;">
+
+          <!-- PHẦN 1: 4 DẠNG NỐI ÂM CHÍNH -->
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+              <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:#1E293B; display:flex; align-items:center; gap:8px;">
+                <span>🎯</span> I. 4 Dạng Nối Âm Cốt Lõi (The 4 Linking Patterns)
+              </h3>
+              <span style="font-size:0.78rem; font-weight:700; background:#EFF6FF; color:#1E40AF; padding:4px 10px; border-radius:var(--radius-pill); border:1px solid #BFDBFE;">
+                Bản chất: Người bản xứ không đọc rời rạc từng từ
+              </span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              ${types.map(t => `
+                <div class="linking-card">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                    <div style="font-family:var(--font-heading); font-weight:800; font-size:1.05rem; color:#1E40AF;">
+                      ${t.title}
+                    </div>
+                    <span style="font-size:0.75rem; font-weight:700; background:#DBEAFE; color:#1E40AF; padding:3px 10px; border-radius:var(--radius-pill);">
+                      ${t.badge}
+                    </span>
+                  </div>
+
+                  <p style="font-size:0.86rem; color:#475569; line-height:1.55; margin-bottom:10px;">
+                    👉 ${t.desc}
+                  </p>
+
+                  <div style="font-family:monospace; font-size:0.85rem; font-weight:700; color:#0369A1; background:#F0F9FF; border:1px dashed #BAE6FD; padding:8px 12px; border-radius:6px; margin-bottom:14px;">
+                    📐 Quy tắc: ${t.formula}
+                  </div>
+
+                  <!-- Grid ví dụ -->
+                  <div class="linking-examples-grid">
+                    ${t.examples.map(ex => `
+                      <div class="linking-example-item">
+                        <div style="flex:1;">
+                          <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-family:var(--font-heading); font-weight:800; font-size:0.95rem; color:#0F172A;">${ex.original}</span>
+                            <span style="font-size:0.82rem; color:#6D28D9; font-weight:700;">→</span>
+                            <span style="font-family:monospace; font-weight:700; font-size:0.88rem; color:#2563EB;">${ex.phoneticVi}</span>
+                          </div>
+                          <div style="font-size:0.75rem; color:#64748B; margin-top:2px;">
+                            ${ex.note} • <span style="font-family:var(--font-ipa); color:#7C3AED;">${ex.linkedIpa}</span>
+                          </div>
+                        </div>
+                        <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio(null, '${ex.speechText}', 1.0, 0.88, this)" title="Nghe cách phát âm nối âm">
+                          🔊
+                        </button>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- PHẦN 2: CÁC DẠNG NÓI TẮT PHỔ BIẾN (CONTRACTIONS) -->
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+              <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:#1E293B; display:flex; align-items:center; gap:8px;">
+                <span>⚡</span> II. Các Dạng Nói Tắt & Rút Gọn (Contractions)
+              </h3>
+              <span style="font-size:0.78rem; font-weight:700; background:#FAF5FF; color:#7C3AED; padding:4px 10px; border-radius:var(--radius-pill); border:1px solid #E9D5FF;">
+                Tiết kiệm hơi & tăng tốc độ nói
+              </span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+              ${contractions.map(c => `
+                <div class="contraction-group-card">
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.98rem; color:#6D28D9; margin-bottom:4px;">
+                    ${c.label}
+                  </div>
+                  <div style="font-size:0.8rem; color:#475569; line-height:1.45; margin-bottom:10px;">
+                    👉 ${c.rule}
+                  </div>
+
+                  <div class="contraction-items-grid">
+                    ${c.items.map(it => `
+                      <button class="contraction-pill-btn" onclick="AudioEngine.playIntonationAudio(null, '${it.speechText}', 1.0, 0.88, this)" title="Bấm để nghe cách phát âm">
+                        <span style="font-weight:800; color:#0F172A; font-size:0.92rem;">${it.text}</span>
+                        <span style="font-size:0.75rem; color:#6D28D9; font-family:var(--font-ipa);">${it.ipa}</span>
+                        <span style="font-size:0.75rem;">🔊</span>
+                      </button>
+                    `).join("")}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 6: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
     // ------------------------------------------------------------------------
     renderAttitudesTab(container) {
       const attitudes = window.INTONATION_DATA.attitudes;
