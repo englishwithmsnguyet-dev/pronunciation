@@ -2076,5 +2076,309 @@ window.INTONATION_DATA = {
       ],
       explanation: "Mệnh lệnh dứt khoát (Orders/Commands) bắt buộc hạ giọng sâu (Falling ↘) để biểu thị quyền lực, tính kiên quyết và yêu cầu người nghe thực hiện ngay lập tức."
     }
-  ]
+  ],
+
+  // =========================================================================
+  // PHẦN 6: LUYỆN ĐỀ THỰC CHIẾN TOEIC SPEAKING (QUESTIONS 1–2)
+  // Giáo trình Độc quyền Miss Nguyet 2026 kết hợp Collins TOEIC
+  // =========================================================================
+  toeicPractice: {
+    title: "Luyện Đề Thực Chiến: TOEIC Speaking Questions 1–2",
+    subtitle: "Áp dụng toàn diện 5 kỹ năng: Ngữ điệu, Trọng âm câu, Ngắt nghỉ theo dấu câu, Phân cụm tư duy và Nối âm vào 4 bài đọc khảo thí thực tế.",
+    examInfo: {
+      part: "Questions 1–2: Read a Text Aloud",
+      directions: "In this part, you will read a text aloud. You will have 45 seconds to prepare and 45 seconds to read the text aloud.",
+      prepTime: 45,
+      speakTime: 45,
+      scoringCriteria: [
+        { icon: "🗣️", label: "Phát âm (Pronunciation)", desc: "Chuẩn xác từng phụ âm cuối (/t/, /d/, /s/, /z/), nguyên âm dài/ngắn, không nuốt âm ẩu." },
+        { icon: "⚡", label: "Trọng âm (Word & Sentence Stress)", desc: "Nhấn mạnh từ mang nghĩa (Content Words), lướt nhanh từ chức năng (Function Words)." },
+        { icon: "📈", label: "Ngữ điệu (Intonation)", desc: "Lên giọng cuối câu Yes/No, liệt kê, vế phụ; Hạ giọng câu trần thuật, Wh-questions, thông báo." },
+        { icon: "⏸️", label: "Ngắt nghỉ (Pausing & Chunking)", desc: "Ngắt hơi đúng dấu câu (comma, period) và cụm tư duy (Meaning Groups), không ngắt vụn." }
+      ]
+    },
+    practices: [
+      {
+        id: "practice_1",
+        num: 1,
+        badge: "Get Set • Text 1",
+        title: "PRACTICE 01: Hội Chợ Quận (The County Fair)",
+        trackInfo: "Collins Track 01-02.36 (Get Set - Text 1)",
+        audioUrl: "audio/collins/collins_practice_county_fair.mp3",
+        rawText: "Good afternoon everyone, and welcome to the county fair! It’s wonderful to have you here today as we celebrate the 120th anniversary of our city. We commemorate this day with great pride. Please make sure you visit the exhibits and game booths. Later today, there will be competitive events, such as our famous pie-baking contest. I strongly suggest that you get over to the pie table early, or there might not be anything left. It is also my pleasure to introduce you to our mayor, Mr. James Moon. Mr. Moon will lead us in singing our national anthem. Then, we’ll begin the festivities.",
+        markedDisplay: `Good afternoon everyone <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, and welcome <span class="pause-pill-light">/</span> to the county fair! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> It’s wonderful <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> to have you here today <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> as we celebrate <span class="pause-pill-light">/</span> the 120th anniversary <span class="pause-pill-light">/</span> of our city <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. We commemorate <span class="pause-pill-light">/</span> this day <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> with great pride <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. Please make sure <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> you visit <span class="pause-pill-light">/</span> the exhibits <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> and game booths <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. Later today <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, there will be <span class="pause-pill-light">/</span> competitive events <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, such as <span class="pause-pill-light">/</span> our famous pie-baking contest <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. I strongly suggest <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> that you get over <span class="pause-pill-light">/</span> to the pie table early <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, or there might not be <span class="pause-pill-light">/</span> anything left <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. It is also <span class="pause-pill-light">/</span> my pleasure <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> to introduce you <span class="pause-pill-light">/</span> to our mayor <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, Mr. James Moon <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. Mr. Moon <span class="pause-pill-light">/</span> will lead us <span class="pause-pill-light">/</span> in singing <span class="pause-pill-light">/</span> our national anthem <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>. Then <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, we’ll begin <span class="pause-pill-light">/</span> the festivities <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>.`,
+        chunkedSentences: [
+          {
+            text: "Good afternoon ↗, everyone ↗ | and welcome | to the county fair! ↘",
+            note: "Lời chào mở đầu lên giọng thân mật (↗), cụm chào mừng hạ giọng dứt khoát (↘) ở cuối.",
+            speechText: "Good afternoon everyone, and welcome to the county fair!"
+          },
+          {
+            text: "It’s wonderful | to have you here today ↘ | as we celebrate | the 120th anniversary | of our city ↘",
+            note: "Ngắt nhẹ trước liên từ 'as', số đếm '120th' nhấn rõ trọng âm, hạ giọng cuối câu trần thuật.",
+            speechText: "It's wonderful to have you here today as we celebrate the 120th anniversary of our city."
+          },
+          {
+            text: "We commemorate this day | with great pride ↘",
+            note: "Tách cụm chủ vị và cụm giới từ 'with great pride', hạ giọng dứt khoát ở pride.",
+            speechText: "We commemorate this day with great pride."
+          },
+          {
+            text: "Please make sure | you visit | the exhibits and game booths ↘",
+            note: "Lời kêu gọi cộng đồng hạ giọng dứt khoát (giây 28-31 trong băng gốc Collins).",
+            speechText: "Please make sure you visit the exhibits and game booths."
+          },
+          {
+            text: "Later today ↗, | there will be competitive events ↘ | such as our famous pie-baking contest ↘",
+            note: "Trạng ngữ mở đầu 'Later today ↗' lên giọng; cụm ví dụ 'such as...' giữ nhịp hạ giọng.",
+            speechText: "Later today, there will be competitive events, such as our famous pie-baking contest."
+          },
+          {
+            text: "I strongly suggest | that you | get over to the pie table | early ↗ | or there might not be anything left ↘",
+            note: "Nhấn mạnh trạng từ 'strongly', lên giọng ở vế điều kiện dở dang (early ↗), hạ giọng dứt điểm ở vế sau (left ↘).",
+            speechText: "I strongly suggest that you get over to the pie table early, or there might not be anything left."
+          },
+          {
+            text: "It is also my pleasure | to introduce you | to our mayor ↗, Mr. James ↗ M-o-o-n ↘",
+            note: "Giới thiệu danh vị lên giọng nhẹ (mayor ↗), đọc tên riêng Mr. James Moon với nhịp trang trọng.",
+            speechText: "It is also my pleasure to introduce you to our mayor, Mr. James Moon."
+          },
+          {
+            text: "Mr. Moon will lead us | in singing | our national anthem ↘",
+            note: "Ngắt sau cụm động từ 'lead us', hạ giọng ở cụm danh từ 'national anthem ↘'.",
+            speechText: "Mr. Moon will lead us in singing our national anthem."
+          },
+          {
+            text: "Then | we’ll begin ↗ | the festivities ↘",
+            note: "Từ nối 'Then' ngắt nhẹ, 'we’ll begin ↗' đưa nhịp lên nhẹ rồi chốt hạ giọng ở 'festivities ↘'.",
+            speechText: "Then, we'll begin the festivities."
+          }
+        ],
+        vocabulary: [
+          { word: "county fair", ipa: "/ˈkaʊnti fer/", pos: "n", meaning: "hội chợ của quận" },
+          { word: "anniversary", ipa: "/ˌænɪˈvɝːsəri/", pos: "n", meaning: "ngày kỷ niệm" },
+          { word: "commemorate", ipa: "/kəˈmeməreɪt/", pos: "v", meaning: "kỷ niệm, tưởng niệm" },
+          { word: "pride", ipa: "/praɪd/", pos: "n", meaning: "niềm tự hào" },
+          { word: "exhibit", ipa: "/ɪɡˈzɪbɪt/", pos: "n", meaning: "vật trưng bày, triển lãm" },
+          { word: "booth", ipa: "/buːθ/", pos: "n", meaning: "gian hàng" },
+          { word: "competitive", ipa: "/kəmˈpetətɪv/", pos: "adj", meaning: "mang tính thi đấu, cạnh tranh" },
+          { word: "pie-baking contest", ipa: "/ˈpaɪ ˌbeɪkɪŋ ˈkɑːntest/", pos: "n", meaning: "cuộc thi làm bánh pie" },
+          { word: "suggest", ipa: "/səˈdʒest/", pos: "v", meaning: "đề nghị, khuyên bảo" },
+          { word: "mayor", ipa: "/ˈmeɪər/", pos: "n", meaning: "thị trưởng" },
+          { word: "pleasure", ipa: "/ˈpleʒər/", pos: "n", meaning: "niềm vui, vinh hạnh" },
+          { word: "national", ipa: "/ˈnæʃənəl/", pos: "adj", meaning: "thuộc quốc gia, dân tộc" },
+          { word: "anthem", ipa: "/ˈænθəm/", pos: "n", meaning: "quốc ca" },
+          { word: "festivities", ipa: "/fesˈtɪvətiz/", pos: "n", meaning: "lễ hội, hoạt động ăn mừng" }
+        ]
+      },
+      {
+        id: "practice_2",
+        num: 2,
+        badge: "Get Set • Text 2",
+        title: "PRACTICE 02: Trung Tâm Thể Thao Mạo Hiểm (Extreme Sports Center)",
+        trackInfo: "Collins Track 01-02.37 (Get Set - Text 2)",
+        audioUrl: "audio/collins/collins_practice_extreme_sports.mp3",
+        rawText: "Are you ready for an adventure? Extreme Sports Center offers the latest in adventurous outdoor sports—skydiving, hang gliding, scuba diving, or rock climbing. We can expedite the process of getting you a scuba diving permit and train you to dive in just a few intensive sessions. Our specialized training sessions with expert instructors will give you all the basics. We also organize packages for extreme sport vacations. So wherever you want to go, we’ll take you there! Go Extreme!",
+        markedDisplay: `Are you ready <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> for an adventure <span class="tone-pill-rise">↗</span>? <span class="pause-pill-heavy">//</span> Extreme Sports Center <span class="pause-pill-light">/</span> offers the latest <span class="pause-pill-light">/</span> in adventurous outdoor sports - <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> skydiving <span class="tone-pill-rise">↗</span>, hang gliding <span class="tone-pill-rise">↗</span>, scuba diving <span class="tone-pill-rise">↗</span>, or rock climbing. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We can expedite <span class="pause-pill-light">/</span> the process of getting you <span class="pause-pill-light">/</span> a scuba diving permit <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and train you to dive <span class="pause-pill-light">/</span> in just a few intensive sessions. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Our specialized training sessions <span class="pause-pill-light">/</span> with expert instructors <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> will give you <span class="pause-pill-light">/</span> all the basics. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We also organize packages <span class="pause-pill-light">/</span> for extreme sport vacations. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> So wherever you want to go <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, we’ll take you there! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Go Extreme! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>`,
+        chunkedSentences: [
+          {
+            text: "Are you ready ↗ | for an adventure ↗?",
+            note: "Câu hỏi Yes/No lên giọng vút cao ở cuối câu để khơi gợi sự hứng thú của người nghe.",
+            speechText: "Are you ready for an adventure?"
+          },
+          {
+            text: "Extreme Sports Center | offers the latest | in adventurous outdoor sports - ↘ | skydiving ↗, hang gliding ↗, scuba diving ↗, or rock climbing. ↘",
+            note: "Quy tắc liệt kê kinh điển: 3 môn đầu lên giọng (↗), môn cuối cùng 'rock climbing ↘' hạ giọng kết chuỗi.",
+            speechText: "Extreme Sports Center offers the latest in adventurous outdoor sports—skydiving, hang gliding, scuba diving, or rock climbing."
+          },
+          {
+            text: "We can expedite | the process of getting you | a scuba diving permit ↘ | and train you to dive | in just a few intensive sessions ↘",
+            note: "Ngắt sau 'expedite', nhấn trọng âm âm 1 của PERmit (danh từ), hạ giọng ở cuối mỗi vế liên từ 'and'.",
+            speechText: "We can expedite the process of getting you a scuba diving permit and train you to dive in just a few intensive sessions."
+          },
+          {
+            text: "Our specialized training sessions | with expert instructors ↘ | will give you | all the basics ↘",
+            note: "Cụm chủ ngữ dài chia thành 2 chunk nhỏ, hạ giọng ở 'instructors' và chốt câu ở 'basics'.",
+            speechText: "Our specialized training sessions with expert instructors will give you all the basics."
+          },
+          {
+            text: "We also organize packages | for extreme sport vacations ↘",
+            note: "Câu trần thuật hạ giọng dứt khoát ở 'vacations ↘'.",
+            speechText: "We also organize packages for extreme sport vacations."
+          },
+          {
+            text: "So wherever you want to go ↗, | we’ll take you there ↘",
+            note: "Mệnh đề phụ bắt đầu bằng 'wherever' lên giọng dở dang (↗), mệnh đề chính hạ giọng (↘).",
+            speechText: "So wherever you want to go, we'll take you there!"
+          },
+          {
+            text: "Go Extreme ↘",
+            note: "Khẩu hiệu (slogan) hạ giọng dứt khoát, tràn đầy năng lượng và quyết tâm.",
+            speechText: "Go Extreme!"
+          }
+        ],
+        vocabulary: [
+          { word: "adventure", ipa: "/ədˈventʃər/", pos: "n", meaning: "cuộc phiêu lưu" },
+          { word: "adventurous", ipa: "/ədˈventʃərəs/", pos: "adj", meaning: "mang tính mạo hiểm" },
+          { word: "skydiving", ipa: "/ˈskaɪdaɪvɪŋ/", pos: "n", meaning: "nhảy dù" },
+          { word: "hang gliding", ipa: "/ˈhæŋ ɡlaɪdɪŋ/", pos: "n", meaning: "lượn bằng diều lượn" },
+          { word: "scuba diving", ipa: "/ˈskuːbə daɪvɪŋ/", pos: "n", meaning: "lặn biển có bình dưỡng khí" },
+          { word: "rock climbing", ipa: "/ˈrɑːk klaɪmɪŋ/", pos: "n", meaning: "leo núi đá" },
+          { word: "expedite", ipa: "/ˈekspədaɪt/", pos: "v", meaning: "đẩy nhanh, xúc tiến" },
+          { word: "permit", ipa: "/ˈpɝːmɪt/", pos: "n", meaning: "giấy phép (nhấn âm 1)" },
+          { word: "intensive", ipa: "/ɪnˈtensɪv/", pos: "adj", meaning: "chuyên sâu, cường độ cao" },
+          { word: "specialized", ipa: "/ˈspeʃəlaɪzd/", pos: "adj", meaning: "chuyên biệt, chuyên môn hóa" },
+          { word: "instructor", ipa: "/ɪnˈstrʌktər/", pos: "n", meaning: "người hướng dẫn, huấn luyện viên" },
+          { word: "organize", ipa: "/ˈɔːrɡənaɪz/", pos: "v", meaning: "tổ chức" },
+          { word: "vacation", ipa: "/veɪˈkeɪʃən/", pos: "n", meaning: "kỳ nghỉ" },
+          { word: "basics", ipa: "/ˈbeɪsɪks/", pos: "n", meaning: "những điều cơ bản, kiến thức nền tảng" },
+          { word: "latest", ipa: "/ˈleɪtɪst/", pos: "adj", meaning: "mới nhất, hiện đại nhất" },
+          { word: "process", ipa: "/ˈprɑːses/", pos: "n", meaning: "quá trình, quy trình" },
+          { word: "session", ipa: "/ˈseʃən/", pos: "n", meaning: "buổi học, phiên làm việc" },
+          { word: "expert", ipa: "/ˈekspɝːt/", pos: "n/adj", meaning: "chuyên gia; có chuyên môn cao" }
+        ]
+      },
+      {
+        id: "practice_3",
+        num: 3,
+        badge: "Go for the TOEIC Test • Question 1",
+        title: "PRACTICE 03: Khu Nghỉ Dưỡng & Spa Faraway (Faraway Spa and Resort)",
+        trackInfo: "Collins Track 01-02.40 (Test Practice - Question 1)",
+        audioUrl: "audio/collins/collins_practice_spa_resort.mp3",
+        rawText: "Good day, everyone, and welcome to the Faraway Spa and Resort. We’d like to call your attention to a few important items. Make sure you register at the front desk and pick up your room keys and introductory packets. Next, you will receive a complimentary certificate for dinner at our gourmet restaurant. Dinner will be served at 6 p.m. and 8 p.m. In your room, you will find a robe, towels, and a gift basket of products, such as bath soaps and lotions. Please feel free to contact us if you have forgotten to bring any personal items with you. We hope you find your stay at Faraway Spa and Resort relaxing and enjoyable.",
+        markedDisplay: `Good day, everyone <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and welcome <span class="pause-pill-light">/</span> to the Faraway Spa and Resort. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We’d like <span class="pause-pill-light">/</span> to call your attention <span class="pause-pill-light">/</span> to a few important items. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Make sure <span class="pause-pill-light">/</span> you register <span class="pause-pill-light">/</span> at the front desk <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and pick up <span class="pause-pill-light">/</span> your room keys <span class="pause-pill-light">/</span> and introductory packets. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Next <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, you will receive <span class="pause-pill-light">/</span> a complimentary certificate for dinner <span class="pause-pill-light">/</span> at our gourmet restaurant. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Dinner will be served <span class="pause-pill-light">/</span> at 6 p.m. <span class="tone-pill-rise">↗</span> and 8 p.m. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> In your room <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, you will find <span class="pause-pill-light">/</span> a robe <span class="tone-pill-rise">↗</span>, towels <span class="tone-pill-rise">↗</span>, and a gift basket of products <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> such as bath soaps <span class="tone-pill-rise">↗</span> and lotions. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Please feel free <span class="pause-pill-light">/</span> to contact us <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> if you have forgotten <span class="pause-pill-light">/</span> to bring any personal items <span class="pause-pill-light">/</span> with you. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We hope <span class="pause-pill-light">/</span> you find your stay <span class="pause-pill-light">/</span> at Faraway Spa and Resort <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> relaxing <span class="pause-pill-light">/</span> and enjoyable. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>`,
+        chunkedSentences: [
+          {
+            text: "Good day, everyone ↘ | and welcome | to the Faraway Spa and Resort ↘",
+            note: "Lời chào trang trọng nơi khách sạn/resort hạ giọng điềm tĩnh.",
+            speechText: "Good day, everyone, and welcome to the Faraway Spa and Resort."
+          },
+          {
+            text: "We’d like | to call your attention | to a few important items ↘",
+            note: "Cụm 'call your attention' trang trọng, hạ giọng ở cuối câu.",
+            speechText: "We'd like to call your attention to a few important items."
+          },
+          {
+            text: "Make sure | you register | at the front desk ↘ | and pick up | your room keys | and introductory packets ↘",
+            note: "Chia câu mệnh lệnh ghép thành 2 vế rõ ràng với liên từ 'and'.",
+            speechText: "Make sure you register at the front desk and pick up your room keys and introductory packets."
+          },
+          {
+            text: "Next ↗, | you will receive | a complimentary certificate for dinner | at our gourmet restaurant ↘",
+            note: "Từ nối dẫn dắt 'Next ↗' lên giọng; cụm 'complimentary certificate' đọc liền không ngắt.",
+            speechText: "Next, you will receive a complimentary certificate for dinner at our gourmet restaurant."
+          },
+          {
+            text: "Dinner will be served | at 6 p.m. ↗ and 8 p.m. ↘",
+            note: "Chuỗi thời gian: mốc 1 (6 p.m. ↗) lên giọng, mốc 2 (8 p.m. ↘) hạ giọng.",
+            speechText: "Dinner will be served at 6 p.m. and 8 p.m."
+          },
+          {
+            text: "In your room ↗, | you will find | a robe ↗, towels ↗, and a gift basket of products ↘ | such as bath soaps ↗ and lotions ↘",
+            note: "Quy tắc liệt kê kép: a robe ↗, towels ↗, a gift basket ↘; tiếp theo bath soaps ↗ và lotions ↘.",
+            speechText: "In your room, you will find a robe, towels, and a gift basket of products, such as bath soaps and lotions."
+          },
+          {
+            text: "Please feel free | to contact us ↘ | if you have forgotten | to bring any personal items | with you ↘",
+            note: "Mệnh đề chính trước hạ giọng, mệnh đề điều kiện 'if' ở sau hạ giọng dứt câu.",
+            speechText: "Please feel free to contact us if you have forgotten to bring any personal items with you."
+          },
+          {
+            text: "We hope | you find your stay | at Faraway Spa and Resort ↘ | relaxing | and enjoyable ↘",
+            note: "Ngắt sau tên riêng Resort, kết thúc bài đọc với 2 tính từ cảm xúc nhẹ nhàng.",
+            speechText: "We hope you find your stay at Faraway Spa and Resort relaxing and enjoyable."
+          }
+        ],
+        vocabulary: [
+          { word: "attention", ipa: "/əˈtenʃən/", pos: "n", meaning: "sự chú ý" },
+          { word: "register", ipa: "/ˈredʒɪstər/", pos: "v", meaning: "đăng ký, làm thủ tục" },
+          { word: "front desk", ipa: "/ˌfrʌnt ˈdesk/", pos: "n", meaning: "quầy lễ tân" },
+          { word: "introductory packet", ipa: "/ˌɪntrəˈdʌktəri ˈpækɪt/", pos: "n", meaning: "bộ tài liệu giới thiệu" },
+          { word: "complimentary", ipa: "/ˌkɑːmpləˈmentəri/", pos: "adj", meaning: "miễn phí, tặng kèm" },
+          { word: "certificate", ipa: "/sərˈtɪfɪkət/", pos: "n", meaning: "giấy chứng nhận, phiếu quà tặng" },
+          { word: "gourmet restaurant", ipa: "/ɡʊrˈmeɪ ˈrestrɑːnt/", pos: "n", meaning: "nhà hàng ẩm thực cao cấp" },
+          { word: "robe", ipa: "/roʊb/", pos: "n", meaning: "áo choàng tắm" },
+          { word: "gift basket", ipa: "/ˈɡɪft ˌbæskɪt/", pos: "n", meaning: "giỏ quà tặng" },
+          { word: "bath soap", ipa: "/ˈbæθ soʊp/", pos: "n", meaning: "xà phòng tắm" },
+          { word: "lotion", ipa: "/ˈloʊʃən/", pos: "n", meaning: "kem dưỡng da" },
+          { word: "personal item", ipa: "/ˈpɝːsənəl ˈaɪtəm/", pos: "n", meaning: "vật dụng cá nhân" },
+          { word: "relaxing", ipa: "/rɪˈlæksɪŋ/", pos: "adj", meaning: "thư giãn, thoải mái" },
+          { word: "enjoyable", ipa: "/ɪnˈdʒɔɪəbl/", pos: "adj", meaning: "thú vị, dễ chịu" }
+        ]
+      },
+      {
+        id: "practice_4",
+        num: 4,
+        badge: "Go for the TOEIC Test • Question 2",
+        title: "PRACTICE 04: Thông Báo Sự Cố Xe Buýt (Mechanical Problems on Bus)",
+        trackInfo: "Collins Track 01-02.41 (Test Practice - Question 2)",
+        audioUrl: "audio/collins/collins_practice_bus_delay.mp3",
+        rawText: "Could I have everyone’s attention, please? Due to mechanical problems, this bus will now be taken out of service. We apologize for any inconvenience this might cause you. Please exit the bus safely by using the front or back doors and stepping away from the side of the road. We have contacted the main bus depot, and a shuttle bus is presently en route to our location. The shuttle’s approximate arrival time is fifteen minutes. Again, we apologize for the delay and appreciate your patience. All connecting buses will be held at the station until our bus arrives. Are there any questions?",
+        markedDisplay: `Could I have everyone’s attention <span class="tone-pill-rise">↗</span>, please <span class="tone-pill-rise">↗</span>? <span class="pause-pill-heavy">//</span> Due to mechanical problems <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, this bus will now be taken out of service. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We apologize <span class="pause-pill-light">/</span> for any inconvenience <span class="pause-pill-light">/</span> this might cause you. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Please exit the bus safely <span class="pause-pill-light">/</span> by using the front or back doors <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and stepping away <span class="pause-pill-light">/</span> from the side of the road. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We have contacted <span class="pause-pill-light">/</span> the main bus depot <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and a shuttle bus <span class="pause-pill-light">/</span> is presently en route <span class="pause-pill-light">/</span> to our location. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> The shuttle’s approximate arrival time <span class="pause-pill-light">/</span> is fifteen minutes. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Again <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, we apologize <span class="pause-pill-light">/</span> for the delay <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and appreciate <span class="pause-pill-light">/</span> your patience. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> All connecting buses <span class="pause-pill-light">/</span> will be held <span class="pause-pill-light">/</span> at the station <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> until our bus arrives. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Are there any questions <span class="tone-pill-rise">↗</span>? <span class="pause-pill-heavy">//</span>`,
+        chunkedSentences: [
+          {
+            text: "Could I have everyone’s attention ↗, please ↗",
+            note: "Lời kêu gọi sự chú ý nơi công cộng (câu hỏi tu từ mang sắc thái lịch sự).",
+            speechText: "Could I have everyone's attention, please?"
+          },
+          {
+            text: "Due to mechanical problems ↗, | this bus will now be taken out of service ↘",
+            note: "Cụm giới từ chỉ nguyên nhân 'Due to...' lên giọng (↗), mệnh đề chính hạ giọng dứt khoát.",
+            speechText: "Due to mechanical problems, this bus will now be taken out of service."
+          },
+          {
+            text: "We apologize | for any inconvenience | this might cause you ↘",
+            note: "Lời xin lỗi khách hàng chia thành 3 cụm nhịp nhàng, hạ giọng ở 'cause you ↘'.",
+            speechText: "We apologize for any inconvenience this might cause you."
+          },
+          {
+            text: "Please exit the bus safely | by using the front or back doors ↘ | and stepping away | from the side of the road ↘",
+            note: "Hướng dẫn an toàn chia theo cụm giới từ 'by using...' và 'from the side of the road'.",
+            speechText: "Please exit the bus safely by using the front or back doors and stepping away from the side of the road."
+          },
+          {
+            text: "We have contacted | the main bus depot ↘ | and a shuttle bus | is presently en route | to our location ↘",
+            note: "Từ 'depot' đọc là /ˈdiːpoʊ/ (câm chữ t), 'en route' đọc là /ˌɑːn ˈruːt/.",
+            speechText: "We have contacted the main bus depot, and a shuttle bus is presently en route to our location."
+          },
+          {
+            text: "The shuttle’s approximate arrival time | is fifteen minutes ↘",
+            note: "Nhấn mạnh rõ đuôi '-teen' trong 'fifteen' /ˈfɪf.tiːn/ (tránh nhầm với fifty).",
+            speechText: "The shuttle's approximate arrival time is fifteen minutes."
+          },
+          {
+            text: "Again ↗, | we apologize | for the delay ↘ | and appreciate | your patience ↘",
+            note: "Từ chuyển tiếp 'Again ↗' lên giọng nhẹ; 'patience ↘' hạ giọng kết vế lịch sự.",
+            speechText: "Again, we apologize for the delay and appreciate your patience."
+          },
+          {
+            text: "All connecting buses | will be held | at the station ↘ | until our bus arrives ↘",
+            note: "Ngắt sau cụm danh từ 'All connecting buses', hạ giọng dứt khoát ở 'arrives'.",
+            speechText: "All connecting buses will be held at the station until our bus arrives."
+          },
+          {
+            text: "Are there any questions ↗",
+            note: "Câu hỏi Yes/No kết thúc đoạn văn bắt buộc lên giọng vút cao (↗) ở 'questions'.",
+            speechText: "Are there any questions?"
+          }
+        ],
+        vocabulary: [
+          { word: "mechanical problem", ipa: "/məˈkænɪkəl ˈprɑːbləm/", pos: "n", meaning: "sự cố kỹ thuật, trục trặc máy móc" },
+          { word: "take out of service", ipa: "/teɪk aʊt əv ˈsɝːvɪs/", pos: "v phr", meaning: "ngừng hoạt động, đưa ra khỏi luồng tuyến" },
+          { word: "apologize", ipa: "/əˈpɑːlədʒaɪz/", pos: "v", meaning: "xin lỗi" },
+          { word: "inconvenience", ipa: "/ˌɪnkənˈviːniəns/", pos: "n", meaning: "sự bất tiện, phiền toái" },
+          { word: "exit", ipa: "/ˈeɡzɪt/", pos: "v", meaning: "rời khỏi, thoát ra" },
+          { word: "bus depot", ipa: "/ˈbʌs ˌdiːpoʊ/", pos: "n", meaning: "bến xe, trạm tập kết xe buýt" },
+          { word: "shuttle bus", ipa: "/ˈʃʌtl bʌs/", pos: "n", meaning: "xe buýt trung chuyển" },
+          { word: "en route", ipa: "/ˌɑːn ˈruːt/", pos: "adj/adv", meaning: "đang trên đường đi" },
+          { word: "approximate", ipa: "/əˈprɑːksɪmət/", pos: "adj", meaning: "xấp xỉ, ước tính" },
+          { word: "delay", ipa: "/dɪˈleɪ/", pos: "n", meaning: "sự chậm trễ, hoãn lại" },
+          { word: "patience", ipa: "/ˈpeɪʃəns/", pos: "n", meaning: "sự kiên nhẫn" },
+          { word: "connecting bus", ipa: "/kəˈnektɪŋ bʌs/", pos: "n", meaning: "xe buýt nối tuyến" },
+          { word: "station", ipa: "/ˈsteɪʃən/", pos: "n", meaning: "nhà ga, trạm trung chuyển" },
+          { word: "arrive", ipa: "/əˈraɪv/", pos: "v", meaning: "đến nơi" }
+        ]
+      }
+    ]
+  }
 };

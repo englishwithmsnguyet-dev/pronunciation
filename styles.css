@@ -4664,6 +4664,254 @@ button, select, input {
   transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   TOEIC SPEAKING QUESTIONS 1-2 PRACTICE STYLES (COLLINS MODEL)
+   ========================================================================== */
+.tone-pill-rise {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #DCFCE7;
+  color: #15803D;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #86EFAC;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+.tone-pill-fall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #93C5FD;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+.pause-pill-light {
+  display: inline-flex;
+  align-items: center;
+  background: #FEF3C7;
+  color: #B45309;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin: 0 2px;
+  border: 1px solid #FDE68A;
+}
+
+.pause-pill-heavy {
+  display: inline-flex;
+  align-items: center;
+  background: #FEE2E2;
+  color: #B91C1C;
+  font-weight: 800;
+  font-size: 0.82rem;
+  padding: 1px 7px;
+  border-radius: 4px;
+  margin: 0 3px;
+  border: 1px solid #FCA5A5;
+}
+
+.toeic-practice-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.practice-nav-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: #F1F5F9;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid #E2E8F0;
+}
+
+.practice-nav-btn {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 16px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.practice-nav-btn:hover {
+  border-color: #2563EB;
+  background: #F8FAFC;
+  transform: translateY(-1px);
+}
+
+.practice-nav-btn.active {
+  background: linear-gradient(135deg, #1E40AF, #2563EB);
+  color: #FFFFFF;
+  border-color: #1E40AF;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.practice-nav-btn.active .practice-nav-sub {
+  color: #DBEAFE;
+}
+
+.practice-nav-sub {
+  font-size: 0.72rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.exam-sim-card {
+  background: #FFFFFF;
+  border: 2px solid #3B82F6;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.08);
+}
+
+.exam-sim-header {
+  background: linear-gradient(135deg, #1E3A8A, #1D4ED8);
+  color: #FFFFFF;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.exam-sim-directions {
+  background: #EFF6FF;
+  border-bottom: 1px solid #DBEAFE;
+  padding: 12px 20px;
+  font-size: 0.88rem;
+  color: #1E40AF;
+  line-height: 1.5;
+}
+
+.exam-timer-bar-wrapper {
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.exam-timer-clock {
+  font-family: monospace;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0F172A;
+  background: #FFFFFF;
+  border: 2px solid #CBD5E1;
+  padding: 4px 14px;
+  border-radius: 8px;
+  letter-spacing: 2px;
+}
+
+.exam-timer-clock.prep-mode {
+  color: #D97706;
+  border-color: #F59E0B;
+  background: #FFFBEB;
+}
+
+.exam-timer-clock.speak-mode {
+  color: #DC2626;
+  border-color: #EF4444;
+  background: #FEF2F2;
+  animation: pulse-border 1.5s infinite;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.exam-passage-box {
+  padding: 24px;
+  font-size: 1.15rem;
+  line-height: 2.1;
+  color: #0F172A;
+  background: #FFFFFF;
+  border-radius: var(--radius-sm);
+}
+
+.exam-passage-box.clean-mode {
+  font-family: var(--font-heading);
+  letter-spacing: 0.2px;
+}
+
+.exam-passage-box.marked-mode {
+  font-family: var(--font-body);
+}
+
+.practice-chunk-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  transition: all 0.2s ease;
+}
+
+.practice-chunk-row:hover {
+  background: #F0FDF4;
+  border-color: #86EFAC;
+}
+
+.practice-vocab-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.practice-vocab-table th {
+  background: #F1F5F9;
+  color: #334155;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  padding: 10px 14px;
+  border-bottom: 2px solid #CBD5E1;
+}
+
+.practice-vocab-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #E2E8F0;
+  color: #1E293B;
+}
+
+.practice-vocab-table tr:hover td {
+  background: #F8FAFC;
+}
+
+
 
 
 

@@ -3838,6 +3838,12 @@ document.addEventListener("DOMContentLoaded", () => {
     currentRuleFilter: "all",
     selectedAttitudeWord: "Really",
     selectedNucleusIndex: 0,
+    selectedPracticeId: "practice_1",
+    practiceMode: "marked", // "clean" or "marked"
+    examTimerInterval: null,
+    examTimerSecondsLeft: 45,
+    examTimerTotal: 45,
+    examTimerType: null, // "prep" or "speak"
     quizIndex: 0,
     quizScore: 0,
     quizStreak: 0,
@@ -3910,6 +3916,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.renderPausingTab(container);
       } else if (this.currentTab === "linking") {
         this.renderLinkingTab(container);
+      } else if (this.currentTab === "practice") {
+        this.renderPracticeTab(container);
       } else if (this.currentTab === "attitudes") {
         this.renderAttitudesTab(container);
       } else if (this.currentTab === "functions") {
@@ -5054,7 +5062,241 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 6: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+    // TAB 6: LUYỆN ĐỀ THỰC CHIẾN TOEIC SPEAKING (QUESTIONS 1–2)
+    // ------------------------------------------------------------------------
+    renderPracticeTab(container) {
+      const data = window.INTONATION_DATA.toeicPractice;
+      if (!data) {
+        container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748B;">Đang tải dữ liệu bài luyện đề...</div>`;
+        return;
+      }
+
+      const practices = data.practices;
+      const currentPractice = practices.find(p => p.id === this.selectedPracticeId) || practices[0];
+      const exam = data.examInfo;
+
+      let html = `
+        <div class="toeic-practice-wrapper">
+
+          <!-- BANNER GIỚI THIỆU CHUYÊN ĐỀ -->
+          <div style="background: linear-gradient(135deg, #0F172A, #1E293B); border-radius: var(--radius-md); padding: 22px 26px; color: #FFFFFF; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);">
+            <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:800; background:rgba(59, 130, 246, 0.2); color:#93C5FD; padding:4px 12px; border-radius:999px; text-transform:uppercase; margin-bottom:10px; border:1px solid rgba(147, 197, 253, 0.3);">
+              <span>🎙️</span> ${exam.part} • Collins TOEIC Official
+            </div>
+            <h2 style="font-family:var(--font-heading); font-size:1.42rem; font-weight:800; margin-bottom:8px; color:#FFFFFF;">
+              ${data.title}
+            </h2>
+            <p style="font-size:0.9rem; color:#CBD5E1; line-height:1.6; max-width:880px; margin-bottom:14px;">
+              ${data.subtitle}
+            </p>
+
+            <!-- 4 Tiêu Chí Chấm Điểm ETS Cốt Lõi -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:10px; margin-top:14px; border-top:1px solid rgba(255,255,255,0.1); padding-top:14px;">
+              ${exam.scoringCriteria.map(sc => `
+                <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:10px 12px; border:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-size:0.8rem; font-weight:800; color:#60A5FA; display:flex; align-items:center; gap:6px; margin-bottom:3px;">
+                    <span>${sc.icon}</span> ${sc.label}
+                  </div>
+                  <div style="font-size:0.75rem; color:#94A3B8; line-height:1.4;">${sc.desc}</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- THANH CHỌN 4 ĐỀ THI THỰC HÀNH -->
+          <div>
+            <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#475569; text-transform:uppercase; margin-bottom:8px; letter-spacing:0.5px;">
+              Chọn Đề Luyện Tập (4 Đề Khảo Thí Collins):
+            </div>
+            <div class="practice-nav-pills">
+              ${practices.map(p => `
+                <button class="practice-nav-btn ${p.id === currentPractice.id ? 'active' : ''}" onclick="IntonationManager.selectPractice('${p.id}')">
+                  <span>${p.title.split(':')[0]}</span>
+                  <span class="practice-nav-sub">${p.title.split(':')[1] || ''} • ${p.badge}</span>
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- BĂNG GỐC COLLINS NATIVE SPEAKER AUDIO PLAYER -->
+          <div style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #F0FDF4, #DCFCE7); border:1px solid #86EFAC; border-radius:12px; padding:16px 20px; box-shadow:0 2px 8px rgba(22,163,74,0.08); flex-wrap:wrap; gap:14px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <span style="font-size:2rem;">🎙️</span>
+              <div>
+                <div style="font-family:var(--font-heading); font-weight:800; font-size:1rem; color:#166534;">
+                  Băng Gốc Giọng Bản Xứ: ${currentPractice.trackInfo}
+                </div>
+                <div style="font-size:0.8rem; color:#15803D; margin-top:3px;">
+                  Bản thu âm chuẩn khảo thí từ NXB Collins Education (Speaking Questions 1–2). Lắng nghe ngữ điệu và ngắt nghỉ mẫu để đối chiếu.
+                </div>
+              </div>
+            </div>
+            <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(22,163,74,0.35);" onclick="AudioEngine.playIntonationAudio('${currentPractice.audioUrl}', null, 1.0, 1.0, this)" title="Nghe toàn bộ bài đọc mẫu từ băng gốc Collins">
+              <span>▶️</span> Nghe Băng Gốc
+            </button>
+          </div>
+
+          <!-- PHÒNG THI MÔ PHỎNG ETS (EXAM SIMULATION CARD & TIMER) -->
+          <div class="exam-sim-card">
+            <!-- Header đề thi -->
+            <div class="exam-sim-header">
+              <div style="font-family:var(--font-heading); font-weight:800; font-size:1.05rem;">
+                ${currentPractice.title}
+              </div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <!-- Chuyển đổi chế độ: Clean đề thi vs Ký hiệu ngữ điệu -->
+                <button style="background:${this.practiceMode === 'clean' ? '#FFFFFF' : 'rgba(255,255,255,0.2)'}; color:${this.practiceMode === 'clean' ? '#1E3A8A' : '#FFFFFF'}; border:none; padding:6px 14px; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;" onclick="IntonationManager.setPracticeMode('clean')">
+                  📄 Đề Thi Chuẩn (ETS Mode)
+                </button>
+                <button style="background:${this.practiceMode === 'marked' ? '#FFFFFF' : 'rgba(255,255,255,0.2)'}; color:${this.practiceMode === 'marked' ? '#1E3A8A' : '#FFFFFF'}; border:none; padding:6px 14px; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;" onclick="IntonationManager.setPracticeMode('marked')">
+                  🎯 Ký Hiệu Ngữ Điệu (Analyzed)
+                </button>
+              </div>
+            </div>
+
+            <!-- Hướng dẫn làm bài (Directions) -->
+            <div class="exam-sim-directions">
+              <strong>Directions:</strong> In this part, you will read a text aloud. You will have 45 seconds to prepare and 45 seconds to read the text aloud.
+            </div>
+
+            <!-- Bộ đếm giờ khảo thí 45 giây (Interactive Exam Timer) -->
+            <div class="exam-timer-bar-wrapper">
+              <div style="display:flex; align-items:center; gap:14px;">
+                <div class="exam-timer-clock ${this.examTimerType === 'prep' ? 'prep-mode' : (this.examTimerType === 'speak' ? 'speak-mode' : '')}" id="examTimerDisplay">
+                  ${this.formatTimerTime(this.examTimerSecondsLeft)}
+                </div>
+                <div>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#1E293B;" id="examTimerStatus">
+                    ${this.examTimerType === 'prep' ? '⏳ Đang trong 45s CHUẨN BỊ (Lướt mắt, gạch chân từ khó)' : (this.examTimerType === 'speak' ? '🎙️ Đang trong 45s ĐỌC TO (Nói to, rõ, dứt khoát)' : 'Đồng hồ bấm giờ mô phỏng phòng thi ETS')}
+                  </div>
+                  <div style="font-size:0.75rem; color:#64748B;">
+                    Luyện tập chuẩn áp lực thời gian thực tế trong phòng thi TOEIC Speaking
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:8px;">
+                <button class="btn-primary" style="background:#D97706; padding:8px 16px; font-size:0.82rem; font-weight:700;" onclick="IntonationManager.startExamTimer('prep', 45)">
+                  ⏱️ 45s Chuẩn Bị
+                </button>
+                <button class="btn-primary" style="background:#DC2626; padding:8px 16px; font-size:0.82rem; font-weight:700;" onclick="IntonationManager.startExamTimer('speak', 45)">
+                  🎙️ 45s Đọc To
+                </button>
+                <button class="btn-primary" style="background:#64748B; padding:8px 14px; font-size:0.82rem; font-weight:700;" onclick="IntonationManager.stopExamTimer()">
+                  ⏹️ Đặt Lại
+                </button>
+              </div>
+            </div>
+
+            <!-- Thanh tiến trình thời gian -->
+            <div style="width:100%; height:4px; background:#E2E8F0;">
+              <div id="examTimerProgressBar" style="width:${(this.examTimerSecondsLeft / this.examTimerTotal) * 100}%; height:100%; background:${this.examTimerType === 'prep' ? '#F59E0B' : '#EF4444'}; transition: width 0.3s linear;"></div>
+            </div>
+
+            <!-- Đoạn văn bài đọc đề thi -->
+            <div class="exam-passage-box ${this.practiceMode === 'clean' ? 'clean-mode' : 'marked-mode'}">
+              ${this.practiceMode === 'clean' ? currentPractice.rawText : currentPractice.markedDisplay}
+            </div>
+
+            <!-- Chú thích ký hiệu nếu ở chế độ Marked -->
+            ${this.practiceMode === 'marked' ? `
+              <div style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:10px 20px; font-size:0.78rem; color:#475569; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+                <span><strong>Ký hiệu:</strong></span>
+                <span><span class="tone-pill-rise">↗</span> Lên giọng (Rise)</span>
+                <span><span class="tone-pill-fall">↘</span> Xuống giọng (Fall)</span>
+                <span><span class="pause-pill-light">/</span> Ngắt nhẹ (0.3s)</span>
+                <span><span class="pause-pill-heavy">//</span> Ngắt trọn vẹn (0.7s)</span>
+              </div>
+            ` : ""}
+          </div>
+
+          <!-- PHÂN TÍCH CHI TIẾT TỪNG CÂU & HƯỚNG DẪN SƯ PHẠM (SENTENCE-BY-SENTENCE BREAKDOWN) -->
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:var(--radius-md); padding:22px 24px; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
+              <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:#1E293B; display:flex; align-items:center; gap:8px;">
+                <span>🔬</span> Phân Tích Kỹ Thuật Chunking &amp; Ngữ Điệu Từng Câu
+              </h3>
+              <span style="font-size:0.75rem; font-weight:700; background:#F0FDF4; color:#166534; padding:4px 10px; border-radius:var(--radius-pill); border:1px solid #BBF7D0;">
+                Bấm 🔊 để luyện đọc từng câu
+              </span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              ${currentPractice.chunkedSentences.map((sent, sIdx) => `
+                <div class="practice-chunk-row">
+                  <div style="min-width:28px; height:28px; border-radius:50%; background:#2563EB; color:#fff; font-weight:800; font-size:0.82rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    ${sIdx + 1}
+                  </div>
+                  <div style="flex:1;">
+                    <div style="font-family:var(--font-heading); font-size:1.02rem; font-weight:700; color:#0F172A; line-height:1.6; margin-bottom:4px;">
+                      ${sent.text}
+                    </div>
+                    <div style="font-size:0.82rem; color:#475569; line-height:1.45;">
+                      👉 <strong>Phân tích:</strong> ${sent.note}
+                    </div>
+                  </div>
+                  <button class="btn-tone-audio" onclick="IntonationManager.playPracticeSentence('${currentPractice.id}', ${sIdx}, this)" title="Nghe câu này">
+                    🔊
+                  </button>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- BẢNG TỪ VỰNG TRỌNG TÂM CỦA BÀI (VOCABULARY TABLE) -->
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:var(--radius-md); padding:22px 24px; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
+              <div>
+                <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:#1E293B; display:flex; align-items:center; gap:8px;">
+                  <span>📚</span> Bảng Từ Vựng &amp; Trọng Âm Trọng Tâm
+                </h3>
+                <div style="font-size:0.8rem; color:#64748B; margin-top:2px;">
+                  Tập trung xử lý trọng âm âm tiết chính xác và các phụ âm đuôi (/t/, /d/, /s/, /z/, /θ/) để không bị mất điểm phát âm
+                </div>
+              </div>
+              <span style="font-size:0.75rem; font-weight:700; background:#FAF5FF; color:#7C3AED; padding:4px 10px; border-radius:var(--radius-pill); border:1px solid #E9D5FF;">
+                ${currentPractice.vocabulary.length} từ vựng then chốt
+              </span>
+            </div>
+
+            <div style="overflow-x:auto;">
+              <table class="practice-vocab-table">
+                <thead>
+                  <tr>
+                    <th style="width:25%;">Từ vựng (Word)</th>
+                    <th style="width:25%;">Phiên âm (IPA)</th>
+                    <th style="width:12%;">Từ loại</th>
+                    <th style="width:30%;">Nghĩa tiếng Việt</th>
+                    <th style="width:8%; text-align:center;">Nghe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${currentPractice.vocabulary.map((it, vIdx) => `
+                    <tr>
+                      <td style="font-weight:800; color:#0F172A; font-family:var(--font-heading);">${it.word}</td>
+                      <td style="font-family:var(--font-ipa); color:#7C3AED; font-weight:600; font-size:0.92rem;">${it.ipa}</td>
+                      <td><span style="font-size:0.72rem; font-weight:800; background:#E2E8F0; color:#334155; padding:2px 8px; border-radius:4px; text-transform:uppercase;">${it.pos}</span></td>
+                      <td style="color:#475569;">${it.meaning}</td>
+                      <td style="text-align:center;">
+                        <button class="btn-tone-audio" style="width:32px; height:32px; font-size:0.75rem;" onclick="IntonationManager.playPracticeWord('${it.word.replace(/'/g, "\\'")}', this)" title="Nghe phát âm từ này">
+                          🔊
+                        </button>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 7: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
     // ------------------------------------------------------------------------
     renderAttitudesTab(container) {
       const attitudes = window.INTONATION_DATA.attitudes;
@@ -5641,6 +5883,112 @@ document.addEventListener("DOMContentLoaded", () => {
     playDialogueLine(speechText, pitch, rate, btnEl) {
       if (!speechText) return;
       AudioEngine.playIntonationAudio(null, speechText, pitch || 1.0, rate || 0.90, btnEl);
+    },
+
+    selectPractice(practiceId) {
+      this.selectedPracticeId = practiceId;
+      this.stopExamTimer();
+      this.render();
+    },
+
+    setPracticeMode(mode) {
+      this.practiceMode = mode;
+      this.render();
+    },
+
+    formatTimerTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    },
+
+    startExamTimer(type, seconds = 45) {
+      this.stopExamTimer();
+      this.examTimerType = type;
+      this.examTimerSecondsLeft = seconds;
+      this.examTimerTotal = seconds;
+
+      const displayEl = document.getElementById("examTimerDisplay");
+      const statusEl = document.getElementById("examTimerStatus");
+      const progressEl = document.getElementById("examTimerProgressBar");
+
+      if (displayEl) {
+        displayEl.textContent = this.formatTimerTime(seconds);
+        displayEl.className = `exam-timer-clock ${type === 'prep' ? 'prep-mode' : 'speak-mode'}`;
+      }
+      if (statusEl) {
+        statusEl.textContent = type === 'prep' 
+          ? '⏳ Đang trong 45s CHUẨN BỊ (Lướt mắt, gạch chân từ khó)' 
+          : '🎙️ Đang trong 45s ĐỌC TO (Nói to, rõ, dứt khoát)';
+      }
+      if (progressEl) {
+        progressEl.style.width = '100%';
+        progressEl.style.background = type === 'prep' ? '#F59E0B' : '#EF4444';
+      }
+
+      this.examTimerInterval = setInterval(() => {
+        this.examTimerSecondsLeft--;
+        if (this.examTimerSecondsLeft < 0) {
+          this.stopExamTimer();
+          const sEl = document.getElementById("examTimerStatus");
+          if (sEl) {
+            sEl.textContent = type === 'prep' 
+              ? '🔔 HẾT 45S CHUẨN BỊ! Bấm "🎙️ 45s Đọc To" để ghi âm ngay!' 
+              : '🎉 HOÀN THÀNH 45S ĐỌC TO! Bấm "▶️ Nghe Băng Gốc" để đối chiếu!';
+          }
+          if (window.AudioEngine && window.AudioEngine.playSfx) {
+            window.AudioEngine.playSfx("correct");
+          }
+          return;
+        }
+
+        const disp = document.getElementById("examTimerDisplay");
+        const prog = document.getElementById("examTimerProgressBar");
+        if (disp) disp.textContent = this.formatTimerTime(this.examTimerSecondsLeft);
+        if (prog) {
+          const pct = (this.examTimerSecondsLeft / this.examTimerTotal) * 100;
+          prog.style.width = `${pct}%`;
+        }
+      }, 1000);
+    },
+
+    stopExamTimer() {
+      if (this.examTimerInterval) {
+        clearInterval(this.examTimerInterval);
+        this.examTimerInterval = null;
+      }
+      this.examTimerType = null;
+      this.examTimerSecondsLeft = 45;
+      this.examTimerTotal = 45;
+      const displayEl = document.getElementById("examTimerDisplay");
+      const statusEl = document.getElementById("examTimerStatus");
+      const progressEl = document.getElementById("examTimerProgressBar");
+      if (displayEl) {
+        displayEl.textContent = "00:45";
+        displayEl.className = "exam-timer-clock";
+      }
+      if (statusEl) {
+        statusEl.textContent = "Đồng hồ bấm giờ mô phỏng phòng thi ETS";
+      }
+      if (progressEl) {
+        progressEl.style.width = "100%";
+        progressEl.style.background = "#CBD5E1";
+      }
+    },
+
+    playPracticeSentence(practiceId, sentIdx, btnEl) {
+      const data = window.INTONATION_DATA && window.INTONATION_DATA.toeicPractice;
+      if (!data) return;
+      const p = data.practices.find(item => item.id === practiceId);
+      if (!p || !p.chunkedSentences[sentIdx]) return;
+      const sent = p.chunkedSentences[sentIdx];
+      const text = sent.speechText || sent.text.replace(/[↗↘|\/]/g, "").trim();
+      AudioEngine.playIntonationAudio(null, text, 1.0, 0.90, btnEl);
+    },
+
+    playPracticeWord(word, btnEl) {
+      if (!word) return;
+      AudioEngine.playIntonationAudio(null, word, 1.0, 0.88, btnEl);
     }
   };
   window.IntonationManager = IntonationManager;
