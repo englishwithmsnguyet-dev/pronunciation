@@ -3835,12 +3835,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   const IntonationManager = {
     currentTab: "tones",
+    currentRuleFilter: "all",
     selectedAttitudeWord: "Really",
     selectedNucleusIndex: 0,
     quizIndex: 0,
     quizScore: 0,
     quizStreak: 0,
     quizAnswered: false,
+
+    filterRules(groupKey, btnEl) {
+      this.currentRuleFilter = groupKey;
+      const container = document.getElementById("intonationContentContainer");
+      if (!container) return;
+
+      const buttons = container.querySelectorAll(".rule-filter-btn");
+      buttons.forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-filter") === groupKey);
+      });
+
+      const sections = container.querySelectorAll(".rule-group-section");
+      sections.forEach(sec => {
+        const secGroup = sec.getAttribute("data-group");
+        if (groupKey === "all" || secGroup === groupKey) {
+          sec.style.display = "block";
+        } else {
+          sec.style.display = "none";
+        }
+      });
+    },
 
     init() {
       const tabsNav = document.getElementById("intonationTabsNav");
@@ -4174,148 +4196,220 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 2: 12 QUY TẮC NGỮ PHÁP & THỰC CHIẾN TOEIC
+    // TAB 2: QUY TẮC LÊN & XUỐNG GIỌNG (3 NHÓM ĐỊNH HƯỚNG NGỮ ĐIỆU)
     // ------------------------------------------------------------------------
     renderRulesTab(container) {
       const rules = window.INTONATION_DATA.rules;
+      const filter = this.currentRuleFilter || "all";
+
+      const GROUPS = [
+        {
+          key: "falling",
+          icon: "📉",
+          title: "Nhóm 1: Nhóm Xuống Giọng (Falling Tone ↘)",
+          badge: "4 Quy Tắc (Quy Tắc 1, 2, 6, 11)",
+          desc: "Đặc trưng: Hạ giọng dứt khoát ở âm tiết mang trọng âm cuối cùng. Dùng cho câu trần thuật, câu hỏi Wh-, câu mệnh lệnh và lời yêu cầu tu từ công cộng (Collins Track 06 & 24). Thể hiện sự chắc chắn, kết thúc trọn vẹn thông tin.",
+          classSuffix: "group-falling"
+        },
+        {
+          key: "rising",
+          icon: "📈",
+          title: "Nhóm 2: Nhóm Lên Giọng (Rising Tone ↗)",
+          badge: "3 Quy Tắc (Quy Tắc 3, 5, 10)",
+          desc: "Đặc trưng: Vút cao giọng ở âm tiết cuối cùng. Dùng cho câu hỏi Yes/No, câu hỏi đuôi khi chưa chắc chắn và các từ nối dẫn dắt bài đọc (Collins Quick Tip). Thể hiện sự tò mò, cần xác nhận hoặc báo hiệu thông tin còn tiếp diễn.",
+          classSuffix: "group-rising"
+        },
+        {
+          key: "combined",
+          icon: "🔄",
+          title: "Nhóm 3: Nhóm Phối Hợp (Lên Trước ↗ — Xuống Sau ↘)",
+          badge: "5 Quy Tắc (Quy Tắc 4, 7, 8, 9, 12)",
+          desc: "Đặc trưng: Lên giọng ở các vế mở đầu hoặc liệt kê, rồi hạ giọng dứt khoát ở vế chốt cuối cùng. Đây là quy tắc trọng tâm của bài thi TOEIC Speaking Questions 1–2 (Liệt kê đồ vật, chuỗi số điện thoại Collins Track 23, câu điều kiện, câu hỏi lựa chọn 'OR' và kỹ thuật ngắt nghỉ dấu câu Collins Track 29).",
+          classSuffix: "group-combined"
+        }
+      ];
 
       let html = `
         <div style="margin-bottom:20px;">
-          <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
-            <span>📖</span> 12 Quy Tắc Ngữ Điệu Chuẩn Quốc Tế & Luyện Thi TOEIC (Grammatical & Test Rules)
+          <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:800; background:#EFF6FF; color:#1E40AF; padding:4px 12px; border-radius:999px; text-transform:uppercase; margin-bottom:8px; border:1px solid #BFDBFE;">
+            <span>📖</span> Hệ Thống Ngữ Điệu Thực Chiến (Speaking Mastery)
+          </div>
+          <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+            <span>🎯</span> 12 Quy Tắc Lên &amp; Xuống Giọng Theo Kiểu Câu
           </h3>
-          <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
-            Hệ thống 12 quy tắc ngữ pháp & ngữ điệu thực chiến theo chuẩn Cambridge, Oxford & Collins TOEIC (Speaking Questions 1–2). Nắm vững các quy tắc này giúp học viên tự tin biết chính xác khi nào lên giọng (↗), khi nào hạ giọng (↘) trong mọi tình huống giao tiếp và bài thi chuẩn hóa.
+          <p style="font-size:0.88rem; color:#475569; line-height:1.6;">
+            Toàn bộ 12 quy tắc ngữ điệu thực chiến chuẩn quốc tế (Cambridge, Oxford) và luyện thi TOEIC Speaking (Collins) được phân chia khoa học thành <strong>3 nhóm định hướng ngữ điệu trực quan</strong>. Học viên chỉ cần nắm chắc bản chất <em>khi nào xuống (↘)</em>, <em>khi nào lên (↗)</em> và <em>khi nào phối hợp (↗↘)</em> là có thể làm chủ giai điệu câu tự nhiên nhất.
           </p>
         </div>
 
-        <div class="rules-accordion-list">
+        <!-- Bộ Lọc Phân Nhóm Ngữ Điệu -->
+        <div class="rule-filter-bar">
+          <button class="rule-filter-btn ${filter === 'all' ? 'active' : ''}" data-filter="all" onclick="IntonationManager.filterRules('all', this)">
+            <span>🌟</span> Tất Cả (12 Quy Tắc)
+          </button>
+          <button class="rule-filter-btn ${filter === 'falling' ? 'active' : ''}" data-filter="falling" onclick="IntonationManager.filterRules('falling', this)">
+            <span>📉</span> 1. Nhóm Xuống Giọng (4)
+          </button>
+          <button class="rule-filter-btn ${filter === 'rising' ? 'active' : ''}" data-filter="rising" onclick="IntonationManager.filterRules('rising', this)">
+            <span>📈</span> 2. Nhóm Lên Giọng (3)
+          </button>
+          <button class="rule-filter-btn ${filter === 'combined' ? 'active' : ''}" data-filter="combined" onclick="IntonationManager.filterRules('combined', this)">
+            <span>🔄</span> 3. Nhóm Phối Hợp ↗↘ (5)
+          </button>
+        </div>
       `;
 
-      rules.forEach(r => {
-        html += `
-          <div class="rule-accordion-card">
-            <div class="rule-card-header">
-              <div class="rule-num-circle">${r.num}</div>
-              <div class="rule-title-group">
-                <div class="rule-title-text">
-                  ${r.title}
-                  <span class="rule-pattern-pill">${r.tonePattern}</span>
-                </div>
-                <div class="rule-summary-text">${r.ruleSummary}</div>
-              </div>
-            </div>
-
-            <!-- Sơ Đồ Cao Độ Trực Quan & Công Thức -->
-            <div class="rule-diagram-box">
-              <div style="font-family:monospace; font-weight:700; font-size:0.95rem;">${r.diagram}</div>
-              ${r.formula ? `<div style="font-size:0.82rem; color:#6D28D9; margin-top:4px; font-weight:600;">📐 Công thức: ${r.formula}</div>` : ""}
-            </div>
-
-            <!-- Băng Gốc Collins TOEIC Nếu Có -->
-            ${r.collinsTrack ? `
-              <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #F0FDF4, #DCFCE7); border:1px solid #86EFAC; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(22,163,74,0.06);">
-                <div style="display:flex; align-items:center; gap:12px;">
-                  <span style="font-size:1.5rem;">🎙️</span>
-                  <div>
-                    <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#166534;">Băng Gốc Collins TOEIC: ${r.collinsTrackTitle || "Native Audio Track"}</div>
-                    <div style="font-size:0.75rem; color:#15803D; margin-top:2px;">Bản thu giọng người bản xứ từ NXB Collins Education (Speaking Questions 1–2)</div>
-                  </div>
-                </div>
-                <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(22,163,74,0.3);" onclick="AudioEngine.playIntonationAudio('${r.collinsTrack}', null, 1.0, 1.0, this)" title="Nghe băng thu âm gốc từ sách Collins">
-                  <span>▶️</span> Nghe Băng Gốc
-                </button>
-              </div>
-            ` : ""}
-
-            <!-- Cơ Sở Ngôn Ngữ Học (Deep Rationale) -->
-            ${r.deepRationale ? `
-              <div class="context-box">
-                <div class="context-icon">🔬</div>
-                <div>
-                  <div class="context-title">Cơ Sở Ngôn Ngữ Học (Deep Rationale)</div>
-                  <div class="context-body">${r.deepRationale}</div>
-                </div>
-              </div>
-            ` : ""}
-
-            <!-- Bẫy Ngữ Âm Học Viên Việt Thường Mắc -->
-            ${r.vietnamesePitfalls ? `
-              <div class="pitfall-box">
-                <div class="pitfall-icon">⚠️</div>
-                <div>
-                  <div class="pitfall-title">Bẫy Ngữ Âm Thường Gặp</div>
-                  <div class="pitfall-body">${r.vietnamesePitfalls}</div>
-                </div>
-              </div>
-            ` : ""}
-
-            <!-- Ghi Chú Sư Phạm Thêm Nếu Có -->
-            ${r.note && !r.deepRationale ? `
-              <div class="rule-note-box">
-                💡 <strong>Lưu ý:</strong> ${r.note.replace(/\n/g, "<br/>")}
-              </div>
-            ` : ""}
-
-            <!-- Đoạn Hội Thoại Thực Tế Minh Họa -->
-            ${r.contextualDialogue ? `
-              <div class="dialogue-card">
-                <div class="dialogue-card-head">
-                  <div class="dialogue-card-label">
-                    <span>💬</span> ${r.contextualDialogue.title}
-                  </div>
-                  <div style="font-size:0.75rem; color:#64748B;">${r.contextualDialogue.context}</div>
-                </div>
-                <div class="dialogue-lines">
-                  ${r.contextualDialogue.lines.map((l, lIdx) => `
-                    <div class="dialogue-line">
-                      <span class="speaker-badge ${lIdx % 2 === 0 ? "speaker-a" : "speaker-b"}">${l.speaker}</span>
-                      <div class="dialogue-text-wrap">
-                        <div class="dialogue-en">${l.en}</div>
-                        <div class="dialogue-vn">${l.vn}</div>
-                      </div>
-                      <button class="btn-dialogue-play" onclick="IntonationManager.playRuleDialogue('${r.id}', ${lIdx}, this)" title="Nghe câu này">
-                        <span>🔊</span> Nghe
-                      </button>
-                    </div>
-                  `).join("")}
-                </div>
-              </div>
-            ` : ""}
-
-            <!-- Các Ví Dụ Có Audio Phát Chuẩn -->
-            <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin:12px 0 6px;">
-              🎧 Ví Dụ Mẫu Câu Chuẩn Bản Xứ:
-            </div>
-            <div class="rule-examples-box">
-        `;
-
-        r.examples.forEach((ex, exIdx) => {
-          html += `
-            <div class="rule-example-row">
-              <div>
-                <div style="font-family:var(--font-heading); font-size:0.92rem; font-weight:700; color:#1E293B;">
-                  ${ex.marked}
-                </div>
-                <div style="font-size:0.78rem; color:#64748B; margin-top:2px;">
-                  ${ex.vn} • <span style="font-family:var(--font-ipa); color:#7C3AED;">${ex.ipa}</span>
-                </div>
-              </div>
-              <button class="btn-tone-audio" onclick="IntonationManager.playRuleExample('${r.id}', ${exIdx}, this)" title="Nghe phát âm chuẩn câu này">
-                🔊
-              </button>
-            </div>
-          `;
-        });
+      GROUPS.forEach(g => {
+        const groupRules = rules.filter(r => r.group === g.key);
+        const isVisible = (filter === "all" || filter === g.key);
 
         html += `
+          <div class="rule-group-section" data-group="${g.key}" style="display: ${isVisible ? 'block' : 'none'};">
+            <div class="rule-group-header ${g.classSuffix}">
+              <div style="display:flex; align-items:center; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
+                <div class="rule-group-title">
+                  <span>${g.icon}</span> ${g.title}
+                </div>
+                <span class="rule-group-badge">${g.badge}</span>
+              </div>
+              <div class="rule-group-desc">${g.desc}</div>
+            </div>
+
+            <div class="rules-accordion-list">
+              ${groupRules.map(r => this.renderSingleRuleCard(r, g.key)).join("")}
             </div>
           </div>
         `;
       });
 
-      html += `</div>`;
       container.innerHTML = html;
+    },
+
+    renderSingleRuleCard(r, groupKey) {
+      let numBg = "#EFF6FF", numColor = "#1E40AF";
+      let pillBg = "#EFF6FF", pillColor = "#1E40AF", pillBorder = "#BFDBFE";
+
+      if (groupKey === "rising") {
+        numBg = "#FAF5FF"; numColor = "#7C3AED";
+        pillBg = "#FAF5FF"; pillColor = "#7E22CE"; pillBorder = "#E9D5FF";
+      } else if (groupKey === "combined") {
+        numBg = "#F0FDF4"; numColor = "#15803D";
+        pillBg = "#F0FDF4"; pillColor = "#15803D"; pillBorder = "#BBF7D0";
+      }
+
+      return `
+        <div class="rule-accordion-card" id="card-${r.id}">
+          <div class="rule-card-header">
+            <div class="rule-num-circle" style="background:${numBg}; color:${numColor};">${r.num}</div>
+            <div class="rule-title-group">
+              <div class="rule-title-text">
+                ${r.title}
+                <span class="rule-pattern-pill" style="background:${pillBg}; color:${pillColor}; border:1px solid ${pillBorder};">${r.tonePattern}</span>
+              </div>
+              <div class="rule-summary-text">${r.ruleSummary}</div>
+            </div>
+          </div>
+
+          <!-- Sơ Đồ Cao Độ Trực Quan & Công Thức -->
+          <div class="rule-diagram-box">
+            <div style="font-family:monospace; font-weight:700; font-size:0.95rem;">${r.diagram}</div>
+            ${r.formula ? `<div style="font-size:0.82rem; color:#6D28D9; margin-top:4px; font-weight:600;">📐 Công thức: ${r.formula}</div>` : ""}
+          </div>
+
+          <!-- Băng Gốc Collins TOEIC Nếu Có -->
+          ${r.collinsTrack ? `
+            <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #F0FDF4, #DCFCE7); border:1px solid #86EFAC; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(22,163,74,0.06);">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span style="font-size:1.5rem;">🎙️</span>
+                <div>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#166534;">Băng Gốc Collins TOEIC: ${r.collinsTrackTitle || "Native Audio Track"}</div>
+                  <div style="font-size:0.75rem; color:#15803D; margin-top:2px;">Bản thu giọng người bản xứ từ NXB Collins Education (Speaking Questions 1–2)</div>
+                </div>
+              </div>
+              <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(22,163,74,0.3);" onclick="AudioEngine.playIntonationAudio('${r.collinsTrack}', null, 1.0, 1.0, this)" title="Nghe băng thu âm gốc từ sách Collins">
+                <span>▶️</span> Nghe Băng Gốc
+              </button>
+            </div>
+          ` : ""}
+
+          <!-- Cơ Sở Ngôn Ngữ Học (Deep Rationale) -->
+          ${r.deepRationale ? `
+            <div class="context-box">
+              <div class="context-icon">🔬</div>
+              <div>
+                <div class="context-title">Cơ Sở Ngôn Ngữ Học (Deep Rationale)</div>
+                <div class="context-body">${r.deepRationale}</div>
+              </div>
+            </div>
+          ` : ""}
+
+          <!-- Bẫy Ngữ Âm Học Viên Việt Thường Mắc -->
+          ${r.vietnamesePitfalls ? `
+            <div class="pitfall-box">
+              <div class="pitfall-icon">⚠️</div>
+              <div>
+                <div class="pitfall-title">Bẫy Ngữ Âm Thường Gặp</div>
+                <div class="pitfall-body">${r.vietnamesePitfalls}</div>
+              </div>
+            </div>
+          ` : ""}
+
+          <!-- Ghi Chú Sư Phạm Thêm Nếu Có -->
+          ${r.note && !r.deepRationale ? `
+            <div class="rule-note-box">
+              💡 <strong>Lưu ý:</strong> ${r.note.replace(/\n/g, "<br/>")}
+            </div>
+          ` : ""}
+
+          <!-- Đoạn Hội Thoại Thực Tế Minh Họa -->
+          ${r.contextualDialogue ? `
+            <div class="dialogue-card">
+              <div class="dialogue-card-head">
+                <div class="dialogue-card-label">
+                  <span>💬</span> ${r.contextualDialogue.title}
+                </div>
+                <div style="font-size:0.75rem; color:#64748B;">${r.contextualDialogue.context}</div>
+              </div>
+              <div class="dialogue-lines">
+                ${r.contextualDialogue.lines.map((l, lIdx) => `
+                  <div class="dialogue-line">
+                    <span class="speaker-badge ${lIdx % 2 === 0 ? "speaker-a" : "speaker-b"}">${l.speaker}</span>
+                    <div class="dialogue-text-wrap">
+                      <div class="dialogue-en">${l.en}</div>
+                      <div class="dialogue-vn">${l.vn}</div>
+                    </div>
+                    <button class="btn-dialogue-play" onclick="IntonationManager.playRuleDialogue('${r.id}', ${lIdx}, this)" title="Nghe câu này">
+                      <span>🔊</span> Nghe
+                    </button>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          ` : ""}
+
+          <!-- Các Ví Dụ Có Audio Phát Chuẩn -->
+          <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin:12px 0 6px;">
+            🎧 Ví Dụ Mẫu Câu Chuẩn Bản Xứ:
+          </div>
+          <div class="rule-examples-box">
+            ${r.examples.map((ex, exIdx) => `
+              <div class="rule-example-row">
+                <div>
+                  <div style="font-family:var(--font-heading); font-size:0.92rem; font-weight:700; color:#1E293B;">
+                    ${ex.marked}
+                  </div>
+                  <div style="font-size:0.78rem; color:#64748B; margin-top:2px;">
+                    ${ex.vn} • <span style="font-family:var(--font-ipa); color:#7C3AED;">${ex.ipa}</span>
+                  </div>
+                </div>
+                <button class="btn-tone-audio" onclick="IntonationManager.playRuleExample('${r.id}', ${exIdx}, this)" title="Nghe phát âm chuẩn câu này">
+                  🔊
+                </button>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
     },
 
     // ------------------------------------------------------------------------

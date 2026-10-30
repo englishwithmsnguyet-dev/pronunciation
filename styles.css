@@ -3414,7 +3414,165 @@ button, select, input {
   transform: scale(1.08);
 }
 
-/* 2. SECTION 8 GRAMMATICAL RULES */
+/* 2. SECTION INTONATION RULES (PHÂN NHÓM LÊN & XUỐNG GIỌNG) */
+.rule-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 8px 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.rule-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: #475569;
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rule-filter-btn:hover {
+  background: #FFFFFF;
+  color: var(--text-main);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.rule-filter-btn.active {
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+  color: var(--brand-primary-dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.rule-filter-btn.active[data-filter="falling"] {
+  background: #EFF6FF;
+  border-color: #93C5FD;
+  color: #1E40AF;
+}
+
+.rule-filter-btn.active[data-filter="rising"] {
+  background: #FAF5FF;
+  border-color: #D8B4FE;
+  color: #7C3AED;
+}
+
+.rule-filter-btn.active[data-filter="combined"] {
+  background: #F0FDF4;
+  border-color: #86EFAC;
+  color: #15803D;
+}
+
+.rule-group-section {
+  margin-bottom: 32px;
+}
+
+.rule-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.rule-group-header.group-falling {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  border: 1px solid #BFDBFE;
+  border-left: 6px solid #2563EB;
+}
+
+.rule-group-header.group-rising {
+  background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%);
+  border: 1px solid #E9D5FF;
+  border-left: 6px solid #9333EA;
+}
+
+.rule-group-header.group-combined {
+  background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+  border: 1px solid #BBF7D0;
+  border-left: 6px solid #16A34A;
+}
+
+.rule-group-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rule-group-header.group-falling .rule-group-title {
+  color: #1E40AF;
+}
+
+.rule-group-header.group-rising .rule-group-title {
+  color: #6B21A8;
+}
+
+.rule-group-header.group-combined .rule-group-title {
+  color: #166534;
+}
+
+.rule-group-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.rule-group-header.group-falling .rule-group-badge {
+  background: #DBEAFE;
+  color: #1E40AF;
+  border: 1px solid #93C5FD;
+}
+
+.rule-group-header.group-rising .rule-group-badge {
+  background: #F3E8FF;
+  color: #7E22CE;
+  border: 1px solid #D8B4FE;
+}
+
+.rule-group-header.group-combined .rule-group-badge {
+  background: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #86EFAC;
+}
+
+.rule-group-desc {
+  width: 100%;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-top: 2px;
+}
+
+.rule-group-header.group-falling .rule-group-desc {
+  color: #1E3A8A;
+}
+
+.rule-group-header.group-rising .rule-group-desc {
+  color: #581C87;
+}
+
+.rule-group-header.group-combined .rule-group-desc {
+  color: #14532D;
+}
+
 .rules-accordion-list {
   display: flex;
   flex-direction: column;

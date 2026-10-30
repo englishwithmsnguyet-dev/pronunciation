@@ -409,6 +409,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_statements",
       num: 1,
+      group: "falling",
       title: "Câu Trần Thuật (Statements)",
       tonePattern: "Hạ giọng ở cuối câu (Falling ↘)",
       badge: "Cực kỳ phổ biến (60% giao tiếp)",
@@ -459,6 +460,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_wh_questions",
       num: 2,
+      group: "falling",
       title: "Câu Hỏi Wh- (Information Questions)",
       tonePattern: "Hạ giọng ở cuối câu (Falling ↘)",
       badge: "Lỗi sai số 1 của học viên",
@@ -509,6 +511,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_yes_no",
       num: 3,
+      group: "rising",
       title: "Câu Hỏi Yes / No",
       tonePattern: "Lên giọng ở cuối câu (Rising ↗)",
       badge: "Quy tắc kinh điển",
@@ -559,6 +562,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_choice",
       num: 4,
+      group: "combined",
       title: "Câu Hỏi Lựa Chọn (Alternative Questions với 'OR')",
       tonePattern: "Vế 1 Lên (↗) — Vế cuối Xuống (↘)",
       badge: "Quy tắc 2 vế bắt buộc",
@@ -600,6 +604,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_tag_questions",
       num: 5,
+      group: "rising",
       title: "Câu Hỏi Đuôi (Tag Questions)",
       tonePattern: "Chắc chắn $\\rightarrow$ Xuống (↘) | Chưa chắc $\\rightarrow$ Lên (↗)",
       badge: "Phản ánh tâm lý khảo thí",
@@ -641,6 +646,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_commands_requests",
       num: 6,
+      group: "falling",
       title: "Câu Mệnh Lệnh (Commands) vs Lời Yêu Cầu (Requests)",
       tonePattern: "Mệnh lệnh $\\rightarrow$ Xuống (↘) | Yêu cầu lịch sự $\\rightarrow$ Lên (↗) hoặc ↘↗",
       badge: "Sắc thái quyền lực vs Lịch sự",
@@ -691,6 +697,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_lists",
       num: 7,
+      group: "combined",
       title: "Ngữ Điệu Liệt Kê (List Intonation)",
       tonePattern: "Liệt kê đóng: A ↗, B ↗, and C ↘ | Liệt kê mở: A ↗, B ↗, C ↗...",
       badge: "Quy tắc vàng TOEIC Speaking Part 1",
@@ -732,6 +739,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_conditionals",
       num: 8,
+      group: "combined",
       title: "Mệnh Đề Phụ Mở Đầu (Introductory & Dependent Clauses)",
       tonePattern: "Mệnh đề phụ Lên (↗ hoặc ↘↗) — Mệnh đề chính Xuống (↘)",
       badge: "Cấu trúc ghép câu nâng cao",
@@ -782,6 +790,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_numbers_series",
       num: 9,
+      group: "combined",
       title: "Chuỗi Số, Số Điện Thoại & Mã Số (Series of Numbers & Phone Numbers)",
       tonePattern: "Lên giọng ở các cụm đầu (↗) — Hạ giọng ở cụm cuối (↘)",
       badge: "Đặc sản TOEIC Part 1 (Collins Track 23)",
@@ -834,6 +843,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_signposts",
       num: 10,
+      group: "rising",
       title: "Từ Nối Dẫn Dắt & Trạng Từ Mở Đầu (Signposts & Transition Words)",
       tonePattern: "Lên giọng nhẹ (↗) + Nghỉ ngắn — Mệnh đề chính Hạ giọng (↘)",
       badge: "Bí quyết liên kết bài đọc (Collins Quick Tip)",
@@ -886,6 +896,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_rhetorical_requests",
       num: 11,
+      group: "falling",
       title: "Lời Yêu Cầu Tu Từ & Kêu Gọi Chú Ý (Rhetorical Requests & Public Calls)",
       tonePattern: "Hạ giọng dứt khoát ở cuối câu (Falling ↘) — Không lên giọng!",
       badge: "Ngoại lệ bẫy kinh điển (Collins Track 06 & 24)",
@@ -938,6 +949,7 @@ window.INTONATION_DATA = {
     {
       id: "rule_punctuation_pausing",
       num: 12,
+      group: "combined",
       title: "Kỹ Thuật Ngắt Nghỉ Theo Dấu Câu & Cụm Tư Duy (Punctuation & Thought Groups)",
       tonePattern: "Dấu phẩy/hai chấm: Nghỉ ngắn (0.3s) • Dấu chấm: Nghỉ trọn vẹn (0.7s)",
       badge: "Kỹ thuật thở đều & Nhịp điệu bản xứ (Collins Track 29)",
@@ -1449,7 +1461,7 @@ window.INTONATION_DATA = {
       {
         num: 2,
         title: "Bước 2: Dạy Quy Tắc Gắn Với Ngữ Cảnh (Contextual Grammar)",
-        desc: "Dùng Tab 2 (8 Quy Tắc Ngữ Pháp) để giải thích cơ sở ngôn ngữ học. Không bắt học viên học vẹt công thức mà cho đọc to Đoạn hội thoại thực tế giữa 2 nhân vật (A và B). Chỉ ra bẫy ngữ âm kinh điển của câu hỏi Wh- và câu hỏi Lựa chọn."
+        desc: "Dùng Tab 2 (Quy Tắc Lên & Xuống Giọng) để giải thích cơ sở ngôn ngữ học. Không bắt học viên học vẹt công thức mà cho đọc to Đoạn hội thoại thực tế giữa 2 nhân vật (A và B). Chỉ ra bẫy ngữ âm kinh điển của câu hỏi Wh- và câu hỏi Lựa chọn."
       },
       {
         num: 3,
