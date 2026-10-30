@@ -4528,5 +4528,72 @@ button, select, input {
   line-height: 1.5;
 }
 
+/* ==========================================================================
+   MODULE MỚI: NGẮT NGHỈ (PAUSING) & PHÂN CỤM (CHUNKING)
+   ========================================================================== */
+.pause-pill-light {
+  display: inline-block;
+  background: #EFF6FF;
+  color: #2563EB;
+  border: 1px solid #BFDBFE;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-family: monospace;
+  font-size: 0.95rem;
+  margin: 0 3px;
+}
+
+.pause-pill-heavy {
+  display: inline-block;
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-family: monospace;
+  font-size: 0.95rem;
+  margin: 0 3px;
+}
+
+.chunking-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 24px;
+}
+
+.chunking-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+@media (max-width: 768px) {
+  .chunking-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chunking-compare-col {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+}
+
+.chunking-compare-col.bad {
+  background: #FFF5F5;
+  border: 1px solid #FED7D7;
+}
+
+.chunking-compare-col.good {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+}
+
+
 
 

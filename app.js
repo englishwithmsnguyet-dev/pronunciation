@@ -3906,6 +3906,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.renderRulesTab(container);
       } else if (this.currentTab === "stress") {
         this.renderStressTab(container);
+      } else if (this.currentTab === "pausing") {
+        this.renderPausingTab(container);
       } else if (this.currentTab === "attitudes") {
         this.renderAttitudesTab(container);
       } else if (this.currentTab === "functions") {
@@ -4672,7 +4674,257 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 4: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+    // TAB 4: KỸ THUẬT NGẮT NGHỈ (PAUSING) & PHÂN CỤM TƯ DUY (CHUNKING)
+    // ------------------------------------------------------------------------
+    renderPausingTab(container) {
+      const data = window.INTONATION_DATA.pausingChunking;
+      if (!data) {
+        container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748B;">Đang tải dữ liệu ngắt nghỉ &amp; phân cụm...</div>`;
+        return;
+      }
+
+      const s1 = data.section1;
+      const s2 = data.section2;
+      const s3 = data.section3;
+
+      let html = `
+        <div style="margin-bottom:24px;">
+          <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:800; background:#FEF3C7; color:#B45309; padding:4px 12px; border-radius:999px; text-transform:uppercase; margin-bottom:8px; border:1px solid #FDE68A;">
+            <span>⏸️</span> Trụ Cột Số 3: TOEIC Speaking Questions 1–2 (Collins TOEIC)
+          </div>
+          <h2 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
+            ${data.title}
+          </h2>
+          <div style="font-size:0.88rem; color:#6D28D9; font-weight:600; margin-bottom:12px;">
+            ${data.subtitle}
+          </div>
+          <p style="font-size:0.88rem; color:#475569; line-height:1.6; background:#F8FAFC; border:1px solid #E2E8F0; padding:14px 16px; border-radius:10px;">
+            ${data.overview}
+          </p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:28px;">
+
+          <!-- PHẦN 1: NGẮT NGHỈ THEO DẤU CÂU (TRACK 29) -->
+          <div class="chunking-card">
+            <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:#1E40AF; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+              <span>📝</span> ${s1.title}
+            </h3>
+            <p style="font-size:0.88rem; color:#334155; line-height:1.55; margin-bottom:16px;">
+              ${s1.desc}
+            </p>
+
+            <!-- Bảng Quy Ước Nhịp Thở Dấu Câu -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:18px;">
+              ${s1.guideBox.map(g => `
+                <div style="background:#F1F5F9; border-left:4px solid #3B82F6; padding:12px 14px; border-radius:4px 8px 8px 4px;">
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.92rem; color:#1E293B;">
+                    ${g.mark} <span style="font-family:monospace; background:#DBEAFE; color:#1E40AF; padding:1px 6px; border-radius:4px;">${g.symbol}</span>
+                  </div>
+                  <div style="font-weight:700; color:#2563EB; font-size:0.82rem; margin:2px 0;">${g.pause}</div>
+                  <div style="font-size:0.78rem; color:#64748B;">${g.note}</div>
+                </div>
+              `).join("")}
+            </div>
+
+            <!-- Băng Gốc Collins Track 29 Player -->
+            <div style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #EFF6FF, #DBEAFE); border:1px solid #93C5FD; border-radius:10px; padding:14px 18px; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span style="font-size:1.6rem;">🎙️</span>
+                <div>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.92rem; color:#1E40AF;">${s1.collinsTrackTitle}</div>
+                  <div style="font-size:0.78rem; color:#1E3A8A; margin-top:2px;">Bản thu âm gốc người bản xứ từ NXB Collins Education (Speaking Questions 1–2)</div>
+                </div>
+              </div>
+              <button class="btn-dialogue-play" style="background:#2563EB; color:#fff; border:none; padding:9px 18px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(37,99,235,0.3);" onclick="AudioEngine.playIntonationAudio('${s1.collinsTrack}', null, 1.0, 1.0, this)" title="Nghe băng thu âm gốc Track 29 từ sách Collins">
+                <span>▶️</span> Nghe Băng Gốc Track 29
+              </button>
+            </div>
+
+            <!-- Khung Bài Đọc Mẫu Phân Nhịp -->
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:10px; padding:18px 20px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+              <div style="font-family:var(--font-heading); font-weight:800; font-size:0.85rem; color:#475569; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;">
+                <span>📖 ${s1.passage.title}</span>
+                <span style="font-size:0.75rem; text-transform:none; color:#64748B;">Ký hiệu: <span class="pause-pill-light">│ = 0.3s</span> <span class="pause-pill-heavy">‖ = 0.7s</span></span>
+              </div>
+              <div style="font-family:var(--font-heading); font-size:1.02rem; line-height:2.0; color:#0F172A; margin-bottom:12px;">
+                ${s1.passage.chunkedDisplay}
+              </div>
+              <div style="font-size:0.82rem; color:#475569; border-top:1px dashed #E2E8F0; padding-top:10px; line-height:1.55;">
+                💡 <strong>Dịch nghĩa:</strong> ${s1.passage.vn}
+              </div>
+            </div>
+          </div>
+
+          <!-- PHẦN 2: NGẮT NGHỈ SAU TỪ NỐI & CỤM GIỚI TỪ (TRACK 30) -->
+          <div class="chunking-card">
+            <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:#059669; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+              <span>🔗</span> ${s2.title}
+            </h3>
+            <p style="font-size:0.88rem; color:#334155; line-height:1.55; margin-bottom:16px;">
+              ${s2.desc}
+            </p>
+
+            <!-- Băng Gốc Collins Track 30 Player -->
+            <div style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #ECFDF5, #D1FAE5); border:1px solid #A7F3D0; border-radius:10px; padding:14px 18px; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span style="font-size:1.6rem;">🎙️</span>
+                <div>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.92rem; color:#065F46;">${s2.collinsTrackTitle}</div>
+                  <div style="font-size:0.78rem; color:#047857; margin-top:2px;">Bản thu âm gốc người bản xứ từ NXB Collins Education (Speaking Questions 1–2)</div>
+                </div>
+              </div>
+              <button class="btn-dialogue-play" style="background:#059669; color:#fff; border:none; padding:9px 18px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(5,150,105,0.3);" onclick="AudioEngine.playIntonationAudio('${s2.collinsTrack}', null, 1.0, 1.0, this)" title="Nghe băng thu âm gốc Track 30 từ sách Collins">
+                <span>▶️</span> Nghe Băng Gốc Track 30
+              </button>
+            </div>
+
+            <!-- Danh Sách 4 Câu Thực Hành -->
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              ${s2.sentences.map((sent, sIdx) => `
+                <div style="display:flex; align-items:center; justify-content:space-between; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px 16px; gap:12px;">
+                  <div style="flex:1;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                      <span style="font-size:0.72rem; font-weight:800; background:#E0F2FE; color:#0369A1; padding:2px 8px; border-radius:4px; text-transform:uppercase;">${sent.type}</span>
+                    </div>
+                    <div style="font-family:var(--font-heading); font-size:1rem; font-weight:700; color:#1E293B;">
+                      ${sent.marked}
+                    </div>
+                    <div style="font-size:0.8rem; color:#64748B; margin-top:2px;">
+                      ${sent.vn}
+                    </div>
+                  </div>
+                  <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio(null, '${sent.speechText.replace(/'/g, "\\'")}', 1.0, 0.88, this)" title="Nghe câu này">
+                    🔊
+                  </button>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- PHẦN 3: KỸ THUẬT NGẮT CỤM (CHUNKING) & 3 QUY TẮC VÀNG -->
+          <div class="chunking-card" style="border-top:4px solid #7C3AED;">
+            <div style="display:inline-block; font-size:0.72rem; font-weight:800; background:#F3E8FF; color:#7E22CE; padding:3px 10px; border-radius:999px; text-transform:uppercase; margin-bottom:6px;">
+              ⭐ Phương Pháp Sư Phạm Cốt Lõi
+            </div>
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:800; color:#581C87; margin-bottom:8px;">
+              ${s3.title}
+            </h3>
+            <p style="font-size:0.88rem; color:#334155; line-height:1.6; margin-bottom:14px;">
+              ${s3.concept.definition}
+            </p>
+
+            <!-- So Sánh Bad vs Good Chunking -->
+            <div class="chunking-compare-grid">
+              <div class="chunking-compare-col bad">
+                <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#991B1B; margin-bottom:6px;">
+                  ❌ Cách đọc sai (Tách từng từ rời rạc):
+                </div>
+                <div style="font-family:monospace; font-size:1rem; font-weight:700; color:#DC2626; margin-bottom:6px;">
+                  ${s3.concept.comparison.bad}
+                </div>
+                <div style="font-size:0.78rem; color:#7F1D1D; line-height:1.45;">
+                  ${s3.concept.comparison.badDesc}
+                </div>
+              </div>
+
+              <div class="chunking-compare-col good">
+                <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#166534; margin-bottom:6px;">
+                  ✅ Cách đọc chuẩn (Nhóm theo cụm tư duy):
+                </div>
+                <div style="font-family:monospace; font-size:1.05rem; font-weight:800; color:#16A34A; margin-bottom:6px;">
+                  ${s3.concept.comparison.good}
+                </div>
+                <div style="font-size:0.78rem; color:#14532D; line-height:1.45;">
+                  ${s3.concept.comparison.goodDesc}
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 QUY TẮC CHUNKING CHI TIẾT -->
+            <div style="margin-top:24px; display:flex; flex-direction:column; gap:20px;">
+              <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#1E293B;">
+                🎯 3 QUY TẮC CHUNKING BẮT BUỘC PHẢI NHỚ:
+              </h4>
+
+              <!-- Quy Tắc 1 -->
+              <div style="background:#FAF5FF; border:1px solid #E9D5FF; border-radius:10px; padding:18px 20px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                  <span style="width:28px; height:28px; border-radius:50%; background:#7C3AED; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem;">1</span>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:1rem; color:#6B21A8;">
+                    ${s3.rules[0].name}
+                  </div>
+                </div>
+                <p style="font-size:0.85rem; color:#4C1D95; line-height:1.55; margin-bottom:12px;">
+                  👉 <strong>Quy tắc đọc:</strong> ${s3.rules[0].instruction}
+                </p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom:14px;">
+                  ${s3.rules[0].categories.map(cat => `
+                    <div style="background:#FFFFFF; border:1px solid #D8B4FE; padding:8px 12px; border-radius:6px;">
+                      <div style="font-size:0.72rem; font-weight:800; color:#7C3AED; text-transform:uppercase;">${cat.label}</div>
+                      <div style="font-size:0.82rem; font-weight:600; color:#1E293B; margin-top:2px;">${cat.items}</div>
+                    </div>
+                  `).join("")}
+                </div>
+                <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:6px; padding:10px 14px; font-size:0.82rem; color:#334155; line-height:1.6;">
+                  <strong>🔍 Ví dụ cụ thể:</strong><br/>
+                  ${s3.rules[0].doAndDont.map(d => `
+                    • <strong>${d.good}</strong> (không đọc: <code>${d.bad}</code>) — <em>${d.note}</em><br/>
+                  `).join("")}
+                </div>
+              </div>
+
+              <!-- Quy Tắc 2 -->
+              <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:18px 20px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                  <span style="width:28px; height:28px; border-radius:50%; background:#2563EB; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem;">2</span>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:1rem; color:#1E40AF;">
+                    ${s3.rules[1].name}
+                  </div>
+                </div>
+                <p style="font-size:0.85rem; color:#1E3A8A; line-height:1.55; margin-bottom:10px;">
+                  👉 <strong>Áp dụng:</strong> ${s3.rules[1].instruction}
+                </p>
+                <ul style="font-size:0.85rem; color:#1E40AF; margin-left:18px; margin-bottom:12px; line-height:1.6;">
+                  ${s3.rules[1].bullets.map(b => `<li>${b}</li>`).join("")}
+                </ul>
+                <div style="background:#FFFFFF; border:1px solid #BFDBFE; border-radius:6px; padding:10px 14px; font-size:0.84rem; color:#1E293B;">
+                  <strong>Ví dụ:</strong> <span style="font-family:monospace; font-weight:700; color:#2563EB;">${s3.rules[1].example.text}</span><br/>
+                  <span style="font-size:0.78rem; color:#64748B;">→ ${s3.rules[1].example.note}</span>
+                </div>
+              </div>
+
+              <!-- Quy Tắc 3 -->
+              <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:18px 20px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                  <span style="width:28px; height:28px; border-radius:50%; background:#16A34A; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem;">3</span>
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:1rem; color:#166534;">
+                    ${s3.rules[2].name}
+                  </div>
+                </div>
+                <p style="font-size:0.85rem; color:#14532D; line-height:1.55; margin-bottom:10px;">
+                  👉 <strong>Quy tắc khi nói tự do:</strong> ${s3.rules[2].instruction}
+                </p>
+                <ul style="font-size:0.85rem; color:#15803D; margin-left:18px; margin-bottom:12px; line-height:1.6;">
+                  ${s3.rules[2].bullets.map(b => `<li>${b}</li>`).join("")}
+                </ul>
+                <div style="background:#FFFFFF; border:1px solid #BBF7D0; border-radius:6px; padding:10px 14px; font-size:0.84rem; color:#1E293B;">
+                  <strong>Ví dụ:</strong> <span style="font-family:monospace; font-weight:700; color:#16A34A;">${s3.rules[2].example.text}</span><br/>
+                  <span style="font-size:0.78rem; color:#64748B;">→ ${s3.rules[2].example.note}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 5: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
     // ------------------------------------------------------------------------
     renderAttitudesTab(container) {
       const attitudes = window.INTONATION_DATA.attitudes;

@@ -1190,7 +1190,135 @@ window.INTONATION_DATA = {
   },
 
   // =========================================================================
-  // PHẦN 4: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+  // PHẦN 4: KỸ THUẬT NGẮT NGHỈ (PAUSING) & PHÂN CỤM TƯ DUY (CHUNKING)
+  // Trụ cột số 3 trong thang điểm TOEIC Speaking Questions 1–2 (Collins TOEIC)
+  // =========================================================================
+  pausingChunking: {
+    title: "Kỹ Thuật Ngắt Nghỉ (Pausing) & Phân Cụm Tư Duy (Chunking)",
+    subtitle: "Bí quyết làm chủ nhịp thở, không bị hụt hơi và giúp bài nói rành mạch, chuẩn bản xứ trong TOEIC Speaking Questions 1–2.",
+    overview: "Trong Speaking, ngắt nghỉ đúng chỗ (Pausing) và phân cụm thông tin (Chunking) là phương pháp chia bài nói thành các khối thông tin nhỏ có nghĩa và ngắt giọng giữa các phần này. Mục đích là giúp người nghe/giám khảo dễ dàng theo dõi mạch ý, đồng thời giúp người nói có những khoảng dừng tự nhiên để lấy lại cột hơi bằng cơ hoành, giữ nhịp tim ổn định và tránh bị cuống giọng.",
+
+    section1: {
+      title: "1. Kỹ Thuật Ngắt Nghỉ Theo Dấu Câu (Punctuation Pausing)",
+      collinsTrack: "audio/collins/collins_punctuation_pausing.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.29 (Punctuation & Pausing)",
+      desc: "Dấu câu (punctuation) cho biết nơi cần ngắt nghỉ trong câu. Dấu phẩy (comma) và dấu chấm (period) được dùng để chỉ ra nơi người viết muốn chia câu hoặc tách ý. Hãy đảm bảo có ngắt nhẹ giữa các câu và sau dấu phẩy, dấu hai chấm và dấu chấm phẩy.",
+      guideBox: [
+        { mark: "Dấu phẩy (,)", pause: "Nghỉ nhẹ (0.3s)", symbol: "│", note: "Tách các vế câu hoặc các mục liệt kê dở dang" },
+        { mark: "Dấu hai chấm (:) & chấm phẩy (;)", pause: "Nghỉ vừa (0.4s – 0.5s)", symbol: "│", note: "Chuẩn bị dẫn giải ý tiếp nối hoặc mệnh đề liên đới" },
+        { mark: "Dấu chấm (.)", pause: "Nghỉ trọn vẹn (0.7s)", symbol: "‖", note: "Chấm dứt hoàn toàn một câu, thả lỏng cơ hoành lấy hơi" }
+      ],
+      passage: {
+        title: "Đoạn Văn Mẫu Luyện Tập (Trích Đề Collins TOEIC Track 29)",
+        raw: "According to the monthly report, our production has increased 300% over the past five years. There’s only one group to thank for this: you. Our support staff and team members have done so much to help over the past year; we couldn’t have done it without you. Our thanks go out to everyone. We really appreciate it.",
+        chunkedDisplay: `According to the monthly report <span class="pause-pill-light">, │</span> our production has increased 300% over the past five years <span class="pause-pill-heavy">. ‖</span><br/>There’s only one group to thank for this <span class="pause-pill-light">: │</span> <strong>you</strong> <span class="pause-pill-heavy">. ‖</span><br/>Our support staff and team members have done so much to help over the past year <span class="pause-pill-light">; │</span> we couldn’t have done it without you <span class="pause-pill-heavy">. ‖</span><br/>Our thanks go out to everyone <span class="pause-pill-heavy">. ‖</span> We really appreciate it <span class="pause-pill-heavy">. ‖</span>`,
+        vn: "Theo báo cáo hàng tháng, sản lượng của chúng ta đã tăng 300% trong 5 năm qua. Chỉ có một tập thể duy nhất xứng đáng nhận lời cảm ơn cho thành tích này: chính là các bạn. Đội ngũ hỗ trợ và các thành viên đã cống hiến rất nhiều trong năm qua; chúng ta không thể thành công nếu thiếu các bạn. Xin gửi lời cảm ơn chân thành đến tất cả mọi người. Chúng tôi vô cùng trân trọng điều đó."
+      }
+    },
+
+    section2: {
+      title: "2. Ngắt Nghỉ Sau Từ Nối (Transitions) & Cụm Giới Từ (Prepositional Phrases)",
+      collinsTrack: "audio/collins/collins_transitions_prepositional.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.30 (Transitions & Prepositional Phrases)",
+      desc: "Bạn cũng nên ngắt nghỉ sau các từ nối (transitions) và cụm giới từ mở đầu câu (prepositional phrases). Lưu ý rằng dấu phẩy cũng là một dấu hiệu bổ sung cho vị trí cần ngắt.",
+      sentences: [
+        {
+          num: 1,
+          type: "Từ nối (Transition Word)",
+          en: "Nonetheless, he got the promotion.",
+          marked: "<u>Nonetheless</u> <span class=\"pause-pill-light\">, │</span> he got the promotion ↘.",
+          vn: "Dù vậy, anh ấy vẫn được thăng chức.",
+          speechText: "Nonetheless, he got the promotion."
+        },
+        {
+          num: 2,
+          type: "Từ nối (Transition Word)",
+          en: "Unfortunately, there’s nothing more we can do.",
+          marked: "<u>Unfortunately</u> <span class=\"pause-pill-light\">, │</span> there’s nothing more we can do ↘.",
+          vn: "Thật không may, chúng tôi không thể làm gì hơn.",
+          speechText: "Unfortunately, there is nothing more we can do."
+        },
+        {
+          num: 3,
+          type: "Cụm giới từ mở đầu (Prepositional Phrase)",
+          en: "By the time we got to the airport, the plane had gone.",
+          marked: "<u>By the time we got to the airport</u> <span class=\"pause-pill-light\">, │</span> the plane had gone ↘.",
+          vn: "Vào thời điểm chúng tôi đến sân bay, máy bay đã cất cánh.",
+          speechText: "By the time we got to the airport, the plane had gone."
+        },
+        {
+          num: 4,
+          type: "Cụm giới từ mở đầu (Prepositional Phrase)",
+          en: "As a result of the sale, we all got raises.",
+          marked: "<u>As a result of the sale</u> <span class=\"pause-pill-light\">, │</span> we all got raises ↘.",
+          vn: "Nhờ đợt bán hàng thành công, tất cả chúng tôi đều được tăng lương.",
+          speechText: "As a result of the sale, we all got raises."
+        }
+      ]
+    },
+
+    section3: {
+      title: "3. Kỹ Thuật Ngắt Cụm Tư Duy (Chunking) & 3 Quy Tắc Vàng",
+      concept: {
+        definition: "Trong Speaking, Chunking là phương pháp chia bài nói thành các khối thông tin nhỏ và ngắt giọng giữa các phần này với mục đích giúp người nghe dễ dàng theo dõi ý của người nói hơn.",
+        comparison: {
+          bad: "I / don’t / know / what / to / do",
+          badDesc: "Nói rời rạc từng từ riêng lẻ — người nghe mệt mỏi, phát âm như robot, đứt gãy cảm xúc.",
+          good: "I don’t know │ what to do",
+          goodDesc: "Nhóm thành 2 cụm tư duy liền mạch — trôi chảy, nhịp nhàng và chuẩn phong thái bản xứ."
+        }
+      },
+      rules: [
+        {
+          num: 1,
+          name: "Quy tắc 1: Giữ nguyên các cụm từ cố định (Fixed Chunks)",
+          instruction: "Không tách rời các cụm từ đã 'đi cùng nhau' trong tự nhiên. Đọc liền mạch, không ngắt giữa các từ trong cùng một cụm.",
+          categories: [
+            { label: "Collocations", items: "fast food, make a decision, heavy rain, do homework" },
+            { label: "Fixed expressions", items: "as a result, in conclusion, once in a while, on the other hand" },
+            { label: "Phrasal verbs", items: "check in, turn off, give up, look after, pick up" },
+            { label: "Discourse markers", items: "first of all, however, for example, in addition" }
+          ],
+          doAndDont: [
+            { good: "fast food", bad: "fast │ food", note: "Collocation quen thuộc: đọc dính liền" },
+            { good: "check in", bad: "check │ in", note: "Phrasal verb: nối âm và đọc dính liền" },
+            { good: "in conclusion, │ we would like to thank everyone ↘.", bad: "in │ conclusion │ we │ would...", note: "'in conclusion' tạo thành 1 chunk trọn vẹn rồi mới ngắt nhẹ sau dấu phẩy" }
+          ]
+        },
+        {
+          num: 2,
+          name: "Quy tắc 2: Chunking theo dấu câu (Punctuation Chunks)",
+          instruction: "Dấu câu là dấu hiệu trực quan và rõ ràng nhất để phân chia cụm trong bài đọc.",
+          bullets: [
+            "Dấu phẩy (,) → ngắt nhẹ (0.3s)",
+            "Dấu chấm (.) → ngắt rõ (0.7s)",
+            "Dấu chấm phẩy (;) & dấu hai chấm (:) → ngắt chuyển ý (0.4s – 0.5s)"
+          ],
+          example: {
+            text: "According to the report, │ our sales increased significantly ↘.",
+            note: "Ngắt nhẹ sau dấu phẩy để phân tách nguồn thông tin với số liệu báo cáo."
+          }
+        },
+        {
+          num: 3,
+          name: "Quy tắc 3: Ngắt theo ý nghĩa (Meaning Groups)",
+          instruction: "Khi nói tự do (không có script trước mắt), cần chia câu theo các khối ý hoàn chỉnh, không ngắt theo từng từ lẻ tẻ.",
+          bullets: [
+            "Mỗi chunk = 1 ý nghĩa nhỏ hoàn chỉnh",
+            "Đọc liền mạch các từ bên trong chunk",
+            "Ngắt nhẹ sau khi ý nhỏ đó đã hoàn tất"
+          ],
+          example: {
+            text: "Because we don’t have the reports yet, │ we can’t have the meeting today ↘.",
+            note: "Chunk 1: Lý do (Chưa có báo cáo) ── Chunk 2: Kết quả (Không họp hôm nay)."
+          }
+        }
+      ]
+    }
+  },
+
+  // =========================================================================
+  // PHẦN 5: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
   // Cùng 1 từ biến đổi ý nghĩa 180 độ theo cao độ tự nhiên
   // =========================================================================
   attitudes: [
