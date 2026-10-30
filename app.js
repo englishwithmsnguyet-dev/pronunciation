@@ -3882,6 +3882,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.renderTonesTab(container);
       } else if (this.currentTab === "rules") {
         this.renderRulesTab(container);
+      } else if (this.currentTab === "stress") {
+        this.renderStressTab(container);
       } else if (this.currentTab === "attitudes") {
         this.renderAttitudesTab(container);
       } else if (this.currentTab === "functions") {
@@ -4317,7 +4319,280 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 3: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+    // TAB 3: TRỌNG ÂM CÂU & NHỊP ĐIỆU ĐẲNG THỜI (SENTENCE STRESS & RHYTHM)
+    // ------------------------------------------------------------------------
+    renderStressTab(container) {
+      const data = window.INTONATION_DATA.sentenceStress;
+      if (!data) return;
+
+      const p1 = data.contentVsFunction;
+      const p2 = data.adverbsEmphasis;
+      const p3 = data.contrastiveNumbers;
+      const p4 = data.nounVerbShift;
+
+      let html = `
+        <div style="margin-bottom:24px;">
+          <div style="display:inline-block; font-size:0.75rem; font-weight:800; background:#FEF3C7; color:#B45309; padding:4px 10px; border-radius:999px; text-transform:uppercase; margin-bottom:8px;">
+            ⚡ TOEIC Speaking Questions 1–2 Mastery
+          </div>
+          <h2 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">
+            ${data.title}
+          </h2>
+          <div style="font-size:0.88rem; color:#6D28D9; font-weight:600; margin-bottom:12px;">
+            ${data.subtitle}
+          </div>
+          <p style="font-size:0.88rem; color:#475569; line-height:1.6; background:#F8FAFC; border:1px solid #E2E8F0; padding:14px 16px; border-radius:10px;">
+            ${data.overview}
+          </p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:24px;">
+
+          <!-- SECTION 1: CONTENT VS FUNCTION WORDS -->
+          <div class="rule-accordion-card">
+            <div class="rule-card-header">
+              <div class="rule-num-circle" style="background:#059669;">1</div>
+              <div class="rule-title-group">
+                <div class="rule-title-text" style="color:#065F46;">
+                  ${p1.headline}
+                </div>
+                <div class="rule-summary-text">${p1.explanation}</div>
+              </div>
+            </div>
+
+            <!-- Collins Track Badge -->
+            ${p1.collinsTrack ? `
+              <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #F0FDF4, #DCFCE7); border:1px solid #86EFAC; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(22,163,74,0.06);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="font-size:1.5rem;">🎙️</span>
+                  <div>
+                    <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#166534;">Băng Gốc Collins TOEIC: ${p1.collinsTrackTitle}</div>
+                    <div style="font-size:0.75rem; color:#15803D; margin-top:2px;">Lắng nghe người bản xứ đọc mẫu quy tắc Content vs. Function Words</div>
+                  </div>
+                </div>
+                <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(22,163,74,0.3);" onclick="AudioEngine.playIntonationAudio('${p1.collinsTrack}', null, 1.0, 1.0, this)">
+                  <span>▶️</span> Nghe Băng Gốc
+                </button>
+              </div>
+            ` : ""}
+
+            <!-- Bảng So Sánh 2 Nhóm Từ -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin:14px 0;">
+              ${p1.categories.map(cat => `
+                <div style="background:${cat.badgeColor === 'green' ? '#F0FDF4' : '#F8FAFC'}; border:1px solid ${cat.badgeColor === 'green' ? '#86EFAC' : '#CBD5E1'}; border-radius:10px; padding:14px;">
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.92rem; color:${cat.badgeColor === 'green' ? '#166534' : '#334155'}; margin-bottom:4px;">
+                    ${cat.type}
+                  </div>
+                  <div style="font-size:0.78rem; color:#64748B; margin-bottom:10px;">${cat.desc}</div>
+                  <div style="display:flex; flex-direction:column; gap:6px;">
+                    ${cat.groups.map(g => `
+                      <div style="font-size:0.82rem; background:#fff; padding:6px 10px; border-radius:6px; border:1px solid #E2E8F0;">
+                        <span style="font-weight:700; color:#1E293B;">${g.pos}:</span>
+                        <span style="color:#6B21A8; font-family:var(--font-heading); font-size:0.8rem;"> ${g.examples}</span>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+
+            <!-- Ví Dụ Có Audio -->
+            <div style="font-family:var(--font-heading); font-size:0.8rem; font-weight:800; color:#334155; text-transform:uppercase; margin:14px 0 8px;">
+              🎧 Ví Dụ Trọng Âm Câu Điển Hình:
+            </div>
+            <div class="rule-examples-box">
+              ${p1.examples.map(ex => `
+                <div class="rule-example-row">
+                  <div>
+                    <div style="font-family:var(--font-heading); font-size:0.95rem; font-weight:700; color:#1E293B;">
+                      ${ex.marked}
+                    </div>
+                    <div style="font-size:0.78rem; color:#475569; margin-top:3px; line-height:1.4;">
+                      💡 ${ex.analysis}
+                    </div>
+                  </div>
+                  <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio('${ex.audioUrl}', '${ex.speechText}', 1.0, 0.90, this)" title="Nghe câu này">
+                    🔊
+                  </button>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- SECTION 2: ADVERBS FOR EMPHASIS -->
+          <div class="rule-accordion-card">
+            <div class="rule-card-header">
+              <div class="rule-num-circle" style="background:#7C3AED;">2</div>
+              <div class="rule-title-group">
+                <div class="rule-title-text" style="color:#5B21B6;">
+                  ${p2.headline}
+                </div>
+                <div class="rule-summary-text">${p2.explanation}</div>
+              </div>
+            </div>
+
+            ${p2.collinsTrack ? `
+              <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #F5F3FF, #EDE9FE); border:1px solid #C4B5FD; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(124,58,237,0.06);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="font-size:1.5rem;">🎙️</span>
+                  <div>
+                    <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#5B21B6;">Băng Gốc Collins TOEIC: ${p2.collinsTrackTitle}</div>
+                    <div style="font-size:0.75rem; color:#6D28D9; margin-top:2px;">Trọng âm nhấn mạnh vào trạng từ chỉ mức độ (Adverbs for Emphasis)</div>
+                  </div>
+                </div>
+                <button class="btn-dialogue-play" style="background:#7C3AED; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(124,58,237,0.3);" onclick="AudioEngine.playIntonationAudio('${p2.collinsTrack}', null, 1.0, 1.0, this)">
+                  <span>▶️</span> Nghe Băng Gốc
+                </button>
+              </div>
+            ` : ""}
+
+            <div class="rule-examples-box">
+              ${p2.examples.map(ex => `
+                <div class="rule-example-row">
+                  <div>
+                    <div style="font-family:var(--font-heading); font-size:0.95rem; font-weight:700; color:#1E293B;">
+                      ${ex.marked}
+                    </div>
+                    <div style="font-size:0.8rem; color:#64748B; margin-top:2px;">
+                      ${ex.vn}
+                    </div>
+                  </div>
+                  <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio('${ex.audioUrl}', '${ex.speechText}', 1.0, 0.90, this)" title="Nghe câu này">
+                    🔊
+                  </button>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- SECTION 3: CONTRASTIVE STRESS & NUMBERS (-TEEN VS -TY) -->
+          <div class="rule-accordion-card">
+            <div class="rule-card-header">
+              <div class="rule-num-circle" style="background:#EA580C;">3</div>
+              <div class="rule-title-group">
+                <div class="rule-title-text" style="color:#C2410C;">
+                  ${p3.headline}
+                </div>
+                <div class="rule-summary-text">${p3.explanation}</div>
+              </div>
+            </div>
+
+            ${p3.collinsTrack ? `
+              <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #FFF7ED, #FFEDD5); border:1px solid #FDBA74; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(234,88,12,0.06);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="font-size:1.5rem;">🎙️</span>
+                  <div>
+                    <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#9A3412;">Băng Gốc Collins TOEIC: ${p3.collinsTrackTitle}</div>
+                    <div style="font-size:0.75rem; color:#C2410C; margin-top:2px;">Luyện nghe phân biệt đuôi -teen (âm 2) và -ty (âm 1) chuẩn bản xứ</div>
+                  </div>
+                </div>
+                <button class="btn-dialogue-play" style="background:#EA580C; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(234,88,12,0.3);" onclick="AudioEngine.playIntonationAudio('${p3.collinsTrack}', null, 1.0, 1.0, this)">
+                  <span>▶️</span> Nghe Băng Gốc
+                </button>
+              </div>
+            ` : ""}
+
+            <!-- Bảng So Sánh -teen vs -ty -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin:14px 0;">
+              ${p3.rulesComparison.map(r => `
+                <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px; padding:14px;">
+                  <div style="font-family:var(--font-heading); font-weight:800; font-size:0.95rem; color:#92400E; margin-bottom:4px;">
+                    ${r.type}
+                  </div>
+                  <div style="font-size:0.82rem; font-weight:700; color:#B45309; margin-bottom:4px;">${r.rule}</div>
+                  <div style="font-size:0.78rem; font-family:var(--font-ipa); color:#7C3AED; margin-bottom:6px;">${r.ipa}</div>
+                  <div style="font-size:0.78rem; color:#475569;">Ví dụ: <strong>${r.examples}</strong></div>
+                </div>
+              `).join("")}
+            </div>
+
+            <div class="rule-examples-box">
+              ${p3.examples.map(ex => `
+                <div class="rule-example-row">
+                  <div>
+                    <div style="font-family:var(--font-heading); font-size:0.95rem; font-weight:700; color:#1E293B;">
+                      ${ex.marked}
+                    </div>
+                    <div style="font-size:0.8rem; color:#64748B; margin-top:2px;">
+                      ${ex.vn}
+                    </div>
+                  </div>
+                  <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio('${ex.audioUrl}', '${ex.speechText}', 1.0, 0.90, this)" title="Nghe câu này">
+                    🔊
+                  </button>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- SECTION 4: HETERONYMS NOUN VS VERB -->
+          <div class="rule-accordion-card">
+            <div class="rule-card-header">
+              <div class="rule-num-circle" style="background:#2563EB;">4</div>
+              <div class="rule-title-group">
+                <div class="rule-title-text" style="color:#1E40AF;">
+                  ${p4.headline}
+                </div>
+                <div class="rule-summary-text">${p4.explanation}</div>
+              </div>
+            </div>
+
+            ${p4.collinsTrack ? `
+              <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #EFF6FF, #DBEAFE); border:1px solid #93C5FD; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(37,99,235,0.06);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="font-size:1.5rem;">🎙️</span>
+                  <div>
+                    <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#1E40AF;">Băng Gốc Collins TOEIC: ${p4.collinsTrackTitle}</div>
+                    <div style="font-size:0.75rem; color:#2563EB; margin-top:2px;">Danh từ/Tính từ nhấn ÂM 1 vs Động từ nhấn ÂM 2 (Heteronyms)</div>
+                  </div>
+                </div>
+                <button class="btn-dialogue-play" style="background:#2563EB; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(37,99,235,0.3);" onclick="AudioEngine.playIntonationAudio('${p4.collinsTrack}', null, 1.0, 1.0, this)">
+                  <span>▶️</span> Nghe Băng Gốc
+                </button>
+              </div>
+            ` : ""}
+
+            <!-- Bảng Tra Cứu Cặp Từ -->
+            <div style="overflow-x:auto; margin:14px 0;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.84rem; text-align:left;">
+                <thead>
+                  <tr style="background:#F1F5F9; border-bottom:2px solid #CBD5E1;">
+                    <th style="padding:10px; font-weight:800; color:#1E293B;">Từ Vựng</th>
+                    <th style="padding:10px; font-weight:800; color:#166534; background:#F0FDF4;">Danh Từ / Tính Từ (Nhấn Âm 1)</th>
+                    <th style="padding:10px; font-weight:800; color:#1E40AF; background:#EFF6FF;">Động Từ (Nhấn Âm 2)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${p4.pairs.map((pair, idx) => `
+                    <tr style="border-bottom:1px solid #E2E8F0; background:${idx % 2 === 0 ? '#fff' : '#F8FAFC'};">
+                      <td style="padding:10px; font-weight:800; font-family:var(--font-heading); color:#0F172A;">
+                        ${pair.word}
+                      </td>
+                      <td style="padding:10px; background:${idx % 2 === 0 ? '#F0FDF4' : '#E7F9EE'};">
+                        <div style="font-weight:700; color:#15803D;">${pair.nStress}</div>
+                        <div style="font-size:0.75rem; color:#475569; margin:2px 0;">${pair.nMeaning}</div>
+                        <div style="font-size:0.78rem; font-style:italic; color:#047857;">Ví dụ: "${pair.exN}"</div>
+                      </td>
+                      <td style="padding:10px; background:${idx % 2 === 0 ? '#EFF6FF' : '#E0EDFE'};">
+                        <div style="font-weight:700; color:#1D4ED8;">${pair.vStress}</div>
+                        <div style="font-size:0.75rem; color:#475569; margin:2px 0;">${pair.vMeaning}</div>
+                        <div style="font-size:0.78rem; font-style:italic; color:#1E40AF;">Ví dụ: "${pair.exV}"</div>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      container.innerHTML = html;
+    },
+
+    // ------------------------------------------------------------------------
+    // TAB 4: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
     // ------------------------------------------------------------------------
     renderAttitudesTab(container) {
       const attitudes = window.INTONATION_DATA.attitudes;

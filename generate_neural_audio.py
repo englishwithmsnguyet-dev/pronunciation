@@ -230,7 +230,19 @@ AUDIO_SPECS = [
     },
 
     # =========================================================================
-    # 7. QUIZ AUDIO (15 items)
+    # 7. SENTENCE STRESS EXAMPLES (8 items - Collins TOEIC)
+    # =========================================================================
+    {"id": "stress_ex_employees", "file": "stress_ex_employees.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "The employees are the ones to thank."},
+    {"id": "stress_ex_not_lot", "file": "stress_ex_not_lot.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "There's really not a lot to say about that."},
+    {"id": "stress_ex_really_time", "file": "stress_ex_really_time.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "We really don't have much time."},
+    {"id": "stress_ex_completely_forgot", "file": "stress_ex_completely_forgot.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "I completely forgot the conference."},
+    {"id": "stress_ex_strongly_suggest", "file": "stress_ex_strongly_suggest.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "We strongly suggest that you back up your computer files at the end of the day."},
+    {"id": "stress_ex_numbers_contrast", "file": "stress_ex_numbers_contrast.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "The correct numbers are thirteen and seventeen, not thirty and seventy."},
+    {"id": "stress_ex_turn_down", "file": "stress_ex_turn_down.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Please turn down the volume on the TV, not up."},
+    {"id": "stress_ex_parking_visitor", "file": "stress_ex_parking_visitor.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "The parking spaces are clearly marked visitor."},
+
+    # =========================================================================
+    # 8. QUIZ AUDIO (15 items)
     # =========================================================================
     {"id": "quiz_1", "file": "quiz_1.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "-5%", "text": "She lives in California."},
     {"id": "quiz_2", "file": "quiz_2.mp3", "voice": VOICE_FEMALE, "pitch": "+15Hz", "rate": "+0%", "text": "Are you coming to the party?"},

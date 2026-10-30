@@ -990,7 +990,161 @@ window.INTONATION_DATA = {
   ],
 
   // =========================================================================
-  // PHẦN 3: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
+  // PHẦN 3: TRỌNG ÂM CÂU & NHỊP ĐIỆU ĐẲNG THỜI (SENTENCE STRESS & RHYTHM)
+  // Biên soạn theo chuẩn Collins TOEIC Speaking Questions 1–2 (Tips & Tasks)
+  // =========================================================================
+  sentenceStress: {
+    title: "Trọng Âm Câu & Nhịp Điệu Đẳng Thời (Sentence Stress & Rhythm)",
+    subtitle: "Bí quyết tạo nhịp điệu bập bênh tự nhiên và đạt điểm tối đa tiêu chí Stress trong bài thi TOEIC Speaking Questions 1–2.",
+    overview: "Trong tiếng Anh, không phải từ nào trong câu cũng được đọc mạnh như nhau. Tiếng Anh là ngôn ngữ đẳng thời trọng âm (Stress-timed language): người bản xứ chỉ dồn sức nhấn mạnh vào các TỪ NỘI DUNG (Content Words), và lướt qua rất nhanh các TỪ CHỨC NĂNG (Function Words). Nắm vững 4 nguyên lý trọng âm câu dưới đây giúp học viên thoát hoàn toàn khỏi cách nói 'đều đều như tụng kinh' của tiếng Việt.",
+    
+    // 1. CONTENT WORDS VS FUNCTION WORDS
+    contentVsFunction: {
+      headline: "1. Nguyên Tắc Cốt Lõi: Content Words (Nhấn Mạnh) vs. Function Words (Lướt Nhẹ)",
+      explanation: "Đây là quy tắc nền tảng tạo nên nhịp điệu (rhythm) của tiếng Anh. Hãy nhớ câu thần chú: 'Có từ mang nghĩa thì nhấn to cao dài, từ ngữ pháp thì lướt nhanh trầm nhẹ'.",
+      collinsTrack: "audio/collins/collins_sentence_stress_content.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.18 (Content vs. Function Words)",
+      categories: [
+        {
+          type: "Content Words (TỪ NỘI DUNG — Nhấn Trọng Âm ★)",
+          desc: "Mang thông tin cốt lõi của câu. Phải đọc TO HƠN, CAO HƠN, và KÉO DÀI HƠN.",
+          badgeColor: "green",
+          groups: [
+            { pos: "Danh từ (Nouns)", examples: "meeting, employees, report, London, manager" },
+            { pos: "Động từ chính (Main Verbs)", examples: "thank, attend, conduct, work, increase" },
+            { pos: "Tính từ (Adjectives)", examples: "important, new, annual, fantastic, difficult" },
+            { pos: "Trạng từ (Adverbs)", examples: "really, completely, strongly, quickly, early" },
+            { pos: "Từ phủ định (Negatives)", examples: "not, don't, can't, never, nowhere" }
+          ]
+        },
+        {
+          type: "Function Words (TỪ CHỨC NĂNG — Đọc Lướt / Nhược Hóa)",
+          desc: "Chỉ đóng vai trò kết nối ngữ pháp. Đọc NHẸ, NHANH, NGUYÊN ÂM BIẾN THÀNH /ə/ (Schwa).",
+          badgeColor: "gray",
+          groups: [
+            { pos: "Mạo từ (Articles)", examples: "a, an, the (đọc nhẹ thành /ðə/, /ə/)" },
+            { pos: "Giới từ (Prepositions)", examples: "to, in, on, at, of, for (đọc nhẹ thành /tə/, /əv/, /fə/)" },
+            { pos: "Đại từ (Pronouns)", examples: "he, she, it, they, us, you, my, your" },
+            { pos: "Trợ động từ (Auxiliaries)", examples: "is, are, was, have, has, can, will, do" },
+            { pos: "Liên từ (Conjunctions)", examples: "and, but, or, so (đọc 'and' thành /ən/)" }
+          ]
+        }
+      ],
+      examples: [
+        {
+          en: "The employees are the ones to thank.",
+          marked: "The em<strong>PLOY</strong>ees are the <strong>ONES</strong> to <strong>THANK</strong>.",
+          analysis: "Trong câu có 7 từ, nhưng chỉ có 3 từ mang nội dung nhận trọng âm: emPLOYees (noun), ONES (pronoun đại diện), THANK (verb). Các từ 'The', 'are the', 'to' đọc lướt cực nhanh.",
+          audioUrl: "audio/intonation/stress_ex_employees.mp3",
+          speechText: "The employees are the ones to thank."
+        },
+        {
+          en: "There's really not a lot to say about that.",
+          marked: "There's <strong>REAL</strong>ly <strong>NOT</strong> a <strong>LOT</strong> to <strong>SAY</strong> about that.",
+          analysis: "Nhấn mạnh vào REALly (adverb), NOT (negative), LOT (noun), SAY (main verb). Các từ 'There's a', 'to', 'about that' lướt nhẹ.",
+          audioUrl: "audio/intonation/stress_ex_not_lot.mp3",
+          speechText: "There's really not a lot to say about that."
+        }
+      ]
+    },
+
+    // 2. ADVERBS FOR EMPHASIS
+    adverbsEmphasis: {
+      headline: "2. Nhấn Mạnh Trạng Từ Chỉ Mức Độ (Adverbs for Emphasis)",
+      explanation: "Trong các bài đọc TOEIC Speaking (thông báo sự kiện, quảng cáo dịch vụ, thư ngỏ giám đốc), các trạng từ như 'really', 'completely', 'strongly', 'extremely', 'absolutely' đóng vai trò thuyết phục người nghe. Người bản xứ luôn dồn trọng âm câu vào các trạng từ này để tạo sức nặng.",
+      collinsTrack: "audio/collins/collins_adverbs_emphasis.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.19 (Adverbs Stressed for Emphasis)",
+      examples: [
+        {
+          en: "We really don't have much time.",
+          marked: "We <strong>REAL</strong>ly don't have much <strong>TIME</strong>.",
+          vn: "Chúng ta thực sự không còn nhiều thời gian nữa đâu (Nhấn mạnh sự cấp bách).",
+          audioUrl: "audio/intonation/stress_ex_really_time.mp3",
+          speechText: "We really don't have much time."
+        },
+        {
+          en: "I completely forgot the conference.",
+          marked: "I com<strong>PLETE</strong>ly for<strong>GOT</strong> the <strong>CON</strong>ference.",
+          vn: "Tôi hoàn toàn quên bẵng mất buổi hội nghị (Nhấn mạnh mức độ triệt để).",
+          audioUrl: "audio/intonation/stress_ex_completely_forgot.mp3",
+          speechText: "I completely forgot the conference."
+        },
+        {
+          en: "We strongly suggest that you back up your computer files.",
+          marked: "We <strong>STRONG</strong>ly sug<strong>GEST</strong> that you <strong>BACK UP</strong> your com<strong>PU</strong>ter files.",
+          vn: "Chúng tôi cực kỳ khuyến nghị bạn nên sao lưu các tệp máy tính vào cuối ngày (Collins Track 20).",
+          audioUrl: "audio/intonation/stress_ex_strongly_suggest.mp3",
+          speechText: "We strongly suggest that you back up your computer files at the end of the day."
+        }
+      ]
+    },
+
+    // 3. CONTRASTIVE STRESS & NUMBERS (-TEEN VS -TY)
+    contrastiveNumbers: {
+      headline: "3. Bẫy Số Đếm (-teen vs -ty) & Trọng Âm Tương Phản (Contrastive Stress)",
+      explanation: "Đây là 'chiếc bẫy điểm số' kinh điển trong bài thi TOEIC Q1-2: Giám khảo ETS luôn cố tình đưa các con số như 13, 30, 17, 70 vào văn bản để kiểm tra xem thí sinh có phân biệt được trọng âm âm tiết 1 hay 2 không. Khi câu có thông tin sửa sai hoặc đối lập, từ tương phản phải nhận trọng âm mạnh nhất toàn câu.",
+      collinsTrack: "audio/collins/collins_contrastive_numbers.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.20 & Track 21 (Numbers & Contrastive Stress)",
+      rulesComparison: [
+        {
+          type: "Đuôi -TEEN (13 – 19)",
+          rule: "Luôn nhấn vào ÂM TIẾT THỨ 2 (-TEEN)",
+          ipa: "/...ˈtiːn/ (Âm /iː/ căng dài, cao độ vút lên)",
+          examples: "thirTEEN (/θɜːrˈtiːn/), fourTEEN, fifTEEN, sevenTEEN (/ˌsevnˈtiːn/)"
+        },
+        {
+          type: "Đuôi -TY (30, 40 ... 70)",
+          rule: "Luôn nhấn vào ÂM TIẾT THỨ 1 (Âm đầu)",
+          ipa: "/ˈ...ti/ (Âm /i/ ngắn nhẹ, cao độ rơi xuống)",
+          examples: "THIRty (/ˈθɜːrti/), FORty, FIFty, SEVenty (/ˈsevnti/)"
+        }
+      ],
+      examples: [
+        {
+          en: "The correct numbers are 13 and 17, not 30 and 70.",
+          marked: "The correct numbers are thir<strong>TEEN</strong> and seven<strong>TEEN</strong>, NOT <strong>THIR</strong>ty and <strong>SEV</strong>enty.",
+          vn: "Các con số chính xác là 13 và 17, chứ KHÔNG PHẢI 30 và 70 (Trích đề Collins Track 20).",
+          audioUrl: "audio/intonation/stress_ex_numbers_contrast.mp3",
+          speechText: "The correct numbers are thirteen and seventeen, not thirty and seventy."
+        },
+        {
+          en: "Please turn down the volume on the TV, not up.",
+          marked: "Please turn <strong>DOWN</strong> the volume on the TV, <strong>NOT UP</strong>.",
+          vn: "Làm ơn vặn NHỎ tivi lại, KHÔNG PHẢI vặn to lên đâu (Tương phản đối lập).",
+          audioUrl: "audio/intonation/stress_ex_turn_down.mp3",
+          speechText: "Please turn down the volume on the TV, not up."
+        },
+        {
+          en: "The parking spaces are clearly marked 'visitor.'",
+          marked: "The <strong>PARK</strong>ing spaces are <strong>CLEAR</strong>ly marked '<strong>VIS</strong>itor.'",
+          vn: "Các chỗ đỗ xe được ghi rõ ràng là dành cho khách thăm quan.",
+          audioUrl: "audio/intonation/stress_ex_parking_visitor.mp3",
+          speechText: "The parking spaces are clearly marked visitor."
+        }
+      ]
+    },
+
+    // 4. HETERONYMS: NOUN (1) VS VERB (2) STRESS SHIFT
+    nounVerbShift: {
+      headline: "4. Bẫy Chuyển Trọng Âm Cặp Từ Noun / Verb (Two-Syllable Heteronyms)",
+      explanation: "Trong tiếng Anh, hàng trăm từ có cùng mặt chữ nhưng đổi vị trí trọng âm hoàn toàn tùy theo loại từ trong câu: Đứng làm Danh từ/Tính từ nhấn ÂM 1, đứng làm Động từ nhấn ÂM 2. Đọc sai trọng âm sẽ làm sai lệch cấu trúc ngữ pháp và bị trừ điểm phát âm nặng.",
+      collinsTrack: "audio/collins/collins_noun_verb_stress.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.12 & Track 13 (Noun/Verb Stress Shift)",
+      pairs: [
+        { word: "conduct", nStress: "CONduct /ˈkɒn.dʌkt/", nMeaning: "hạnh kiểm, tư cách, sự chỉ đạo", vStress: "conDUCT /kənˈdʌkt/", vMeaning: "tiến hành, thực hiện", exN: "follow the code of CONduct", exV: "will conDUCT a thorough search" },
+        { word: "record", nStress: "REcord /ˈrek.ɔːd/", nMeaning: "kỷ lục, hồ sơ, bản ghi", vStress: "reCORD /rɪˈkɔːd/", vMeaning: "ghi nhận, ghi âm", exN: "set a new sales REcord", exV: "so we can reCORD your attendance" },
+        { word: "produce", nStress: "PROduce /ˈprɒd.juːs/", nMeaning: "nông sản, rau củ quả", vStress: "proDUCE /prəˈdjuːs/", vMeaning: "sản xuất, chế tạo", exN: "made money in PROduce", exV: "the plant will proDUCE parts" },
+        { word: "permit", nStress: "PERmit /ˈpɜː.mɪt/", nMeaning: "giấy phép, sự cấp phép", vStress: "perMIT /pəˈmɪt/", vMeaning: "cho phép", exN: "getting a scuba PERmit", exV: "smoking is not perMITted" },
+        { word: "project", nStress: "PROject /ˈprɒdʒ.ekt/", nMeaning: "dự án, đề án", vStress: "proJECT /prəˈdʒekt/", vMeaning: "chiếu, dự phóng", exN: "several important PROjects", exV: "sales are proJECTed to grow" },
+        { word: "increase", nStress: "INcrease /ˈɪn.kriːs/", nMeaning: "sự gia tăng", vStress: "inCREASE /ɪnˈkriːs/", vMeaning: "tăng lên", exN: "a significant INcrease", exV: "business is set to inCREASE" },
+        { word: "refund", nStress: "REfund /ˈriː.fʌnd/", nMeaning: "tiền hoàn lại", vStress: "reFUND /rɪˈfʌnd/", vMeaning: "hoàn tiền", exN: "request a full REfund", exV: "we will reFUND your money" },
+        { word: "contest", nStress: "CONtest /ˈkɒn.test/", nMeaning: "cuộc thi, hội thi", vStress: "conTEST /kənˈtest/", vMeaning: "tranh chấp, khiếu nại", exN: "pie-baking CONtest", exV: "decided to conTEST the decision" }
+      ]
+    }
+  },
+
+  // =========================================================================
+  // PHẦN 4: PHÒNG THÍ NGHIỆM THÁI ĐỘ (ATTITUDINAL LAB)
   // Cùng 1 từ biến đổi ý nghĩa 180 độ theo cao độ tự nhiên
   // =========================================================================
   attitudes: [
