@@ -261,7 +261,70 @@ AUDIO_SPECS = [
         "ssml": """<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US"><voice name="en-US-JennyNeural">I didn't take <prosody pitch="+50Hz" volume="+40%">YOUR</prosody> book.</voice></speak>"""
     },
     {"id": "quiz_14", "file": "quiz_14.mp3", "voice": VOICE_FEMALE, "pitch": "-15Hz", "rate": "-15%", "text": "Well, let me see..."},
-    {"id": "quiz_15", "file": "quiz_15.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "+0%", "text": "Sit down."}
+    {"id": "quiz_15", "file": "quiz_15.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "+0%", "text": "Sit down."},
+
+    # =========================================================================
+    # 9. LINKING EXAMPLES (16 items)
+    # =========================================================================
+    {"id": "link_1_0", "file": "link_1_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "take it"},
+    {"id": "link_1_1", "file": "link_1_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "leave early"},
+    {"id": "link_1_2", "file": "link_1_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "hold on"},
+    {"id": "link_1_3", "file": "link_1_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "check in"},
+
+    {"id": "link_2_0", "file": "link_2_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "I am"},
+    {"id": "link_2_1", "file": "link_2_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "go on"},
+    {"id": "link_2_2", "file": "link_2_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "see it"},
+    {"id": "link_2_3", "file": "link_2_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "do it"},
+
+    {"id": "link_3_0", "file": "link_3_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "big girl"},
+    {"id": "link_3_1", "file": "link_3_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "stop playing"},
+    {"id": "link_3_2", "file": "link_3_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "bad day"},
+    {"id": "link_3_3", "file": "link_3_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "black cat"},
+
+    {"id": "link_4_0", "file": "link_4_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "next day"},
+    {"id": "link_4_1", "file": "link_4_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "friends"},
+    {"id": "link_4_2", "file": "link_4_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "last night"},
+    {"id": "link_4_3", "file": "link_4_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "hold tight"},
+
+    # =========================================================================
+    # 10. CONTRACTIONS (23 items)
+    # =========================================================================
+    {"id": "cont_ll_0", "file": "cont_ll_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "I'll"},
+    {"id": "cont_ll_1", "file": "cont_ll_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "You'll"},
+    {"id": "cont_ll_2", "file": "cont_ll_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "He'll"},
+    {"id": "cont_ll_3", "file": "cont_ll_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "She'll"},
+    {"id": "cont_ll_4", "file": "cont_ll_4.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "We'll"},
+    {"id": "cont_ll_5", "file": "cont_ll_5.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "They'll"},
+
+    {"id": "cont_re_0", "file": "cont_re_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "We're"},
+    {"id": "cont_re_1", "file": "cont_re_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "You're"},
+    {"id": "cont_re_2", "file": "cont_re_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "They're"},
+
+    {"id": "cont_ve_0", "file": "cont_ve_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "I've"},
+    {"id": "cont_ve_1", "file": "cont_ve_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "You've"},
+    {"id": "cont_ve_2", "file": "cont_ve_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "We've"},
+    {"id": "cont_ve_3", "file": "cont_ve_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "They've"},
+
+    {"id": "cont_d_0", "file": "cont_d_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "I'd"},
+    {"id": "cont_d_1", "file": "cont_d_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "He'd"},
+    {"id": "cont_d_2", "file": "cont_d_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "She'd"},
+    {"id": "cont_d_3", "file": "cont_d_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "We'd"},
+
+    {"id": "cont_m_0", "file": "cont_m_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "I'm"},
+
+    {"id": "cont_negative_0", "file": "cont_negative_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "don't"},
+    {"id": "cont_negative_1", "file": "cont_negative_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "doesn't"},
+    {"id": "cont_negative_2", "file": "cont_negative_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "didn't"},
+    {"id": "cont_negative_3", "file": "cont_negative_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "can't"},
+    {"id": "cont_negative_4", "file": "cont_negative_4.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "won't"},
+
+    # =========================================================================
+    # 11. PAUSING TRANSITIONS (4 items)
+    # =========================================================================
+    {"id": "pause_trans_0", "file": "pause_trans_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Nonetheless, he got the promotion."},
+    {"id": "pause_trans_1", "file": "pause_trans_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Unfortunately, there's nothing more we can do."},
+    {"id": "pause_trans_2", "file": "pause_trans_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "By the time we got to the airport, the plane had gone."},
+    {"id": "pause_trans_3", "file": "pause_trans_3.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "As a result of the sale, we all got raises."}
 ]
 
 async def generate_item(spec, semaphore, index, total):

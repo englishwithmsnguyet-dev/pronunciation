@@ -1228,7 +1228,8 @@ window.INTONATION_DATA = {
           en: "Nonetheless, he got the promotion.",
           marked: "<u>Nonetheless</u> <span class=\"pause-pill-light\">, │</span> he got the promotion ↘.",
           vn: "Dù vậy, anh ấy vẫn được thăng chức.",
-          speechText: "Nonetheless, he got the promotion."
+          speechText: "Nonetheless, he got the promotion.",
+          audioUrl: "audio/intonation/pause_trans_0.mp3"
         },
         {
           num: 2,
@@ -1236,7 +1237,8 @@ window.INTONATION_DATA = {
           en: "Unfortunately, there’s nothing more we can do.",
           marked: "<u>Unfortunately</u> <span class=\"pause-pill-light\">, │</span> there’s nothing more we can do ↘.",
           vn: "Thật không may, chúng tôi không thể làm gì hơn.",
-          speechText: "Unfortunately, there is nothing more we can do."
+          speechText: "Unfortunately, there is nothing more we can do.",
+          audioUrl: "audio/intonation/pause_trans_1.mp3"
         },
         {
           num: 3,
@@ -1244,7 +1246,8 @@ window.INTONATION_DATA = {
           en: "By the time we got to the airport, the plane had gone.",
           marked: "<u>By the time we got to the airport</u> <span class=\"pause-pill-light\">, │</span> the plane had gone ↘.",
           vn: "Vào thời điểm chúng tôi đến sân bay, máy bay đã cất cánh.",
-          speechText: "By the time we got to the airport, the plane had gone."
+          speechText: "By the time we got to the airport, the plane had gone.",
+          audioUrl: "audio/intonation/pause_trans_2.mp3"
         },
         {
           num: 4,
@@ -1252,7 +1255,8 @@ window.INTONATION_DATA = {
           en: "As a result of the sale, we all got raises.",
           marked: "<u>As a result of the sale</u> <span class=\"pause-pill-light\">, │</span> we all got raises ↘.",
           vn: "Nhờ đợt bán hàng thành công, tất cả chúng tôi đều được tăng lương.",
-          speechText: "As a result of the sale, we all got raises."
+          speechText: "As a result of the sale, we all got raises.",
+          audioUrl: "audio/intonation/pause_trans_3.mp3"
         }
       ]
     },
@@ -1336,10 +1340,10 @@ window.INTONATION_DATA = {
         desc: "Khi một từ kết thúc bằng một phụ âm và từ tiếp theo bắt đầu bằng một nguyên âm, phụ âm cuối sẽ tự động 'nhảy' sang đứng đầu nguyên âm của từ sau.",
         formula: "[Phụ âm cuối] ── nối liền ── [Nguyên âm đầu]",
         examples: [
-          { original: "take it", linkedIpa: "/ˈteɪ.kɪt/", phoneticVi: "tei-kit", note: "Âm /k/ nối sang /ɪt/ thành /kɪt/", speechText: "take it" },
-          { original: "leave early", linkedIpa: "/liːv ˈɜːli/", phoneticVi: "lee-vearly", note: "Âm /v/ nối sang /ˈɜːli/ thành /vɜːli/", speechText: "leave early" },
-          { original: "hold on", linkedIpa: "/həʊl.dɒn/", phoneticVi: "houl-don", note: "Âm /d/ nối sang /ɒn/ thành /dɒn/", speechText: "hold on" },
-          { original: "check in", linkedIpa: "/tʃek.ɪn/", phoneticVi: "che-kin", note: "Âm /k/ nối sang /ɪn/ thành /kɪn/", speechText: "check in" }
+          { original: "take it", linkedIpa: "/ˈteɪ.kɪt/", phoneticVi: "tei-kit", note: "Âm /k/ nối sang /ɪt/ thành /kɪt/", speechText: "take it", audioUrl: "audio/intonation/link_1_0.mp3" },
+          { original: "leave early", linkedIpa: "/liːv ˈɜːli/", phoneticVi: "lee-vearly", note: "Âm /v/ nối sang /ˈɜːli/ thành /vɜːli/", speechText: "leave early", audioUrl: "audio/intonation/link_1_1.mp3" },
+          { original: "hold on", linkedIpa: "/həʊl.dɒn/", phoneticVi: "houl-don", note: "Âm /d/ nối sang /ɒn/ thành /dɒn/", speechText: "hold on", audioUrl: "audio/intonation/link_1_2.mp3" },
+          { original: "check in", linkedIpa: "/tʃek.ɪn/", phoneticVi: "che-kin", note: "Âm /k/ nối sang /ɪn/ thành /kɪn/", speechText: "check in", audioUrl: "audio/intonation/link_1_3.mp3" }
         ]
       },
       {
@@ -1350,10 +1354,10 @@ window.INTONATION_DATA = {
         desc: "Khi một từ kết thúc bằng nguyên âm và từ tiếp theo cũng bắt đầu bằng nguyên âm, người bản xứ sẽ chèn một âm nối lướt rất nhẹ (/j/ hoặc /w/) để tránh bị khựng lại giữa 2 nguyên âm.",
         formula: "Nguyên âm dẹt môi + [j] + Nguyên âm | Nguyên âm tròn môi + [w] + Nguyên âm",
         examples: [
-          { original: "I am", linkedIpa: "/aɪ ˈjæm/", phoneticVi: "ai-yam", note: "Chèn âm nối nhẹ /j/ (y)", speechText: "I am" },
-          { original: "go on", linkedIpa: "/ɡəʊ ˈwɒn/", phoneticVi: "go-won", note: "Chèn âm nối nhẹ /w/ (w)", speechText: "go on" },
-          { original: "see it", linkedIpa: "/siː ˈjɪt/", phoneticVi: "see-yit", note: "Chèn âm /j/ lướt nhẹ", speechText: "see it" },
-          { original: "do it", linkedIpa: "/duː ˈwɪt/", phoneticVi: "doo-wit", note: "Chèn âm /w/ lướt nhẹ", speechText: "do it" }
+          { original: "I am", linkedIpa: "/aɪ ˈjæm/", phoneticVi: "ai-yam", note: "Chèn âm nối nhẹ /j/ (y)", speechText: "I am", audioUrl: "audio/intonation/link_2_0.mp3" },
+          { original: "go on", linkedIpa: "/ɡəʊ ˈwɒn/", phoneticVi: "go-won", note: "Chèn âm nối nhẹ /w/ (w)", speechText: "go on", audioUrl: "audio/intonation/link_2_1.mp3" },
+          { original: "see it", linkedIpa: "/siː ˈjɪt/", phoneticVi: "see-yit", note: "Chèn âm /j/ lướt nhẹ", speechText: "see it", audioUrl: "audio/intonation/link_2_2.mp3" },
+          { original: "do it", linkedIpa: "/duː ˈwɪt/", phoneticVi: "doo-wit", note: "Chèn âm /w/ lướt nhẹ", speechText: "do it", audioUrl: "audio/intonation/link_2_3.mp3" }
         ]
       },
       {
@@ -1364,10 +1368,10 @@ window.INTONATION_DATA = {
         desc: "Khi từ phía trước kết thúc bằng một phụ âm và từ tiếp theo bắt đầu bằng đúng phụ âm đó, ta KHÔNG bật âm 2 lần mà giữ khẩu hình và phát âm nối dài như một âm duy nhất.",
         formula: "[Phụ âm X] + [Phụ âm X] ──→ Giữ khẩu hình, phát âm 1 lần",
         examples: [
-          { original: "big girl", linkedIpa: "/bɪ ˈɡɜːl/", phoneticVi: "bigirl", note: "2 âm /ɡ/ đọc gộp làm 1, không ngắt quãng", speechText: "big girl" },
-          { original: "stop playing", linkedIpa: "/stɒ ˈpleɪɪŋ/", phoneticVi: "stoplaying", note: "Ngậm môi ở /p/ rồi bật thẳng sang /l/", speechText: "stop playing" },
-          { original: "bad day", linkedIpa: "/bæ ˈdeɪ/", phoneticVi: "baday", note: "2 âm /d/ gộp làm 1", speechText: "bad day" },
-          { original: "black cat", linkedIpa: "/blæ ˈkæt/", phoneticVi: "blackat", note: "2 âm /k/ gộp làm 1", speechText: "black cat" }
+          { original: "big girl", linkedIpa: "/bɪ ˈɡɜːl/", phoneticVi: "bigirl", note: "2 âm /ɡ/ đọc gộp làm 1, không ngắt quãng", speechText: "big girl", audioUrl: "audio/intonation/link_3_0.mp3" },
+          { original: "stop playing", linkedIpa: "/stɒ ˈpleɪɪŋ/", phoneticVi: "stoplaying", note: "Ngậm môi ở /p/ rồi bật thẳng sang /l/", speechText: "stop playing", audioUrl: "audio/intonation/link_3_1.mp3" },
+          { original: "bad day", linkedIpa: "/bæ ˈdeɪ/", phoneticVi: "baday", note: "2 âm /d/ gộp làm 1", speechText: "bad day", audioUrl: "audio/intonation/link_3_2.mp3" },
+          { original: "black cat", linkedIpa: "/blæ ˈkæt/", phoneticVi: "blackat", note: "2 âm /k/ gộp làm 1", speechText: "black cat", audioUrl: "audio/intonation/link_3_3.mp3" }
         ]
       },
       {
@@ -1378,10 +1382,10 @@ window.INTONATION_DATA = {
         desc: "Khi có nhiều phụ âm đứng cạnh nhau trong cụm, người bản xứ thường nuốt nhẹ các phụ âm vô thanh ở giữa (đặc biệt là âm /t/ hoặc /d/) để câu nói lướt nhanh, không bị vấp.",
         formula: "[Phụ âm 1] + [t / d nuốt nhẹ] + [Phụ âm 3]",
         examples: [
-          { original: "next day", linkedIpa: "/neks ˈdeɪ/", phoneticVi: "neks day", note: "Nuốt nhẹ âm /t/ ở giữa, đọc là /neks deɪ/", speechText: "next day" },
-          { original: "friends", linkedIpa: "/frenz/", phoneticVi: "frenz", note: "Nuốt nhẹ âm /d/ trong cụm /ndz/", speechText: "friends" },
-          { original: "last night", linkedIpa: "/lɑːs ˈnaɪt/", phoneticVi: "las night", note: "Nuốt âm /t/ trước phụ âm /n/", speechText: "last night" },
-          { original: "hold tight", linkedIpa: "/həʊl ˈtaɪt/", phoneticVi: "hol tight", note: "Nuốt nhẹ âm /d/ trước phụ âm /t/", speechText: "hold tight" }
+          { original: "next day", linkedIpa: "/neks ˈdeɪ/", phoneticVi: "neks day", note: "Nuốt nhẹ âm /t/ ở giữa, đọc là /neks deɪ/", speechText: "next day", audioUrl: "audio/intonation/link_4_0.mp3" },
+          { original: "friends", linkedIpa: "/frenz/", phoneticVi: "frenz", note: "Nuốt nhẹ âm /d/ trong cụm /ndz/", speechText: "friends", audioUrl: "audio/intonation/link_4_1.mp3" },
+          { original: "last night", linkedIpa: "/lɑːs ˈnaɪt/", phoneticVi: "las night", note: "Nuốt âm /t/ trước phụ âm /n/", speechText: "last night", audioUrl: "audio/intonation/link_4_2.mp3" },
+          { original: "hold tight", linkedIpa: "/həʊl ˈtaɪt/", phoneticVi: "hol tight", note: "Nuốt nhẹ âm /d/ trước phụ âm /t/", speechText: "hold tight", audioUrl: "audio/intonation/link_4_3.mp3" }
         ]
       }
     ],
@@ -1393,12 +1397,12 @@ window.INTONATION_DATA = {
         label: "1. “’ll” (Rút gọn của Will)",
         rule: "Phát âm là /l/ (âm nhẹ, dính chặt vào từ đứng trước).",
         items: [
-          { text: "I’ll", ipa: "/aɪl/", note: "Tôi sẽ", speechText: "I'll" },
-          { text: "You’ll", ipa: "/juːl/", note: "Bạn sẽ", speechText: "You'll" },
-          { text: "He’ll", ipa: "/hiːl/", note: "Anh ấy sẽ", speechText: "He'll" },
-          { text: "She’ll", ipa: "/ʃiːl/", note: "Cô ấy sẽ", speechText: "She'll" },
-          { text: "We’ll", ipa: "/wiːl/", note: "Chúng tôi sẽ", speechText: "We'll" },
-          { text: "They’ll", ipa: "/ðeɪl/", note: "Họ sẽ", speechText: "They'll" }
+          { text: "I’ll", ipa: "/aɪl/", note: "Tôi sẽ", speechText: "I'll", audioUrl: "audio/intonation/cont_ll_0.mp3" },
+          { text: "You’ll", ipa: "/juːl/", note: "Bạn sẽ", speechText: "You'll", audioUrl: "audio/intonation/cont_ll_1.mp3" },
+          { text: "He’ll", ipa: "/hiːl/", note: "Anh ấy sẽ", speechText: "He'll", audioUrl: "audio/intonation/cont_ll_2.mp3" },
+          { text: "She’ll", ipa: "/ʃiːl/", note: "Cô ấy sẽ", speechText: "She'll", audioUrl: "audio/intonation/cont_ll_3.mp3" },
+          { text: "We’ll", ipa: "/wiːl/", note: "Chúng tôi sẽ", speechText: "We'll", audioUrl: "audio/intonation/cont_ll_4.mp3" },
+          { text: "They’ll", ipa: "/ðeɪl/", note: "Họ sẽ", speechText: "They'll", audioUrl: "audio/intonation/cont_ll_5.mp3" }
         ]
       },
       {
@@ -1406,9 +1410,9 @@ window.INTONATION_DATA = {
         label: "2. “’re” (Rút gọn của Are)",
         rule: "Phát âm là /ər/ hoặc /r/ (âm lướt rất nhẹ, hòa vào đại từ).",
         items: [
-          { text: "We’re", ipa: "/wɪr/ hoặc /wɪər/", note: "Chúng tôi là", speechText: "We're" },
-          { text: "You’re", ipa: "/jʊr/ hoặc /jʊər/", note: "Bạn là", speechText: "You're" },
-          { text: "They’re", ipa: "/ðer/ hoặc /ðeər/", note: "Họ là", speechText: "They're" }
+          { text: "We’re", ipa: "/wɪr/ hoặc /wɪər/", note: "Chúng tôi là", speechText: "We're", audioUrl: "audio/intonation/cont_re_0.mp3" },
+          { text: "You’re", ipa: "/jʊr/ hoặc /jʊər/", note: "Bạn là", speechText: "You're", audioUrl: "audio/intonation/cont_re_1.mp3" },
+          { text: "They’re", ipa: "/ðer/ hoặc /ðeər/", note: "Họ là", speechText: "They're", audioUrl: "audio/intonation/cont_re_2.mp3" }
         ]
       },
       {
@@ -1416,10 +1420,10 @@ window.INTONATION_DATA = {
         label: "3. “’ve” (Rút gọn của Have)",
         rule: "Phát âm là /v/ (âm ngắn, răng trên cắn nhẹ môi dưới rồi dính vào từ sau).",
         items: [
-          { text: "I’ve", ipa: "/aɪv/", note: "Tôi đã", speechText: "I've" },
-          { text: "You’ve", ipa: "/juːv/", note: "Bạn đã", speechText: "You've" },
-          { text: "We’ve", ipa: "/wiːv/", note: "Chúng tôi đã", speechText: "We've" },
-          { text: "They’ve", ipa: "/ðeɪv/", note: "Họ đã", speechText: "They've" }
+          { text: "I’ve", ipa: "/aɪv/", note: "Tôi đã", speechText: "I've", audioUrl: "audio/intonation/cont_ve_0.mp3" },
+          { text: "You’ve", ipa: "/juːv/", note: "Bạn đã", speechText: "You've", audioUrl: "audio/intonation/cont_ve_1.mp3" },
+          { text: "We’ve", ipa: "/wiːv/", note: "Chúng tôi đã", speechText: "We've", audioUrl: "audio/intonation/cont_ve_2.mp3" },
+          { text: "They’ve", ipa: "/ðeɪv/", note: "Họ đã", speechText: "They've", audioUrl: "audio/intonation/cont_ve_3.mp3" }
         ]
       },
       {
@@ -1427,10 +1431,10 @@ window.INTONATION_DATA = {
         label: "4. “’d” (Rút gọn của Had / Would)",
         rule: "Phát âm là /d/ (âm chạm rất nhẹ đầu lưỡi ở nướu răng trên).",
         items: [
-          { text: "I’d", ipa: "/aɪd/", note: "Tôi đã / muốn", speechText: "I'd" },
-          { text: "He’d", ipa: "/hiːd/", note: "Anh ấy đã", speechText: "He'd" },
-          { text: "She’d", ipa: "/ʃiːd/", note: "Cô ấy đã", speechText: "She'd" },
-          { text: "We’d", ipa: "/wiːd/", note: "Chúng tôi đã", speechText: "We'd" }
+          { text: "I’d", ipa: "/aɪd/", note: "Tôi đã / muốn", speechText: "I'd", audioUrl: "audio/intonation/cont_d_0.mp3" },
+          { text: "He’d", ipa: "/hiːd/", note: "Anh ấy đã", speechText: "He'd", audioUrl: "audio/intonation/cont_d_1.mp3" },
+          { text: "She’d", ipa: "/ʃiːd/", note: "Cô ấy đã", speechText: "She'd", audioUrl: "audio/intonation/cont_d_2.mp3" },
+          { text: "We’d", ipa: "/wiːd/", note: "Chúng tôi đã", speechText: "We'd", audioUrl: "audio/intonation/cont_d_3.mp3" }
         ]
       },
       {
@@ -1438,7 +1442,7 @@ window.INTONATION_DATA = {
         label: "5. “’m” (Rút gọn của Am)",
         rule: "Phát âm là /m/ (khép môi nhanh gọn).",
         items: [
-          { text: "I’m", ipa: "/aɪm/", note: "Tôi là", speechText: "I'm" }
+          { text: "I’m", ipa: "/aɪm/", note: "Tôi là", speechText: "I'm", audioUrl: "audio/intonation/cont_m_0.mp3" }
         ]
       },
       {
@@ -1446,11 +1450,11 @@ window.INTONATION_DATA = {
         label: "6. Dạng Phủ Định (Negative Contractions)",
         rule: "Thường NHẤN TRỌNG ÂM vào 'not' để khẳng định tính phủ định dứt khoát.",
         items: [
-          { text: "don’t", ipa: "/doʊnt/", note: "Không (nhấn mạnh)", speechText: "don't" },
-          { text: "doesn’t", ipa: "/ˈdʌzənt/", note: "Không (ngôi thứ 3)", speechText: "doesn't" },
-          { text: "didn’t", ipa: "/ˈdɪdənt/", note: "Đã không", speechText: "didn't" },
-          { text: "can’t", ipa: "/kænt/ hoặc /kɑːnt/", note: "Không thể (nhấn mạnh)", speechText: "can't" },
-          { text: "won’t", ipa: "/woʊnt/", note: "Sẽ không", speechText: "won't" }
+          { text: "don’t", ipa: "/doʊnt/", note: "Không (nhấn mạnh)", speechText: "don't", audioUrl: "audio/intonation/cont_negative_0.mp3" },
+          { text: "doesn’t", ipa: "/ˈdʌzənt/", note: "Không (ngôi thứ 3)", speechText: "doesn't", audioUrl: "audio/intonation/cont_negative_1.mp3" },
+          { text: "didn’t", ipa: "/ˈdɪdənt/", note: "Đã không", speechText: "didn't", audioUrl: "audio/intonation/cont_negative_2.mp3" },
+          { text: "can’t", ipa: "/kænt/ hoặc /kɑːnt/", note: "Không thể (nhấn mạnh)", speechText: "can't", audioUrl: "audio/intonation/cont_negative_3.mp3" },
+          { text: "won’t", ipa: "/woʊnt/", note: "Sẽ không", speechText: "won't", audioUrl: "audio/intonation/cont_negative_4.mp3" }
         ]
       }
     ]

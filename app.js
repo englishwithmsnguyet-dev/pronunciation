@@ -4796,7 +4796,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       ${sent.vn}
                     </div>
                   </div>
-                  <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio(null, '${sent.speechText.replace(/'/g, "\\'")}', 1.0, 0.88, this)" title="Nghe câu này">
+                  <button class="btn-tone-audio" onclick="IntonationManager.playPausingSentence(${sIdx}, this)" title="Nghe câu này">
                     🔊
                   </button>
                 </div>
@@ -4989,7 +4989,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                   <!-- Grid ví dụ -->
                   <div class="linking-examples-grid">
-                    ${t.examples.map(ex => `
+                    ${t.examples.map((ex, exIdx) => `
                       <div class="linking-example-item">
                         <div style="flex:1;">
                           <div style="display:flex; align-items:center; gap:8px;">
@@ -5001,7 +5001,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${ex.note} • <span style="font-family:var(--font-ipa); color:#7C3AED;">${ex.linkedIpa}</span>
                           </div>
                         </div>
-                        <button class="btn-tone-audio" onclick="AudioEngine.playIntonationAudio(null, '${ex.speechText}', 1.0, 0.88, this)" title="Nghe cách phát âm nối âm">
+                        <button class="btn-tone-audio" onclick="IntonationManager.playLinkingItem(${t.num}, ${exIdx}, this)" title="Nghe cách phát âm nối âm">
                           🔊
                         </button>
                       </div>
@@ -5034,8 +5034,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
 
                   <div class="contraction-items-grid">
-                    ${c.items.map(it => `
-                      <button class="contraction-pill-btn" onclick="AudioEngine.playIntonationAudio(null, '${it.speechText}', 1.0, 0.88, this)" title="Bấm để nghe cách phát âm">
+                    ${c.items.map((it, itIdx) => `
+                      <button class="contraction-pill-btn" onclick="IntonationManager.playContraction('${c.id}', ${itIdx}, this)" title="Bấm để nghe cách phát âm">
                         <span style="font-weight:800; color:#0F172A; font-size:0.92rem;">${it.text}</span>
                         <span style="font-size:0.75rem; color:#6D28D9; font-family:var(--font-ipa);">${it.ipa}</span>
                         <span style="font-size:0.75rem;">🔊</span>
@@ -5607,6 +5607,35 @@ document.addEventListener("DOMContentLoaded", () => {
       const audioUrl = q.audioUrl || `audio/intonation/quiz_${q.id}.mp3`;
       const textToSpeak = q.speechText || q.audioText;
       AudioEngine.playIntonationAudio(audioUrl, textToSpeak, q.speechPitch || 1.0, 0.90, btnEl);
+    },
+
+    playLinkingItem(typeNum, exIdx, btnEl) {
+      const data = window.INTONATION_DATA && window.INTONATION_DATA.linkingContractions;
+      if (!data || !data.linkingTypes) return;
+      const type = data.linkingTypes.find(t => t.num === typeNum);
+      if (!type || !type.examples[exIdx]) return;
+      const ex = type.examples[exIdx];
+      const audioUrl = ex.audioUrl || `audio/intonation/link_${typeNum}_${exIdx}.mp3`;
+      AudioEngine.playIntonationAudio(audioUrl, ex.speechText, 1.0, 0.88, btnEl);
+    },
+
+    playContraction(groupId, itemIdx, btnEl) {
+      const data = window.INTONATION_DATA && window.INTONATION_DATA.linkingContractions;
+      if (!data || !data.contractions) return;
+      const group = data.contractions.find(g => g.id === groupId);
+      if (!group || !group.items[itemIdx]) return;
+      const item = group.items[itemIdx];
+      const audioUrl = item.audioUrl || `audio/intonation/cont_${groupId}_${itemIdx}.mp3`;
+      AudioEngine.playIntonationAudio(audioUrl, item.speechText, 1.0, 0.88, btnEl);
+    },
+
+    playPausingSentence(sentIdx, btnEl) {
+      const data = window.INTONATION_DATA && window.INTONATION_DATA.pausingChunking;
+      if (!data || !data.section2 || !data.section2.sentences) return;
+      const sent = data.section2.sentences[sentIdx];
+      if (!sent) return;
+      const audioUrl = sent.audioUrl || `audio/intonation/pause_trans_${sentIdx}.mp3`;
+      AudioEngine.playIntonationAudio(audioUrl, sent.speechText, 1.0, 0.88, btnEl);
     },
 
     playDialogueLine(speechText, pitch, rate, btnEl) {
