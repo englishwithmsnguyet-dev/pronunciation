@@ -105,6 +105,26 @@ AUDIO_SPECS = [
     {"id": "rule_rule_commands_requests_ex_1", "file": "rule_rule_commands_requests_ex_1.mp3", "voice": VOICE_FEMALE, "pitch": "+15Hz", "rate": "+0%", "text": "Could you pass the salt, please?"},
     {"id": "rule_rule_commands_requests_ex_2", "file": "rule_rule_commands_requests_ex_2.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "+0%", "text": "Sit down immediately."},
 
+    # Rule 9: Series of numbers & phone numbers
+    {"id": "rule_rule_numbers_series_ex_0", "file": "rule_rule_numbers_series_ex_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Our new number is two one eight, five five five, three six seven five."},
+    {"id": "rule_rule_numbers_series_ex_1", "file": "rule_rule_numbers_series_ex_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Flight VN four one two, will depart from Gate eighteen."},
+    {"id": "rule_rule_numbers_series_ex_2", "file": "rule_rule_numbers_series_ex_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Call toll-free at one eight hundred, four five six, seven eight nine zero."},
+
+    # Rule 10: Signposts & transition words
+    {"id": "rule_rule_signposts_ex_0", "file": "rule_rule_signposts_ex_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Additionally, all attendees will receive a training handbook."},
+    {"id": "rule_rule_signposts_ex_1", "file": "rule_rule_signposts_ex_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "In conclusion, we would like to thank all of our guests."},
+    {"id": "rule_rule_signposts_ex_2", "file": "rule_rule_signposts_ex_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "However, if you buy tickets in advance, you will receive a discount."},
+
+    # Rule 11: Rhetorical requests & public announcements (Falling ↘)
+    {"id": "rule_rule_rhetorical_requests_ex_0", "file": "rule_rule_rhetorical_requests_ex_0.mp3", "voice": VOICE_FEMALE, "pitch": "-10Hz", "rate": "-5%", "text": "Could we have your attention, please."},
+    {"id": "rule_rule_rhetorical_requests_ex_1", "file": "rule_rule_rhetorical_requests_ex_1.mp3", "voice": VOICE_FEMALE, "pitch": "-10Hz", "rate": "-5%", "text": "Can you please listen carefully."},
+    {"id": "rule_rule_rhetorical_requests_ex_2", "file": "rule_rule_rhetorical_requests_ex_2.mp3", "voice": VOICE_FEMALE, "pitch": "-10Hz", "rate": "-5%", "text": "Could I have everyone's attention, please."},
+
+    # Rule 12: Punctuation pausing & thought groups
+    {"id": "rule_rule_punctuation_pausing_ex_0", "file": "rule_rule_punctuation_pausing_ex_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "According to the monthly report, our production has increased three hundred percent."},
+    {"id": "rule_rule_punctuation_pausing_ex_1", "file": "rule_rule_punctuation_pausing_ex_1.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "Due to severe weather conditions, all morning flights have been delayed."},
+    {"id": "rule_rule_punctuation_pausing_ex_2", "file": "rule_rule_punctuation_pausing_ex_2.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "By the time we got to the airport, the plane had already departed."},
+
     # =========================================================================
     # 4. RULE DIALOGUES (16 items)
     # =========================================================================
@@ -139,6 +159,22 @@ AUDIO_SPECS = [
     # Commands & Requests Dialogue
     {"id": "rule_rule_commands_requests_dial_0", "file": "rule_rule_commands_requests_dial_0.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "-5%", "text": "Please review these contracts before noon."},
     {"id": "rule_rule_commands_requests_dial_1", "file": "rule_rule_commands_requests_dial_1.mp3", "voice": VOICE_MALE, "pitch": "+0Hz", "rate": "+0%", "text": "Sure thing! I will look at it right away."},
+
+    # Rule 9: Series of numbers Dialogue
+    {"id": "rule_rule_numbers_series_dial_0", "file": "rule_rule_numbers_series_dial_0.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "-5%", "text": "Where can I contact if I have questions about my reservation."},
+    {"id": "rule_rule_numbers_series_dial_1", "file": "rule_rule_numbers_series_dial_1.mp3", "voice": VOICE_MALE, "pitch": "-5Hz", "rate": "-5%", "text": "Our customer service number is two one eight, five five five, three six seven five. Please call between nine and five."},
+
+    # Rule 10: Signposts Dialogue
+    {"id": "rule_rule_signposts_dial_0", "file": "rule_rule_signposts_dial_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "First, please pick up your badge at the desk. Next, join our keynote session in Hall A."},
+    {"id": "rule_rule_signposts_dial_1", "file": "rule_rule_signposts_dial_1.mp3", "voice": VOICE_MALE, "pitch": "+15Hz", "rate": "+0%", "text": "Additionally, will lunch be provided at noon?"},
+
+    # Rule 11: Rhetorical requests Dialogue
+    {"id": "rule_rule_rhetorical_requests_dial_0", "file": "rule_rule_rhetorical_requests_dial_0.mp3", "voice": VOICE_MALE, "pitch": "-10Hz", "rate": "-5%", "text": "Could I have everyone's attention, please. Due to mechanical problems, this bus will now be taken out of service."},
+    {"id": "rule_rule_rhetorical_requests_dial_1", "file": "rule_rule_rhetorical_requests_dial_1.mp3", "voice": VOICE_FEMALE, "pitch": "-5Hz", "rate": "-5%", "text": "Excuse me, how long will we have to wait for the shuttle."},
+
+    # Rule 12: Punctuation pausing Dialogue
+    {"id": "rule_rule_punctuation_pausing_dial_0", "file": "rule_rule_punctuation_pausing_dial_0.mp3", "voice": VOICE_FEMALE, "pitch": "+0Hz", "rate": "-5%", "text": "According to the monthly report, our production has increased three hundred percent over the past five years."},
+    {"id": "rule_rule_punctuation_pausing_dial_1", "file": "rule_rule_punctuation_pausing_dial_1.mp3", "voice": VOICE_MALE, "pitch": "-5Hz", "rate": "-5%", "text": "There is only one group to thank for this: our dedicated staff."},
 
     # =========================================================================
     # 5. ATTITUDES (16 items)

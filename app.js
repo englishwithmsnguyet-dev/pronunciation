@@ -4172,18 +4172,18 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 2: 8 QUY TẮC NGỮ PHÁP (GRAMMATICAL RULES)
+    // TAB 2: 12 QUY TẮC NGỮ PHÁP & THỰC CHIẾN TOEIC
     // ------------------------------------------------------------------------
     renderRulesTab(container) {
       const rules = window.INTONATION_DATA.rules;
 
       let html = `
         <div style="margin-bottom:20px;">
-          <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:gap:8px;">
-            <span>📖</span> 8 Quy Tắc Ngữ Pháp Cốt Lõi Của Ngữ Điệu (Grammatical Rules)
+          <h3 style="font-family:var(--font-heading); font-size:1.18rem; font-weight:800; color:var(--text-main); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+            <span>📖</span> 12 Quy Tắc Ngữ Điệu Chuẩn Quốc Tế & Luyện Thi TOEIC (Grammatical & Test Rules)
           </h3>
           <p style="font-size:0.88rem; color:#475569; line-height:1.5;">
-            Hệ thống quy tắc ngữ pháp khách quan theo chuẩn Cambridge, Oxford & ETS TOEIC. Nắm vững 8 quy tắc này giúp học viên tự tin biết chính xác khi nào lên giọng (↗), khi nào hạ giọng (↘) trong mọi câu nói.
+            Hệ thống 12 quy tắc ngữ pháp & ngữ điệu thực chiến theo chuẩn Cambridge, Oxford & Collins TOEIC (Speaking Questions 1–2). Nắm vững các quy tắc này giúp học viên tự tin biết chính xác khi nào lên giọng (↗), khi nào hạ giọng (↘) trong mọi tình huống giao tiếp và bài thi chuẩn hóa.
           </p>
         </div>
 
@@ -4209,6 +4209,22 @@ document.addEventListener("DOMContentLoaded", () => {
               <div style="font-family:monospace; font-weight:700; font-size:0.95rem;">${r.diagram}</div>
               ${r.formula ? `<div style="font-size:0.82rem; color:#6D28D9; margin-top:4px; font-weight:600;">📐 Công thức: ${r.formula}</div>` : ""}
             </div>
+
+            <!-- Băng Gốc Collins TOEIC Nếu Có -->
+            ${r.collinsTrack ? `
+              <div class="collins-track-card" style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #F0FDF4, #DCFCE7); border:1px solid #86EFAC; border-radius:10px; padding:12px 16px; margin:14px 0; box-shadow:0 2px 4px rgba(22,163,74,0.06);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="font-size:1.5rem;">🎙️</span>
+                  <div>
+                    <div style="font-family:var(--font-heading); font-weight:800; font-size:0.88rem; color:#166534;">Băng Gốc Collins TOEIC: ${r.collinsTrackTitle || "Native Audio Track"}</div>
+                    <div style="font-size:0.75rem; color:#15803D; margin-top:2px;">Bản thu giọng người bản xứ từ NXB Collins Education (Speaking Questions 1–2)</div>
+                  </div>
+                </div>
+                <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(22,163,74,0.3);" onclick="AudioEngine.playIntonationAudio('${r.collinsTrack}', null, 1.0, 1.0, this)" title="Nghe băng thu âm gốc từ sách Collins">
+                  <span>▶️</span> Nghe Băng Gốc
+                </button>
+              </div>
+            ` : ""}
 
             <!-- Cơ Sở Ngôn Ngữ Học (Deep Rationale) -->
             ${r.deepRationale ? `

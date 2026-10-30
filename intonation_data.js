@@ -778,6 +778,214 @@ window.INTONATION_DATA = {
           speechRate: 0.88
         }
       ]
+    },
+    {
+      id: "rule_numbers_series",
+      num: 9,
+      title: "Chuỗi Số, Số Điện Thoại & Mã Số (Series of Numbers & Phone Numbers)",
+      tonePattern: "Lên giọng ở các cụm đầu (↗) — Hạ giọng ở cụm cuối (↘)",
+      badge: "Đặc sản TOEIC Part 1 (Collins Track 23)",
+      collinsTrack: "audio/collins/collins_numbers_lists.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.23 (Series of Numbers)",
+      ruleSummary: "Khi đọc chuỗi số dài, số điện thoại hotline, mã chuyến bay hoặc thời gian, người bản xứ luôn chia nhỏ thành từng cụm tư duy (thought chunks): các cụm trước đều lên giọng (↗) báo hiệu số chưa kết thúc, chỉ cụm cuối cùng mới hạ giọng (↘) dứt khoát.",
+      diagram: "[Area Code ↗] ── [Prefix ↗] ──────── [Line Number ↘] (Đã hết số)",
+      formula: "[Cụm 1 ↗] – [Cụm 2 ↗] – [Cụm Cuối ↘]",
+      deepRationale: "Theo âm vị học quốc tế (J.C. Wells) và giáo trình Collins TOEIC (trang 23), cao độ hướng lên (Rising) biểu thị tính phi kết thúc (Non-finality). Khi người nghe nghe thấy '218 ↗' và '555 ↗', não bộ tự động hiểu thông tin vẫn đang tiếp diễn. Nếu bạn hạ giọng quá sớm ở giữa dãy số, người nghe sẽ ngỡ ngàng tưởng dãy số đã kết thúc và ghi chép thiếu thông tin.",
+      vietnamesePitfalls: "Học viên Việt Nam thường đọc dãy số như đọc số tiếng Việt: đọc đều đều từng số một ('hai... một... tám...') hoặc hạ giọng ngang phè ở từng số, khiến dãy số bị rời rạc, thiếu nhịp điệu và rất khó cho giám khảo/khách hàng ghi kịp.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy hướng dẫn học viên gõ nhịp: ngắt hơi nhẹ và đẩy cao độ lên sau mỗi dấu gạch ngang (hyphen), đến 4 số cuối cùng thì đọc liền một mạch và hạ giọng êm xuống đáy.",
+      contextualDialogue: {
+        title: "Hội thoại: Cung cấp số điện thoại tổng đài (Customer Service Hotline)",
+        context: "Nhân viên chăm sóc khách hàng cung cấp số liên lạc hỗ trợ theo chuẩn phân cụm quốc tế.",
+        lines: [
+          { speaker: "Customer", en: "Where can I contact if I have questions about my reservation ↘?", vn: "Tôi có thể liên hệ ở đâu nếu có thắc mắc về chỗ đặt trước?", speechText: "Where can I contact if I have questions about my reservation." },
+          { speaker: "Support Agent", en: "Our customer service number is 218 ↗ - 555 ↗ - 3675 ↘. Please call between nine and five ↘.", vn: "Số chăm sóc khách hàng của chúng tôi là 218 – 555 – 3675. Xin vui lòng gọi từ 9h đến 17h.", speechText: "Our customer service number is two one eight, five five five, three six seven five. Please call between nine and five." }
+        ]
+      },
+      examples: [
+        {
+          en: "Our new number is 218 - 555 - 3675.",
+          vn: "Số điện thoại mới của chúng tôi là 218 – 555 – 3675 (Trích đề Collins Track 23).",
+          ipa: "/aʊə njuː ˈnʌmbə z tuː wʌn eɪt ↗ faɪv faɪv faɪv ↗ θriː sɪks ˈsevn faɪv ↘/",
+          marked: "Our new number is <strong>218</strong> ↗ – <strong>555</strong> ↗ – <strong>3675</strong> ↘.",
+          speechText: "Our new number is two one eight, five five five, three six seven five.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Flight VN 412 will depart from Gate 18.",
+          vn: "Chuyến bay VN 412 sẽ khởi hành từ Cổng số 18.",
+          ipa: "/flaɪt viː en fɔː wʌn tuː ↗ wɪl dɪˈpɑːt frəm ɡeɪt eɪˈtiːn ↘/",
+          marked: "Flight <strong>VN 412</strong> ↗ will depart from <strong>GATE 18</strong> ↘.",
+          speechText: "Flight VN four one two, will depart from Gate eighteen.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Call toll-free at 1-800 - 456 - 7890.",
+          vn: "Hãy gọi miễn cước tại số 1-800 – 456 – 7890.",
+          ipa: "/kɔːl təʊl friː æt wʌn eɪt ˈhʌndrəd ↗ fɔː faɪv sɪks ↗ ˈsevn eɪt naɪn ˈzɪərəʊ ↘/",
+          marked: "Call toll-free at <strong>1-800</strong> ↗ – <strong>456</strong> ↗ – <strong>7890</strong> ↘.",
+          speechText: "Call toll-free at one eight hundred, four five six, seven eight nine zero.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        }
+      ]
+    },
+    {
+      id: "rule_signposts",
+      num: 10,
+      title: "Từ Nối Dẫn Dắt & Trạng Từ Mở Đầu (Signposts & Transition Words)",
+      tonePattern: "Lên giọng nhẹ (↗) + Nghỉ ngắn — Mệnh đề chính Hạ giọng (↘)",
+      badge: "Bí quyết liên kết bài đọc (Collins Quick Tip)",
+      collinsTrack: "audio/collins/collins_signposts_clauses.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.24 & Track 30 (Signposts & Transitions)",
+      ruleSummary: "Các từ nối chuyển ý liên kết câu hoặc đoạn văn (First, Next, Then, Additionally, However, Furthermore, In comparison, As a result, Finally, In conclusion) khi đứng đầu câu phải đọc với ngữ điệu HƯỚNG LÊN (Rising ↗) kèm một khoảng dừng ngắn (micro-pause) để thu hút sự chú ý trước khi hạ giọng ở mệnh đề chính.",
+      diagram: "[Signpost Word ↗,] ── [Khoảng Dừng Ngắn] ── [Mệnh Đề Chính ────────↘]",
+      formula: "[Transition Word ↗,] + [S + V + O ↘]",
+      deepRationale: "Theo giáo trình Collins TOEIC (trang 23), Signposts đóng vai trò là 'biển chỉ đường' (road signs) của bài đọc. Khi người nói nâng nhẹ cao độ và tạo khoảng dừng nhỏ sau từ nối, người nghe sẽ kịp định hình trong đầu: 'À, đây là một ý bổ sung / một sự tương phản / hoặc một kết luận quan trọng!'.",
+      vietnamesePitfalls: "Nhiều học viên đọc lướt qua từ nối hoặc nuốt chửng vào câu tiếp theo mà không dừng lại ('Additionallyallparticipants...'). Lỗi này khiến bài đọc trở nên dồn dập, mất nhịp điệu tự nhiên và làm người nghe không nắm được mạch logic của bài.",
+      teacherTips: "Mẹo của cô Nguyệt: Dạy học viên công thức 'Nhấc nhẹ ngón tay ở từ nối ↗, hạ tay xuống ở cuối câu ↘'. Sau từ nối luôn có dấu phẩy (,), hãy nhớ lấy hơi nhẹ 0.2 giây trước khi đọc tiếp.",
+      contextualDialogue: {
+        title: "Hội thoại: Hướng dẫn người tham dự hội nghị (Conference Signposting)",
+        context: "Ban tổ chức thông báo các bước hoạt động trong ngày cho các đại biểu tham dự.",
+        lines: [
+          { speaker: "Host", en: "First ↗, please pick up your badge at the desk ↘. Next ↗, join our keynote session in Hall A ↘.", vn: "Đầu tiên, vui lòng lấy thẻ đeo tại bàn lễ tân. Tiếp theo, hãy tham gia phiên phát biểu khai mạc tại Hội trường A.", speechText: "First, please pick up your badge at the desk. Next, join our keynote session in Hall A." },
+          { speaker: "Attendee", en: "Additionally ↗, will lunch be provided at noon ↗?", vn: "Ngoài ra, bữa trưa có được phục vụ vào lúc 12 giờ không ạ?", speechText: "Additionally, will lunch be provided at noon?" }
+        ]
+      },
+      examples: [
+        {
+          en: "Additionally, all attendees will receive a training handbook.",
+          vn: "Ngoài ra, tất cả người tham dự sẽ nhận được sổ tay đào tạo (Collins Quick Tip).",
+          ipa: "/əˈdɪʃənəli ↗ ɔːl ətɛnˈdiːz wɪl rɪˈsiːv ə ˈtreɪnɪŋ ˈhændbʊk ↘/",
+          marked: "<strong>ADDITIONALLY</strong> ↗, all attendees will receive a training <strong>HANDBOOK</strong> ↘.",
+          speechText: "Additionally, all attendees will receive a training handbook.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "In conclusion, we would like to thank all of our guests.",
+          vn: "Tóm lại, chúng tôi xin chân thành cảm ơn toàn thể quý quan khách (Collins Track 25).",
+          ipa: "/ɪn kənˈkluːʒən ↗ wiː wʊd laɪk tuː θæŋk ɔːl əv ˈaʊə ɡɛsts ↘/",
+          marked: "<strong>IN CONCLUSION</strong> ↗, we'd like to thank all of our <strong>GUESTS</strong> ↘.",
+          speechText: "In conclusion, we would like to thank all of our guests.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "However, if you buy tickets in advance, you will receive a discount.",
+          vn: "Tuy nhiên, nếu bạn mua vé trước, bạn sẽ được giảm giá (Collins Track 02).",
+          ipa: "/haʊˈɛvə ↗ ɪf juː baɪ ˈtɪkɪts ɪn ədˈvɑːns ↗ juː wɪl rɪˈsiːv ə ˈdɪskaʊnt ↘/",
+          marked: "<strong>HOWEVER</strong> ↗, if you buy tickets in <strong>ADVANCE</strong> ↗, you will receive a <strong>DISCOUNT</strong> ↘.",
+          speechText: "However, if you buy tickets in advance, you will receive a discount.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        }
+      ]
+    },
+    {
+      id: "rule_rhetorical_requests",
+      num: 11,
+      title: "Lời Yêu Cầu Tu Từ & Kêu Gọi Chú Ý (Rhetorical Requests & Public Calls)",
+      tonePattern: "Hạ giọng dứt khoát ở cuối câu (Falling ↘) — Không lên giọng!",
+      badge: "Ngoại lệ bẫy kinh điển (Collins Track 06 & 24)",
+      collinsTrack: "audio/collins/collins_banquet_model.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.06 & Track 24 (Rhetorical Requests)",
+      ruleSummary: "Khi đưa ra lời yêu cầu lịch sự mang tính tu từ hoặc kêu gọi sự chú ý của đám đông (nơi người nghe không thực sự cần trả lời Yes/No mà chỉ cần lắng nghe hoặc trật tự), ngữ điệu BẮT BUỘC PHẢI HẠ GIỌNG ↘, tuyệt đối không được vểnh giọng lên cao ở chữ 'please'!",
+      diagram: "Could we have your attention, please ──────────────↘ (Lịch thiệp & Uy quyền)",
+      formula: "[Could / Can / May we please...] ────────↘",
+      deepRationale: "Theo sách Collins TOEIC (trang 24): 'When you make a polite request by asking a rhetorical question, or one that people don't really need to answer, intonation will fall.' Dù về ngữ pháp có hình thức câu hỏi trợ động từ (Could/Can), nhưng về bản chất chức năng đây là một chỉ thị điều hành (Directive/Command). Hạ giọng thể hiện tư thế của người làm chủ sân khấu, chững chạc và chuyên nghiệp.",
+      vietnamesePitfalls: "99% học viên cứ thấy từ 'Could I...' hoặc thấy từ 'please' ở cuối là tự động vểnh giọng vút lên cao ('attention please ↗?'). Lỗi này khiến lời thông báo trở nên van nài, thiếu tính quyền lực và làm mất điểm nặng trong các bài phát biểu/thông báo TOEIC.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy so sánh giữa 2 tình huống: 'Bạn mượn cây bút' (nhờ vả cá nhân: 'Could you pass me the pen, please ↗?' - cần người ta gật đầu đồng ý) KHÁC VỚI 'Cô giáo nhắc cả lớp trật tự' ('Can you please listen carefully ↘?' - không cần học sinh trả lời, chỉ cần trật tự).",
+      contextualDialogue: {
+        title: "Hội thoại: Thông báo trên xe buýt gặp sự cố (Bus Delay Announcement)",
+        context: "Tài xế thông báo cho hành khách về sự cố cơ khí và yêu cầu sự chú ý trật tự.",
+        lines: [
+          { speaker: "Driver", en: "Could I have everyone's attention, please ↘? Due to mechanical problems ↗, this bus will now be taken out of service ↘.", vn: "Xin quý hành khách vui lòng chú ý. Do sự cố kỹ thuật, xe buýt này tạm thời ngừng phục vụ.", speechText: "Could I have everyone's attention, please. Due to mechanical problems, this bus will now be taken out of service." },
+          { speaker: "Passenger", en: "Excuse me ↗, how long will we have to wait for the shuttle ↘?", vn: "Xin lỗi, chúng tôi sẽ phải đợi xe trung chuyển bao lâu vậy ạ?", speechText: "Excuse me, how long will we have to wait for the shuttle." }
+        ]
+      },
+      examples: [
+        {
+          en: "Could we have your attention, please?",
+          vn: "Xin quý vị vui lòng chú ý (Trích đề Collins Track 06).",
+          ipa: "/kʊd wiː hæv jɔːr əˈtɛnʃən pliːz ↘/",
+          marked: "Could we have your attention, <strong>PLEASE</strong> ↘?",
+          speechText: "Could we have your attention, please.",
+          speechPitch: 0.94,
+          speechRate: 0.88
+        },
+        {
+          en: "Can you please listen carefully?",
+          vn: "Xin các bạn vui lòng chú ý lắng nghe (Trích đề Collins Track 24).",
+          ipa: "/kæn juː pliːz ˈlɪsn ˈkeəfʊli ↘/",
+          marked: "Can you please listen <strong>CAREFULLY</strong> ↘?",
+          speechText: "Can you please listen carefully.",
+          speechPitch: 0.94,
+          speechRate: 0.88
+        },
+        {
+          en: "Could I have everyone's attention, please?",
+          vn: "Xin tất cả mọi người vui lòng chú ý (Trích đề Collins Track 41).",
+          ipa: "/kʊd aɪ hæv ˈɛvrɪwʌnz əˈtɛnʃən pliːz ↘/",
+          marked: "Could I have everyone's attention, <strong>PLEASE</strong> ↘?",
+          speechText: "Could I have everyone's attention, please.",
+          speechPitch: 0.94,
+          speechRate: 0.88
+        }
+      ]
+    },
+    {
+      id: "rule_punctuation_pausing",
+      num: 12,
+      title: "Kỹ Thuật Ngắt Nghỉ Theo Dấu Câu & Cụm Tư Duy (Punctuation & Thought Groups)",
+      tonePattern: "Dấu phẩy/hai chấm: Nghỉ ngắn (0.3s) • Dấu chấm: Nghỉ trọn vẹn (0.7s)",
+      badge: "Kỹ thuật thở đều & Nhịp điệu bản xứ (Collins Track 29)",
+      collinsTrack: "audio/collins/collins_punctuation_pausing.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.29 (Punctuation & Pausing)",
+      ruleSummary: "Dấu câu trong văn bản tiếng Anh chính là 'nốt nhạc nghỉ' của bài nói. Phải chủ động ngắt hơi sau dấu phẩy (,), dấu hai chấm (:), dấu chấm phẩy (;), và hạ trọn vẹn cao độ sau dấu chấm (.). Ngoài ra, bắt buộc phải dừng một nhịp sau các cụm giới từ mở đầu câu (According to..., By the time..., At this time,...).",
+      diagram: "[Cụm 1 ↗] , [nghỉ 0.3s] ── [Cụm 2 ↗] : [nghỉ 0.4s] ── [Cụm Cuối ↘] . [nghỉ 0.7s]",
+      formula: "[Cụm mở đầu ↗ , | ] + [Mệnh đề chính ↘ . || ]",
+      deepRationale: "Theo giáo trình Collins TOEIC (trang 24): Dấu phẩy và dấu chấm thể hiện nơi người viết muốn phân chia các khối tư duy (Thought Groups). Người bản xứ không bao giờ phát âm quá 7-8 từ mà không ngắt hơi. Ngắt nghỉ đúng nhịp giúp cơ thể lấy lại cột hơi bằng cơ hoành, giữ nhịp tim ổn định và tránh tình trạng cuống giọng khi đọc bài thi.",
+      vietnamesePitfalls: "Nhiều học viên sợ không đọc hết bài trong 45 giây nên đọc như 'bắn súng liên thanh', không dừng lại ở dấu chấm dấu phẩy. Kết quả là bị hụt hơi ở giữa câu, ngắt sai cụm làm sai lệch hoàn toàn ngữ nghĩa của bài đọc.",
+      teacherTips: "Mẹo của cô Nguyệt: Dạy học viên quy tắc vạch nhịp: Dấu phẩy đánh 1 gạch đứng (|) tương đương 1 nhịp chớp mắt; Dấu chấm đánh 2 gạch đứng (||) tương đương 1 nhịp thở bụng. Dừng lại đúng lúc giúp giọng nói vang, trầm và sang hơn rất nhiều.",
+      contextualDialogue: {
+        title: "Hội thoại: Báo cáo tăng trưởng sản xuất (Executive Production Report)",
+        context: "Giám đốc điều hành báo cáo thành tích ấn tượng với sự ngắt nghỉ khúc chiết, đĩnh đạc.",
+        lines: [
+          { speaker: "CEO", en: "According to the monthly report ↗, | our production has increased three hundred percent over the past five years ↘. ||", vn: "Theo báo cáo hàng tháng, sản lượng của chúng ta đã tăng trưởng 300% trong 5 năm qua.", speechText: "According to the monthly report, our production has increased three hundred percent over the past five years." },
+          { speaker: "Director", en: "There's only one group to thank for this: | our dedicated staff ↘. ||", vn: "Chỉ có một tập thể duy nhất xứng đáng nhận lời cảm ơn cho thành tích này: toàn thể nhân viên tận tụy của chúng ta.", speechText: "There is only one group to thank for this: our dedicated staff." }
+        ]
+      },
+      examples: [
+        {
+          en: "According to the monthly report, our production has increased 300%.",
+          vn: "Theo báo cáo hàng tháng, sản lượng của chúng ta đã tăng 300% (Collins Track 29).",
+          ipa: "/əˈkɔːdɪŋ tuː ðə ˈmʌnθli rɪˈpɔːt ↗ ˈaʊə prəˈdʌkʃən hæz ɪnˈkriːst θriː ˈhʌndrəd pəˈsɛnt ↘/",
+          marked: "According to the monthly report ↗, | our production has increased <strong>300%</strong> ↘. ||",
+          speechText: "According to the monthly report, our production has increased three hundred percent.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Due to severe weather conditions, all morning flights have been delayed.",
+          vn: "Do điều kiện thời tiết xấu, tất cả chuyến bay buổi sáng đã bị hoãn.",
+          ipa: "/djuː tuː sɪˈvɪə ˈwɛðə kənˈdɪʃənz ↗ ɔːl ˈmɔːnɪŋ flaɪts hæv biːn dɪˈleɪd ↘/",
+          marked: "Due to severe weather conditions ↗, | all morning flights have been <strong>DELAYED</strong> ↘. ||",
+          speechText: "Due to severe weather conditions, all morning flights have been delayed.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "By the time we got to the airport, the plane had already departed.",
+          vn: "Vào thời điểm chúng tôi đến sân bay, máy bay đã khởi hành rồi (Collins Track 30).",
+          ipa: "/baɪ ðə taɪm wiː ɡɒt tuː ði ˈeəpɔːt ↗ ðə pleɪn hæd ɔːlˈrɛdi dɪˈpɑːtɪd ↘/",
+          marked: "By the time we got to the airport ↗, | the plane had already <strong>DEPARTED</strong> ↘. ||",
+          speechText: "By the time we got to the airport, the plane had already departed.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        }
+      ]
     }
   ],
 
