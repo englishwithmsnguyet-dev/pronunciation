@@ -3924,8 +3924,8 @@ document.addEventListener("DOMContentLoaded", () => {
         this.renderFunctionsTab(container);
       } else if (this.currentTab === "quiz") {
         this.renderQuizTab(container);
-      } else if (this.currentTab === "guide") {
-        this.renderGuideTab(container);
+      } else {
+        this.renderTonesTab(container);
       }
     },
 
