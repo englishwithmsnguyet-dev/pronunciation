@@ -73,7 +73,7 @@ window.INTONATION_DATA = {
       headline: "Kỹ Thuật Cơ Thể Học: Điều Khiển Dây Thanh & Luồng Hơi",
       steps: [
         "Lấy hơi bằng cơ hoành (thở bụng): Không thở nông bằng ngực để có đủ cột hơi duy trì cao độ đến cuối câu.",
-        "Độ căng của dây thanh đới: Khi muốn lên giọng (↗), siết nhẹ dây thanh để tăng tần số rung $F_0$; khi muốn hạ giọng (↘), thả lỏng dây thanh để âm thanh trầm ấm rơi tự nhiên.",
+        "Độ căng của dây thanh đới: Khi muốn lên giọng (↗), siết nhẹ dây thanh để tăng tần số rung F₀; khi muốn hạ giọng (↘), thả lỏng dây thanh để âm thanh trầm ấm rơi tự nhiên.",
         "Kéo dài trường độ (Vowel Lengthening): Âm tiết nhận Nucleus bắt buộc phải đọc DÀI HƠN gấp 1.5 lần so với các âm tiết xung quanh."
       ]
     }
@@ -93,7 +93,7 @@ window.INTONATION_DATA = {
       shortDesc: "Cao độ đổ dốc từ cao xuống mức thấp nhất của quãng giọng",
       meaning: "Hoàn tất (Finality) • Chắc chắn (Certainty) • Dứt khoát (Definiteness)",
       detailedExplanation: "Cao độ bắt đầu từ mức trung bình hoặc cao rồi đổ dốc xuống mức thấp nhất của quãng giọng. Đây là giai điệu phổ biến nhất trong tiếng Anh (chiếm khoảng 60% giao tiếp), báo hiệu câu nói đã trọn vẹn và người nói hoàn toàn tự tin về thông tin mình cung cấp.",
-      acousticDetails: "Tần số cơ bản $F_0$ giảm từ khoảng 260Hz - 280Hz xuống mức đáy 120Hz - 130Hz trong khoảng 0.4 - 0.5 giây.",
+      acousticDetails: "Tần số cơ bản F₀ giảm từ khoảng 260Hz - 280Hz xuống mức đáy 120Hz - 130Hz trong khoảng 0.4 - 0.5 giây.",
       usageGuide: [
         "Câu khẳng định và phủ định thông thường (Statements).",
         "Câu hỏi Wh- yêu cầu thông tin cụ thể (Who, What, Where, When, Why, How).",
@@ -159,7 +159,7 @@ window.INTONATION_DATA = {
       shortDesc: "Cao độ vút từ mức thấp/trung bình lên cao dần về cuối",
       meaning: "Chưa hoàn tất (Non-finality) • Nghi vấn / Thăm dò (Inquiry) • Mời gọi phản hồi",
       detailedExplanation: "Cao độ bắt đầu từ mức thấp hoặc trung bình rồi vút lên cao dần về cuối câu. Điệu lên tạo cảm giác tò mò, mở lời, mời gọi người nghe trả lời, hoặc báo hiệu câu chuyện vẫn còn vế sau chưa hết.",
-      acousticDetails: "Tần số cơ bản $F_0$ nâng từ khoảng 135Hz lên mức đỉnh 280Hz - 300Hz, tạo âm sắc ngân vang nhẹ.",
+      acousticDetails: "Tần số cơ bản F₀ nâng từ khoảng 135Hz lên mức đỉnh 280Hz - 300Hz, tạo âm sắc ngân vang nhẹ.",
       usageGuide: [
         "Câu hỏi Yes/No bắt đầu bằng trợ động từ (Do, Are, Can, Will...).",
         "Lời đề nghị, nhờ vả lịch sự (Polite requests: Could you please...?).",
@@ -290,7 +290,7 @@ window.INTONATION_DATA = {
       shortDesc: "Cao độ vút lên cực đỉnh rồi rơi thẳng đứng xuống mức rất thấp",
       meaning: "Kinh ngạc tột độ (Surprise) • Ấn tượng mãnh liệt (Strong Approval) • Mỉa mai (Sarcasm)",
       detailedExplanation: "Cao độ vọt lên rất cao tạo một đỉnh nhọn chót vót rồi rơi thẳng đứng xuống mức rất thấp. Dùng khi người nói quá đỗi ngạc nhiên trước một tin tức chấn động, xúc động mạnh trước một thành tựu, hoặc dùng để mỉa mai sâu cay.",
-      acousticDetails: "Tần số $F_0$ phóng từ 160Hz vút lên đỉnh nhọn 330Hz - 350Hz rồi đổ sập xuống 120Hz.",
+      acousticDetails: "Tần số F₀ phóng từ 160Hz vút lên đỉnh nhọn 330Hz - 350Hz rồi đổ sập xuống 120Hz.",
       usageGuide: [
         "Bày tỏ sự kinh ngạc tột bực (You passed with 100% ↗↘?!).",
         "Lời tán thưởng, khen ngợi hết lời (Brilliant ↗↘! Absolutely fantastic ↗↘!).",
@@ -354,7 +354,7 @@ window.INTONATION_DATA = {
       shortDesc: "Cao độ duy trì một đường ngang phẳng lì, không đổi",
       meaning: "Do dự (Hesitation) • Đang suy nghĩ (Thinking aloud) • Máy móc / Vô cảm (Routine)",
       detailedExplanation: "Cao độ duy trì một đường ngang phẳng, không dịch chuyển lên hay xuống. Xuất hiện khi người nói đang ngẫm nghĩ tìm từ tiếp theo ('Well →, um →'), hoặc khi đọc danh sách điểm danh, đọc số liệu một cách vô cảm, máy móc.",
-      acousticDetails: "Tần số $F_0$ dao động cực ít, giữ cố định quanh mức trung bình 190Hz - 200Hz.",
+      acousticDetails: "Tần số F₀ dao động cực ít, giữ cố định quanh mức trung bình 190Hz - 200Hz.",
       usageGuide: [
         "Khi người nói cần thời gian suy nghĩ để không bị người khác cướp lượt lời (Turn-holding).",
         "Đọc danh sách, số điện thoại hoặc mã sản phẩm một cách vô cảm (Routine listing).",
@@ -403,19 +403,22 @@ window.INTONATION_DATA = {
   ],
 
   // =========================================================================
-  // PHẦN 2: 8 QUY TẮC NGỮ PHÁP CHUYÊN SÂU (THE 8 GRAMMATICAL RULES)
+  // PHẦN 2: 12 QUY TẮC LÊN & XUỐNG GIỌNG THEO KIỂU CÂU (6 XUỐNG - 6 LÊN)
   // =========================================================================
   rules: [
+    // =======================================================================
+    // NHÓM 1: CÁC TRƯỜNG HỢP XUỐNG GIỌNG (FALLING TONE ↘)
+    // =======================================================================
     {
       id: "rule_statements",
       num: 1,
       group: "falling",
       title: "Câu Trần Thuật (Statements)",
       tonePattern: "Hạ giọng ở cuối câu (Falling ↘)",
-      badge: "Cực kỳ phổ biến (60% giao tiếp)",
+      badge: "Khẳng định & Phủ định (60% giao tiếp)",
       ruleSummary: "Đa số câu khẳng định và phủ định diễn tả sự thật, cung cấp thông tin hoàn chỉnh đều hạ cao độ ở từ khóa mang nghĩa cuối cùng.",
       diagram: "Subject + Verb + Object ───────────↘ (Chắc chắn & Trọn vẹn)",
-      formula: "[Chủ ngữ] + [Vị ngữ] + [Tân ngữ / Trạng từ ↘]",
+      formula: "[Chủ ngữ] + [Vị ngữ] + [Tân ngữ / Từ cuối ↘] .",
       deepRationale: "Hạ giọng ở cuối câu trần thuật là tín hiệu âm học sinh học phổ quát của con người: dây thanh đới chùng xuống, báo hiệu lượng thông tin đã được giải phóng trọn vẹn, người nghe không cần phải phỏng đoán thêm.",
       vietnamesePitfalls: "Nhiều học viên Việt Nam hay có thói quen 'vểnh giọng' ở cuối câu trần thuật (Up-talk) do ảnh hưởng từ mạng xã hội hoặc do thiếu tự tin, khiến câu khẳng định nghe như một câu hỏi ngớ ngẩn (ví dụ: 'My name is Nam ↗?').",
       teacherTips: "Mẹo của cô Nguyệt: Hãy nhắc học viên tưởng tượng từ cuối cùng của câu khẳng định mang 'dấu huyền' nhẹ nhàng của tiếng Việt. Điều này giúp học viên tự động ghìm cao độ xuống đáy một cách êm ái.",
@@ -423,8 +426,8 @@ window.INTONATION_DATA = {
         title: "Hội thoại: Báo cáo tiến độ dự án (Project Status Meeting)",
         context: "Trình bày thông tin dự án một cách chuyên nghiệp, dứt khoát trước hội đồng quản trị.",
         lines: [
-          { speaker: "Manager", en: "When will the mobile application be ready for testing ↘?", vn: "Khi nào thì ứng dụng di động sẵn sàng để thử nghiệm?", speechText: "When will the mobile application be ready for testing." },
-          { speaker: "Lead Dev", en: "Our development team has finished the core features ↘. We will launch the beta test next Monday ↘.", vn: "Đội ngũ phát triển đã hoàn thành các tính năng cốt lõi. Chúng tôi sẽ chạy thử nghiệm vào thứ Hai tới (Tự tin & chính xác).", speechText: "Our development team has finished the core features. We will launch the beta test next Monday." }
+          { speaker: "Manager", en: "When will the mobile application be ready for testing ↘?", vn: "Khi nào thì ứng dụng di động sẵn sàng để thử nghiệm?", audioUrl: "audio/intonation/rule_rule_statements_dial_0.mp3", speechText: "When will the mobile application be ready for testing." },
+          { speaker: "Lead Dev", en: "Our development team has finished the core features ↘. We will launch the beta test next Monday ↘.", vn: "Đội ngũ phát triển đã hoàn thành các tính năng cốt lõi. Chúng tôi sẽ chạy thử nghiệm vào thứ Hai tới.", audioUrl: "audio/intonation/rule_rule_statements_dial_1.mp3", speechText: "Our development team has finished the core features. We will launch the beta test next Monday." }
         ]
       },
       examples: [
@@ -433,6 +436,7 @@ window.INTONATION_DATA = {
           vn: "Cô ấy làm kỹ sư phần mềm (Sự thật rõ ràng).",
           ipa: "/ʃiː wɜːks æz ə ˈsɒftweər ˌendʒɪˈnɪə ↘/",
           marked: "She works as a software <strong>ENGINEER</strong> ↘.",
+          audioUrl: "audio/intonation/rule_rule_statements_ex_0.mp3",
           speechText: "She works as a software engineer.",
           speechPitch: 0.94,
           speechRate: 0.90
@@ -442,18 +446,20 @@ window.INTONATION_DATA = {
           vn: "Tôi không nghĩ đó là một ý kiến hay.",
           ipa: "/aɪ dəʊnt θɪŋk ðæts ə ɡʊd aɪˈdɪə ↘/",
           marked: "I don't think that's a good <strong>IDEA</strong> ↘.",
+          audioUrl: "audio/intonation/rule_rule_statements_ex_1.mp3",
           speechText: "I don't think that's a good idea.",
           speechPitch: 0.94,
           speechRate: 0.90
         },
         {
-          en: "I thought he was honest...",
-          vn: "Tôi từng nghĩ anh ta thành thật... (Dè dặt, ngầm ý: hóa ra không phải).",
-          ipa: "/aɪ θɔːt hiː wɒz ˈɒnɪst ↘↗/",
-          marked: "I thought he was <strong>HONEST</strong> ↘↗...",
-          speechText: "I thought he was honest, though...",
-          speechPitch: 1.04,
-          speechRate: 0.86
+          en: "We will launch the beta test next Monday.",
+          vn: "Chúng tôi sẽ bắt đầu chạy thử nghiệm vào thứ Hai tới.",
+          ipa: "/wiː wɪl lɔːntʃ ðə ˈbeɪtə tɛst nɛkst ˈmʌndeɪ ↘/",
+          marked: "We will launch the beta test next <strong>MONDAY</strong> ↘.",
+          audioUrl: "audio/intonation/rule_rule_statements_dial_1.mp3",
+          speechText: "We will launch the beta test next Monday.",
+          speechPitch: 0.94,
+          speechRate: 0.90
         }
       ]
     },
@@ -464,9 +470,11 @@ window.INTONATION_DATA = {
       title: "Câu Hỏi Wh- (Information Questions)",
       tonePattern: "Hạ giọng ở cuối câu (Falling ↘)",
       badge: "Lỗi sai số 1 của học viên",
+      collinsTrack: "audio/collins/collins_wh_questions_falling.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.06 (Wh-Questions Falling)",
       ruleSummary: "Câu hỏi bắt đầu bằng Who, What, Where, When, Why, Which, How có ngữ điệu CHUẨN BẢN XỨ LÀ HẠ GIỌNG ↘, tuyệt đối không lên giọng!",
       diagram: "Wh- Word ───────────↘ (Đòi hỏi thông tin thực tế)",
-      formula: "[Wh- Word] + [Trợ ĐT] + [S] + [V] ↘",
+      formula: "[Wh- Word] + [Trợ ĐT] + [S] + [V ↘] ?",
       deepRationale: "Tại sao câu hỏi Wh- lại hạ giọng? Vì từ để hỏi (Who, What, Where...) đã đứng ở đầu câu làm nhiệm vụ báo hiệu đây là một câu hỏi rồi! Người bản xứ không cần phải lên giọng ở cuối câu nữa. Hạ giọng ở cuối câu Wh- thể hiện tính lịch thiệp, tự nhiên và tập trung vào thông tin cần trả lời.",
       vietnamesePitfalls: "Đây là lỗi sai phổ biến nhất: 90% người Việt cứ thấy câu hỏi là tự động 'vểnh giọng' lên ở từ cuối! Đọc 'Where do you live ↗?' nghe rất kỳ quặc, thiếu tự nhiên và làm mất điểm nặng trong bài thi TOEIC/IELTS Speaking.",
       teacherTips: "Mẹo của cô Nguyệt: Hãy đặt câu hỏi cho học viên: 'Trong tiếng Việt, câu 'Mày đi đâu đấy?' người ta có lên giọng the thé ở cuối không?'. Không! Tiếng Anh cũng vậy: 'Where are you going ↘?'. Hãy hướng dẫn học viên gõ nhẹ ngón tay xuống bàn ở từ cuối cùng.",
@@ -474,8 +482,8 @@ window.INTONATION_DATA = {
         title: "Hội thoại: Hỏi đường ở sân bay (Airport Navigation)",
         context: "Hành khách hỏi thông tin nhân viên mặt đất với ngữ điệu tự nhiên, chuẩn mực.",
         lines: [
-          { speaker: "Passenger", en: "Excuse me ↗, where can I pick up my luggage ↘?", vn: "Xin lỗi anh, tôi có thể lấy hành lý ở đâu vậy ạ?", speechText: "Excuse me, where can I pick up my luggage." },
-          { speaker: "Airport Staff", en: "Baggage claim is on the ground floor ↘, right next to Carousel Three ↘.", vn: "Khu vực trả hành lý ở tầng trệt, ngay cạnh băng chuyền số 3 ạ.", speechText: "Baggage claim is on the ground floor, right next to Carousel Three." }
+          { speaker: "Passenger", en: "Excuse me ↗, where can I pick up my luggage ↘?", vn: "Xin lỗi anh, tôi có thể lấy hành lý ở đâu vậy ạ?", audioUrl: "audio/intonation/rule_rule_wh_questions_dial_0.mp3", speechText: "Excuse me, where can I pick up my luggage." },
+          { speaker: "Airport Staff", en: "Baggage claim is on the ground floor ↘, right next to Carousel Three ↘.", vn: "Khu vực trả hành lý ở tầng trệt, ngay cạnh băng chuyền số 3 ạ.", audioUrl: "audio/intonation/rule_rule_wh_questions_dial_1.mp3", speechText: "Baggage claim is on the ground floor, right next to Carousel Three." }
         ]
       },
       examples: [
@@ -484,6 +492,7 @@ window.INTONATION_DATA = {
           vn: "Bạn mua chiếc áo khoác này ở đâu vậy? (Câu hỏi Wh- chuẩn).",
           ipa: "/weə dɪd juː baɪ ðɪs ˈdʒækɪt ↘/",
           marked: "Where did you buy this <strong>JACKET</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_wh_questions_ex_0.mp3",
           speechText: "Where did you buy this jacket.",
           speechPitch: 0.92,
           speechRate: 0.88
@@ -493,175 +502,42 @@ window.INTONATION_DATA = {
           vn: "Mấy giờ thì hội nghị bắt đầu?",
           ipa: "/wɒt taɪm dʌz ðə ˈkɒnfərəns stɑːt ↘/",
           marked: "What time does the conference <strong>START</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_wh_questions_ex_1.mp3",
           speechText: "What time does the conference start.",
           speechPitch: 0.92,
           speechRate: 0.88
         },
         {
-          en: "What was your name again?",
-          vn: "Tên bạn là gì nhỉ? (Hỏi lại thân thiện, xin lỗi vì quên tên).",
-          ipa: "/wɒt wɒz jɔː neɪm əˈɡen ↗/",
-          marked: "What was your name <strong>AGAIN</strong> ↗?",
-          speechText: "What was your name again?",
-          speechPitch: 1.15,
-          speechRate: 0.90
+          en: "Why are you learning English?",
+          vn: "Tại sao bạn lại học tiếng Anh?",
+          ipa: "/waɪ ɑː juː ˈlɜːnɪŋ ˈɪŋɡlɪʃ ↘/",
+          marked: "Why are you learning <strong>ENGLISH</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_wh_questions_ex_2.mp3",
+          speechText: "Why are you learning English.",
+          speechPitch: 0.92,
+          speechRate: 0.88
         }
       ]
     },
     {
-      id: "rule_yes_no",
+      id: "rule_commands",
       num: 3,
-      group: "rising",
-      title: "Câu Hỏi Yes / No",
-      tonePattern: "Lên giọng ở cuối câu (Rising ↗)",
-      badge: "Quy tắc kinh điển",
-      ruleSummary: "Câu hỏi bắt đầu bằng trợ động từ (Do, Does, Did, Are, Is, Have, Has, Can, Will, Would...) luôn lên giọng cao dần về cuối để mời gọi xác nhận.",
-      diagram: "Auxiliary + Subject ───────────↗ (Chờ đợi xác nhận Yes/No)",
-      formula: "[Trợ động từ] + [S] + [V] ↗",
-      deepRationale: "Câu hỏi Yes/No là câu hỏi đóng (Closed question): người nói không biết chắc tính chân thực của mệnh đề và muốn trao toàn quyền xác nhận Đúng/Sai cho người nghe. Cao độ nâng lên biểu thị sự chờ đợi câu trả lời từ đối phương.",
-      vietnamesePitfalls: "Học viên hay lên giọng bằng cách 'thêm dấu sắc' khiến âm cuối nghe rất gay gắt và bị méo nguyên âm (ví dụ: 'pen' đọc thành 'pén'). Hãy nhớ: Lên giọng là nâng CAO ĐỘ (Pitch), không làm thay đổi nguyên âm chuẩn của từ!",
-      teacherTips: "Mẹo của cô Nguyệt: Hướng dẫn học viên bắt đầu câu hỏi bằng một tông giọng trung bình trầm, và chỉ bắt đầu 'cất cánh' nâng cao độ ở 1-2 âm tiết cuối cùng giống như máy bay cất cánh khỏi đường băng.",
-      contextualDialogue: {
-        title: "Hội thoại: Gọi món tại nhà hàng (Ordering at a Restaurant)",
-        context: "Bồi bàn hỏi thăm thực khách về nhu cầu dùng bữa.",
-        lines: [
-          { speaker: "Waiter", en: "Are you ready to order your main course ↗?", vn: "Quý khách đã sẵn sàng gọi món chính chưa ạ?", speechText: "Are you ready to order your main course?" },
-          { speaker: "Customer", en: "Yes ↘, I will have the grilled salmon, please ↘.", vn: "Vâng, cho tôi món cá hồi nướng nhé.", speechText: "Yes, I will have the grilled salmon, please." }
-        ]
-      },
-      examples: [
-        {
-          en: "Do you live in New York?",
-          vn: "Bạn có sống ở New York không?",
-          ipa: "/duː juː lɪv ɪn njuː jɔːk ↗/",
-          marked: "Do you live in New <strong>YORK</strong> ↗?",
-          speechText: "Do you live in New York?",
-          speechPitch: 1.14,
-          speechRate: 0.90
-        },
-        {
-          en: "Have you finished your homework?",
-          vn: "Con đã làm xong bài tập về nhà chưa?",
-          ipa: "/hæv juː ˈfɪnɪʃt jɔː ˈhəʊmwɜːk ↗/",
-          marked: "Have you finished your <strong>HOMEWORK</strong> ↗?",
-          speechText: "Have you finished your homework?",
-          speechPitch: 1.14,
-          speechRate: 0.90
-        },
-        {
-          en: "Can you speak French?",
-          vn: "Bạn có nói được tiếng Pháp không?",
-          ipa: "/kæn juː spiːk frentʃ ↗/",
-          marked: "Can you speak <strong>FRENCH</strong> ↗?",
-          speechText: "Can you speak French?",
-          speechPitch: 1.14,
-          speechRate: 0.90
-        }
-      ]
-    },
-    {
-      id: "rule_choice",
-      num: 4,
-      group: "combined",
-      title: "Câu Hỏi Lựa Chọn (Alternative Questions với 'OR')",
-      tonePattern: "Vế 1 Lên (↗) — Vế cuối Xuống (↘)",
-      badge: "Quy tắc 2 vế bắt buộc",
-      ruleSummary: "Khi đưa ra các phương án chọn lựa bằng liên từ 'or': Lên giọng ở lựa chọn thứ nhất (↗) và HẠ GIỌNG DỨT KHOÁT ở lựa chọn cuối cùng (↘).",
-      diagram: "Option 1 ↗  or  Option 2 ↘ (Chốt danh sách lựa chọn)",
-      formula: "[Lựa chọn 1 ↗] + or + [Lựa chọn 2 ↘]",
-      deepRationale: "Vế 1 lên giọng (↗) báo hiệu: 'Đây là phương án A, nhưng chưa hết đâu nhé'. Vế 2 hạ giọng (↘) báo hiệu: 'Đây là phương án B và là lựa chọn cuối cùng rồi, bạn chỉ được chọn 1 trong 2'.",
-      vietnamesePitfalls: "BẪY TAI HẠI NHẤT: Nếu bạn lên giọng ở cả hai vế ('Would you like tea ↗ or coffee ↗?'), câu đó lập tức biến thành câu hỏi Yes/No: 'Bạn có muốn uống chút gì đó (như trà hay cà phê) không?'. Khi đó khách sẽ trả lời 'Yes, please' chứ không chọn trà hay cà phê!",
-      teacherTips: "Mẹo của cô Nguyệt: Hãy vẽ hình cây cầu bập bênh: vế 1 nhấc bổng lên cao, vế 2 dập xuống đất. Bắt học viên luyện tập bằng cách chỉ tay trái lên (coffee ↗), chỉ tay phải xuống (tea ↘).",
-      contextualDialogue: {
-        title: "Hội thoại: Tiếp viên hàng không phục vụ đồ uống (In-flight Service)",
-        context: "Tiếp viên hỏi hành khách lựa chọn thức uống trên chuyến bay.",
-        lines: [
-          { speaker: "Flight Attendant", en: "Would you like red wine ↗ or white wine ↘?", vn: "Quý khách muốn dùng rượu vang đỏ hay vang trắng ạ?", speechText: "Would you like red wine, or white wine." },
-          { speaker: "Passenger", en: "Red wine, please ↘. Thank you ↘.", vn: "Cho tôi vang đỏ nhé. Cảm ơn cô.", speechText: "Red wine, please. Thank you." }
-        ]
-      },
-      examples: [
-        {
-          en: "Would you prefer coffee or tea?",
-          vn: "Bạn muốn dùng cà phê hay trà? (Chọn 1 trong 2).",
-          ipa: "/wʊd juː prɪˈfɜː ˈkɒfi ↗ ɔː tiː ↘/",
-          marked: "Would you prefer <strong>COFFEE</strong> ↗ or <strong>TEA</strong> ↘?",
-          speechText: "Would you prefer coffee, or tea.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "Are we traveling by train or by bus?",
-          vn: "Chúng ta sẽ đi bằng tàu hỏa hay xe buýt?",
-          ipa: "/ɑː wiː ˈtrævlɪŋ baɪ treɪn ↗ ɔː baɪ bʌs ↘/",
-          marked: "Are we traveling by <strong>TRAIN</strong> ↗ or by <strong>BUS</strong> ↘?",
-          speechText: "Are we traveling by train, or by bus.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        }
-      ]
-    },
-    {
-      id: "rule_tag_questions",
-      num: 5,
-      group: "rising",
-      title: "Câu Hỏi Đuôi (Tag Questions)",
-      tonePattern: "Chắc chắn $\\rightarrow$ Xuống (↘) | Chưa chắc $\\rightarrow$ Lên (↗)",
-      badge: "Phản ánh tâm lý khảo thí",
-      ruleSummary: "Ngữ điệu của câu hỏi đuôi phản ánh chính xác 100% mức độ tự tin của người nói trong giao tiếp.",
-      diagram: "Chắc chắn 100%: ──↘ (Đồng tình đi nào!) | Chưa chắc: ──↗ (Hỏi thật đấy!)",
-      formula: "Câu kể + [Trợ ĐT + Đại từ ↘ hoặc ↗]",
-      deepRationale: "• Điệu Xuống (Falling Tag ↘): Người nói ĐÃ BIẾT CHẮC đáp án rồi, không có nhu cầu hỏi thêm, chỉ cần người nghe gật đầu tán thành theo mình.\n• Điệu Lên (Rising Tag ↗): Người nói CHƯA BIẾT THỰC SỰ và đang hỏi thật sự như một câu hỏi Yes/No thông thường.",
-      vietnamesePitfalls: "Học viên khi làm bài thi ngữ pháp trên giấy thì làm đúng, nhưng khi nói thì luôn lên giọng ở đuôi vì nghĩ 'cứ có dấu hỏi là phải lên giọng', dẫn đến việc biến một lời chào xã giao thân mật thành một câu tra khảo đối phương!",
-      teacherTips: "Mẹo của cô Nguyệt: Trong đời sống, 80% câu hỏi đuôi dùng điệu HẠ GIỌNG ↘ để tạo sự đồng cảm (ví dụ khen thời tiết đẹp: 'Nice day, isn't it ↘?'). Hãy dạy học viên hạ giọng để tạo phong thái ấm áp, gần gũi.",
-      contextualDialogue: {
-        title: "Hội thoại: Trò chuyện xã giao công sở (Small Talk)",
-        context: "Hai đồng nghiệp gặp nhau ở hành lang và bắt chuyện thời tiết.",
-        lines: [
-          { speaker: "Colleague A", en: "The new marketing strategy is very promising, isn't it ↘?", vn: "Chiến lược tiếp thị mới rất nhiều triển vọng, đúng không nào? (Đồng tình đi nào!).", speechText: "The new marketing strategy is very promising, isn't it." },
-          { speaker: "Colleague B", en: "Absolutely ↘! I think our sales will double next quarter ↘.", vn: "Chắc chắn rồi! Tớ nghĩ doanh số sẽ tăng gấp đôi trong quý tới.", speechText: "Absolutely! I think our sales will double next quarter." }
-        ]
-      },
-      examples: [
-        {
-          en: "It's a beautiful day, isn't it?",
-          vn: "Trời đẹp quá, đúng không nào? (Người nói biết chắc trời đang rất đẹp).",
-          ipa: "/ɪts ə ˈbjuːtɪfl deɪ ˈɪznt ɪt ↘/",
-          marked: "It's a beautiful day, isn't it ↘?",
-          speechText: "It's a beautiful day, isn't it.",
-          speechPitch: 0.94,
-          speechRate: 0.90
-        },
-        {
-          en: "You haven't seen my keys, have you?",
-          vn: "Cậu có thấy chìa khóa của tôi đâu không đấy? (Hỏi thật vì đang tìm chìa khóa).",
-          ipa: "/juː hævnt siːn maɪ kiːz hæv juː ↗/",
-          marked: "You haven't seen my keys, have you ↗?",
-          speechText: "You haven't seen my keys, have you?",
-          speechPitch: 1.15,
-          speechRate: 0.90
-        }
-      ]
-    },
-    {
-      id: "rule_commands_requests",
-      num: 6,
       group: "falling",
-      title: "Câu Mệnh Lệnh (Commands) vs Lời Yêu Cầu (Requests)",
-      tonePattern: "Mệnh lệnh $\\rightarrow$ Xuống (↘) | Yêu cầu lịch sự $\\rightarrow$ Lên (↗) hoặc ↘↗",
-      badge: "Sắc thái quyền lực vs Lịch sự",
-      ruleSummary: "Mệnh lệnh dứt khoát hạ giọng để thể hiện thẩm quyền; Lời nhờ vả lịch sự lên giọng hoặc dùng Fall-Rise để giảm nhẹ độ áp đặt.",
-      diagram: "Mệnh lệnh: ──↘ (Dứt khoát) | Yêu cầu: ──↗ hoặc ──↘↗ (Mềm mỏng)",
-      formula: "Command: [V-inf ↘] | Request: [Could/Would you... ↗]",
-      deepRationale: "Hạ giọng sâu trong mệnh lệnh thể hiện vị thế quyền lực cao hơn (sếp ra lệnh cho nhân viên, giáo viên bảo học sinh, cha mẹ bảo con cái). Nếu trong lời nhờ vả đối tác mà bạn hạ giọng sâu, đối tác sẽ cảm thấy bị bạn ra lệnh một cách trịch thượng và thô lỗ.",
-      vietnamesePitfalls: "Học viên nói 'Could you help me?' nhưng lại phát âm với giọng điệu trầm đục và hạ sâu ở từ 'me ↘', khiến người nước ngoài cảm thấy như đang bị 'bắt buộc' phải giúp chứ không phải đang được nhờ vả một cách lịch sự.",
-      teacherTips: "Mẹo của cô Nguyệt: Khi nhờ vả ai, hãy mỉm cười nhẹ khi nói từ cuối cùng! Nụ cười tự nhiên sẽ kéo khóe môi sang hai bên và nâng cao độ thanh quản lên một cách tự nhiên mà không cần gắng gượng.",
+      title: "Câu Mệnh Lệnh & Chỉ Dẫn Dứt Khoát (Commands & Orders)",
+      tonePattern: "Hạ giọng dứt khoát (Falling ↘)",
+      badge: "Thể hiện thẩm quyền & Quyết đoán",
+      ruleSummary: "Câu mệnh lệnh, chỉ dẫn quy trình an toàn hoặc yêu cầu dứt khoát luôn HẠ GIỌNG sâu ở âm tiết cuối cùng để thể hiện thẩm quyền và tính quyết đoán.",
+      diagram: "[Động từ nguyên mẫu] + ... + [Từ cuối ↘] !",
+      formula: "[V-inf + Object ↘ !]",
+      deepRationale: "Hạ giọng sâu trong mệnh lệnh thể hiện vị thế quyền lực cao hơn (giáo viên hướng dẫn học sinh trong lớp, sếp phân công nhiệm vụ dứt khoát, hoặc người hướng dẫn an toàn). Âm sắc rơi dứt khoát tạo sự tin cậy.",
+      vietnamesePitfalls: "Nếu bạn đưa ra chỉ dẫn kỹ thuật hoặc mệnh lệnh an toàn mà lại lên giọng ở cuối, người nghe sẽ cảm thấy bạn đang hoang mang, thiếu tự tin hoặc nghi ngờ chính mệnh lệnh của mình.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy phát âm âm tiết cuối dứt khoát như một dấu chấm hết, không ngân dài, hạ thấp âm vực để tạo sự uy tín.",
       contextualDialogue: {
-        title: "Hội thoại: Nhờ vả đồng nghiệp tại văn phòng (Office Collaboration)",
-        context: "Nhân viên nhờ đồng nghiệp chuyển tài liệu một cách lịch thiệp, dễ mến.",
+        title: "Hội thoại: Hướng dẫn trong lớp học (Classroom Instruction)",
+        context: "Giáo viên yêu cầu cả lớp mở sách để bắt đầu bài học.",
         lines: [
-          { speaker: "Staff A", en: "Could you please review this contract for me ↗?", vn: "Cậu làm ơn xem qua bản hợp đồng này giúp tớ được không?", speechText: "Could you please review this contract for me?" },
-          { speaker: "Staff B", en: "Sure thing ↘! I will look at it right away ↘.", vn: "Được chứ! Tớ sẽ xem ngay bây giờ.", speechText: "Sure thing! I will look at it right away." }
+          { speaker: "Teacher", en: "Please turn off your phones and open your books to page ten ↘.", vn: "Các em vui lòng tắt điện thoại và mở sách ra trang số mười.", audioUrl: "audio/intonation/rule_rule_commands_requests_dial_0.mp3", speechText: "Please turn off your phones and open your books to page ten." },
+          { speaker: "Students", en: "Yes, teacher ↘.", vn: "Vâng ạ.", audioUrl: "audio/intonation/rule_rule_commands_requests_dial_1.mp3", speechText: "Yes, teacher." }
         ]
       },
       examples: [
@@ -670,250 +546,88 @@ window.INTONATION_DATA = {
           vn: "Mở sách ra trang số mười (Lời thầy cô ra lệnh trong lớp).",
           ipa: "/ˈəʊpən jɔː bʊks tuː peɪdʒ ten ↘/",
           marked: "Open your books to page <strong>TEN</strong> ↘.",
+          audioUrl: "audio/intonation/rule_rule_commands_requests_ex_0.mp3",
           speechText: "Open your books to page ten.",
           speechPitch: 0.92,
           speechRate: 0.88
         },
         {
-          en: "Could you please pass the salt?",
-          vn: "Bạn làm ơn chuyển giúp tôi lọ muối được không? (Yêu cầu lịch sự).",
-          ipa: "/kʊd juː pliːz pɑːs ðə sɔːlt ↗/",
-          marked: "Could you please pass the <strong>SALT</strong> ↗?",
-          speechText: "Could you please pass the salt?",
-          speechPitch: 1.14,
+          en: "Turn off the lights before leaving the office.",
+          vn: "Hãy tắt đèn trước khi rời khỏi văn phòng.",
+          ipa: "/tɜːn ɒf ðə laɪts bɪˈfɔː ˈliːvɪŋ ði ˈɒfɪs ↘/",
+          marked: "Turn off the lights before leaving the <strong>OFFICE</strong> ↘.",
+          audioUrl: "audio/intonation/rule_rule_commands_requests_ex_0.mp3",
+          speechText: "Turn off the lights before leaving the office.",
+          speechPitch: 0.92,
+          speechRate: 0.88
+        }
+      ]
+    },
+    {
+      id: "rule_tag_certain",
+      num: 4,
+      group: "falling",
+      title: "Câu Hỏi Đuôi Khi Đã Biết Chắc (Tag Questions - Certainty)",
+      tonePattern: "Hạ giọng ở phần đuôi (Falling ↘)",
+      badge: "Tìm kiếm sự đồng thuận (Expecting Agreement)",
+      ruleSummary: "Khi người nói ĐÃ BIẾT CHẮC thông tin và chỉ muốn người nghe đồng tình, gật đầu xác nhận cùng mình thì BẮT BUỘC HẠ GIỌNG ở phần đuôi.",
+      diagram: "[Mệnh đề trần thuật] , [Trợ động từ + Đại từ ↘] ?",
+      formula: "[Statement] , [Tag ↘ ?]",
+      deepRationale: "Vì người nói đã nắm chắc sự thật (ví dụ trời đang rất đẹp, hoặc báo cáo đã xong), phần đuôi không nhằm mục đích lấy thông tin mà chỉ là một nhịp cầu giao tiếp để mời gọi đối phương gật đầu hòa hợp.",
+      vietnamesePitfalls: "Học viên thấy dấu hỏi ở cuối câu hỏi đuôi nên luôn vểnh giọng lên, vô tình biến một lời chào xã giao ấm áp thành một câu tra khảo đối phương.",
+      teacherTips: "Mẹo của cô Nguyệt: Trong đời sống hàng ngày, hơn 80% câu hỏi đuôi dùng điệu HẠ GIỌNG ↘ để tạo sự thân thiện, gần gũi.",
+      contextualDialogue: {
+        title: "Hội thoại: Trò chuyện xã giao công sở (Small Talk)",
+        context: "Hai đồng nghiệp gặp nhau ở hành lang và bàn luận chiến lược.",
+        lines: [
+          { speaker: "Colleague A", en: "The new marketing strategy is very promising, isn't it ↘?", vn: "Chiến lược tiếp thị mới rất nhiều triển vọng, đúng không nào? (Đồng tình đi nào!).", audioUrl: "audio/intonation/rule_rule_tag_questions_dial_0.mp3", speechText: "The new marketing strategy is very promising, isn't it." },
+          { speaker: "Colleague B", en: "Absolutely ↘! I think our sales will double next quarter ↘.", vn: "Chắc chắn rồi! Tớ nghĩ doanh số sẽ tăng gấp đôi trong quý tới.", audioUrl: "audio/intonation/rule_rule_tag_questions_dial_1.mp3", speechText: "Absolutely! I think our sales will double next quarter." }
+        ]
+      },
+      examples: [
+        {
+          en: "It's a beautiful day, isn't it?",
+          vn: "Trời đẹp quá, đúng không nào? (Người nói biết chắc trời đang rất đẹp).",
+          ipa: "/ɪts ə ˈbjuːtɪfl deɪ ˈɪznt ɪt ↘/",
+          marked: "It's a beautiful day, isn't <strong>IT</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_tag_questions_ex_0.mp3",
+          speechText: "It's a beautiful day, isn't it.",
+          speechPitch: 0.94,
           speechRate: 0.90
         },
         {
-          en: "Hold on a minute, please.",
-          vn: "Làm ơn giữ máy một chút nhé (Lịch sự, nhẹ nhàng).",
-          ipa: "/həʊld ɒn ə ˈmɪnɪt pliːz ↘↗/",
-          marked: "Hold on a minute, <strong>PLEASE</strong> ↘↗.",
-          speechText: "Hold on a minute, please.",
-          speechPitch: 1.05,
-          speechRate: 0.88
+          en: "The new marketing strategy is very promising, isn't it?",
+          vn: "Chiến lược tiếp thị mới rất triển vọng, đúng không nào?",
+          ipa: "/ðə njuː ˈmɑːkɪtɪŋ ˈstrætədʒi z ˈvɛri ˈprɒmɪsɪŋ ˈɪznt ɪt ↘/",
+          marked: "The new marketing strategy is very promising, isn't <strong>IT</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_tag_questions_dial_0.mp3",
+          speechText: "The new marketing strategy is very promising, isn't it.",
+          speechPitch: 0.94,
+          speechRate: 0.90
         }
       ]
     },
     {
-      id: "rule_lists",
-      num: 7,
-      group: "combined",
-      title: "Ngữ Điệu Liệt Kê (List Intonation)",
-      tonePattern: "Liệt kê đóng: A ↗, B ↗, and C ↘ | Liệt kê mở: A ↗, B ↗, C ↗...",
-      badge: "Quy tắc vàng TOEIC Speaking Part 1",
-      ruleSummary: "Khi liệt kê một chuỗi các danh từ/tính từ: Lên giọng nhẹ ở các mục phía trước để báo hiệu chưa hết, và HẠ GIỌNG DỨT KHOÁT ở mục cuối cùng sau 'and'.",
-      diagram: "Item 1 ↗  ,  Item 2 ↗  ,  and  Item 3 ↘ (Đóng danh sách)",
-      formula: "A ↗, B ↗, and C ↘",
-      deepRationale: "Trong bài thi TOEIC Speaking Part 1 (Read a text aloud), quy tắc này xuất hiện trong 100% các đề thi ETS! Giám khảo khảo thí chấm điểm rất khắt khe tiêu chí này để xem thí sinh có khả năng điều khiển nhịp thở và báo hiệu kết thúc danh sách hay không.",
-      vietnamesePitfalls: "Học viên thường đọc liền một mạch không ngắt nghỉ ở dấu phẩy, hoặc đọc đều đều như tụng kinh, không có nhịp nhấc lên ở A và B.",
-      teacherTips: "Mẹo của cô Nguyệt: Yêu cầu học viên ngắt nghỉ 0.3 giây tại mỗi dấu phẩy, và tưởng tượng mỗi món đồ như một nốt nhạc tăng dần: Đồ ↗, Rê ↗, Mi ↗... và nốt cuối rơi về Đô ↘!",
-      contextualDialogue: {
-        title: "Hội thoại: Thông báo trên chuyến bay (In-flight Announcement)",
-        context: "Tiếp viên trưởng thông báo các dịch vụ miễn phí phục vụ hành khách.",
-        lines: [
-          { speaker: "Cabin Crew", en: "We are pleased to offer complimentary coffee ↗, orange juice ↗, and light snacks ↘.", vn: "Chúng tôi rất hân hạnh được phục vụ cà phê miễn phí, nước cam và đồ ăn nhẹ.", speechText: "We are pleased to offer complimentary coffee, orange juice, and light snacks." },
-          { speaker: "Passenger", en: "Could I have some coffee, please ↗?", vn: "Cho tôi một ly cà phê nhé?", speechText: "Could I have some coffee, please?" }
-        ]
-      },
-      examples: [
-        {
-          en: "I bought some apples, oranges, bananas, and milk.",
-          vn: "Tôi đã mua một ít táo, cam, chuối và sữa (Hết danh sách).",
-          ipa: "/aɪ bɔːt səm ˈæplz ↗ ˈɒrɪndʒɪz ↗ bəˈnɑːnəz ↗ ənd mɪlk ↘/",
-          marked: "I bought some <strong>APPLES</strong> ↗, <strong>ORANGES</strong> ↗, <strong>BANANAS</strong> ↗, and <strong>MILK</strong> ↘.",
-          speechText: "I bought some apples, oranges, bananas, and milk.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "We could visit London, Paris, Rome...",
-          vn: "Chúng ta có thể ghé London, Paris, Rome... (Liệt kê mở: còn nhiều nơi nữa chưa kể).",
-          ipa: "/wiː kʊd ˈvɪzɪt ˈlʌndən ↗ ˈpærɪs ↗ rəʊm ↗/",
-          marked: "We could visit <strong>LONDON</strong> ↗, <strong>PARIS</strong> ↗, <strong>ROME</strong> ↗...",
-          speechText: "We could visit London, Paris, Rome...",
-          speechPitch: 1.04,
-          speechRate: 0.88
-        }
-      ]
-    },
-    {
-      id: "rule_conditionals",
-      num: 8,
-      group: "combined",
-      title: "Mệnh Đề Phụ Mở Đầu (Introductory & Dependent Clauses)",
-      tonePattern: "Mệnh đề phụ Lên (↗ hoặc ↘↗) — Mệnh đề chính Xuống (↘)",
-      badge: "Cấu trúc ghép câu nâng cao",
-      ruleSummary: "Khi mệnh đề phụ thuộc (chỉ điều kiện If, thời gian When, nhượng bộ Although...) đứng trước: Lên giọng nhẹ để nối sang mệnh đề chính rồi hạ giọng kết thúc.",
-      diagram: "Dependent Clause ↗ / ↘↗  ,  Main Clause ───────────↘",
-      formula: "[If / When / Although + Clause ↗] , [Main Clause ↘]",
-      deepRationale: "Hiện tượng này gọi là 'Treo cao độ' (Suspension): người nói giữ cao độ lơ lửng ở giữa câu để giữ sự chú ý của người nghe, ngầm báo hiệu: 'Ý chính quan trọng nhất sắp xuất hiện ở vế sau, hãy chú ý nghe!'.",
-      vietnamesePitfalls: "Học viên hay hạ giọng ở cuối mệnh đề phụ If, khiến người nghe tưởng câu nói đã kết thúc và bất ngờ khi thí sinh nói tiếp vế sau.",
-      teacherTips: "Mẹo của cô Nguyệt: Dạy học viên coi dấu phẩy (,) như một bàn đạp nhảy: nhấc cao độ lên ở bàn đạp rồi đáp êm ái xuống đất ở cuối câu.",
-      contextualDialogue: {
-        title: "Hội thoại: Tư vấn khách hàng tại ngân hàng (Banking Advisory)",
-        context: "Chuyên viên tài chính tư vấn điều kiện mở thẻ tín dụng cho khách hàng.",
-        lines: [
-          { speaker: "Advisor", en: "If you open an account today ↗, you will receive a cash bonus of fifty dollars ↘.", vn: "Nếu quý khách mở tài khoản ngay hôm nay, quý khách sẽ nhận được khoản tiền thưởng 50 đô la.", speechText: "If you open an account today, you will receive a cash bonus of fifty dollars." },
-          { speaker: "Customer", en: "That sounds fantastic ↘! I would like to sign up now ↘.", vn: "Nghe tuyệt quá! Tôi muốn đăng ký ngay bây giờ.", speechText: "That sounds fantastic! I would like to sign up now." }
-        ]
-      },
-      examples: [
-        {
-          en: "If you study hard, you will pass the exam.",
-          vn: "Nếu bạn học chăm chỉ, bạn sẽ đỗ kỳ thi.",
-          ipa: "/ɪf juː ˈstʌdi hɑːd ↗ juː wɪl pɑːs ði ɪɡˈzæm ↘/",
-          marked: "If you study <strong>HARD</strong> ↗, you will pass the <strong>EXAM</strong> ↘.",
-          speechText: "If you study hard, you will pass the exam.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "Although it was raining, they still played football.",
-          vn: "Mặc dù trời mưa, họ vẫn chơi bóng đá.",
-          ipa: "/ɔːlˈðəʊ ɪt wɒz ˈreɪnɪŋ ↘↗ ðeɪ stɪl pleɪd ˈfʊtbɔːl ↘/",
-          marked: "Although it was <strong>RAINING</strong> ↘↗, they still played <strong>FOOTBALL</strong> ↘.",
-          speechText: "Although it was raining, they still played football.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "Before you leave, please turn off the lights.",
-          vn: "Trước khi rời đi, xin vui lòng tắt đèn.",
-          ipa: "/bɪˈfɔː juː liːv ↗ pliːz tɜːn ɒf ðə laɪts ↘/",
-          marked: "Before you <strong>LEAVE</strong> ↗, please turn off the <strong>LIGHTS</strong> ↘.",
-          speechText: "Before you leave, please turn off the lights.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        }
-      ]
-    },
-    {
-      id: "rule_numbers_series",
-      num: 9,
-      group: "combined",
-      title: "Chuỗi Số, Số Điện Thoại & Mã Số (Series of Numbers & Phone Numbers)",
-      tonePattern: "Lên giọng ở các cụm đầu (↗) — Hạ giọng ở cụm cuối (↘)",
-      badge: "Đặc sản TOEIC Part 1 (Collins Track 23)",
-      collinsTrack: "audio/collins/collins_numbers_lists.mp3",
-      collinsTrackTitle: "Collins Audio Track 01-02.23 (Series of Numbers)",
-      ruleSummary: "Khi đọc chuỗi số dài, số điện thoại hotline, mã chuyến bay hoặc thời gian, người bản xứ luôn chia nhỏ thành từng cụm tư duy (thought chunks): các cụm trước đều lên giọng (↗) báo hiệu số chưa kết thúc, chỉ cụm cuối cùng mới hạ giọng (↘) dứt khoát.",
-      diagram: "[Area Code ↗] ── [Prefix ↗] ──────── [Line Number ↘] (Đã hết số)",
-      formula: "[Cụm 1 ↗] – [Cụm 2 ↗] – [Cụm Cuối ↘]",
-      deepRationale: "Theo âm vị học quốc tế (J.C. Wells) và giáo trình Collins TOEIC (trang 23), cao độ hướng lên (Rising) biểu thị tính phi kết thúc (Non-finality). Khi người nghe nghe thấy '218 ↗' và '555 ↗', não bộ tự động hiểu thông tin vẫn đang tiếp diễn. Nếu bạn hạ giọng quá sớm ở giữa dãy số, người nghe sẽ ngỡ ngàng tưởng dãy số đã kết thúc và ghi chép thiếu thông tin.",
-      vietnamesePitfalls: "Học viên Việt Nam thường đọc dãy số như đọc số tiếng Việt: đọc đều đều từng số một ('hai... một... tám...') hoặc hạ giọng ngang phè ở từng số, khiến dãy số bị rời rạc, thiếu nhịp điệu và rất khó cho giám khảo/khách hàng ghi kịp.",
-      teacherTips: "Mẹo của cô Nguyệt: Hãy hướng dẫn học viên gõ nhịp: ngắt hơi nhẹ và đẩy cao độ lên sau mỗi dấu gạch ngang (hyphen), đến 4 số cuối cùng thì đọc liền một mạch và hạ giọng êm xuống đáy.",
-      contextualDialogue: {
-        title: "Hội thoại: Cung cấp số điện thoại tổng đài (Customer Service Hotline)",
-        context: "Nhân viên chăm sóc khách hàng cung cấp số liên lạc hỗ trợ theo chuẩn phân cụm quốc tế.",
-        lines: [
-          { speaker: "Customer", en: "Where can I contact if I have questions about my reservation ↘?", vn: "Tôi có thể liên hệ ở đâu nếu có thắc mắc về chỗ đặt trước?", speechText: "Where can I contact if I have questions about my reservation." },
-          { speaker: "Support Agent", en: "Our customer service number is 218 ↗ - 555 ↗ - 3675 ↘. Please call between nine and five ↘.", vn: "Số chăm sóc khách hàng của chúng tôi là 218 – 555 – 3675. Xin vui lòng gọi từ 9h đến 17h.", speechText: "Our customer service number is two one eight, five five five, three six seven five. Please call between nine and five." }
-        ]
-      },
-      examples: [
-        {
-          en: "Our new number is 218 - 555 - 3675.",
-          vn: "Số điện thoại mới của chúng tôi là 218 – 555 – 3675 (Trích đề Collins Track 23).",
-          ipa: "/aʊə njuː ˈnʌmbə z tuː wʌn eɪt ↗ faɪv faɪv faɪv ↗ θriː sɪks ˈsevn faɪv ↘/",
-          marked: "Our new number is <strong>218</strong> ↗ – <strong>555</strong> ↗ – <strong>3675</strong> ↘.",
-          speechText: "Our new number is two one eight, five five five, three six seven five.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "Flight VN 412 will depart from Gate 18.",
-          vn: "Chuyến bay VN 412 sẽ khởi hành từ Cổng số 18.",
-          ipa: "/flaɪt viː en fɔː wʌn tuː ↗ wɪl dɪˈpɑːt frəm ɡeɪt eɪˈtiːn ↘/",
-          marked: "Flight <strong>VN 412</strong> ↗ will depart from <strong>GATE 18</strong> ↘.",
-          speechText: "Flight VN four one two, will depart from Gate eighteen.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "Call toll-free at 1-800 - 456 - 7890.",
-          vn: "Hãy gọi miễn cước tại số 1-800 – 456 – 7890.",
-          ipa: "/kɔːl təʊl friː æt wʌn eɪt ˈhʌndrəd ↗ fɔː faɪv sɪks ↗ ˈsevn eɪt naɪn ˈzɪərəʊ ↘/",
-          marked: "Call toll-free at <strong>1-800</strong> ↗ – <strong>456</strong> ↗ – <strong>7890</strong> ↘.",
-          speechText: "Call toll-free at one eight hundred, four five six, seven eight nine zero.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        }
-      ]
-    },
-    {
-      id: "rule_signposts",
-      num: 10,
-      group: "rising",
-      title: "Từ Nối Dẫn Dắt & Trạng Từ Mở Đầu (Signposts & Transition Words)",
-      tonePattern: "Lên giọng nhẹ (↗) + Nghỉ ngắn — Mệnh đề chính Hạ giọng (↘)",
-      badge: "Bí quyết liên kết bài đọc (Collins Quick Tip)",
-      collinsTrack: "audio/collins/collins_signposts_clauses.mp3",
-      collinsTrackTitle: "Collins Audio Track 01-02.24 & Track 30 (Signposts & Transitions)",
-      ruleSummary: "Các từ nối chuyển ý liên kết câu hoặc đoạn văn (First, Next, Then, Additionally, However, Furthermore, In comparison, As a result, Finally, In conclusion) khi đứng đầu câu phải đọc với ngữ điệu HƯỚNG LÊN (Rising ↗) kèm một khoảng dừng ngắn (micro-pause) để thu hút sự chú ý trước khi hạ giọng ở mệnh đề chính.",
-      diagram: "[Signpost Word ↗,] ── [Khoảng Dừng Ngắn] ── [Mệnh Đề Chính ────────↘]",
-      formula: "[Transition Word ↗,] + [S + V + O ↘]",
-      deepRationale: "Theo giáo trình Collins TOEIC (trang 23), Signposts đóng vai trò là 'biển chỉ đường' (road signs) của bài đọc. Khi người nói nâng nhẹ cao độ và tạo khoảng dừng nhỏ sau từ nối, người nghe sẽ kịp định hình trong đầu: 'À, đây là một ý bổ sung / một sự tương phản / hoặc một kết luận quan trọng!'.",
-      vietnamesePitfalls: "Nhiều học viên đọc lướt qua từ nối hoặc nuốt chửng vào câu tiếp theo mà không dừng lại ('Additionallyallparticipants...'). Lỗi này khiến bài đọc trở nên dồn dập, mất nhịp điệu tự nhiên và làm người nghe không nắm được mạch logic của bài.",
-      teacherTips: "Mẹo của cô Nguyệt: Dạy học viên công thức 'Nhấc nhẹ ngón tay ở từ nối ↗, hạ tay xuống ở cuối câu ↘'. Sau từ nối luôn có dấu phẩy (,), hãy nhớ lấy hơi nhẹ 0.2 giây trước khi đọc tiếp.",
-      contextualDialogue: {
-        title: "Hội thoại: Hướng dẫn người tham dự hội nghị (Conference Signposting)",
-        context: "Ban tổ chức thông báo các bước hoạt động trong ngày cho các đại biểu tham dự.",
-        lines: [
-          { speaker: "Host", en: "First ↗, please pick up your badge at the desk ↘. Next ↗, join our keynote session in Hall A ↘.", vn: "Đầu tiên, vui lòng lấy thẻ đeo tại bàn lễ tân. Tiếp theo, hãy tham gia phiên phát biểu khai mạc tại Hội trường A.", speechText: "First, please pick up your badge at the desk. Next, join our keynote session in Hall A." },
-          { speaker: "Attendee", en: "Additionally ↗, will lunch be provided at noon ↗?", vn: "Ngoài ra, bữa trưa có được phục vụ vào lúc 12 giờ không ạ?", speechText: "Additionally, will lunch be provided at noon?" }
-        ]
-      },
-      examples: [
-        {
-          en: "Additionally, all attendees will receive a training handbook.",
-          vn: "Ngoài ra, tất cả người tham dự sẽ nhận được sổ tay đào tạo (Collins Quick Tip).",
-          ipa: "/əˈdɪʃənəli ↗ ɔːl ətɛnˈdiːz wɪl rɪˈsiːv ə ˈtreɪnɪŋ ˈhændbʊk ↘/",
-          marked: "<strong>ADDITIONALLY</strong> ↗, all attendees will receive a training <strong>HANDBOOK</strong> ↘.",
-          speechText: "Additionally, all attendees will receive a training handbook.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "In conclusion, we would like to thank all of our guests.",
-          vn: "Tóm lại, chúng tôi xin chân thành cảm ơn toàn thể quý quan khách (Collins Track 25).",
-          ipa: "/ɪn kənˈkluːʒən ↗ wiː wʊd laɪk tuː θæŋk ɔːl əv ˈaʊə ɡɛsts ↘/",
-          marked: "<strong>IN CONCLUSION</strong> ↗, we'd like to thank all of our <strong>GUESTS</strong> ↘.",
-          speechText: "In conclusion, we would like to thank all of our guests.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "However, if you buy tickets in advance, you will receive a discount.",
-          vn: "Tuy nhiên, nếu bạn mua vé trước, bạn sẽ được giảm giá (Collins Track 02).",
-          ipa: "/haʊˈɛvə ↗ ɪf juː baɪ ˈtɪkɪts ɪn ədˈvɑːns ↗ juː wɪl rɪˈsiːv ə ˈdɪskaʊnt ↘/",
-          marked: "<strong>HOWEVER</strong> ↗, if you buy tickets in <strong>ADVANCE</strong> ↗, you will receive a <strong>DISCOUNT</strong> ↘.",
-          speechText: "However, if you buy tickets in advance, you will receive a discount.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        }
-      ]
-    },
-    {
-      id: "rule_rhetorical_requests",
-      num: 11,
+      id: "rule_public_announcements",
+      num: 5,
       group: "falling",
-      title: "Lời Yêu Cầu Tu Từ & Kêu Gọi Chú Ý (Rhetorical Requests & Public Calls)",
-      tonePattern: "Hạ giọng dứt khoát ở cuối câu (Falling ↘) — Không lên giọng!",
-      badge: "Ngoại lệ bẫy kinh điển (Collins Track 06 & 24)",
+      title: "Thông Báo & Yêu Cầu Nơi Công Cộng (Public Announcements - TOEIC)",
+      tonePattern: "Hạ giọng dứt khoát ở cuối câu (Falling ↘)",
+      badge: "Đặc sản TOEIC Part 1 (Collins Track 06 & 24)",
       collinsTrack: "audio/collins/collins_banquet_model.mp3",
-      collinsTrackTitle: "Collins Audio Track 01-02.06 & Track 24 (Rhetorical Requests)",
-      ruleSummary: "Khi đưa ra lời yêu cầu lịch sự mang tính tu từ hoặc kêu gọi sự chú ý của đám đông (nơi người nghe không thực sự cần trả lời Yes/No mà chỉ cần lắng nghe hoặc trật tự), ngữ điệu BẮT BUỘC PHẢI HẠ GIỌNG ↘, tuyệt đối không được vểnh giọng lên cao ở chữ 'please'!",
-      diagram: "Could we have your attention, please ──────────────↘ (Lịch thiệp & Uy quyền)",
-      formula: "[Could / Can / May we please...] ────────↘",
-      deepRationale: "Theo sách Collins TOEIC (trang 24): 'When you make a polite request by asking a rhetorical question, or one that people don't really need to answer, intonation will fall.' Dù về ngữ pháp có hình thức câu hỏi trợ động từ (Could/Can), nhưng về bản chất chức năng đây là một chỉ thị điều hành (Directive/Command). Hạ giọng thể hiện tư thế của người làm chủ sân khấu, chững chạc và chuyên nghiệp.",
-      vietnamesePitfalls: "99% học viên cứ thấy từ 'Could I...' hoặc thấy từ 'please' ở cuối là tự động vểnh giọng vút lên cao ('attention please ↗?'). Lỗi này khiến lời thông báo trở nên van nài, thiếu tính quyền lực và làm mất điểm nặng trong các bài phát biểu/thông báo TOEIC.",
-      teacherTips: "Mẹo của cô Nguyệt: Hãy so sánh giữa 2 tình huống: 'Bạn mượn cây bút' (nhờ vả cá nhân: 'Could you pass me the pen, please ↗?' - cần người ta gật đầu đồng ý) KHÁC VỚI 'Cô giáo nhắc cả lớp trật tự' ('Can you please listen carefully ↘?' - không cần học sinh trả lời, chỉ cần trật tự).",
+      collinsTrackTitle: "Collins Track 01-02.06 & 24 (Public Announcements)",
+      ruleSummary: "Trong các bài phát thanh nơi công cộng (sân bay, nhà ga, sự kiện), dù câu có mở đầu bằng 'Can you please' hay 'Could I have', phát thanh viên luôn HẠ GIỌNG dứt khoát ở cuối câu để khẳng định tính nghi thức và yêu cầu mọi người tuân thủ.",
+      diagram: "[Can you please / Attention...] + ... + [Từ cuối ↘] .",
+      formula: "[Public Call / Protocol Notice ↘]",
+      deepRationale: "Theo giáo trình Collins TOEIC (trang 24): 'When you make a polite request by asking a rhetorical question, or one that people don't really need to answer, intonation will fall.' Dù có hình thức câu hỏi trợ động từ (Could/Can), nhưng về bản chất đây là một thông báo điều hành mang tính nghi thức. Hạ giọng thể hiện sự chuyên nghiệp tuyệt đối.",
+      vietnamesePitfalls: "99% học viên cứ thấy từ 'Could I...' hoặc thấy từ 'please' ở cuối là tự động vểnh giọng vút lên cao ('attention please ↗?'). Lỗi này khiến lời thông báo trở nên van nài, thiếu tính quyền lực và làm mất điểm nặng trong các bài đọc TOEIC.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy nhớ nguyên tắc: Nhờ vả cá nhân thì LÊN GIỌNG (↗); nhưng thông báo quy định tập thể thì HẠ GIỌNG (↘).",
       contextualDialogue: {
-        title: "Hội thoại: Thông báo trên xe buýt gặp sự cố (Bus Delay Announcement)",
-        context: "Tài xế thông báo cho hành khách về sự cố cơ khí và yêu cầu sự chú ý trật tự.",
+        title: "Hội thoại: Thông báo trên xe buýt (Public Transit Announcement)",
+        context: "Tài xế thông báo cho hành khách về sự cố và yêu cầu sự chú ý trật tự.",
         lines: [
-          { speaker: "Driver", en: "Could I have everyone's attention, please ↘? Due to mechanical problems ↗, this bus will now be taken out of service ↘.", vn: "Xin quý hành khách vui lòng chú ý. Do sự cố kỹ thuật, xe buýt này tạm thời ngừng phục vụ.", speechText: "Could I have everyone's attention, please. Due to mechanical problems, this bus will now be taken out of service." },
-          { speaker: "Passenger", en: "Excuse me ↗, how long will we have to wait for the shuttle ↘?", vn: "Xin lỗi, chúng tôi sẽ phải đợi xe trung chuyển bao lâu vậy ạ?", speechText: "Excuse me, how long will we have to wait for the shuttle." }
+          { speaker: "Driver", en: "Could I have everyone's attention, please ↘? Due to mechanical problems ↗, this bus will now be taken out of service ↘.", vn: "Xin quý hành khách vui lòng chú ý. Do sự cố kỹ thuật, xe buýt này tạm thời ngừng phục vụ.", audioUrl: "audio/intonation/rule_rule_rhetorical_requests_dial_0.mp3", speechText: "Could I have everyone's attention, please. Due to mechanical problems, this bus will now be taken out of service." },
+          { speaker: "Passenger", en: "Thank you for letting us know ↘.", vn: "Cảm ơn bác tài đã thông báo.", audioUrl: "audio/intonation/rule_rule_rhetorical_requests_dial_1.mp3", speechText: "Thank you for letting us know." }
         ]
       },
       examples: [
@@ -922,6 +636,7 @@ window.INTONATION_DATA = {
           vn: "Xin quý vị vui lòng chú ý (Trích đề Collins Track 06).",
           ipa: "/kʊd wiː hæv jɔːr əˈtɛnʃən pliːz ↘/",
           marked: "Could we have your attention, <strong>PLEASE</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_rhetorical_requests_ex_0.mp3",
           speechText: "Could we have your attention, please.",
           speechPitch: 0.94,
           speechRate: 0.88
@@ -931,6 +646,7 @@ window.INTONATION_DATA = {
           vn: "Xin các bạn vui lòng chú ý lắng nghe (Trích đề Collins Track 24).",
           ipa: "/kæn juː pliːz ˈlɪsn ˈkeəfʊli ↘/",
           marked: "Can you please listen <strong>CAREFULLY</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_rhetorical_requests_ex_1.mp3",
           speechText: "Can you please listen carefully.",
           speechPitch: 0.94,
           speechRate: 0.88
@@ -940,6 +656,7 @@ window.INTONATION_DATA = {
           vn: "Xin tất cả mọi người vui lòng chú ý (Trích đề Collins Track 41).",
           ipa: "/kʊd aɪ hæv ˈɛvrɪwʌnz əˈtɛnʃən pliːz ↘/",
           marked: "Could I have everyone's attention, <strong>PLEASE</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_rhetorical_requests_ex_2.mp3",
           speechText: "Could I have everyone's attention, please.",
           speechPitch: 0.94,
           speechRate: 0.88
@@ -947,53 +664,370 @@ window.INTONATION_DATA = {
       ]
     },
     {
-      id: "rule_punctuation_pausing",
-      num: 12,
-      group: "combined",
-      title: "Kỹ Thuật Ngắt Nghỉ Theo Dấu Câu & Cụm Tư Duy (Punctuation & Thought Groups)",
-      tonePattern: "Dấu phẩy/hai chấm: Nghỉ ngắn (0.3s) • Dấu chấm: Nghỉ trọn vẹn (0.7s)",
-      badge: "Kỹ thuật thở đều & Nhịp điệu bản xứ (Collins Track 29)",
-      collinsTrack: "audio/collins/collins_punctuation_pausing.mp3",
-      collinsTrackTitle: "Collins Audio Track 01-02.29 (Punctuation & Pausing)",
-      ruleSummary: "Dấu câu trong văn bản tiếng Anh chính là 'nốt nhạc nghỉ' của bài nói. Phải chủ động ngắt hơi sau dấu phẩy (,), dấu hai chấm (:), dấu chấm phẩy (;), và hạ trọn vẹn cao độ sau dấu chấm (.). Ngoài ra, bắt buộc phải dừng một nhịp sau các cụm giới từ mở đầu câu (According to..., By the time..., At this time,...).",
-      diagram: "[Cụm 1 ↗] , [nghỉ 0.3s] ── [Cụm 2 ↗] : [nghỉ 0.4s] ── [Cụm Cuối ↘] . [nghỉ 0.7s]",
-      formula: "[Cụm mở đầu ↗ , | ] + [Mệnh đề chính ↘ . || ]",
-      deepRationale: "Theo giáo trình Collins TOEIC (trang 24): Dấu phẩy và dấu chấm thể hiện nơi người viết muốn phân chia các khối tư duy (Thought Groups). Người bản xứ không bao giờ phát âm quá 7-8 từ mà không ngắt hơi. Ngắt nghỉ đúng nhịp giúp cơ thể lấy lại cột hơi bằng cơ hoành, giữ nhịp tim ổn định và tránh tình trạng cuống giọng khi đọc bài thi.",
-      vietnamesePitfalls: "Nhiều học viên sợ không đọc hết bài trong 45 giây nên đọc như 'bắn súng liên thanh', không dừng lại ở dấu chấm dấu phẩy. Kết quả là bị hụt hơi ở giữa câu, ngắt sai cụm làm sai lệch hoàn toàn ngữ nghĩa của bài đọc.",
-      teacherTips: "Mẹo của cô Nguyệt: Dạy học viên quy tắc vạch nhịp: Dấu phẩy đánh 1 gạch đứng (|) tương đương 1 nhịp chớp mắt; Dấu chấm đánh 2 gạch đứng (||) tương đương 1 nhịp thở bụng. Dừng lại đúng lúc giúp giọng nói vang, trầm và sang hơn rất nhiều.",
+      id: "rule_final_item",
+      num: 6,
+      group: "falling",
+      title: "Vế Chốt Cuối Cùng Của Danh Sách & Lựa Chọn (Final Item Falling)",
+      tonePattern: "Hạ giọng dứt điểm ở mục cuối cùng (Falling ↘)",
+      badge: "Tín hiệu đóng danh sách (Closed List)",
+      collinsTrack: "audio/collins/collins_closed_list.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.22 (Closed Lists)",
+      ruleSummary: "Dù trong chuỗi liệt kê nhiều món đồ hay câu hỏi lựa chọn 'A or B', mục cuối cùng BẮT BUỘC phải hạ giọng sâu để phát tín hiệu: 'Danh sách đã kết thúc, tôi đã nói xong!'",
+      diagram: "[Mục 1 ↗] , [Mục 2 ↗] ... and [MỤC CUỐI ↘] .",
+      formula: "[Item A ↗] , [Item B ↗] and [Final Item ↘]",
+      deepRationale: "Theo giáo trình Collins TOEIC (trang 22): Đây là bài kiểm tra cốt lõi của TOEIC Speaking Part 1. Nếu thí sinh tiếp tục lên giọng ở mục cuối, giám khảo sẽ trừ điểm vì câu bị hiểu thành 'danh sách mở dở dang' (Open list).",
+      vietnamesePitfalls: "Thí sinh bị đà 'lên giọng' cuốn đi, lên giọng ở mục 1, mục 2 rồi lên luôn ở mục cuối cùng (apples ↗, bananas ↗, and milk ↗?), khiến bài nói bị hụt hẫng và mất điểm ngữ điệu.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy coi chữ 'AND' hoặc 'OR' trước mục cuối cùng như một cái phanh hãm: Gặp 'and' là chuẩn bị cho giọng rơi thẳng xuống đáy!",
       contextualDialogue: {
-        title: "Hội thoại: Báo cáo tăng trưởng sản xuất (Executive Production Report)",
-        context: "Giám đốc điều hành báo cáo thành tích ấn tượng với sự ngắt nghỉ khúc chiết, đĩnh đạc.",
+        title: "Hội thoại: Tiếp viên phục vụ đồ uống trên máy bay",
+        context: "Tiếp viên hỏi hành khách lựa chọn thức uống với vế cuối hạ giọng dứt khoát.",
         lines: [
-          { speaker: "CEO", en: "According to the monthly report ↗, | our production has increased three hundred percent over the past five years ↘. ||", vn: "Theo báo cáo hàng tháng, sản lượng của chúng ta đã tăng trưởng 300% trong 5 năm qua.", speechText: "According to the monthly report, our production has increased three hundred percent over the past five years." },
-          { speaker: "Director", en: "There's only one group to thank for this: | our dedicated staff ↘. ||", vn: "Chỉ có một tập thể duy nhất xứng đáng nhận lời cảm ơn cho thành tích này: toàn thể nhân viên tận tụy của chúng ta.", speechText: "There is only one group to thank for this: our dedicated staff." }
+          { speaker: "Flight Attendant", en: "Would you like red wine ↗ or white wine ↘?", vn: "Quý khách muốn dùng rượu vang đỏ hay vang trắng ạ?", audioUrl: "audio/intonation/rule_rule_choice_dial_0.mp3", speechText: "Would you like red wine, or white wine." },
+          { speaker: "Passenger", en: "Red wine, please ↘. Thank you ↘.", vn: "Cho tôi vang đỏ nhé. Cảm ơn cô.", audioUrl: "audio/intonation/rule_rule_choice_dial_1.mp3", speechText: "Red wine, please. Thank you." }
         ]
       },
       examples: [
         {
+          en: "I bought some apples, oranges, bananas, and milk.",
+          vn: "Tôi đã mua táo, cam, chuối và sữa (Mục cuối cùng hạ giọng kết thúc).",
+          ipa: "/aɪ bɔːt səm ˈæplz ↗ ˈɒrɪndʒɪz ↗ bəˈnɑːnəz ↗ ənd mɪlk ↘/",
+          marked: "I bought some apples ↗, oranges ↗, bananas ↗, and <strong>MILK</strong> ↘.",
+          audioUrl: "audio/intonation/rule_rule_lists_ex_0.mp3",
+          speechText: "I bought some apples, oranges, bananas, and milk.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Would you prefer coffee or tea?",
+          vn: "Bạn muốn dùng cà phê hay trà? (Trà là lựa chọn cuối nên hạ giọng).",
+          ipa: "/wʊd juː prɪˈfɜː ˈkɒfi ↗ ɔː tiː ↘/",
+          marked: "Would you prefer coffee ↗ or <strong>TEA</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_choice_ex_0.mp3",
+          speechText: "Would you prefer coffee, or tea.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Are we traveling by train or by bus?",
+          vn: "Chúng ta sẽ đi bằng tàu hỏa hay xe buýt?",
+          ipa: "/ɑː wiː ˈtrævlɪŋ baɪ treɪn ↗ ɔː baɪ bʌs ↘/",
+          marked: "Are we traveling by train ↗ or by <strong>BUS</strong> ↘?",
+          audioUrl: "audio/intonation/rule_rule_choice_ex_1.mp3",
+          speechText: "Are we traveling by train, or by bus.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        }
+      ]
+    },
+
+    // =======================================================================
+    // NHÓM 2: CÁC TRƯỜNG HỢP LÊN GIỌNG (RISING TONE ↗)
+    // =======================================================================
+    {
+      id: "rule_yes_no",
+      num: 7,
+      group: "rising",
+      title: "Câu Hỏi Yes / No (Yes / No Questions)",
+      tonePattern: "Lên giọng ở cuối câu (Rising ↗)",
+      badge: "Quy tắc kinh điển mọi cấp độ",
+      collinsTrack: "audio/collins/collins_yes_no_rising.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.07 (Yes/No Questions Rising)",
+      ruleSummary: "Câu hỏi bắt đầu bằng trợ động từ (Do, Does, Did, Are, Is, Have, Has, Can, Will, Would...) luôn VÚT CAO GIỌNG ở âm tiết cuối cùng để hỏi thông tin đúng hay sai.",
+      diagram: "Trợ động từ + Chủ ngữ + ... + [Từ cuối ↗] ?",
+      formula: "[Aux + S + V ↗ ?]",
+      deepRationale: "Theo Peter Roach & Collins TOEIC (trang 18): Câu hỏi Yes/No là câu hỏi đóng, người nói thiếu thông tin xác nhận nên cao độ được kéo vút lên ở âm tiết mang trọng âm cuối cùng để trao quyền phát biểu cho đối phương.",
+      vietnamesePitfalls: "Học viên thường đọc ngang bè bè hoặc hạ giọng như câu khẳng định (ví dụ: 'Do you live in Hanoi ↘?'), khiến người nghe tưởng bạn đang lẩm bẩm khẳng định thay vì đặt câu hỏi.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy giữ đầu câu ở cao độ vừa phải, đến âm tiết cuối cùng thì nâng cao vòm họng và nhướng nhẹ chân mày để hỗ trợ đẩy cao độ lên.",
+      contextualDialogue: {
+        title: "Hội thoại: Lễ tân khách sạn đón khách (Hotel Check-in)",
+        context: "Lễ tân xác nhận thông tin đặt phòng với khách du lịch.",
+        lines: [
+          { speaker: "Receptionist", en: "Do you have a reservation with us tonight ↗?", vn: "Quý khách đã có đặt phòng trước tối nay chưa ạ?", audioUrl: "audio/intonation/rule_rule_yes_no_dial_0.mp3", speechText: "Do you have a reservation with us tonight?" },
+          { speaker: "Guest", en: "Yes ↘, I booked a deluxe room under the name of Smith ↘.", vn: "Vâng, tôi có đặt phòng deluxe dưới tên Smith.", audioUrl: "audio/intonation/rule_rule_yes_no_dial_1.mp3", speechText: "Yes, I booked a deluxe room under the name of Smith." }
+        ]
+      },
+      examples: [
+        {
+          en: "Do you live in New York?",
+          vn: "Bạn có sống ở New York không?",
+          ipa: "/duː juː lɪv ɪn njuː jɔːk ↗/",
+          marked: "Do you live in New <strong>YORK</strong> ↗?",
+          audioUrl: "audio/intonation/rule_rule_yes_no_ex_0.mp3",
+          speechText: "Do you live in New York?",
+          speechPitch: 1.14,
+          speechRate: 0.90
+        },
+        {
+          en: "Have you finished your homework?",
+          vn: "Con đã làm xong bài tập về nhà chưa?",
+          ipa: "/hæv juː ˈfɪnɪʃt jɔː ˈhəʊmwɜːk ↗/",
+          marked: "Have you finished your <strong>HOMEWORK</strong> ↗?",
+          audioUrl: "audio/intonation/rule_rule_yes_no_ex_1.mp3",
+          speechText: "Have you finished your homework?",
+          speechPitch: 1.14,
+          speechRate: 0.90
+        },
+        {
+          en: "Can you speak French?",
+          vn: "Bạn có nói được tiếng Pháp không?",
+          ipa: "/kæn juː spiːk frentʃ ↗/",
+          marked: "Can you speak <strong>FRENCH</strong> ↗?",
+          audioUrl: "audio/intonation/rule_rule_yes_no_ex_2.mp3",
+          speechText: "Can you speak French?",
+          speechPitch: 1.14,
+          speechRate: 0.90
+        }
+      ]
+    },
+    {
+      id: "rule_polite_requests",
+      num: 8,
+      group: "rising",
+      title: "Lời Nhờ Vả & Yêu Cầu Lịch Sự (Polite Requests)",
+      tonePattern: "Lên giọng mềm mỏng (Rising ↗)",
+      badge: "Sắc thái khiêm nhường & Tôn trọng",
+      ruleSummary: "Khi nhờ vả hoặc xin phép người khác giúp đỡ (Could you please..., Would you mind..., Excuse me...), bắt buộc LÊN GIỌNG ở từ cuối cùng để thể hiện sự nhã nhặn, tránh tạo cảm giác ra lệnh thô lỗ.",
+      diagram: "Could/Would you please + ... + [Từ cuối ↗] ?",
+      formula: "[Could / Would you... ↗ ?]",
+      deepRationale: "Trong văn hóa giao tiếp tiếng Anh, lên giọng thể hiện sự khiêm nhường, trao quyền quyết định đồng ý hay từ chối cho đối phương. Nếu hạ giọng sâu (Could you help me ↘), đối phương sẽ cảm thấy bị bạn ra lệnh ép buộc.",
+      vietnamesePitfalls: "Nhiều người nói 'Could you help me?' nhưng hạ giọng đục ở từ 'me ↘', khiến lời nhờ vả nghe như một mệnh lệnh trịch thượng.",
+      teacherTips: "Mẹo của cô Nguyệt: Khi nói lời nhờ vả, hãy mỉm cười ở từ cuối cùng! Nụ cười giúp khóe môi kéo sang hai bên và nâng thanh quản lên tự nhiên.",
+      contextualDialogue: {
+        title: "Hội thoại: Nhờ đồng nghiệp giúp đỡ tại văn phòng",
+        context: "Nhân viên nhờ đồng nghiệp xem qua bản hợp đồng một cách lịch thiệp.",
+        lines: [
+          { speaker: "Staff A", en: "Could you please review this contract for me ↗?", vn: "Cậu làm ơn xem qua bản hợp đồng này giúp tớ được không?", audioUrl: "audio/intonation/rule_rule_commands_requests_dial_0.mp3", speechText: "Could you please review this contract for me?" },
+          { speaker: "Staff B", en: "Sure thing ↘! I will look at it right away ↘.", vn: "Được chứ! Tớ sẽ xem ngay bây giờ.", audioUrl: "audio/intonation/rule_rule_commands_requests_dial_1.mp3", speechText: "Sure thing! I will look at it right away." }
+        ]
+      },
+      examples: [
+        {
+          en: "Could you please pass the salt?",
+          vn: "Bạn làm ơn chuyển giúp tôi lọ muối được không? (Nhờ vả lịch sự).",
+          ipa: "/kʊd juː pliːz pɑːs ðə sɔːlt ↗/",
+          marked: "Could you please pass the <strong>SALT</strong> ↗?",
+          audioUrl: "audio/intonation/rule_rule_commands_requests_ex_1.mp3",
+          speechText: "Could you please pass the salt?",
+          speechPitch: 1.14,
+          speechRate: 0.90
+        },
+        {
+          en: "Hold on a minute, please.",
+          vn: "Làm ơn giữ máy một chút nhé (Lịch sự, nhẹ nhàng).",
+          ipa: "/həʊld ɒn ə ˈmɪnɪt pliːz ↗/",
+          marked: "Hold on a minute, <strong>PLEASE</strong> ↗.",
+          audioUrl: "audio/intonation/rule_rule_commands_requests_ex_2.mp3",
+          speechText: "Hold on a minute, please.",
+          speechPitch: 1.12,
+          speechRate: 0.88
+        },
+        {
+          en: "Could you please review this contract for me?",
+          vn: "Cậu làm ơn xem qua bản hợp đồng này giúp tớ được không?",
+          ipa: "/kʊd juː pliːz rɪˈvjuː ðɪs ˈkɒntrækt fɔː miː ↗/",
+          marked: "Could you please review this contract for <strong>ME</strong> ↗?",
+          audioUrl: "audio/intonation/rule_rule_commands_requests_dial_0.mp3",
+          speechText: "Could you please review this contract for me?",
+          speechPitch: 1.14,
+          speechRate: 0.90
+        }
+      ]
+    },
+    {
+      id: "rule_tag_unsure",
+      num: 9,
+      group: "rising",
+      title: "Câu Hỏi Đuôi Khi Chưa Thực Sự Chắc (Tag Questions - Unsure)",
+      tonePattern: "Lên giọng ở phần đuôi (Rising ↗)",
+      badge: "Hỏi thật sự để lấy thông tin (Genuine Inquiry)",
+      ruleSummary: "Khi người nói THỰC SỰ CHƯA BIẾT câu trả lời và muốn hỏi đối phương thật lòng (tương đương một câu hỏi Yes/No), bắt buộc LÊN GIỌNG ở phần đuôi.",
+      diagram: "[Mệnh đề trần thuật] , [Trợ động từ + Đại từ ↗] ?",
+      formula: "[Statement] , [Tag ↗ ?]",
+      deepRationale: "Khi cao độ vút lên ở phần đuôi, người nghe lập tức nhận diện đây là một câu hỏi thật sự cần câu trả lời chứ không phải một lời nói đãi bôi xã giao.",
+      vietnamesePitfalls: "Khi thực sự muốn hỏi thông tin (ví dụ hỏi người khác có thấy ví tiền của mình không) mà lại hạ giọng ở đuôi, người nghe sẽ tưởng bạn đã tìm thấy rồi!",
+      teacherTips: "Mẹo của cô Nguyệt: Nếu trong lòng bạn đang băn khoăn và chưa biết chắc, hãy nhấc giọng cao lên ở trợ động từ và đại từ đuôi.",
+      contextualDialogue: {
+        title: "Hội thoại: Tìm kiếm đồ thất lạc (Looking for Keys)",
+        context: "Một người đang vội vã tìm chìa khóa xe của mình.",
+        lines: [
+          { speaker: "Person A", en: "You haven't seen my keys, have you ↗?", vn: "Cậu có thấy chùm chìa khóa của tớ đâu không đấy?", audioUrl: "audio/intonation/rule_rule_tag_questions_ex_1.mp3", speechText: "You haven't seen my keys, have you?" },
+          { speaker: "Person B", en: "Check on the kitchen table ↘. I saw them there earlier ↘.", vn: "Xem trên bàn bếp xem, hồi nãy tớ thấy ở đó đấy.", audioUrl: "audio/intonation/rule_rule_statements_ex_1.mp3", speechText: "Check on the kitchen table. I saw them there earlier." }
+        ]
+      },
+      examples: [
+        {
+          en: "You haven't seen my keys, have you?",
+          vn: "Cậu có thấy chìa khóa của tôi đâu không đấy? (Hỏi thật vì đang tìm chìa khóa).",
+          ipa: "/juː hævnt siːn maɪ kiːz hæv juː ↗/",
+          marked: "You haven't seen my keys, have <strong>YOU</strong> ↗?",
+          audioUrl: "audio/intonation/rule_rule_tag_questions_ex_1.mp3",
+          speechText: "You haven't seen my keys, have you?",
+          speechPitch: 1.15,
+          speechRate: 0.90
+        }
+      ]
+    },
+    {
+      id: "rule_incomplete_items",
+      num: 10,
+      group: "rising",
+      title: "Vế Liệt Kê Mở Đầu & Chuỗi Số (Incomplete Items & Number Series)",
+      tonePattern: "Lên giọng ở các vế phía trước (Rising ↗)",
+      badge: "Đặc sản TOEIC Part 1 (Collins Track 22 & 23)",
+      collinsTrack: "audio/collins/collins_numbers_lists.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.23 (Series of Numbers)",
+      ruleSummary: "Khi liệt kê danh sách hoặc đọc chuỗi số điện thoại, mã hiệu chuyến bay, các mục phía trước luôn LÊN GIỌNG để báo hiệu: 'Thông tin vẫn còn tiếp diễn, hãy chú ý lắng nghe!'",
+      diagram: "[Mục 1 ↗] , [Mục 2 ↗] ... [Cụm số 1 ↗] ── [Cụm số 2 ↗]",
+      formula: "[Item 1 ↗] , [Item 2 ↗] ... [Chưa kết thúc]",
+      deepRationale: "Theo Collins TOEIC (trang 22, 23): Người bản xứ nhóm các con số thành từng cụm 3-4 số và lên giọng ở cuối mỗi cụm để bộ não người nghe kịp ghi nhận từng khối thông tin.",
+      vietnamesePitfalls: "Học viên hay đọc chuỗi số một cách đều đều như đọc bảng cửu chương, khiến bài nói không có nhịp điệu và giám khảo rất khó theo dõi.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy ngắt chuỗi số điện thoại làm 3 cụm (3 số - 3 số - 4 số). Lên giọng ở 2 cụm đầu để tạo giai điệu chuẩn bản xứ.",
+      contextualDialogue: {
+        title: "Hội thoại: Cung cấp số điện thoại tổng đài",
+        context: "Nhân viên tổng đài xác nhận số điện thoại hotline hỗ trợ khách hàng.",
+        lines: [
+          { speaker: "Customer", en: "Where can I contact if I have questions about my reservation ↘?", vn: "Tôi có thể liên hệ ở đâu nếu có thắc mắc?", audioUrl: "audio/intonation/rule_rule_numbers_series_dial_0.mp3", speechText: "Where can I contact if I have questions about my reservation." },
+          { speaker: "Support Agent", en: "Our customer service number is 218 ↗ - 555 ↗ - 3675 ↘. Please call between nine and five ↘.", vn: "Số chăm sóc khách hàng của chúng tôi là 218 – 555 – 3675.", audioUrl: "audio/intonation/rule_rule_numbers_series_dial_1.mp3", speechText: "Our customer service number is two one eight, five five five, three six seven five. Please call between nine and five." }
+        ]
+      },
+      examples: [
+        {
+          en: "Our new number is 218 - 555 - 3675.",
+          vn: "Số điện thoại mới của chúng tôi là 218 – 555 – 3675 (Trích đề Collins Track 23).",
+          ipa: "/aʊə njuː ˈnʌmbə z tuː wʌn eɪt ↗ faɪv faɪv faɪv ↗ θriː sɪks ˈsevn faɪv ↘/",
+          marked: "Our new number is <strong>218</strong> ↗ – <strong>555</strong> ↗ – 3675 ↘.",
+          audioUrl: "audio/intonation/rule_rule_numbers_series_ex_0.mp3",
+          speechText: "Our new number is two one eight, five five five, three six seven five.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Flight VN 412 will depart from Gate 18.",
+          vn: "Chuyến bay VN 412 sẽ khởi hành từ Cổng số 18.",
+          ipa: "/flaɪt viː en fɔː wʌn tuː ↗ wɪl dɪˈpɑːt frəm ɡeɪt eɪˈtiːn ↘/",
+          marked: "Flight <strong>VN 412</strong> ↗ will depart from GATE 18 ↘.",
+          audioUrl: "audio/intonation/rule_rule_numbers_series_ex_1.mp3",
+          speechText: "Flight VN four one two, will depart from Gate eighteen.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "We could visit London, Paris, Rome...",
+          vn: "Chúng ta có thể ghé London, Paris, Rome... (Liệt kê mở: còn nhiều nơi nữa chưa kể).",
+          ipa: "/wiː kʊd ˈvɪzɪt ˈlʌndən ↗ ˈpærɪs ↗ rəʊm ↗/",
+          marked: "We could visit <strong>LONDON</strong> ↗, <strong>PARIS</strong> ↗, <strong>ROME</strong> ↗...",
+          audioUrl: "audio/intonation/rule_rule_lists_ex_1.mp3",
+          speechText: "We could visit London, Paris, Rome...",
+          speechPitch: 1.04,
+          speechRate: 0.88
+        }
+      ]
+    },
+    {
+      id: "rule_dependent_clauses",
+      num: 11,
+      group: "rising",
+      title: "Mệnh Đề Phụ Mở Đầu & Câu Điều Kiện (Introductory Clauses)",
+      tonePattern: "Lên giọng ở cuối mệnh đề phụ (Rising ↗)",
+      badge: "Cầu nối nhịp điệu câu phức",
+      ruleSummary: "Khi mệnh đề phụ chỉ điều kiện (If), thời gian (When, Before), nhượng bộ (Although) đứng đầu câu, luôn LÊN GIỌNG ở cuối mệnh đề phụ để treo thông tin, chuẩn bị bước vào mệnh đề chính.",
+      diagram: "[If / When / Although + Clause ↗] , [Main Clause ↘] .",
+      formula: "[Dependent Clause ↗] , [Main Clause ↘]",
+      deepRationale: "Mệnh đề phụ chỉ là điều kiện hoặc hoàn cảnh, ý chính chưa được giải phóng. Hiện tượng này gọi là 'Treo cao độ' (Suspension): người nói giữ cao độ lơ lửng ở giữa câu để kích thích sự chú ý của người nghe chờ đợi kết quả ở mệnh đề chính.",
+      vietnamesePitfalls: "Nhiều bạn hạ giọng quá sớm ở cuối mệnh đề phụ (If you study hard ↘), khiến người nghe tưởng câu đã kết thúc và bất ngờ khi thí sinh nói tiếp vế sau.",
+      teacherTips: "Mẹo của cô Nguyệt: Hãy giữ cao độ vểnh lên ở từ cuối của mệnh đề phụ như một dấu móc xích nối liền vào mệnh đề chính.",
+      contextualDialogue: {
+        title: "Hội thoại: Họp bàn giải pháp kinh doanh",
+        context: "Giám đốc đưa ra điều kiện tiên quyết cho đội ngũ tiếp thị.",
+        lines: [
+          { speaker: "Director", en: "If we increase our advertising budget next quarter ↗, what results can we expect ↘?", vn: "Nếu quý tới chúng ta tăng ngân sách quảng cáo, ta có thể kỳ vọng kết quả gì?", audioUrl: "audio/intonation/rule_rule_conditionals_dial_0.mp3", speechText: "If we increase our advertising budget next quarter, what results can we expect." },
+          { speaker: "Marketer", en: "If we invest wisely ↗, our market share will expand by twenty percent ↘.", vn: "Nếu đầu tư khôn ngoan, thị phần của chúng ta sẽ tăng 20%.", audioUrl: "audio/intonation/rule_rule_conditionals_dial_1.mp3", speechText: "If we invest wisely, our market share will expand by twenty percent." }
+        ]
+      },
+      examples: [
+        {
+          en: "If you study hard, you will pass the exam.",
+          vn: "Nếu bạn học chăm chỉ, bạn sẽ đỗ kỳ thi (Mệnh đề If lên giọng).",
+          ipa: "/ɪf juː ˈstʌdi hɑːd ↗ juː wɪl pɑːs ði ɪɡˈzæm ↘/",
+          marked: "If you study <strong>HARD</strong> ↗, you will pass the exam ↘.",
+          audioUrl: "audio/intonation/rule_rule_conditionals_ex_0.mp3",
+          speechText: "If you study hard, you will pass the exam.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Although it was raining, they still played football.",
+          vn: "Mặc dù trời mưa, họ vẫn chơi bóng đá.",
+          ipa: "/ɔːlˈðəʊ ɪt wɒz ˈreɪnɪŋ ↗ ðeɪ stɪl pleɪd ˈfʊtbɔːl ↘/",
+          marked: "Although it was <strong>RAINING</strong> ↗, they still played football ↘.",
+          audioUrl: "audio/intonation/rule_rule_conditionals_ex_1.mp3",
+          speechText: "Although it was raining, they still played football.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "Before you leave, please turn off the lights.",
+          vn: "Trước khi rời đi, xin vui lòng tắt đèn.",
+          ipa: "/bɪˈfɔː juː liːv ↗ pliːz tɜːn ɒf ðə laɪts ↘/",
+          marked: "Before you <strong>LEAVE</strong> ↗, please turn off the lights ↘.",
+          audioUrl: "audio/intonation/rule_rule_conditionals_ex_2.mp3",
+          speechText: "Before you leave, please turn off the lights.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        }
+      ]
+    },
+    {
+      id: "rule_signposts_pausing",
+      num: 12,
+      group: "rising",
+      title: "Từ Nối Dẫn Dắt & Ngắt Nghỉ Dấu Phẩy (Signposts & Punctuation)",
+      tonePattern: "Lên giọng nhẹ + Nghỉ ngắn (Rising ↗)",
+      badge: "Kỹ thuật thở đều bản xứ (Collins Track 29)",
+      collinsTrack: "audio/collins/collins_punctuation_pausing.mp3",
+      collinsTrackTitle: "Collins Audio Track 01-02.29 (Punctuation & Pausing)",
+      ruleSummary: "Các từ nối chuyển ý (However ↗, In addition ↗, According to ↗) và vị trí trước dấu phẩy luôn LÊN GIỌNG NHẸ rồi nghỉ một nhịp ngắn (0.3s) để thính giả chuẩn bị tiếp nhận thông điệp tiếp theo.",
+      diagram: "[Từ nối / Cụm tư duy ↗] , [nghỉ 0.3s] ── [Mệnh đề tiếp theo ↘]",
+      formula: "[Signpost ↗ , ] + [Next Thought Group]",
+      deepRationale: "Theo giáo trình Collins TOEIC (trang 24): Dấu phẩy phân tách các khối tư duy (Thought Groups). Lên giọng nhẹ ở từ nối giúp giữ nhịp thở bằng cơ hoành, tránh hụt hơi và tạo phong thái diễn thuyết đĩnh đạc.",
+      vietnamesePitfalls: "Đọc lướt qua từ nối hoặc không ngắt nghỉ sau dấu phẩy, khiến câu dài bị dính chùm vào nhau và mất điểm tiêu chí Lưu loát (Fluency).",
+      teacherTips: "Mẹo của cô Nguyệt: Coi dấu phẩy như một nốt nhạc hoa mỹ: vểnh nhẹ giọng lên rồi ngừng thở nửa giây trước khi sang ý mới.",
+      contextualDialogue: {
+        title: "Hội thoại: Báo cáo thường niên trước đại hội cổ đông",
+        context: "Diễn giả trình bày các chỉ số kinh doanh bằng các từ nối chuẩn mực.",
+        lines: [
+          { speaker: "Speaker", en: "First of all ↗, welcome everyone ↘. However ↗, we faced several supply chain challenges this year ↘.", vn: "Đầu tiên, xin chào mừng mọi người. Tuy nhiên, năm nay chúng ta gặp phải một số thách thức chuỗi cung ứng.", audioUrl: "audio/intonation/rule_rule_signposts_dial_0.mp3", speechText: "First of all, welcome everyone. However, we faced several supply chain challenges this year." },
+          { speaker: "Investor", en: "According to the financial statement ↗, your net revenue still increased significantly ↘.", vn: "Theo báo cáo tài chính, doanh thu thuần vẫn tăng trưởng đáng kể.", audioUrl: "audio/intonation/rule_rule_signposts_dial_1.mp3", speechText: "According to the financial statement, your net revenue still increased significantly." }
+        ]
+      },
+      examples: [
+        {
+          en: "Additionally, all attendees will receive a training handbook.",
+          vn: "Ngoài ra, tất cả người tham dự sẽ nhận được sổ tay đào tạo (Collins Quick Tip).",
+          ipa: "/əˈdɪʃənəli ↗ ɔːl ətɛnˈdiːz wɪl rɪˈsiːv ə ˈtreɪnɪŋ ˈhændbʊk ↘/",
+          marked: "<strong>ADDITIONALLY</strong> ↗, all attendees will receive a training handbook ↘.",
+          audioUrl: "audio/intonation/rule_rule_signposts_ex_0.mp3",
+          speechText: "Additionally, all attendees will receive a training handbook.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
+          en: "In conclusion, we would like to thank all of our guests.",
+          vn: "Tóm lại, chúng tôi xin chân thành cảm ơn toàn thể quý quan khách (Collins Track 25).",
+          ipa: "/ɪn kənˈkluːʒən ↗ wiː wʊd laɪk tuː θæŋk ɔːl əv ˈaʊə ɡɛsts ↘/",
+          marked: "<strong>IN CONCLUSION</strong> ↗, we'd like to thank all of our guests ↘.",
+          audioUrl: "audio/intonation/rule_rule_signposts_ex_1.mp3",
+          speechText: "In conclusion, we would like to thank all of our guests.",
+          speechPitch: 1.0,
+          speechRate: 0.88
+        },
+        {
           en: "According to the monthly report, our production has increased 300%.",
           vn: "Theo báo cáo hàng tháng, sản lượng của chúng ta đã tăng 300% (Collins Track 29).",
           ipa: "/əˈkɔːdɪŋ tuː ðə ˈmʌnθli rɪˈpɔːt ↗ ˈaʊə prəˈdʌkʃən hæz ɪnˈkriːst θriː ˈhʌndrəd pəˈsɛnt ↘/",
-          marked: "According to the monthly report ↗, | our production has increased <strong>300%</strong> ↘. ||",
+          marked: "According to the monthly report <strong>↗</strong>, | our production has increased 300% ↘. ||",
+          audioUrl: "audio/intonation/rule_rule_punctuation_pausing_ex_0.mp3",
           speechText: "According to the monthly report, our production has increased three hundred percent.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "Due to severe weather conditions, all morning flights have been delayed.",
-          vn: "Do điều kiện thời tiết xấu, tất cả chuyến bay buổi sáng đã bị hoãn.",
-          ipa: "/djuː tuː sɪˈvɪə ˈwɛðə kənˈdɪʃənz ↗ ɔːl ˈmɔːnɪŋ flaɪts hæv biːn dɪˈleɪd ↘/",
-          marked: "Due to severe weather conditions ↗, | all morning flights have been <strong>DELAYED</strong> ↘. ||",
-          speechText: "Due to severe weather conditions, all morning flights have been delayed.",
-          speechPitch: 1.0,
-          speechRate: 0.88
-        },
-        {
-          en: "By the time we got to the airport, the plane had already departed.",
-          vn: "Vào thời điểm chúng tôi đến sân bay, máy bay đã khởi hành rồi (Collins Track 30).",
-          ipa: "/baɪ ðə taɪm wiː ɡɒt tuː ði ˈeəpɔːt ↗ ðə pleɪn hæd ɔːlˈrɛdi dɪˈpɑːtɪd ↘/",
-          marked: "By the time we got to the airport ↗, | the plane had already <strong>DEPARTED</strong> ↘. ||",
-          speechText: "By the time we got to the airport, the plane had already departed.",
           speechPitch: 1.0,
           speechRate: 0.88
         }

@@ -4196,7 +4196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     // ------------------------------------------------------------------------
-    // TAB 2: QUY TẮC LÊN & XUỐNG GIỌNG (3 NHÓM ĐỊNH HƯỚNG NGỮ ĐIỆU)
+    // TAB 2: QUY TẮC LÊN & XUỐNG GIỌNG (2 NHÓM: XUỐNG GIỌNG & LÊN GIỌNG)
     // ------------------------------------------------------------------------
     renderRulesTab(container) {
       const rules = window.INTONATION_DATA.rules;
@@ -4206,26 +4206,18 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           key: "falling",
           icon: "📉",
-          title: "Nhóm 1: Nhóm Xuống Giọng (Falling Tone ↘)",
-          badge: "4 Quy Tắc (Quy Tắc 1, 2, 6, 11)",
-          desc: "Đặc trưng: Hạ giọng dứt khoát ở âm tiết mang trọng âm cuối cùng. Dùng cho câu trần thuật, câu hỏi Wh-, câu mệnh lệnh và lời yêu cầu tu từ công cộng (Collins Track 06 & 24). Thể hiện sự chắc chắn, kết thúc trọn vẹn thông tin.",
+          title: "1. Nhóm Xuống Giọng (Falling Tone ↘)",
+          badge: "6 Quy Tắc (Quy Tắc 1 – 6)",
+          desc: "Bản chất: Hạ sâu cao độ ở âm tiết mang trọng âm cuối cùng để báo hiệu sự dứt khoát, chắc chắn, thông tin đã hoàn tất trọn vẹn hoặc mệnh lệnh.",
           classSuffix: "group-falling"
         },
         {
           key: "rising",
           icon: "📈",
-          title: "Nhóm 2: Nhóm Lên Giọng (Rising Tone ↗)",
-          badge: "3 Quy Tắc (Quy Tắc 3, 5, 10)",
-          desc: "Đặc trưng: Vút cao giọng ở âm tiết cuối cùng. Dùng cho câu hỏi Yes/No, câu hỏi đuôi khi chưa chắc chắn và các từ nối dẫn dắt bài đọc (Collins Quick Tip). Thể hiện sự tò mò, cần xác nhận hoặc báo hiệu thông tin còn tiếp diễn.",
+          title: "2. Nhóm Lên Giọng (Rising Tone ↗)",
+          badge: "6 Quy Tắc (Quy Tắc 7 – 12)",
+          desc: "Bản chất: Vút cao giọng ở âm tiết cuối cùng để thể hiện sự tò mò, cần người nghe xác nhận đúng/sai, lời nhờ vả lịch thiệp hoặc báo hiệu thông tin còn tiếp diễn.",
           classSuffix: "group-rising"
-        },
-        {
-          key: "combined",
-          icon: "🔄",
-          title: "Nhóm 3: Nhóm Phối Hợp (Lên Trước ↗ — Xuống Sau ↘)",
-          badge: "5 Quy Tắc (Quy Tắc 4, 7, 8, 9, 12)",
-          desc: "Đặc trưng: Lên giọng ở các vế mở đầu hoặc liệt kê, rồi hạ giọng dứt khoát ở vế chốt cuối cùng. Đây là quy tắc trọng tâm của bài thi TOEIC Speaking Questions 1–2 (Liệt kê đồ vật, chuỗi số điện thoại Collins Track 23, câu điều kiện, câu hỏi lựa chọn 'OR' và kỹ thuật ngắt nghỉ dấu câu Collins Track 29).",
-          classSuffix: "group-combined"
         }
       ];
 
@@ -4238,7 +4230,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span>🎯</span> 12 Quy Tắc Lên &amp; Xuống Giọng Theo Kiểu Câu
           </h3>
           <p style="font-size:0.88rem; color:#475569; line-height:1.6;">
-            Toàn bộ 12 quy tắc ngữ điệu thực chiến chuẩn quốc tế (Cambridge, Oxford) và luyện thi TOEIC Speaking (Collins) được phân chia khoa học thành <strong>3 nhóm định hướng ngữ điệu trực quan</strong>. Học viên chỉ cần nắm chắc bản chất <em>khi nào xuống (↘)</em>, <em>khi nào lên (↗)</em> và <em>khi nào phối hợp (↗↘)</em> là có thể làm chủ giai điệu câu tự nhiên nhất.
+            Hệ thống 12 quy tắc ngữ điệu thực chiến chuẩn quốc tế (Cambridge, Oxford) và luyện thi TOEIC Speaking (Collins) được chia rành mạch thành <strong>2 nhóm định hướng ngữ điệu trực quan</strong>: <em>Nhóm Xuống Giọng (Falling ↘)</em> và <em>Nhóm Lên Giọng (Rising ↗)</em>. Giúp học viên nắm chắc bản chất, không bị rối và ứng dụng chuẩn xác vào giao tiếp cũng như phòng thi.
           </p>
         </div>
 
@@ -4248,13 +4240,10 @@ document.addEventListener("DOMContentLoaded", () => {
             <span>🌟</span> Tất Cả (12 Quy Tắc)
           </button>
           <button class="rule-filter-btn ${filter === 'falling' ? 'active' : ''}" data-filter="falling" onclick="IntonationManager.filterRules('falling', this)">
-            <span>📉</span> 1. Nhóm Xuống Giọng (4)
+            <span>📉</span> 1. Nhóm Xuống Giọng (6)
           </button>
           <button class="rule-filter-btn ${filter === 'rising' ? 'active' : ''}" data-filter="rising" onclick="IntonationManager.filterRules('rising', this)">
-            <span>📈</span> 2. Nhóm Lên Giọng (3)
-          </button>
-          <button class="rule-filter-btn ${filter === 'combined' ? 'active' : ''}" data-filter="combined" onclick="IntonationManager.filterRules('combined', this)">
-            <span>🔄</span> 3. Nhóm Phối Hợp ↗↘ (5)
+            <span>📈</span> 2. Nhóm Lên Giọng (6)
           </button>
         </div>
       `;
@@ -4292,9 +4281,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (groupKey === "rising") {
         numBg = "#FAF5FF"; numColor = "#7C3AED";
         pillBg = "#FAF5FF"; pillColor = "#7E22CE"; pillBorder = "#E9D5FF";
-      } else if (groupKey === "combined") {
-        numBg = "#F0FDF4"; numColor = "#15803D";
-        pillBg = "#F0FDF4"; pillColor = "#15803D"; pillBorder = "#BBF7D0";
       }
 
       return `
