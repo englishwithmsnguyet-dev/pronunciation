@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lexend+Deca:wght@600;700;800&family=Charis+SIL:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css?v=4.9">
 </head>
 <body>
@@ -647,34 +648,51 @@
        MODAL ĐĂNG NHẬP HỌ TÊN & THEO DÕI QUA GOOGLE FORMS
        ========================================================================== -->
   <div class="login-modal-overlay" id="loginModalOverlay">
-    <div class="login-modal-card">
-      <div class="login-modal-banner">
-        <div class="login-avatar-ring">
-          <span class="login-avatar-emoji">👩‍🏫</span>
+    <div class="login-card-custom">
+      <!-- Miss Nguyet Avatar Brand Ring -->
+      <div class="login-teacher-avatar-wrap">
+        <div class="login-teacher-halo">
+          <img src="miss_nguyet.jpg" alt="Miss Nguyet" class="login-teacher-avatar">
         </div>
-        <h2 class="login-modal-title">Chào Mừng Bạn Đến Với</h2>
-        <div class="login-brand-name">PRONUNCIATION WITH MISS NGUYET</div>
-        <p class="login-modal-desc">Vui lòng nhập <strong>Họ và Tên</strong> của bạn để bắt đầu luyện tập ngữ âm và để cô theo dõi tiến độ nhé!</p>
+        <span class="login-teacher-badge">
+          <i class="fa-solid fa-certificate"></i> LEAD INSTRUCTOR
+        </span>
       </div>
 
-      <form class="login-form-body" id="loginForm" onsubmit="window.handleLoginSubmit(event)">
-        <div class="login-field-group">
-          <label for="inputFullName" class="login-label">
-            <span>Họ và tên của bạn:</span>
-            <span class="badge-required">Bắt buộc</span>
+      <div class="login-brand-tag">
+        <i class="fa-solid fa-graduation-cap"></i> Welcome to Miss Nguyet's Class!
+      </div>
+      <div class="login-course-title">PRONUNCIATION WITH MISS NGUYET</div>
+      <h2 class="login-title-custom">NHẬP THÔNG TIN<br/>ĐỂ BẮT ĐẦU HỌC 🚀</h2>
+
+      <form id="loginForm" onsubmit="window.handleLoginSubmit(event)">
+        <div class="input-group-custom">
+          <label for="inputFullName">
+            <i class="fa-solid fa-user-pen" style="color: #6366f1;"></i> HỌ VÀ TÊN HỌC VIÊN:
           </label>
-          <div class="input-with-icon">
-            <span class="input-icon">✍️</span>
-            <input 
-              type="text" 
-              id="inputFullName" 
-              class="login-text-input" 
-              placeholder="Nhập họ và tên của bạn..." 
-              autocomplete="name" 
-              required 
-            />
-          </div>
+          <input 
+            type="text" 
+            id="inputFullName" 
+            placeholder="Nhập họ và tên học viên..." 
+            autocomplete="name" 
+            required 
+          />
         </div>
+
+        <button type="submit" class="btn-login-custom" id="btnSubmitLogin">
+          <span>BẮT ĐẦU HỌC</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="login-footer-signature">
+          <a href="https://www.facebook.com/nguyetpham28" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+            <span>ENGLISH WITH MISS NGUYET</span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
 
         <div class="login-actions-row">
           <button type="submit" class="btn-submit-login" id="btnSubmitLogin">
