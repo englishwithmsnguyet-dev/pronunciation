@@ -5151,7 +5151,11 @@ document.addEventListener("DOMContentLoaded", () => {
               <div style="font-family:var(--font-heading); font-weight:800; font-size:1.05rem;">
                 ${currentPractice.title}
               </div>
-              <div style="display:flex; align-items:center; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <!-- Nút Bật/Tắt Rê Chuột Đọc Từ -->
+                <button id="toggleHoverSpeakBtn" style="background:${this.hoverSpeakEnabled !== false ? '#EFF6FF' : '#F8FAFC'}; color:${this.hoverSpeakEnabled !== false ? '#1D4ED8' : '#64748B'}; border:1px solid ${this.hoverSpeakEnabled !== false ? '#93C5FD' : '#CBD5E1'}; padding:6px 12px; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; gap:6px; transition:all 0.2s;" onclick="IntonationManager.toggleHoverSpeak()" title="Bật/Tắt tính năng rê chuột vào từ bất kỳ để nghe phát âm riêng từ đó">
+                  <span>${this.hoverSpeakEnabled !== false ? '🔊' : '🔇'}</span> Rê Chuột Đọc Từ: <strong>${this.hoverSpeakEnabled !== false ? 'BẬT' : 'TẮT'}</strong>
+                </button>
                 <!-- Chuyển đổi chế độ: Clean đề thi vs Ký hiệu ngữ điệu -->
                 <button style="background:${this.practiceMode === 'clean' ? '#FFFFFF' : 'rgba(255,255,255,0.2)'}; color:${this.practiceMode === 'clean' ? '#1E3A8A' : '#FFFFFF'}; border:none; padding:6px 14px; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;" onclick="IntonationManager.setPracticeMode('clean')">
                   📄 Đề Thi Chuẩn (ETS Mode)
@@ -5214,8 +5218,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span><span class="tone-pill-fall">↘</span> Xuống giọng (Fall)</span>
                 <span><span class="pause-pill-light">/</span> Ngắt nhẹ (0.3s)</span>
                 <span><span class="pause-pill-heavy">//</span> Ngắt trọn vẹn (0.7s)</span>
+                <span style="margin-left:auto; color:#2563EB; font-weight:600;">💡 Rê chuột vào từ để nghe phát âm</span>
               </div>
-            ` : ""}
+            ` : `
+              <div style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:8px 20px; font-size:0.78rem; color:#64748B; display:flex; align-items:center; justify-content:flex-end;">
+                <span style="color:#2563EB; font-weight:600;">💡 Rê chuột vào từ để nghe phát âm</span>
+              </div>
+            `}
           </div>
 
           <!-- PHÂN TÍCH CHI TIẾT TỪNG CÂU & HƯỚNG DẪN SƯ PHẠM (SENTENCE-BY-SENTENCE BREAKDOWN) -->
@@ -5896,32 +5905,81 @@ document.addEventListener("DOMContentLoaded", () => {
     currentKaraokeIdx: -1,
     currentPracticePlaying: null,
     currentPracticeRate: 1.0,
+    hoverSpeakEnabled: true,
+    hoverTimer: null,
+    currentHoveredEl: null,
 
-    selectPractice(practiceId) {
-      AudioEngine.stop();
-      this.clearKaraokeHighlight();
-      this.currentPracticePlaying = null;
-      this.selectedPracticeId = practiceId;
-      this.stopExamTimer();
+    toggleHoverSpeak() {
+      this.hoverSpeakEnabled = !this.hoverSpeakEnabled;
+      this.cancelWordPronounce();
       this.render();
     },
 
-    setPracticeMode(mode) {
-      this.practiceMode = mode;
-      const prevKaraoke = this.currentKaraokeIdx;
-      this.render();
-      if (prevKaraoke >= 0) {
-        setTimeout(() => this.setKaraokeHighlight(prevKaraoke), 30);
-      }
+    wrapWordsForHover(html) {
+      if (!html) return "";
+      const parts = html.split(/(<[^>]+>)/g);
+      return parts.map(part => {
+        if (part.startsWith("<") && part.endsWith(">")) {
+          return part;
+        }
+        return part.replace(/([a-zA-Z0-9’'-]+)/g, (match) => {
+          const cleanWord = match.replace(/[’']/g, "'");
+          const safeData = cleanWord.replace(/"/g, '&quot;');
+          return `<span class="hover-word" data-word="${safeData}" onmouseenter="IntonationManager.queueWordPronounce(this)" onmouseleave="IntonationManager.cancelWordPronounce()" onclick="IntonationManager.playHoverWord(this)">${match}</span>`;
+        });
+      }).join("");
     },
 
     renderPracticePassage(p) {
       if (!p || !p.chunkedSentences) return p.rawText || "";
       const isClean = this.practiceMode === 'clean';
       return p.chunkedSentences.map((s, sIdx) => {
-        const content = isClean ? s.speechText : (s.markedHtml || s.text);
-        return `<span class="passage-sentence" id="passage-sent-${sIdx}" data-sent-idx="${sIdx}" onclick="IntonationManager.playPracticeSentence('${p.id}', ${sIdx})" title="Bấm để nghe riêng câu này">${content}</span>`;
+        const rawContent = isClean ? s.speechText : (s.markedHtml || s.text);
+        const wrapped = this.wrapWordsForHover(rawContent);
+        return `<span class="passage-sentence" id="passage-sent-${sIdx}" data-sent-idx="${sIdx}">${wrapped}</span>`;
       }).join(" ");
+    },
+
+    queueWordPronounce(targetEl) {
+      this.cancelWordPronounce();
+      if (!this.hoverSpeakEnabled) return;
+      if (!targetEl || !targetEl.dataset || !targetEl.dataset.word) return;
+
+      // Không phát đè nếu audio toàn bài đang phát
+      if (AudioEngine.currentAudio && !AudioEngine.currentAudio.paused && this.currentPracticePlaying) {
+        return;
+      }
+
+      this.currentHoveredEl = targetEl;
+      targetEl.classList.add("hover-active-word");
+
+      this.hoverTimer = setTimeout(() => {
+        this.playHoverWord(targetEl);
+      }, 240);
+    },
+
+    cancelWordPronounce() {
+      if (this.hoverTimer) {
+        clearTimeout(this.hoverTimer);
+        this.hoverTimer = null;
+      }
+      if (this.currentHoveredEl) {
+        this.currentHoveredEl.classList.remove("hover-active-word");
+        this.currentHoveredEl = null;
+      }
+    },
+
+    playHoverWord(targetEl) {
+      if (!targetEl) return;
+      const word = typeof targetEl === "string" ? targetEl : (targetEl.dataset ? targetEl.dataset.word : "");
+      if (!word) return;
+
+      if (targetEl.classList) {
+        targetEl.classList.add("hover-playing-word");
+        setTimeout(() => targetEl.classList.remove("hover-playing-word"), 600);
+      }
+
+      AudioEngine.playIntonationAudio(null, word, 1.0, 0.88, targetEl);
     },
 
     setKaraokeHighlight(activeIdx) {

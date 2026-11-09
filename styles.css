@@ -4889,6 +4889,36 @@ button, select, input {
   /* Giữ nguyên font-weight để không làm co giãn chữ / nhảy dòng văn bản */
 }
 
+/* Word hover-to-pronounce styles */
+.hover-word {
+  display: inline;
+  padding: 1px 3px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.hover-word:hover,
+.hover-word.hover-active-word {
+  background-color: #DBEAFE !important; /* Soft sky blue */
+  color: #1D4ED8 !important;
+  box-shadow: 0 0 0 1px #93C5FD !important;
+}
+
+.hover-word.hover-playing-word {
+  background-color: #BFDBFE !important; /* Richer blue during audio pulse */
+  color: #1E40AF !important;
+  box-shadow: 0 0 0 2px #3B82F6 !important;
+}
+
+/* Khi câu đang sáng vàng (karaoke), rê chuột vào từ sẽ có màu vàng cam tương phản */
+.passage-sentence.active-karaoke .hover-word:hover,
+.passage-sentence.active-karaoke .hover-word.hover-active-word {
+  background-color: #FDE047 !important;
+  color: #713F12 !important;
+  box-shadow: 0 0 0 1px #CA8A04 !important;
+}
+
 .practice-chunk-row.active-karaoke {
   background: #EFF6FF !important; /* Soft royal blue highlight */
   border-color: #3B82F6 !important;
