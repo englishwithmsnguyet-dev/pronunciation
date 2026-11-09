@@ -5909,6 +5909,26 @@ document.addEventListener("DOMContentLoaded", () => {
     hoverTimer: null,
     currentHoveredEl: null,
 
+    selectPractice(practiceId) {
+      AudioEngine.stop();
+      this.clearKaraokeHighlight();
+      this.cancelWordPronounce();
+      this.currentPracticePlaying = null;
+      this.selectedPracticeId = practiceId;
+      this.stopExamTimer();
+      this.render();
+    },
+
+    setPracticeMode(mode) {
+      this.practiceMode = mode;
+      const prevKaraoke = this.currentKaraokeIdx;
+      this.cancelWordPronounce();
+      this.render();
+      if (prevKaraoke >= 0) {
+        setTimeout(() => this.setKaraokeHighlight(prevKaraoke), 30);
+      }
+    },
+
     toggleHoverSpeak() {
       this.hoverSpeakEnabled = !this.hoverSpeakEnabled;
       this.cancelWordPronounce();
@@ -5925,7 +5945,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return part.replace(/([a-zA-Z0-9’'-]+)/g, (match) => {
           const cleanWord = match.replace(/[’']/g, "'");
           const safeData = cleanWord.replace(/"/g, '&quot;');
-          return `<span class="hover-word" data-word="${safeData}" onmouseenter="IntonationManager.queueWordPronounce(this)" onmouseleave="IntonationManager.cancelWordPronounce()" onclick="IntonationManager.playHoverWord(this)">${match}</span>`;
+          return `<span class="hover-word" data-word="${safeData}" onmouseenter="IntonationManager.queueWordPronounce(this)" onmouseleave="IntonationManager.cancelWordPronounce()" onclick="IntonationManager.playHoverWord(this, event)">${match}</span>`;
         });
       }).join("");
     },
@@ -5936,7 +5956,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return p.chunkedSentences.map((s, sIdx) => {
         const rawContent = isClean ? s.speechText : (s.markedHtml || s.text);
         const wrapped = this.wrapWordsForHover(rawContent);
-        return `<span class="passage-sentence" id="passage-sent-${sIdx}" data-sent-idx="${sIdx}">${wrapped}</span>`;
+        return `<span class="passage-sentence" id="passage-sent-${sIdx}" data-sent-idx="${sIdx}" onclick="IntonationManager.playPracticeSentence('${p.id}', ${sIdx})">${wrapped}</span>`;
       }).join(" ");
     },
 
@@ -5969,7 +5989,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
 
-    playHoverWord(targetEl) {
+    playHoverWord(targetEl, ev) {
+      if (ev && typeof ev.stopPropagation === "function") {
+        ev.stopPropagation();
+      }
       if (!targetEl) return;
       const word = typeof targetEl === "string" ? targetEl : (targetEl.dataset ? targetEl.dataset.word : "");
       if (!word) return;
