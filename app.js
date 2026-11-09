@@ -430,7 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           this.currentAudio = this.intonationAudio;
           this.currentAudio.src = audioUrl;
-          this.currentAudio.playbackRate = state.speed || 1.0;
+          this.currentAudio.playbackRate = (typeof customRate === 'number' && customRate > 0) ? customRate : (state.speed || 1.0);
 
           // Resume Web Audio Context nếu đang suspended
           if (this.audioCtx && this.audioCtx.state === "suspended") {
@@ -5135,8 +5135,11 @@ document.addEventListener("DOMContentLoaded", () => {
               <a href="https://drive.google.com/drive/folders/1sAxlOJmUrJdbr0dnvxCMQae2K2Rc0ugV?usp=sharing" target="_blank" rel="noopener noreferrer" style="background:#FFFFFF; color:#166534; border:1px solid #86EFAC; padding:9px 16px; border-radius:8px; font-weight:700; font-size:0.85rem; text-decoration:none; display:flex; align-items:center; gap:6px; transition:all 0.2s;" title="Mở thư mục Google Drive tải 4 file MP3">
                 <span>📁</span> Tải 4 File Google Drive
               </a>
-              <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(22,163,74,0.35);" onclick="AudioEngine.playIntonationAudio('${currentPractice.audioUrl}', null, 1.0, 1.0, this)" title="Nghe toàn bộ bài đọc mẫu từ băng gốc Collins">
-                <span>▶️</span> Nghe Băng Gốc
+              <button class="btn-dialogue-play" style="background:#0EA5E9; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(14,165,233,0.35);" onclick="AudioEngine.playIntonationAudio('${currentPractice.audioUrl}', null, 1.0, 0.80, this)" title="Nghe chậm tốc độ 0.8x từ băng gốc để luyện nhại (Shadowing)">
+                <span>🐢</span> Nghe Chậm (0.8x)
+              </button>
+              <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(22,163,74,0.35);" onclick="AudioEngine.playIntonationAudio('${currentPractice.audioUrl}', null, 1.0, 1.0, this)" title="Nghe toàn bộ bài đọc mẫu từ băng gốc Collins chuẩn tốc độ thi">
+                <span>▶️</span> Nghe Chuẩn (1.0x)
               </button>
             </div>
           </div>
