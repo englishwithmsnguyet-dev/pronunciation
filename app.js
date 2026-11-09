@@ -5938,9 +5938,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const rowEl = document.getElementById(`practice-chunk-row-${activeIdx}`);
         if (rowEl) {
           rowEl.classList.add("active-karaoke");
-          try {
-            rowEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-          } catch (e) {}
         }
       }
     },

@@ -4872,10 +4872,9 @@ button, select, input {
 /* Karaoke audio sync sentence highlight */
 .passage-sentence {
   display: inline;
-  padding: 3px 6px;
-  margin: 0 1px;
-  border-radius: 6px;
-  transition: background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
   cursor: pointer;
 }
 
@@ -4886,15 +4885,15 @@ button, select, input {
 .passage-sentence.active-karaoke {
   background-color: #FEF08A !important; /* Soft warm yellow */
   color: #1E3A8A !important;
-  box-shadow: 0 0 0 2px #FACC15, 0 3px 10px rgba(250, 204, 21, 0.45) !important;
-  font-weight: 700;
+  box-shadow: 0 0 0 2px #FACC15 !important;
+  /* Giữ nguyên font-weight để không làm co giãn chữ / nhảy dòng văn bản */
 }
 
 .practice-chunk-row.active-karaoke {
   background: #EFF6FF !important; /* Soft royal blue highlight */
   border-color: #3B82F6 !important;
   box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18) !important;
-  transform: translateX(4px);
+  /* Giữ nguyên vị trí không dịch chuyển transform */
 }
 
 .practice-chunk-row {
