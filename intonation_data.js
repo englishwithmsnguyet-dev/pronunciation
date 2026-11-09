@@ -2179,11 +2179,11 @@ window.INTONATION_DATA = {
         trackInfo: "Collins Track 01-02.37 (Get Set - Text 2)",
         audioUrl: "audio/collins/collins_practice_extreme_sports.mp3",
         rawText: "Are you ready for an adventure? Extreme Sports Center offers the latest in adventurous outdoor sports—skydiving, hang gliding, scuba diving, or rock climbing. We can expedite the process of getting you a scuba diving permit and train you to dive in just a few intensive sessions. Our specialized training sessions with expert instructors will give you all the basics. We also organize packages for extreme sport vacations. So wherever you want to go, we’ll take you there! Go Extreme!",
-        markedDisplay: `Are you ready <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span> for an adventure <span class="tone-pill-rise">↗</span>? <span class="pause-pill-heavy">//</span> Extreme Sports Center <span class="pause-pill-light">/</span> offers the latest <span class="pause-pill-light">/</span> in adventurous outdoor sports - <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> skydiving <span class="tone-pill-rise">↗</span>, hang gliding <span class="tone-pill-rise">↗</span>, scuba diving <span class="tone-pill-rise">↗</span>, or rock climbing. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We can expedite <span class="pause-pill-light">/</span> the process of getting you <span class="pause-pill-light">/</span> a scuba diving permit <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> and train you to dive <span class="pause-pill-light">/</span> in just a few intensive sessions. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Our specialized training sessions <span class="pause-pill-light">/</span> with expert instructors <span class="tone-pill-fall">↘</span> <span class="pause-pill-light">/</span> will give you <span class="pause-pill-light">/</span> all the basics. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We also organize packages <span class="pause-pill-light">/</span> for extreme sport vacations. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> So wherever you want to go <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, we’ll take you there! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Go Extreme! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>`,
+        markedDisplay: `Are you ready <span class="pause-pill-light">/</span> for an adventure <span class="tone-pill-rise">↗</span>? <span class="pause-pill-heavy">//</span> Extreme Sports Center <span class="pause-pill-light">/</span> offers the latest <span class="pause-pill-light">/</span> in adventurous outdoor sports - <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> skydiving <span class="tone-pill-rise">↗</span>, hang gliding <span class="tone-pill-rise">↗</span>, scuba diving <span class="tone-pill-rise">↗</span>, or rock climbing. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We can expedite <span class="pause-pill-light">/</span> the process of getting you <span class="pause-pill-light">/</span> a scuba diving permit <span class="pause-pill-light">/</span> and train you to dive <span class="pause-pill-light">/</span> in just a few intensive sessions. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Our specialized training sessions <span class="pause-pill-light">/</span> with expert instructors <span class="pause-pill-light">/</span> will give you <span class="pause-pill-light">/</span> all the basics. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> We also organize packages <span class="pause-pill-light">/</span> for extreme sport vacations. <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> So wherever you want to go <span class="tone-pill-rise">↗</span> <span class="pause-pill-light">/</span>, we’ll take you there! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span> Go Extreme! <span class="tone-pill-fall">↘</span> <span class="pause-pill-heavy">//</span>`,
         chunkedSentences: [
           {
-            text: "Are you ready ↗ | for an adventure ↗?",
-            note: "Câu hỏi Yes/No lên giọng vút cao ở cuối câu để khơi gợi sự hứng thú của người nghe.",
+            text: "Are you ready | for an adventure ↗?",
+            note: "Không lên giọng quá sớm ở giữa câu; Lên giọng ở cuối câu hỏi Yes/No (adventure ↗?).",
             speechText: "Are you ready for an adventure?"
           },
           {
@@ -2192,13 +2192,13 @@ window.INTONATION_DATA = {
             speechText: "Extreme Sports Center offers the latest in adventurous outdoor sports—skydiving, hang gliding, scuba diving, or rock climbing."
           },
           {
-            text: "We can expedite | the process of getting you | a scuba diving permit ↘ | and train you to dive | in just a few intensive sessions ↘",
-            note: "Ngắt sau 'expedite', nhấn trọng âm âm 1 của PERmit (danh từ), hạ giọng ở cuối mỗi vế liên từ 'and'.",
+            text: "We can expedite | the process of getting you | a scuba diving permit | and train you to dive | in just a few intensive sessions ↘",
+            note: "Ngắt sau 'permit' nhưng không hạ giọng vì câu vẫn tiếp tục nối với 'and train you'; Hạ giọng dứt khoát khi hoàn tất câu (intensive sessions ↘).",
             speechText: "We can expedite the process of getting you a scuba diving permit and train you to dive in just a few intensive sessions."
           },
           {
-            text: "Our specialized training sessions | with expert instructors ↘ | will give you | all the basics ↘",
-            note: "Cụm chủ ngữ dài chia thành 2 chunk nhỏ, hạ giọng ở 'instructors' và chốt câu ở 'basics'.",
+            text: "Our specialized training sessions | with expert instructors | will give you | all the basics ↘",
+            note: "Cụm chủ ngữ dài chia thành 2 chunk nhỏ ('with expert instructors' vẫn là một phần của chủ ngữ nên không hạ giọng); Hạ giọng dứt khoát khi hoàn tất câu ở 'all the basics ↘'.",
             speechText: "Our specialized training sessions with expert instructors will give you all the basics."
           },
           {
