@@ -2111,47 +2111,56 @@ window.INTONATION_DATA = {
           {
             text: "Good afternoon everyone ↗, | and welcome | to the county fair! ↘",
             note: "Lời chào mở đầu lên giọng thân mật (everyone ↗), cụm chào mừng hạ giọng dứt khoát (county fair ↘) ở cuối.",
-            speechText: "Good afternoon everyone, and welcome to the county fair!"
+            speechText: "Good afternoon everyone, and welcome to the county fair!",
+            audioUrl: "audio/collins/sentences/practice_1_sent_0.mp3"
           },
           {
             text: "It’s wonderful | to have you here today ↗ | as we celebrate | the 120th anniversary | of our city ↘",
             note: "Lên giọng nhẹ ở 'today ↗' trước khi nối vào mệnh đề 'as we celebrate', số đếm '120th' nhấn rõ trọng âm, hạ giọng cuối câu trần thuật (city ↘).",
-            speechText: "It's wonderful to have you here today as we celebrate the 120th anniversary of our city."
+            speechText: "It's wonderful to have you here today as we celebrate the 120th anniversary of our city.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_1.mp3"
           },
           {
             text: "We commemorate this day | with great pride ↘",
             note: "Tách cụm chủ vị và cụm giới từ 'with great pride', hạ giọng dứt khoát ở 'pride ↘'.",
-            speechText: "We commemorate this day with great pride."
+            speechText: "We commemorate this day with great pride.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_2.mp3"
           },
           {
             text: "Please make sure | you visit | the exhibits ↗ | and game booths ↘",
             note: "Quy tắc liệt kê 2 thành phần: 'the exhibits ↗' lên giọng, 'game booths ↘' hạ giọng kết chuỗi.",
-            speechText: "Please make sure you visit the exhibits and game booths."
+            speechText: "Please make sure you visit the exhibits and game booths.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_3.mp3"
           },
           {
             text: "Later today ↗, | there will be competitive events | such as our famous pie-baking contest ↘",
             note: "Trạng ngữ mở đầu 'Later today ↗' lên giọng dẫn dắt; cụm ví dụ 'such as...' chốt hạ giọng ở 'contest ↘'.",
-            speechText: "Later today, there will be competitive events, such as our famous pie-baking contest."
+            speechText: "Later today, there will be competitive events, such as our famous pie-baking contest.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_4.mp3"
           },
           {
             text: "I strongly suggest | that you get over | to the pie table early ↗ | or there might not be anything left ↘",
             note: "Lên giọng dở dang ở vế cảnh báo (early ↗) trước liên từ 'or', hạ giọng dứt điểm ở vế sau (left ↘).",
-            speechText: "I strongly suggest that you get over to the pie table early, or there might not be anything left."
+            speechText: "I strongly suggest that you get over to the pie table early, or there might not be anything left.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_5.mp3"
           },
           {
             text: "It is also my pleasure | to introduce you | to our mayor ↗, | Mr. James Moon ↘",
             note: "Giới thiệu danh vị lên giọng nhẹ (mayor ↗) tạo sự trang trọng, đọc tên riêng Mr. James Moon hạ giọng dứt khoát (Moon ↘).",
-            speechText: "It is also my pleasure to introduce you to our mayor, Mr. James Moon."
+            speechText: "It is also my pleasure to introduce you to our mayor, Mr. James Moon.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_6.mp3"
           },
           {
             text: "Mr. Moon will lead us | in singing | our national anthem ↘",
             note: "Ngắt sau cụm động từ 'lead us', hạ giọng ở cụm danh từ 'national anthem ↘'.",
-            speechText: "Mr. Moon will lead us in singing our national anthem."
+            speechText: "Mr. Moon will lead us in singing our national anthem.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_7.mp3"
           },
           {
             text: "Then ↗, | we’ll begin | the festivities ↘",
             note: "Từ nối 'Then ↗' lên giọng nhẹ thu hút chú ý, chốt hạ giọng dứt câu ở 'festivities ↘'.",
-            speechText: "Then, we'll begin the festivities."
+            speechText: "Then, we'll begin the festivities.",
+            audioUrl: "audio/collins/sentences/practice_1_sent_8.mp3"
           }
         ],
         vocabulary: [
@@ -2184,37 +2193,44 @@ window.INTONATION_DATA = {
           {
             text: "Are you ready | for an adventure ↗?",
             note: "Không lên giọng quá sớm ở giữa câu; Lên giọng ở cuối câu hỏi Yes/No (adventure ↗?).",
-            speechText: "Are you ready for an adventure?"
+            speechText: "Are you ready for an adventure?",
+            audioUrl: "audio/collins/sentences/practice_2_sent_0.mp3"
           },
           {
             text: "Extreme Sports Center | offers the latest | in adventurous outdoor sports - ↘ | skydiving ↗, hang gliding ↗, scuba diving ↗, or rock climbing. ↘",
             note: "Quy tắc liệt kê kinh điển: 3 môn đầu lên giọng (↗), môn cuối cùng 'rock climbing ↘' hạ giọng kết chuỗi.",
-            speechText: "Extreme Sports Center offers the latest in adventurous outdoor sports—skydiving, hang gliding, scuba diving, or rock climbing."
+            speechText: "Extreme Sports Center offers the latest in adventurous outdoor sports—skydiving, hang gliding, scuba diving, or rock climbing.",
+            audioUrl: "audio/collins/sentences/practice_2_sent_1.mp3"
           },
           {
             text: "We can expedite | the process of getting you | a scuba diving permit | and train you to dive | in just a few intensive sessions ↘",
             note: "Ngắt sau 'permit' nhưng không hạ giọng vì câu vẫn tiếp tục nối với 'and train you'; Hạ giọng dứt khoát khi hoàn tất câu (intensive sessions ↘).",
-            speechText: "We can expedite the process of getting you a scuba diving permit and train you to dive in just a few intensive sessions."
+            speechText: "We can expedite the process of getting you a scuba diving permit and train you to dive in just a few intensive sessions.",
+            audioUrl: "audio/collins/sentences/practice_2_sent_2.mp3"
           },
           {
             text: "Our specialized training sessions | with expert instructors | will give you | all the basics ↘",
             note: "Cụm chủ ngữ dài chia thành 2 chunk nhỏ ('with expert instructors' vẫn là một phần của chủ ngữ nên không hạ giọng); Hạ giọng dứt khoát khi hoàn tất câu ở 'all the basics ↘'.",
-            speechText: "Our specialized training sessions with expert instructors will give you all the basics."
+            speechText: "Our specialized training sessions with expert instructors will give you all the basics.",
+            audioUrl: "audio/collins/sentences/practice_2_sent_3.mp3"
           },
           {
             text: "We also organize packages | for extreme sport vacations ↘",
             note: "Câu trần thuật hạ giọng dứt khoát ở 'vacations ↘'.",
-            speechText: "We also organize packages for extreme sport vacations."
+            speechText: "We also organize packages for extreme sport vacations.",
+            audioUrl: "audio/collins/sentences/practice_2_sent_4.mp3"
           },
           {
             text: "So wherever you want to go ↗, | we’ll take you there ↘",
             note: "Mệnh đề phụ bắt đầu bằng 'wherever' lên giọng dở dang (↗), mệnh đề chính hạ giọng (↘).",
-            speechText: "So wherever you want to go, we'll take you there!"
+            speechText: "So wherever you want to go, we'll take you there!",
+            audioUrl: "audio/collins/sentences/practice_2_sent_5.mp3"
           },
           {
             text: "Go Extreme ↘",
             note: "Khẩu hiệu (slogan) hạ giọng dứt khoát, tràn đầy năng lượng và quyết tâm.",
-            speechText: "Go Extreme!"
+            speechText: "Go Extreme!",
+            audioUrl: "audio/collins/sentences/practice_2_sent_6.mp3"
           }
         ],
         vocabulary: [
@@ -2251,42 +2267,50 @@ window.INTONATION_DATA = {
           {
             text: "Good day, everyone ↘ | and welcome | to the Faraway Spa and Resort ↘",
             note: "Lời chào trang trọng nơi khách sạn/resort hạ giọng điềm tĩnh.",
-            speechText: "Good day, everyone, and welcome to the Faraway Spa and Resort."
+            speechText: "Good day, everyone, and welcome to the Faraway Spa and Resort.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_0.mp3"
           },
           {
             text: "We’d like | to call your attention | to a few important items ↘",
             note: "Cụm 'call your attention' trang trọng, hạ giọng dứt câu ở 'items ↘'.",
-            speechText: "We'd like to call your attention to a few important items."
+            speechText: "We'd like to call your attention to a few important items.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_1.mp3"
           },
           {
             text: "Make sure | you register | at the front desk | and pick up | your room keys | and introductory packets ↘",
             note: "Chia câu mệnh lệnh ghép thành 2 vế với liên từ 'and'; ngắt nhẹ sau 'front desk' nhưng không hạ giọng vì câu chưa kết thúc, hạ giọng dứt khoát ở cuối câu (packets ↘).",
-            speechText: "Make sure you register at the front desk and pick up your room keys and introductory packets."
+            speechText: "Make sure you register at the front desk and pick up your room keys and introductory packets.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_2.mp3"
           },
           {
             text: "Next ↗, | you will receive | a complimentary certificate for dinner | at our gourmet restaurant ↘",
             note: "Từ nối dẫn dắt 'Next ↗' lên giọng; cụm 'complimentary certificate' đọc liền không ngắt.",
-            speechText: "Next, you will receive a complimentary certificate for dinner at our gourmet restaurant."
+            speechText: "Next, you will receive a complimentary certificate for dinner at our gourmet restaurant.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_3.mp3"
           },
           {
             text: "Dinner will be served | at 6 p.m. ↗ and 8 p.m. ↘",
             note: "Chuỗi thời gian: mốc 1 (6 p.m. ↗) lên giọng, mốc 2 (8 p.m. ↘) hạ giọng.",
-            speechText: "Dinner will be served at 6 p.m. and 8 p.m."
+            speechText: "Dinner will be served at 6 p.m. and 8 p.m.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_4.mp3"
           },
           {
             text: "In your room ↗, | you will find | a robe ↗, towels ↗, and a gift basket of products | such as bath soaps ↗ and lotions ↘",
             note: "Quy tắc liệt kê kép: các món đồ đầu lên giọng (↗), vế ví dụ cuối cùng 'lotions ↘' hạ giọng kết thúc câu.",
-            speechText: "In your room, you will find a robe, towels, and a gift basket of products, such as bath soaps and lotions."
+            speechText: "In your room, you will find a robe, towels, and a gift basket of products, such as bath soaps and lotions.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_5.mp3"
           },
           {
             text: "Please feel free | to contact us | if you have forgotten | to bring any personal items | with you ↘",
             note: "Mệnh đề chính ngắt nhẹ sau 'contact us' (không hạ giọng cụt lủn), hạ giọng dứt câu ở 'with you ↘'.",
-            speechText: "Please feel free to contact us if you have forgotten to bring any personal items with you."
+            speechText: "Please feel free to contact us if you have forgotten to bring any personal items with you.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_6.mp3"
           },
           {
             text: "We hope | you find your stay | at Faraway Spa and Resort | relaxing | and enjoyable ↘",
             note: "Ngắt sau tên riêng Resort nhưng không hạ giọng vì cụm 'relaxing and enjoyable' là tân bổ ngữ; hạ giọng êm dịu kết bài ở 'enjoyable ↘'.",
-            speechText: "We hope you find your stay at Faraway Spa and Resort relaxing and enjoyable."
+            speechText: "We hope you find your stay at Faraway Spa and Resort relaxing and enjoyable.",
+            audioUrl: "audio/collins/sentences/practice_3_sent_7.mp3"
           }
         ],
         vocabulary: [
@@ -2319,47 +2343,56 @@ window.INTONATION_DATA = {
           {
             text: "Could I have everyone’s attention ↗, please ↗",
             note: "Lời kêu gọi sự chú ý nơi công cộng (câu hỏi tu từ mang sắc thái lịch sự).",
-            speechText: "Could I have everyone's attention, please?"
+            speechText: "Could I have everyone's attention, please?",
+            audioUrl: "audio/collins/sentences/practice_4_sent_0.mp3"
           },
           {
             text: "Due to mechanical problems ↗, | this bus will now be taken out of service ↘",
             note: "Cụm giới từ chỉ nguyên nhân 'Due to...' lên giọng (↗), mệnh đề chính hạ giọng dứt khoát.",
-            speechText: "Due to mechanical problems, this bus will now be taken out of service."
+            speechText: "Due to mechanical problems, this bus will now be taken out of service.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_1.mp3"
           },
           {
             text: "We apologize | for any inconvenience | this might cause you ↘",
             note: "Lời xin lỗi khách hàng chia thành 3 cụm nhịp nhàng, hạ giọng ở 'cause you ↘'.",
-            speechText: "We apologize for any inconvenience this might cause you."
+            speechText: "We apologize for any inconvenience this might cause you.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_2.mp3"
           },
           {
             text: "Please exit the bus safely | by using the front or back doors | and stepping away | from the side of the road ↘",
             note: "Hướng dẫn an toàn chia theo 2 hành động song song; ngắt nhẹ sau 'doors' nhưng không hạ giọng trước liên từ 'and', hạ giọng dứt khoát ở cuối câu (road ↘).",
-            speechText: "Please exit the bus safely by using the front or back doors and stepping away from the side of the road."
+            speechText: "Please exit the bus safely by using the front or back doors and stepping away from the side of the road.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_3.mp3"
           },
           {
             text: "We have contacted | the main bus depot | and a shuttle bus | is presently en route | to our location ↘",
             note: "Ngắt nhẹ sau 'depot' nhưng không hạ giọng vì câu ghép còn tiếp diễn với 'and a shuttle bus'; từ 'depot' đọc là /ˈdiːpoʊ/ (câm chữ t), 'en route' đọc là /ˌɑːn ˈruːt/.",
-            speechText: "We have contacted the main bus depot, and a shuttle bus is presently en route to our location."
+            speechText: "We have contacted the main bus depot, and a shuttle bus is presently en route to our location.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_4.mp3"
           },
           {
             text: "The shuttle’s approximate arrival time | is fifteen minutes ↘",
             note: "Nhấn mạnh rõ đuôi '-teen' trong 'fifteen' /ˈfɪf.tiːn/ (tránh nhầm với fifty).",
-            speechText: "The shuttle's approximate arrival time is fifteen minutes."
+            speechText: "The shuttle's approximate arrival time is fifteen minutes.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_5.mp3"
           },
           {
             text: "Again ↗, | we apologize | for the delay | and appreciate | your patience ↘",
             note: "Từ chuyển tiếp 'Again ↗' lên giọng; ngắt sau 'delay' nhưng không hạ giọng trước liên từ 'and', hạ giọng trọn vẹn ở 'patience ↘'.",
-            speechText: "Again, we apologize for the delay and appreciate your patience."
+            speechText: "Again, we apologize for the delay and appreciate your patience.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_6.mp3"
           },
           {
             text: "All connecting buses | will be held | at the station | until our bus arrives ↘",
             note: "Ngắt sau cụm danh từ 'All connecting buses'; ngắt sau 'station' nhưng không hạ giọng vì mệnh đề 'until our bus arrives' bổ nghĩa liền sau, hạ giọng dứt khoát ở 'arrives ↘'.",
-            speechText: "All connecting buses will be held at the station until our bus arrives."
+            speechText: "All connecting buses will be held at the station until our bus arrives.",
+            audioUrl: "audio/collins/sentences/practice_4_sent_7.mp3"
           },
           {
             text: "Are there any questions ↗",
             note: "Câu hỏi Yes/No kết thúc đoạn văn bắt buộc lên giọng vút cao (↗) ở 'questions'.",
-            speechText: "Are there any questions?"
+            speechText: "Are there any questions?",
+            audioUrl: "audio/collins/sentences/practice_4_sent_8.mp3"
           }
         ],
         vocabulary: [

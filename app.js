@@ -5990,8 +5990,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const p = data.practices.find(item => item.id === practiceId);
       if (!p || !p.chunkedSentences[sentIdx]) return;
       const sent = p.chunkedSentences[sentIdx];
+      const audioUrl = sent.audioUrl || `audio/collins/sentences/${practiceId}_sent_${sentIdx}.mp3`;
       const text = sent.speechText || sent.text.replace(/[↗↘|\/]/g, "").trim();
-      AudioEngine.playIntonationAudio(null, text, 1.0, 0.90, btnEl);
+      AudioEngine.playIntonationAudio(audioUrl, text, 1.0, 1.0, btnEl);
     },
 
     playPracticeWord(word, btnEl) {
