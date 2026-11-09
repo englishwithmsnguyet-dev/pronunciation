@@ -5135,10 +5135,10 @@ document.addEventListener("DOMContentLoaded", () => {
               <a href="https://drive.google.com/drive/folders/1sAxlOJmUrJdbr0dnvxCMQae2K2Rc0ugV?usp=sharing" target="_blank" rel="noopener noreferrer" style="background:#FFFFFF; color:#166534; border:1px solid #86EFAC; padding:9px 16px; border-radius:8px; font-weight:700; font-size:0.85rem; text-decoration:none; display:flex; align-items:center; gap:6px; transition:all 0.2s;" title="Mở thư mục Google Drive tải 4 file MP3">
                 <span>📁</span> Tải 4 File Google Drive
               </a>
-              <button class="btn-dialogue-play" style="background:#0EA5E9; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(14,165,233,0.35);" onclick="AudioEngine.playIntonationAudio('${currentPractice.audioUrl}', null, 1.0, 0.80, this)" title="Nghe chậm tốc độ 0.8x từ băng gốc để luyện nhại (Shadowing)">
+              <button class="btn-dialogue-play" style="background:#0EA5E9; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(14,165,233,0.35);" onclick="IntonationManager.playPracticeFullAudio('${currentPractice.id}', 0.80, this)" title="Nghe chậm tốc độ 0.8x từ băng gốc để luyện nhại (Shadowing)">
                 <span>🐢</span> Nghe Chậm (0.8x)
               </button>
-              <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(22,163,74,0.35);" onclick="AudioEngine.playIntonationAudio('${currentPractice.audioUrl}', null, 1.0, 1.0, this)" title="Nghe toàn bộ bài đọc mẫu từ băng gốc Collins chuẩn tốc độ thi">
+              <button class="btn-dialogue-play" style="background:#16A34A; color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:800; font-size:0.95rem; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 3px 10px rgba(22,163,74,0.35);" onclick="IntonationManager.playPracticeFullAudio('${currentPractice.id}', 1.0, this)" title="Nghe toàn bộ bài đọc mẫu từ băng gốc Collins chuẩn tốc độ thi">
                 <span>▶️</span> Nghe Chuẩn (1.0x)
               </button>
             </div>
@@ -5201,9 +5201,9 @@ document.addEventListener("DOMContentLoaded", () => {
               <div id="examTimerProgressBar" style="width:${(this.examTimerSecondsLeft / this.examTimerTotal) * 100}%; height:100%; background:${this.examTimerType === 'prep' ? '#F59E0B' : '#EF4444'}; transition: width 0.3s linear;"></div>
             </div>
 
-            <!-- Đoạn văn bài đọc đề thi -->
+            <!-- Đoạn văn bài đọc đề thi (Hỗ trợ chạy chữ Karaoke theo âm thanh bản xứ) -->
             <div class="exam-passage-box ${this.practiceMode === 'clean' ? 'clean-mode' : 'marked-mode'}">
-              ${this.practiceMode === 'clean' ? currentPractice.rawText : currentPractice.markedDisplay}
+              ${this.renderPracticePassage(currentPractice)}
             </div>
 
             <!-- Chú thích ký hiệu nếu ở chế độ Marked -->
@@ -5231,7 +5231,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div style="display:flex; flex-direction:column; gap:12px;">
               ${currentPractice.chunkedSentences.map((sent, sIdx) => `
-                <div class="practice-chunk-row">
+                <div class="practice-chunk-row" id="practice-chunk-row-${sIdx}">
                   <div style="min-width:28px; height:28px; border-radius:50%; background:#2563EB; color:#fff; font-weight:800; font-size:0.82rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     ${sIdx + 1}
                   </div>
@@ -5893,7 +5893,14 @@ document.addEventListener("DOMContentLoaded", () => {
       AudioEngine.playIntonationAudio(null, speechText, pitch || 1.0, rate || 0.90, btnEl);
     },
 
+    currentKaraokeIdx: -1,
+    currentPracticePlaying: null,
+    currentPracticeRate: 1.0,
+
     selectPractice(practiceId) {
+      AudioEngine.stop();
+      this.clearKaraokeHighlight();
+      this.currentPracticePlaying = null;
       this.selectedPracticeId = practiceId;
       this.stopExamTimer();
       this.render();
@@ -5901,7 +5908,120 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setPracticeMode(mode) {
       this.practiceMode = mode;
+      const prevKaraoke = this.currentKaraokeIdx;
       this.render();
+      if (prevKaraoke >= 0) {
+        setTimeout(() => this.setKaraokeHighlight(prevKaraoke), 30);
+      }
+    },
+
+    renderPracticePassage(p) {
+      if (!p || !p.chunkedSentences) return p.rawText || "";
+      const isClean = this.practiceMode === 'clean';
+      return p.chunkedSentences.map((s, sIdx) => {
+        const content = isClean ? s.speechText : (s.markedHtml || s.text);
+        return `<span class="passage-sentence" id="passage-sent-${sIdx}" data-sent-idx="${sIdx}" onclick="IntonationManager.playPracticeSentence('${p.id}', ${sIdx})" title="Bấm để nghe riêng câu này">${content}</span>`;
+      }).join(" ");
+    },
+
+    setKaraokeHighlight(activeIdx) {
+      if (this.currentKaraokeIdx === activeIdx) return;
+      this.currentKaraokeIdx = activeIdx;
+
+      document.querySelectorAll(".passage-sentence.active-karaoke").forEach(el => el.classList.remove("active-karaoke"));
+      document.querySelectorAll(".practice-chunk-row.active-karaoke").forEach(el => el.classList.remove("active-karaoke"));
+
+      if (activeIdx >= 0) {
+        const passageEl = document.getElementById(`passage-sent-${activeIdx}`);
+        if (passageEl) passageEl.classList.add("active-karaoke");
+
+        const rowEl = document.getElementById(`practice-chunk-row-${activeIdx}`);
+        if (rowEl) {
+          rowEl.classList.add("active-karaoke");
+          try {
+            rowEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          } catch (e) {}
+        }
+      }
+    },
+
+    clearKaraokeHighlight() {
+      this.currentKaraokeIdx = -1;
+      document.querySelectorAll(".passage-sentence.active-karaoke").forEach(el => el.classList.remove("active-karaoke"));
+      document.querySelectorAll(".practice-chunk-row.active-karaoke").forEach(el => el.classList.remove("active-karaoke"));
+    },
+
+    playPracticeFullAudio(practiceId, rate, btnEl) {
+      const data = window.INTONATION_DATA && window.INTONATION_DATA.toeicPractice;
+      if (!data) return;
+      const p = data.practices.find(item => item.id === practiceId);
+      if (!p || !p.audioUrl) return;
+
+      const isPlayingCurrent = AudioEngine.currentAudio && !AudioEngine.currentAudio.paused && this.currentPracticePlaying === practiceId && this.currentPracticeRate === rate;
+      if (isPlayingCurrent) {
+        AudioEngine.stop();
+        this.currentPracticePlaying = null;
+        this.clearKaraokeHighlight();
+        if (btnEl) btnEl.classList.remove("playing");
+        document.querySelectorAll(".btn-dialogue-play.playing").forEach(b => b.classList.remove("playing"));
+        return;
+      }
+
+      AudioEngine.stop();
+      this.clearKaraokeHighlight();
+      this.currentPracticePlaying = practiceId;
+      this.currentPracticeRate = rate || 1.0;
+
+      let activeBtn = btnEl;
+      if (!activeBtn && window.event && window.event.currentTarget) {
+        activeBtn = window.event.currentTarget;
+      }
+      document.querySelectorAll(".btn-dialogue-play.playing").forEach(b => b.classList.remove("playing"));
+      if (activeBtn) activeBtn.classList.add("playing");
+
+      if (!AudioEngine.intonationAudio) {
+        AudioEngine.intonationAudio = new Audio();
+      }
+      const audio = AudioEngine.intonationAudio;
+      AudioEngine.currentAudio = audio;
+      audio.src = p.audioUrl;
+      audio.playbackRate = rate || 1.0;
+
+      audio.ontimeupdate = () => {
+        const cur = audio.currentTime;
+        let activeIdx = -1;
+        if (p.chunkedSentences) {
+          for (let i = 0; i < p.chunkedSentences.length; i++) {
+            const s = p.chunkedSentences[i];
+            if (typeof s.startTime === "number" && typeof s.endTime === "number") {
+              if (cur >= s.startTime && cur < s.endTime) {
+                activeIdx = i;
+                break;
+              }
+            }
+          }
+        }
+        this.setKaraokeHighlight(activeIdx);
+      };
+
+      const onEndOrStop = () => {
+        if (activeBtn) activeBtn.classList.remove("playing");
+        document.querySelectorAll(".btn-dialogue-play.playing").forEach(b => b.classList.remove("playing"));
+        this.clearKaraokeHighlight();
+        this.currentPracticePlaying = null;
+        audio.ontimeupdate = null;
+      };
+
+      audio.onended = onEndOrStop;
+      audio.onerror = onEndOrStop;
+
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.catch(err => {
+          console.warn("Lỗi phát audio full:", err);
+          onEndOrStop();
+        });
+      }
     },
 
     formatTimerTime(seconds) {
@@ -5942,7 +6062,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (sEl) {
             sEl.textContent = type === 'prep' 
               ? '🔔 HẾT 45S CHUẨN BỊ! Bấm "🎙️ 45s Đọc To" để ghi âm ngay!' 
-              : '🎉 HOÀN THÀNH 45S ĐỌC TO! Bấm "▶️ Nghe Băng Gốc" để đối chiếu!';
+              : '🎉 HOÀN THÀNH 45S ĐỌC TO! Bấm "▶️ Nghe Chuẩn" để đối chiếu!';
           }
           if (window.AudioEngine && window.AudioEngine.playSfx) {
             window.AudioEngine.playSfx("correct");
@@ -5992,7 +6112,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const sent = p.chunkedSentences[sentIdx];
       const audioUrl = sent.audioUrl || `audio/collins/sentences/${practiceId}_sent_${sentIdx}.mp3`;
       const text = sent.speechText || sent.text.replace(/[↗↘|\/]/g, "").trim();
+
+      this.clearKaraokeHighlight();
+      this.currentPracticePlaying = null;
+      this.setKaraokeHighlight(sentIdx);
+
       AudioEngine.playIntonationAudio(audioUrl, text, 1.0, 1.0, btnEl);
+
+      if (AudioEngine.currentAudio) {
+        const prevEnded = AudioEngine.currentAudio.onended;
+        AudioEngine.currentAudio.onended = () => {
+          if (typeof prevEnded === "function") prevEnded();
+          this.clearKaraokeHighlight();
+        };
+      }
     },
 
     playPracticeWord(word, btnEl) {
