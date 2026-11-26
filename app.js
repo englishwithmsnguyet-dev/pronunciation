@@ -3700,7 +3700,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     getUserName() {
       try {
-        return localStorage.getItem(this.STORAGE_KEY) || "";
+        const name = localStorage.getItem(this.STORAGE_KEY) || "";
+        const norm = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd');
+        if (norm.includes('gia tue') || norm.replace(/\s+/g, '').includes('giatue')) {
+          localStorage.removeItem(this.STORAGE_KEY);
+          return "";
+        }
+        return name;
       } catch (e) {
         return "";
       }
@@ -3709,6 +3715,11 @@ document.addEventListener("DOMContentLoaded", () => {
     saveUser(fullName) {
       const trimmed = fullName.trim();
       if (!trimmed) return false;
+      const norm = trimmed.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd');
+      if (norm.includes('gia tue') || norm.replace(/\s+/g, '').includes('giatue')) {
+        alert('Tài khoản học viên "Gia Tuệ" hiện đã bị KHÓA! Vui lòng liên hệ Giáo viên (Cô Nguyệt).');
+        return false;
+      }
 
       try {
         localStorage.setItem(this.STORAGE_KEY, trimmed);
@@ -3825,6 +3836,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("inputFullName");
     if (!input || !input.value.trim()) {
       alert("Vui lòng nhập họ và tên của bạn để tiếp tục.");
+      return;
+    }
+    const val = input.value.trim();
+    const norm = val.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd');
+    if (norm.includes('gia tue') || norm.replace(/\s+/g, '').includes('giatue')) {
+      alert('Tài khoản học viên "Gia Tuệ" hiện đã bị KHÓA! Vui lòng liên hệ Giáo viên (Cô Nguyệt).');
       return;
     }
     AUTH.saveUser(input.value);
