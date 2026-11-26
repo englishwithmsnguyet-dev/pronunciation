@@ -3834,17 +3834,46 @@ document.addEventListener("DOMContentLoaded", () => {
   window.handleLoginSubmit = function(e) {
     e.preventDefault();
     const input = document.getElementById("inputFullName");
+    const classInput = document.getElementById("inputStudentClass");
     if (!input || !input.value.trim()) {
       alert("Vui lòng nhập họ và tên của bạn để tiếp tục.");
       return;
     }
     const val = input.value.trim();
+    const classVal = classInput ? classInput.value.trim().toUpperCase().replace(/^(LỚP|LOP|CLASS)\s*/i, '').replace(/\s+/g, '') : '';
+    
     const norm = val.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd');
-    if (norm.includes('gia tue') || norm.replace(/\s+/g, '').includes('giatue')) {
+    if (norm.includes('gia tue') || norm.replace(/\s+/g, '').includes('giatue') || classVal === 'B2') {
       alert('Tài khoản học viên "Gia Tuệ" hiện đã bị KHÓA! Vui lòng liên hệ Giáo viên (Cô Nguyệt).');
       return;
     }
-    AUTH.saveUser(input.value);
+
+    const isTeacher = (classVal === 'GV' || norm === 'ptmn' || norm.includes('co nguyet') || norm.includes('miss nguyet'));
+    if (!isTeacher) {
+      if (!classVal) {
+        alert("Vui lòng nhập mã lớp học của bạn!");
+        if (classInput) classInput.focus();
+        return;
+      }
+      const roster = (typeof VALID_STUDENTS !== 'undefined' ? VALID_STUDENTS[classVal] : null) || [];
+      if (roster.length === 0) {
+        alert("Mã lớp \"" + classVal + "\" không hợp lệ. Vui lòng kiểm tra lại!");
+        if (classInput) classInput.focus();
+        return;
+      }
+      const normInp = (typeof normalizeVietnameseName === 'function' ? normalizeVietnameseName(val) : val.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').replace(/\s+/g, ' ')).trim();
+      const matched = roster.find(st => {
+        const normSt = (typeof normalizeVietnameseName === 'function' ? normalizeVietnameseName(st) : st.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').replace(/\s+/g, ' ')).trim();
+        return normSt === normInp;
+      });
+      if (!matched) {
+        alert("Họ và tên \"" + val + "\" không có trong danh sách lớp " + classVal + "! Vui lòng nhập đúng họ và tên có dấu.");
+        input.focus();
+        return;
+      }
+    }
+
+    AUTH.saveUser(val);
   };
 
   // ==========================================================================
